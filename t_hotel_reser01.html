@@ -7,6 +7,10 @@
         대신 페이지를 이동하지 않더라도 프로모션이나 이벤트 등을 같이 확인할 수 있게 포함시켜서
         좀 더 정보 확인이 쉽도록 고려했습니다.
      -->
+     <!-- 
+        호텔 가격 책정 기준을 모르겠음. 성수기/비성수기, 기간 상관 없이 
+        균일가격으로 설정하여 설정하여 제작함. 후에 기준에 맞춰 제작 필요.
+      -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +19,7 @@
     <style>
         :root {
             --main-width: 1200px;
-            --roomInfo-slide-unit: 25vw;
+            --roomInfo-slide-unit: 15vw;
             --inputBox-bg: white;
         }
         body {padding: 0px;margin: 0px;}
@@ -244,7 +248,6 @@
         .ri_elem_tag_page > div {
             width: 100%;
             border-bottom: 2px solid rgba(50,50,50,0.7);
-            padding: 10px;
             box-sizing: border-box;
 
             display: flex;
@@ -292,27 +295,90 @@
         .ri_e_t_p_exp_title {
             font-size: 20px;
             font-weight: 600;
+            display: block;
         }
         /* ---------------------- */
-        .ri_e_t_p_e_room {
-            display: flex;
-            flex-wrap: wrap;
-            width: 50%;
+        .ri_e_t_p_e_charWrap {
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            width: 100vw;
+            height: 100vh;
+            backdrop-filter: brightness(0.8) blur(1px);
+            z-index: 9999;
+
+            display: none;
         }
-        .ri_e_t_p_e_room span {
+        .ri_e_t_p_e_char:nth-of-type(1) {
+            position: fixed;
+            top: 0px;
+            left: 0px;
+
+            width: 60vw;
+            height: 70vh;
+            margin: 15vh 20vw;
+            padding: 30px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            gap: 20px;
+            background-color: white;
+            box-shadow: 2px 2px 5px #666;
+            border-radius: 10px;
+            box-sizing: border-box;
+        }
+        .ri_e_t_p_e_char > a {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: block;
+            width: 30px;
+            height: 30px;
+            font-size: 0px;
+            background: rgb(248, 175, 162) url("img/close_button.png") no-repeat center/20px;
+            border-radius: 50%;
+        }
+        .ri_e_t_p_e_char dl{
+            width: 30%;
+            padding: 0px;
+            margin: 0px;
+        }
+        .ri_e_t_p_e_char dt {
+            margin: 10px;
+            padding: 5px;
+            width: 70%;
+            border-bottom: 2px solid rgba(153, 205, 50, 0.7);
+            font-size: 105%;
+            color: rgb(113, 150, 38);
+        }
+        .ri_e_t_p_e_char dd {
+            padding-bottom: 5px;
+            position: relative;
+            font-size: 95%;
+            word-break: keep-all;
+        }
+        .ri_e_t_p_e_char dd::before {
+            content: "•";
+            display: inline-block;
+            position: absolute;
+            top: 0px;
+            left: -15px;
+            color: yellowgreen;
+            opacity: 0.7;
+        }
+        .ri_e_t_p_e_room span{
+            position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
-            width: calc( 50% - 20px);
-            height: calc( 50% - 20px);
-            margin: 10px;
+
+            margin: 23px 0px;
             padding: 10px;
-            border: 2px solid #999;
+            border: 2px solid tomato;
             border-radius: 20px;
             box-sizing: border-box;
         }
-        .ri_e_t_p_e_room span:nth-child(1)::before {
+        .ri_e_t_p_e_room span:nth-of-type(1)::before {
            content: "수용 인원";
            display: block;
            position: absolute;
@@ -321,8 +387,8 @@
            font-size: 13px;
            color: #666;
         }
-        .ri_e_t_p_e_room span:nth-child(2)::before {
-           content: "1번 객실";
+        .ri_e_t_p_e_room span:nth-of-type(2)::before {
+           content: "메인 객실";
            display: block;
            position: absolute;
            top: -20px;
@@ -330,8 +396,8 @@
            font-size: 13px;
            color: #666;
         }
-        .ri_e_t_p_e_room span:nth-child(3)::before {
-           content: "2번 객실";
+        .ri_e_t_p_e_room span:nth-of-type(3)::before {
+           content: "어린이 객실";
            display: block;
            position: absolute;
            top: -20px;
@@ -339,8 +405,26 @@
            font-size: 13px;
            color: #666;
         }
-        .ri_e_t_p_e_room span:nth-child(4)::before {
+        .ri_e_t_p_e_room span:nth-of-type(4)::before {
            content: "욕실";
+           display: block;
+           position: absolute;
+           top: -20px;
+           left: 10px;
+           font-size: 13px;
+           color: #666;
+        }
+        .ri_e_t_p_e_room span:nth-of-type(5)::before {
+           content: "객실 면적";
+           display: block;
+           position: absolute;
+           top: -20px;
+           left: 10px;
+           font-size: 13px;
+           color: #666;
+        }
+        .ri_e_t_p_e_room span:nth-of-type(6):not(.notroom)::before {
+           content: "뷰";
            display: block;
            position: absolute;
            top: -20px;
@@ -460,6 +544,7 @@
                             <li><a href="#none" class="sr_c_birthday">#브릭스타틱 생일 패키지</a></li>
                             <li><a href="#none" class="sr_c_friends">#NEW LEGO® 프렌즈 패키지</a></li>
                             <li><a href="#none" class="sr_c_twodays">#LEGOLAND® 파크 2일+호텔 패키지</a></li>
+                            <li><a href="#none" class="sr_c_disabled">#장애인 친화 객실</a></li>
                         </ul>
                     </div>
                 </div>
@@ -476,7 +561,7 @@
                     <div class="ri_load_ninja"></div>
                 </div>
             </div>
-            <div class="hotel_basket">
+            <div class="hotel_basket" hidden>
 
             </div>
         </div>
@@ -516,7 +601,8 @@
                             $(this).text(`객실 ${i+1}`);
                         });
                     }
-                })
+                });
+                
             });
         </script>
     </main>
