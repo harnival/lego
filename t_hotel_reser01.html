@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <!-- 
+        호텔 페이지는 단점이 그리 많지 않아서 구조는 대부분 그대로 갔습니다.
+        객실 비교와 레고랜드 특유의 테마를 중점적으로 볼 수 있도록 약간 수정하고, 
+        대신 페이지를 이동하지 않더라도 프로모션이나 이벤트 등을 같이 확인할 수 있게 포함시켜서
+        좀 더 정보 확인이 쉽도록 고려했습니다.
+     -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>호텔 예약 페이지 │</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        :root {
+            --main-width: 1200px;
+            --roomInfo-slide-unit: 25vw;
+            --inputBox-bg: white;
+        }
+        body {padding: 0px;margin: 0px;}
+        a {text-decoration: none;}
+        ul,li {list-style: none; padding: 0px; margin: 0px;}
+        h1,h2,h3,h4,h5,h6 {margin: 0px; padding: 0px;}
+        /* number input 버튼 숨기기 */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type='number'] {
+            appearance: textfield;
+        }
+        /* ================================================================== */
+        .mainWrap {
+            max-width: var(--main-width);
+            margin: auto;
+        }
+        .shortReservation {
+            background-color: wheat;
+        }
+        .shortReservation_wrap {
+            width: 90%;
+            margin: auto;
+            border: 2px solid #aaa;
+            border-radius: 20px;
+        }
+
+        .sr_date {
+            background-color: white;
+        }
+
+        .sr_numbers li {
+            display: flex;
+        }
+        
+        /* inputbox ----------------- */
+        .inputBox {
+            display: flex;
+            width: 500px;
+            height: 100px;
+            gap: 10px;
+            align-items: center;
+            background-color: var(--inputBox-bg);
+        }
+        .inputBox .checkin,
+        .inputBox .checkout {
+            position: relative;
+            width: 100%;
+        }
+        .inputBox input {
+            display: none;
+        }
+        .inputBox span {
+            display: block;
+            width: 100%;
+            padding: 10px 0px 10px 20px;
+            border: 2px solid black;
+            border-radius: 20px;
+            box-sizing: border-box;
+            font-size: 110%;
+        }
+        .inputBox label {
+            position: absolute;
+            top: -13px;
+            left: 20px;
+            font-size: 90%;
+            color: black;
+            padding: 0px 5px;
+            background-color: var(--inputBox-bg);
+        }
+        .inputBox > img {
+            display: block;
+            width: 30px;
+        }
+        .on {
+            background-color: wheat;
+        }
+        /* number check ---------------------- */
+        .numberCheck {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            width: fit-content;
+            padding: 5px 40px;
+            border-radius: 25px;
+            background-color: yellowgreen;
+
+            margin: auto;
+        }
+        .nc_wrap label {
+            display: none;
+        }
+        .numberCheck input {
+            width: 40px;
+            height: 30px;
+            text-align: center;
+
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+            font-size: 20px;
+            border: none;
+            background-color: transparent;
+        }
+        .decrease_btn {
+            font-size: 0px;
+            display: block;
+            background-color: rgb(240, 240, 89);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+
+            position: absolute;
+            top: 5px;
+            left: 5px;
+        }
+        .decrease_btn img {
+            width: 30px;
+            opacity: 0.7;
+        }
+        .increase_btn {
+            font-size: 0px;
+            display: block;
+            background-color: rgb(240, 240, 89);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
+        .increase_btn img {
+            width: 30px;
+            opacity: 0.7;
+        }
+
+        /* ================================================================ */
+        .sr_code ul {
+            display: flex;
+            gap: 20px;
+        }
+        .sr_code li a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid gray;
+            border-radius: 30px;
+            padding: 10px 5px;
+            box-sizing: border-box;
+        }
+        .sr_code > div {
+            display: flex;
+
+        }
+        #sr_c_input {
+            border: none;
+            padding: 5px;
+        }
+        /* ================================================================ */
+        .sr_numbers h4::after {
+            content: "(객실 하나 당 최대 6인)";
+            color: #777;
+            font-size: 80%;
+            margin-left: 10px;
+        }
+        .sr_n_l_head {
+            text-align: center;
+            vertical-align: top;
+        }
+        .sr_numbers td {
+            width: 150px;
+            /* border: 1px solid black; */
+        }
+        .sr_numbers thead {
+            height: 60px;
+        }
+        .sr_numbers td div {
+            font-size: 13px;
+            color: #777;
+        }
+        .sr_deleteRoom {
+            display: block;
+            width: 30px;
+            height: 30px;
+            font-size: 0px;
+            background: rgb(248, 175, 162) url("img/close_button.png") no-repeat center/20px;
+            border-radius: 50%;
+        }
+        .sr_addRoom {
+            display: block;
+            width: 30px;
+            height: 30px;
+            font-size: 0px;
+            background: rgb(143, 171, 255) url("img/plus.png") no-repeat center/20px;
+            border-radius: 50%;
+        }
+        /* ================================================================ */
+        .roomInfo {
+            background-color: palegreen;
+        }
+        .roomInfo_wrap {
+            padding: 20px;            
+        }
+        .ri_elem_info {
+            box-sizing: border-box;
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+
+            padding: 30px;
+            height: 400px;
+        }
+        .ri_elem_info h4 {
+            font-size: 30px;
+            margin: 0px;
+        }
+        .ri_elem_info div {
+            padding: 20px;
+        }
+        .ri_elem_tag_page {
+            position: relative;
+        }
+        .ri_elem_tag_page > div {
+            width: 100%;
+            border-bottom: 2px solid rgba(50,50,50,0.7);
+            padding: 10px;
+            box-sizing: border-box;
+
+            display: flex;
+            flex-wrap: wrap;
+        }
+        /* -----slide------- */
+        .ri_e_t_p_slide {
+            width: var(--roomInfo-slide-unit);
+            max-width: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+        .ri_e_t_p_slide a {
+            display: block;
+            position: absolute;
+            top: 50%;
+            font-size: 0px;
+
+            width: 20%;
+            aspect-ratio: 1/1;
+            background-color: rgba(255, 255, 255, 0.459);
+        }
+        .slideback {
+            left: 0px;
+            background: url(./img/arrow_back.png) no-repeat center/50%;
+        }
+        .slidenext {
+            right: 0px;
+            background: url("img/arrow_forward.png") no-repeat center/50%;
+        }
+        .ri_e_t_p_slide ul {
+            display: flex;
+        }
+        .ri_e_t_p_slide li img {
+            display: block;
+            width: var(--roomInfo-slide-unit);
+            max-width: 400px;
+        }
+        /* ---------------------- */
+        .ri_e_t_p_exp {
+            width: calc( 100% - 25vw );
+            box-sizing: border-box;
+            padding-left: 10px;    
+        }
+        .ri_e_t_p_exp_title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        /* ---------------------- */
+        .ri_e_t_p_e_room {
+            display: flex;
+            flex-wrap: wrap;
+            width: 50%;
+        }
+        .ri_e_t_p_e_room span {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            width: calc( 50% - 20px);
+            height: calc( 50% - 20px);
+            margin: 10px;
+            padding: 10px;
+            border: 2px solid #999;
+            border-radius: 20px;
+            box-sizing: border-box;
+        }
+        .ri_e_t_p_e_room span:nth-child(1)::before {
+           content: "수용 인원";
+           display: block;
+           position: absolute;
+           top: -20px;
+           left: 10px;
+           font-size: 13px;
+           color: #666;
+        }
+        .ri_e_t_p_e_room span:nth-child(2)::before {
+           content: "1번 객실";
+           display: block;
+           position: absolute;
+           top: -20px;
+           left: 10px;
+           font-size: 13px;
+           color: #666;
+        }
+        .ri_e_t_p_e_room span:nth-child(3)::before {
+           content: "2번 객실";
+           display: block;
+           position: absolute;
+           top: -20px;
+           left: 10px;
+           font-size: 13px;
+           color: #666;
+        }
+        .ri_e_t_p_e_room span:nth-child(4)::before {
+           content: "욕실";
+           display: block;
+           position: absolute;
+           top: -20px;
+           left: 10px;
+           font-size: 13px;
+           color: #666;
+        }
+        /* ======================================================= */
+        .ri_e_t_p_choice {
+            width: 100%;
+        }
+        .ri_e_t_p_choice li {
+            background-color: wheat;
+            position: relative;
+        }
+        .ri_e_t_p_c_price {
+            display: block;
+            width: 200px;
+            height: 50%;
+            background-color: tomato;
+
+            position: absolute;
+            top: 0px;
+            right: 0px;
+        }
+        /* ===================================================== */
+        .hotel_basket {
+            position: fixed;
+            top: 0px;
+            right: 20px;
+
+            width: 200px;
+            height: 500px;
+            background-color: cyan;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="mainWrap">
+            <div class="shortReservation">
+                <div class="shortReservation_wrap">
+                    <div class="sr_date">
+                        <h4>기간 선택</h4>
+                        <div class="inputBox">
+                            <div class="checkin">
+                              <label for="checkin_input">체크인</label>
+                              <input type="date" name="checkin" id="checkin_input" />
+                              <span>날짜 입력</span>
+                            </div>
+                            <img src="./img/arrow_right_alt.png" alt="">
+                            <div class="checkout">
+                              <label for="checkout_input">체크아웃</label>
+                              <input type="date" name="checkout" id="checkout_input" />
+                              <span>날짜 입력</span> </div> </div> <div class="sr_date_calender"  </div></div>
+                    <div class="sr_numbers">
+                        <h4>객실 및 투숙인원 선택</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <td class="sr_n_l_head">
+                                        <strong>성인</strong>
+                                        <div>만 13세 이상</div>
+                                    </td>
+                                    <td class="sr_n_l_head">
+                                        <strong>어린이</strong>
+                                        <div>만 2세 ~ 만 13세 미만</div>
+                                    </td>
+                                    <td class="sr_n_l_head">
+                                        <strong>유아</strong>
+                                        <div>만 2세 미만</div>
+                                    </td>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="sr_n_list sr_n_list_origin">
+                                    <th>
+                                        객실 1
+                                    </th>
+                                    <td>
+                                        <div class="numberCheck">
+                                            <input type="number" name="sr_n_adult" id="sr_n_adult" value="0" readonly/>
+                                            <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
+                                            <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="numberCheck">
+                                            <input type="number" name="sr_n_child" id="sr_n_child" value="0" readonly/>
+                                            <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
+                                            <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="numberCheck">
+                                            <input type="text" name="sr_n_toddler" id="sr_n_toddler" value="0" readonly/>
+                                            <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
+                                            <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
+                                        </div>
+                                    </td>
+                                    <td><a href="#none" class="sr_deleteRoom">취소</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <a href="#none" class="sr_addRoom">객실 추가</a>
+                    </div>
+                    <div class="sr_code">
+                        <div>
+                            <h4>할인코드</h4>
+                            <input type="text" name="dc_code" id="sr_c_input" placeholder="할인코드 직접 입력">
+                        </div>
+                        <ul>
+                            <li><a href="#none" class="sr_c_early">#얼리버드 패키지</a></li>
+                            <li><a href="#none" class="sr_c_awesome">#어썸 초이스</a></li>
+                            <li><a href="#none" class="sr_c_birthday">#브릭스타틱 생일 패키지</a></li>
+                            <li><a href="#none" class="sr_c_friends">#NEW LEGO® 프렌즈 패키지</a></li>
+                            <li><a href="#none" class="sr_c_twodays">#LEGOLAND® 파크 2일+호텔 패키지</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="promotionSlide">
+
+            </div>
+            <div class="roomInfo">
+                <div class="roomInfo_wrap">
+                    <h3>객실 정보</h3>
+                    <div class="ri_load_pirate"></div>
+                    <div class="ri_load_kingdom"></div>
+                    <div class="ri_load_friends"></div>
+                    <div class="ri_load_ninja"></div>
+                </div>
+            </div>
+            <div class="hotel_basket">
+
+            </div>
+        </div>
+        <script>
+            $(function(){
+                // common -------------------------------------------------
+                $(".decrease_btn").click(function(e){
+                    if( $(this).siblings("input").val() > 0) {
+                    $(this).siblings("input").val((i,v) => +v-1);
+                    $(this).siblings("input").trigger("change");           
+                    }
+                });
+                $(".increase_btn").click(function(e){
+                    $(this).siblings("input").val((i,v) => +v+1);
+                    $(this).siblings("input").trigger("change");
+                });
+                // list load-----------------------------------------------
+                $(".ri_load_pirate").load("./t_hotel_reser01_p.html");
+                $(".ri_load_kingdom").load("./t_hotel_reser01_k.html");
+                $(".ri_load_friends").load("./t_hotel_reser01_f.html");
+                $(".ri_load_ninja").load("./t_hotel_reser01_n.html");
+
+                $(".sr_date_calender").load("./unit/multi_calender_hotel.html");
+                // 객실 추가/삭제--------------------------------------------
+                $(".sr_addRoom").click(function(){
+                    const trLength = $(".sr_n_list").length;
+                    const $cloneTr = $(".sr_n_list_origin").clone(true);
+                        $cloneTr.removeClass("sr_n_list_origin");
+                        $cloneTr.children("th").text(`객실 ${trLength + 1}`);
+                    $(".sr_numbers table").append($cloneTr)
+                });
+                $(".sr_deleteRoom").click(function(){
+                    const trLength = $(".sr_n_list").length;
+                    if (trLength > 1) {
+                        $(this).parents("tr").remove();
+                        $(".sr_n_list th").each(function(i){
+                            $(this).text(`객실 ${i+1}`);
+                        });
+                    }
+                })
+            });
+        </script>
+    </main>
+</body>
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+      :root {
+        --dataCell-height: 40px;
+        --dataTable-width: 500px;
+      }
+      body {margin: 0px;padding: 0px;}
+      a {text-decoration: none;}
+      ul {list-style: none;padding: 0px;margin: 0px;}
+
+      /* ==================================== */
+      .dateTable {
+        width: var(--dataTable-width);
+        border: 1px solid black;
+      }
+      .week {
+        height: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .weekCell {
+        width: 100%;
+        text-align: center;
+      }
+      .yearMonth {
+        width: 500px;
+        display: flex;
+        justify-content: space-between;
+        height: 30px;
+      }
+      .dates {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .dataCell {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: calc(100% / 7);
+        height: var(--dataCell-height);
+        box-sizing: border-box;
+        margin: 2px 0px;
+
+        font-size: 20px;
+      }
+      .dataCell.nonClickBox {
+        color: #bbb;
+      }
+      .dataCell.clickBox {
+        color: black;
+      }
+      .gotoback,
+      .gotonext {
+        display: block;
+        width: 30px;
+        height: 100%;
+        text-align: center;
+        background-color: paleturquoise;
+      }
+      
+      .checkin_active {
+        background-color: tomato;
+        color: white;
+        position: relative;
+      }
+      .checkin_active::before,
+      .checkout_active::before {
+        content: "";
+        display: block;
+        width: 20%;
+        height: 12%;
+        background-color: inherit;
+
+        position: absolute;
+        top: -12%;
+        left: 20%;
+      }
+      .checkin_active::after,
+      .checkout_active::after {
+        content: "";
+        display: block;
+        width: 20%;
+        height: 12%;
+        background-color: inherit;
+
+        position: absolute;
+        top: -12%;
+        right: 20%;
+      }
+      .checkout_active {
+        background-color: royalblue;
+        color: white;
+        position: relative;
+      }
+      
+      /* ---------------------------------------- .inputBox */
+      .inputBox {
+        display: flex;
+        width: 500px;
+        height: 100px;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+      .inputBox input {
+        display: none;
+      }
+      .inputBox span {
+        border-bottom: 2px solid black;
+        margin-left: 20px;
+      }
+
+      .on {
+        background-color: wheat;
+      }
+      .select_0 {
+        background-color: yellow;
+        color: rgb(0, 0, 0);
+      }
+      .select_1 {
+        background-color: green;
+        color: white;
+      }
+      .select_2 {
+        background-color: purple;
+        color: white;
+      }
+      .select_3 {
+        background-color: red;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="calender">
+      <div class="calenderWrap">
+        <div class="yearMonth">
+          <a href="#none" class="gotoback">&lt;</a>
+          <div class="ym_text"></div>
+          <a href="#none" class="gotonext">&gt;</a>
+        </div>
+        <div class="dateTable">
+          <div class="week"></div>
+          <div class="dates"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="inputBox">
+      <div class="checkin">
+        <label for="checkin_input">체크인</label>
+        <input type="date" name="checkin" id="checkin_input" />
+        <span>날짜 입력</span>
+      </div>
+      →
+      <div class="checkout">
+        <label for="checkout_input">체크아웃</label>
+        <input type="date" name="checkout" id="checkout_input" />
+        <span>날짜 입력</span>
+      </div>
+    </div>
+    <script>
+      $(function () {
+        // 요일
+        const week = ["일", "월", "화", "수", "목", "금", "토"];
+        for (let i = 0; i < 7; i++) {
+          const newDay = $("<div></div>");
+          newDay.addClass("weekCell");
+          $(".week").append(newDay);
+          newDay.text(week[i]);
+        }
+
+        // 날짜
+        //================ load ======================
+        const today = new Date();
+        let selYear = today.getFullYear();
+        let selMonth = today.getMonth(); // 실제 월은 +1 해야함.
+        let selDate = today.getDate();
+        let selDay = today.getDay();
+        calenderLoad();
+        //================ function ==================
+        function bridge() {
+          const inValue = $(".checkin input").data("data-value")? JSON.parse($(".checkin input").data("data-value")) : 999999999;
+          const outValue = $(".checkout input").data("data-value")? JSON.parse($(".checkout input").data("data-value")) : 0;
+          $(".clickBox").each(function(i){
+            const idValue = JSON.parse($(this).data("data-value"));
+            if ( inValue < idValue && idValue < outValue ) {
+              $(this).addClass(`select_${idValue%4}`);
+            }
+          });
+        }
+        function calenderLoad() { //--------------------------------------------
+          let monthStart = new Date(selYear, selMonth, 1);
+          let monthEnd = new Date(selYear, selMonth + 1, 0);
+          $(".ym_text").text(selYear + "년 " + (selMonth + 1) + "월");
+
+          $(".dates").children().remove();
+
+          const i = monthStart.getDay() + monthEnd.getDate();
+
+          for (let j = 1; j <= i; j++) {
+            const newDateBox = $("<div class='dateCell'></div>");
+            const n = j - monthStart.getDay();
+            if (n > 0) {
+              if ( selYear == today.getFullYear() && selMonth == today.getMonth() && n < today.getDate() ) {
+                const nonClickBox = $("<div class='nonClickBox dataCell'></div>");
+                nonClickBox.text(n);
+                $(".dates").append(nonClickBox);
+              } else {
+                const clickBox = $("<a href='#none' class='clickBox dataCell'></a>");
+                clickBox.text(n);
+                clickBox.data(
+                  "data-value",
+                  `${selYear}${selMonth + 1 > 10 ? selMonth + 1 : "0" + (selMonth + 1)}${n > 10 ? n : "0" + n}`
+                ).prop(
+                  "id",
+                  `${selYear}-${selMonth + 1 > 10 ? selMonth + 1 : "0" + (selMonth + 1)}-${n > 10 ? n : "0" + n}`
+                );
+                newDateBox.append(clickBox);
+                if ( clickBox.data("data-value") == $(".checkin input").data("data-value") ) {
+                  clickBox.addClass("checkin_active");
+                }
+                if (clickBox.data("data-value") == $(".checkout input").data("data-value")) {
+                  clickBox.addClass("checkout_active");
+                }
+                $(".dates").append(clickBox);
+                bridge();
+              }
+            }
+            
+
+            $(".clickBox").click(function() {
+              if ($(".checkin span").hasClass("on")) {
+                if (
+                  !$(this).hasClass("checkout_active") &&
+                  ($(".checkout_active").length == 0 ||
+                    JSON.parse($(".checkout_active").data("data-value")) -
+                      JSON.parse($(this).data("data-value")) >
+                      0)
+                ) {
+                  $(".checkin_active").removeClass("checkin_active");
+                  $(this).addClass("checkin_active");
+
+                  $(".checkin span")
+                    .text(
+                      `${selYear}년 ${selMonth + 1}월 ${$(
+                        ".checkin_active"
+                      ).text()}일`
+                    )
+                    .toggleClass("on");
+                  $(".checkin input").val(
+                    (i, v) => $(this).prop("id")
+                  ).data(
+                    "data-value",
+                    $(this).data("data-value")
+                  );
+                }
+              }
+              if ($(".checkout span").hasClass("on")) {
+                if (
+                  !$(this).hasClass("checkin_active") &&
+                  ($(".checkin_active").length == 0 ||
+                    JSON.parse($(this).data("data-value")) -
+                      JSON.parse($(".checkin_active").data("data-value")) >
+                      0)
+                ) {
+                  $(".checkout_active").removeClass("checkout_active");
+                  $(this).addClass("checkout_active");
+
+                  $(".checkout span")
+                    .text(
+                      `${selYear}년 ${selMonth + 1}월 ${$(
+                        ".checkout_active"
+                      ).text()}일`
+                    )
+                    .toggleClass("on");
+                  $(".checkout input")
+                    .val( (i, v) => $(this).prop("id") )
+                    .data( "data-value", $(this).data("data-value") );
+                }
+              }
+              bridge();
+            });
+          
+          }
+        } //----------------------------------------------------------------------
+        $(".gotonext").click(function () {
+          if (selMonth + 1 >= 12) {
+            selYear += 1;
+            selMonth = 0;
+          } else {
+            selMonth += 1;
+          }
+          calenderLoad();
+        });
+        $(".gotoback").click(function () {
+          if ( today.getFullYear() <= selYear && today.getMonth() < selMonth) {
+            if (selMonth + 1 <= 1) {
+              selYear -= 1;
+              selMonth = 11;
+            } else {
+              selMonth -= 1;
+            }
+          }
+          calenderLoad();
+        });
+        // 체크인
+        $(".checkin span").click(function () {
+          $(this).toggleClass("on");
+          $(".checkout span").removeClass("on");
+        });
+        $(".checkout span").click(function () {
+          $(this).toggleClass("on");
+          $(".checkin span").removeClass("on");
+        });
+      });
+    </script>
+  </body>
+</html>

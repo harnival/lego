@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+      :root {
+        --dataCell-height: 50px;
+        --dataTable-max-width: 500px;
+      }
+      body {margin: 0px;padding: 0px;}
+      a {text-decoration: none;}
+      ul {list-style: none;padding: 0px;margin: 0px;}
+
+      /* ==================================== */
+      .calenderWrap {
+        border: 2px solid black;
+        border-radius: 20px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .dateTable {
+        max-width: var(--dataTable-max-width);
+        padding: 10px;
+      }
+      .week {
+        height: 20%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 3%;
+      }
+      .weekCell {
+        width: 100%;
+        text-align: center;
+      }
+      .yearMonth {
+        width: 100%;
+        max-width: var(--dataTable-max-width);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100px;
+      }
+      .yearMonth > div {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+      .ym_text2 {
+        font-size: 110%;
+        opacity: 0.9;
+      }
+      .ym_text1 {
+        font-size: 140%;
+        color: rgb(255, 141, 121);
+        font-weight: 600;
+      }
+      .dates {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .dataCell {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: calc(100% / 7);
+        height: var(--dataCell-height);
+        box-sizing: border-box;
+        margin: 2px 0px;
+
+        font-size: 20px;
+      }
+      .dataCell.nonClickBox {
+        color: #bbb;
+      }
+      .dataCell.clickBox {
+        color: green;
+      }
+      .gotoback,
+      .gotonext {
+        display: block;
+        width: 50px;
+        height: 50px;
+
+        border-radius: 50%;
+        text-align: center;
+        opacity: 0.5;
+      }
+      /* -------------------- */
+      .checkin_active {
+        background-color: tomato;
+        color: white;
+        position: relative;
+      }
+      .checkin_active::before,
+      .checkout_active::before {
+        content: "";
+        display: block;
+        width: 20%;
+        height: 12%;
+        background-color: inherit;
+
+        position: absolute;
+        top: -12%;
+        left: 20%;
+      }
+      .checkin_active::after,
+      .checkout_active::after {
+        content: "";
+        display: block;
+        width: 20%;
+        height: 12%;
+        background-color: inherit;
+
+        position: absolute;
+        top: -12%;
+        right: 20%;
+      }
+      .checkout_active {
+        background-color: royalblue;
+        color: white;
+        position: relative;
+      }
+      .select_0 {
+        background-color: yellow;
+        color: rgb(0, 0, 0);
+      }
+      .select_1 {
+        background-color: green;
+        color: white;
+      }
+      .select_2 {
+        background-color: purple;
+        color: white;
+      }
+      .select_3 {
+        background-color: red;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="calender">
+      <div class="calenderWrap">
+        <div class="yearMonth">
+          <a href="#none" class="gotoback" style="background:tomato url('./img/arrow_back.png') no-repeat center/50%"></a>
+          <div>
+            <span class="ym_text1"></span>
+            <span class="ym_text2">년</span>
+            <span class="ym_text1"></span>
+            <span class="ym_text2">월</span>
+          </div>
+          <a href="#none" class="gotonext" style="background:tomato url('./img/arrow_forward.png') no-repeat center/50%"></a>
+        </div>
+        <div class="dateTable">
+          <div class="week"></div>
+          <div class="dates"></div>
+        </div>
+      </div>
+    </div>
+
+    
+    <script>
+      $(function () {
+        // 요일
+        const week = ["일", "월", "화", "수", "목", "금", "토"];
+        for (let i = 0; i < 7; i++) {
+          const newDay = $("<div></div>");
+          newDay.addClass("weekCell");
+          $(".week").append(newDay);
+          newDay.text(week[i]);
+        }
+
+        // 날짜
+        //================ load ======================
+        const today = new Date();
+        let selYear = today.getFullYear();
+        let selMonth = today.getMonth(); // 실제 월은 +1 해야함.
+        let selDate = today.getDate();
+        let selDay = today.getDay();
+        calenderLoad();
+        //================ function ==================
+        function bridge() {
+          const inValue = $(".checkin input").data("data-value")? JSON.parse($(".checkin input").data("data-value")) : 999999999;
+          const outValue = $(".checkout input").data("data-value")? JSON.parse($(".checkout input").data("data-value")) : 0;
+          $(".clickBox").removeClass(["select_0","select_1","select_2","select_3"])
+          $(".clickBox").each(function(i){
+            const idValue = JSON.parse($(this).data("data-value"));
+            if ( inValue < idValue && idValue < outValue ) {
+              $(this).addClass(`select_${idValue%4}`);
+            }
+          });
+        }
+        function calenderLoad() { //--------------------------------------------
+          let monthStart = new Date(selYear, selMonth, 1);
+          let monthEnd = new Date(selYear, selMonth + 1, 0);
+          $(".ym_text1").eq(0).text(selYear);
+          $(".ym_text1").eq(1).text(selMonth+1);
+
+          $(".dates").children().remove();
+          const i = monthStart.getDay() + monthEnd.getDate();
+
+          for (let j = 1; j <= i; j++) {
+           
+            const n = j - monthStart.getDay();
+            if (n > 0) {
+              if ( selYear == today.getFullYear() && selMonth == today.getMonth() && n < today.getDate() ) {
+                const nonClickBox = $("<div class='nonClickBox dataCell'></div>");
+                nonClickBox.text(n);
+                $(".dates").append(nonClickBox);
+              } else {
+                const clickBox = $("<a href='#none' class='clickBox dataCell'></a>");
+                clickBox.text(n);
+                clickBox.data(
+                  "data-value",
+                  `${selYear}${selMonth + 1 < 10 ?  "0" + (selMonth + 1) : selMonth + 1 }${n < 10 ? "0"+n : n}`
+                ).prop(
+                  "id",
+                  `${selYear}-${selMonth + 1 < 10 ? "0" + (selMonth + 1) : selMonth + 1 }-${n < 10 ? "0"+n : n}`
+                );
+                if ( clickBox.data("data-value") == $(".checkin input").data("data-value") ) {
+                  clickBox.addClass("checkin_active");
+                }
+                if (clickBox.data("data-value") == $(".checkout input").data("data-value")) {
+                  clickBox.addClass("checkout_active");
+                }
+                $(".dates").append(clickBox);
+              }
+            } else {
+              const newDateBox = $("<div class='dataCell'></div>");
+              $(".dates").append(newDateBox);
+            }
+            
+
+            $(".clickBox").click(function() {
+              if ($(".checkin span").hasClass("on")) {
+                if ( !$(this).hasClass("checkout_active")) {
+                    $(".checkin_active").removeClass("checkin_active");
+                    $(this).addClass("checkin_active");
+                    $(".checkin input")
+                      .val((i, v) => $(this).prop("id"))
+                      .data( "data-value", $(this).data("data-value"));
+                    const weekday = new Date($(".checkin input").val()).getDay();
+                    $(".checkin span")
+                      .text( `${selYear}년 ${selMonth + 1}월 ${$(".checkin_active").text()}일 (${week[weekday]})` )
+                      .toggleClass("on");
+                  
+                }
+              }
+              if ($(".checkout span").hasClass("on")) {
+                if ( !$(this).hasClass("checkin_active") ) {
+                  
+                    $(".checkout_active").removeClass("checkout_active");
+                    $(this).addClass("checkout_active");
+                    $(".checkout input")
+                      .val( (i, v) => $(this).prop("id") )
+                      .data( "data-value", $(this).data("data-value") );
+                    const weekday = new Date($(".checkout input").val()).getDay();
+                    $(".checkout span")
+                      .text( `${selYear}년 ${selMonth + 1}월 ${$(".checkout_active").text()}일 (${week[weekday]})` )
+                      .toggleClass("on");
+                  
+                }
+              }
+              bridge();
+            });
+          
+          }
+          bridge();
+        } //----------------------------------------------------------------------
+        $(".gotonext").click(function () {
+          if (selMonth + 1 >= 12) {
+            selYear += 1;
+            selMonth = 0;
+          } else {
+            selMonth += 1;
+          }
+          calenderLoad();
+        });
+        $(".gotoback").click(function () {
+          if ( today.getFullYear() <= selYear && today.getMonth() < selMonth) {
+            if (selMonth + 1 <= 1) {
+              selYear -= 1;
+              selMonth = 11;
+            } else {
+              selMonth -= 1;
+            }
+          }
+          calenderLoad();
+        });
+        // 체크인
+        $(".checkin span").click(function () {
+          $(this).toggleClass("on");
+          $(".checkout span").removeClass("on");
+        });
+        $(".checkout span").click(function () {
+          $(this).toggleClass("on");
+          $(".checkin span").removeClass("on");
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,19 @@
+    // overlay event
+https://myhappyman.tistory.com/160
+
+    // jquery min script
+https://code.jquery.com/jquery-3.6.4.min.js
+
+https://code.jquery.com/jquery-3.6.4.js
+
+    //server
+https://www.zerocho.com/category/NodeJS/post/578b5a36d8316615006bee0f
+
+    //scroll
+https://code-study.tistory.com/13
+    // flex & grid
+https://studiomeal.com/archives/197
+    //form data
+https://www.learnwithjason.dev/blog/get-form-values-as-json
+    //정규식
+https://inpa.tistory.com/entry/JS-%F0%9F%93%9A-%EC%A0%95%EA%B7%9C%EC%8B%9D-RegExp-%EB%88%84%EA%B5%AC%EB%82%98-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-%EC%89%BD%EA%B2%8C-%EC%A0%95%EB%A6%AC

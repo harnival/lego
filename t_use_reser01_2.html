@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오후이용권 예약 │ </title>
+    <script src="./jquery.js"></script>
+    <style>
+      .disabled_cell {
+        color: #bbb;
+        text-align: center;
+      }
+      .disabled_cell {
+            color: #bbb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .able_cell {
+            display: flex;
+            text-decoration: none;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            color: rgb(2, 172, 2);
+        }
+        .active_cell{
+          background-color: rgb(2, 172, 2);
+          color: white;
+          position: relative;
+        }
+        .active_cell::before {
+          content: "";
+          display: block;
+          position: absolute;
+          width: 20%;
+          height: 10%;
+          background-color: rgb(2, 172, 2);
+          top: -10%;
+          left: 15%;
+        }
+        .active_cell::after {
+          content: "";
+          display: block;
+          position: absolute;
+          width: 20%;
+          height: 10%;
+          background-color: rgb(2, 172, 2);
+          top: -10%;
+          right: 15%;
+        }
+        .calender {
+            border: 2px solid rgba(0,0,0,0.2);
+            box-sizing: border-box;
+            border-radius: 30px;
+            height: fit-content;
+            overflow: hidden;
+            padding: 40px 10px 10px;
+        }
+        .calender .cdt_date {
+          width: var(--calender-table-size);
+          display: flex;
+          flex-wrap: wrap;
+        }
+        .calender .calender_table_cell{
+          aspect-ratio: 1/1;
+          width: calc(100% / 7 - 4px);
+          font-size: 27px;
+          margin: 4px 2px;
+        }
+        .calender .cdt_week {
+          width: 100%;
+          height: 30px;
+          justify-content: space-around;
+          align-items: center;
+          display: flex;
+          text-align: center;
+          color: #666;
+        }
+        .calender_month {
+          width: 100%;
+          height: 50px;
+          text-align: center;
+          box-sizing: border-box;
+          display: flex;
+          position: relative;
+        }
+        .cm_spanbox {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        font-size: 20px; 
+        }
+        .cm_sb_yearnumber,
+        .cm_sb_monthnumber {
+            color: tomato;
+        }
+        .date_inputs {
+            padding: 100px 30px;
+            box-sizing: border-box;
+        }
+        .date_inputs label{
+          font-size: 20px;
+        }
+        .date_inputs input{
+          display: none;
+        }
+
+
+          /* ======================== */
+        .numberCheck {
+          position: relative;
+          display: flex;
+          justify-content: center;
+          width: fit-content;
+          padding: 5px 40px;
+          border-radius: 25px;
+          background-color: yellowgreen;
+        }
+        .nc_wrap label {
+                display: none;
+              }
+          .numberCheck input {
+            width: 40px;
+            height: 30px;
+            text-align: center;
+
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+            font-size: 20px;
+            border: none;
+            background-color: transparent;
+          }
+          .decrease_btn {
+            font-size: 0px;
+            display: block;
+            background-color: rgb(240, 240, 89);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+
+            position: absolute;
+            top: 5px;
+            left: 5px;
+          }
+            .decrease_btn img {
+              width: 30px;
+              opacity: 0.7;
+            }
+          .increase_btn {
+            font-size: 0px;
+            display: block;
+            background-color: rgb(240, 240, 89);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+
+            position: absolute;
+            top: 5px;
+            right: 5px;
+          }
+            .increase_btn img {
+              width: 30px;
+              opacity: 0.7;
+            }
+            /* ============================= */
+
+            /* ------------------------------ */
+            .ticket_formWrap {
+              width: 900px;
+              border: 1px solid tomato;
+              margin: auto;
+            }
+            fieldset {
+              /* border: none; */
+              position: relative;
+              margin: 0px;
+              padding: 0px;
+              padding-top: 100px;
+            }
+            .daytime_fieldset01 {
+              height: 634px;
+              display: flex;
+              justify-content: center;
+              position: relative;
+            }
+              fieldset legend {
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                font-size: 25px;
+              }
+              .daytime_fieldset01 legend::before {
+                content: "01";
+                display: inline-block;
+                text-align: center;
+                vertical-align: middle;
+                line-height: 1.5;
+                width: 30px;
+                height: 30px;
+                background-color: royalblue;
+                border-radius: 50%;
+                font-size: 18px;
+                color: white;
+                margin-right: 10px;
+              }
+              /* ----------------------------------- */
+            .daytime_fieldset02 {
+              display: flex;
+            }
+              .daytime_fieldset02 legend::before {
+                content: "02";
+                display: inline-block;
+                text-align: center;
+                vertical-align: middle;
+                line-height: 1.5;
+                width: 30px;
+                height: 30px;
+                background-color: royalblue;
+                border-radius: 50%;
+                font-size: 18px;
+                color: white;
+                margin-right: 10px;
+              }
+              .dtf02_wrap {
+                width: 50%;
+                display: flex;
+                flex-direction: column;
+                position: relative;
+              }
+                .dtf02_wrap > label {
+                  font-size: 20px;
+                  font-weight: 600;
+                }
+                .dtf02_wrap > span:first-of-type {
+                  font-size: 15px;
+                  color: var(--exp-color);
+                }
+                .dtf02_wrap > span:last-of-type {
+                  padding-top: 10px;
+                }
+                .dtf02_wrap > span:last-of-type span {
+                  color: var(--exp-color);
+                  font-weight: 600;
+                  font-size: 15px;
+                }
+              .dtf02_wrap .nc_wrap {
+                position: absolute;
+                top: 0px;
+                right: 20%;
+              }
+              
+      /* ---------------------- */
+      .daytime_fieldset03 label {
+        font-size: 18px;
+      }
+      .daytime_fieldset03 legend::before {
+                content: "03";
+                display: inline-block;
+                text-align: center;
+                vertical-align: middle;
+                line-height: 1.5;
+                width: 30px;
+                height: 30px;
+                background-color: royalblue;
+                border-radius: 50%;
+                font-size: 18px;
+                color: white;
+                margin-right: 10px;
+              }
+        .dtf03_labelExp {
+          color: var(--exp-color);
+          text-indent: 40px;
+          margin: 0px;
+          display: flex;
+          flex-direction: column;
+        }
+      .dtf03_wrap .nc_wrap {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+      } 
+      .dtf03_wrap {
+        position: relative;
+      }
+      .dtf03_w_exp {
+        padding: 20px;
+        border: 1px solid rgba(0,0,0,0.1);
+        width: 70%;
+        margin: auto;
+      }
+      .dtf03_w_exp span {
+        font-weight: 500;
+        font-size: 15px;
+      }
+      .dtf03_w_exp ul {
+        list-style:square;
+        padding: 10px 0px 10px 30px;
+        margin: 0px;
+        font-size: 13px;
+        color: #666;
+
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      /* --------------------------- */
+      /* ----------------------------------------- */
+      .daytime_fieldset06 {
+        display: flex;
+        position: relative;
+      }
+      .dtf06_discount {
+        width: 50%;
+      }
+      .dtf06_d_list {
+        list-style: none;
+        padding: 0px;
+        border: 1px solid rgba(0,0,0,0.4);
+        border-bottom: none;
+      }
+        .dtf06_d_list li {
+          border-bottom: 1px solid rgba(0,0,0,0.4);
+        }
+        .dtf06_d_list .empty_li {
+          height: 70px;
+          background-color: #eeeeeea4;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          color: #bbb;
+        }
+        .dtf06_d_l_wrap {
+          position: relative;
+          display: flex;
+          align-items:flex-start;
+          flex-direction: column;
+        }
+        .dtf06_d_l_listopen {
+          display: block;
+          width: 50%;
+          background: url("img/arrow_drop_down.png") no-repeat center left/30px;
+          padding-left: 30px;
+          line-height: 2;
+          text-decoration: none;
+          color: black;
+        }
+        .dtf06_d_l_select {
+          position: absolute;
+          top: 0px;
+          right: 0px;
+        }
+        .dtf06_d_l_detail {
+          display: none;
+        }
+        .dtf06_d_l_w_exp {
+          color: var(--exp-color);
+          padding-left: 20px;
+          font-size: 15px;
+        }
+        .active_discount {
+          background-color: rgb(247, 206, 199);
+        }
+        .not_discount .dtf06_d_l_wrap {
+          opacity: 0.5;
+        }
+        .dtf06_d_list li input[type="checkbox"] {
+          display: block;
+        }
+
+        .dtf06_price {
+          width: 50%;
+        }
+        /* ------------------ */
+        .dtf06_p_s_extra > div {
+          border: 1px solid tomato;
+          box-sizing: border-box;
+          display: none;
+        }
+
+        .dtf06_discount_select {
+          display: none;
+        }
+        .dtf06_p_s_discount >div {
+          border: 1px solid tomato;
+        }
+        #daytime_total_price {
+          display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="ticket_formWrap daytime_ticket_formWrap">
+        <div class="daytime_form_title form_title">
+            <h4>오후이용권 구매하기</h4>
+            <div>
+              <ul>
+                <li>본 상품은 온라인 전용 상품으로 LEGOLAND® 파크를 오후 3시부터 9시(폐장)까지 이용하실 수 있는 1일 이용권입니다. (4/28~10/29, 금토일 및 공휴일 한정)</li>
+                <li>당일, 운영시간 및 이용 불가 시설 등 파크 이용 관련 보다 자세한 정보는 공식 홈페이지 또는 공식 App을 통해 확인하세요.</li>
+                <li>환불을 원하시는 경우, 예약하신 방문일 1일 전까지 회사의 홈페이지 내 취소 요청 절차를 통해 구매 철회를 요청해야 합니다.</li>
+                <li>입장일 기준, 만 2세 (24개월 미만) 유아는 무료 입장이 가능합니다.</li>
+              </ul>
+            </div>
+        </div>
+        <form action="" id="daytime_ticket_form" class="ticket_form">
+          <fieldset class="daytime_fieldset01"> 
+            <legend>날짜 지정</legend>
+            <div class="date_inputs">
+              <label for="dated_date_value"></label>
+              <input type="date" name="dated_date_value" id="dated_date_value">
+            </div>
+            <div class="calender">
+              <div class="calender_month dated_calender_month">
+                <div class="cm_spanbox">
+                  <span class="cm_sb_yearnumber"></span>
+                  <span style="color: #666">년</span>
+                  <span class="cm_sb_monthnumber"></span>
+                  <span style="color: #666">월</span>
+                </div>
+                <a href="#none" class="gotoback">이전</a>
+                <a href="#none" class="gotonext">다음</a>
+              </div>
+              <div class="calender_date_table dated_calender_date_table">
+                <div class="cdt_week">
+                  <div>일</div>
+                  <div>월</div>
+                  <div>화</div>
+                  <div>수</div>
+                  <div>목</div>
+                  <div>금</div>
+                  <div>토</div>
+                </div>
+                <ul class="cdt_date"></ul>
+              </div>
+            </div>
+            
+          </fieldset>
+
+          <fieldset class="daytime_fieldset02">
+            <legend>인원 지정</legend>
+            <div class="dtf02_wrap">
+              <label for="daytime_numbers_grown">대인</label>
+              <span>만 13세 이상</span>
+              <span>
+                <span>온라인 판매가격</span> 
+                <s>￦60,000</s>
+                <strong> ￦54,000</strong>
+              </span>
+              <div class="nc_wrap">
+                <div class="numberCheck">
+                  <input type="text" name="daytime_numbers_grown" id="daytime_numbers_grown" class="numbers_grown"  value="0" readonly/>
+                  <a href="#none" class="decrease_btn">인원 제외<img src="./img/minus.png" alt=""></a>
+                  <a href="#none" class="increase_btn">인원 추가<img src="./img/plus.png" alt=""></a>
+                </div>
+              </div>
+            </div>
+            <div class="dtf02_wrap">
+              <label for="daytime_numbers_little">소인</label>
+              <span>만 2세 ~ 12세</span>
+              <span>
+                <span>온라인 판매가격</span> 
+                <s>￦50,000</s>
+                <strong> ￦45,000</strong>
+              </span>
+              <div class="nc_wrap">
+                <div class="numberCheck">
+                  <input type="text" name="daytime_numbers_little" id="daytime_numbers_little" class="numbers_little" value="0" readonly />
+                  <a href="#none" class="decrease_btn">인원 제외<img src="./img/minus.png" alt=""></a>
+                  <a href="#none" class="increase_btn">인원 추가<img src="./img/plus.png" alt=""></a>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="daytime_fieldset03">
+            <legend>사전구매</legend>
+            <div class="dtf03_wrap">
+              <div>
+                <input
+                  type="radio"
+                  name="daytime_pre_reserve"
+                  value="daytime_digital_photo"
+                  id="daytime_digital_photo"
+                  class="digital_photo"
+                />
+                <label for="daytime_digital_photo">디지털 기념 사진 사전 구매</label>
+                <p class="dtf03_labelExp">
+                  <span>
+                    LEGOLAND® 와 함께 한 소중한 추억을 고화질 사진으로
+                    간직하세요!
+                  </span>
+                  <span>온라인 구매가격 ￦25,000</span>
+                </p>
+                <p>
+                </p>
+                <div class="nc_wrap">
+                  <label for="daytime_digital_photo_number">수량</label>
+                  <div class="numberCheck">
+                    <div class="dpnWrap">
+                      <input
+                        type="text"
+                        name="daytime_digital_photo_number"
+                        id="daytime_digital_photo_number"
+                        class="digital_photo_number"
+                        value="0"
+                        readonly
+                      />
+                      <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
+                      <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
+                    </div>
+                </div>
+                </div>
+              </div>
+              <div class="dtf03_w_exp">
+                <div>
+                    <span>기념 사진 사전 구매 안내</span>
+                    <ul>
+                        <li>
+                          시그니쳐 포토존 위티는 파크 운영 상황에 따라 변경될 수
+                          있음.
+                        </li>
+                        <li>
+                          어트랙션 탑승 중 촬영한 사진은 다운로드 항목에서 제외
+                        </li>
+                        <li>
+                          사진 파일 수령은 LEGOLAND® 파크 내 포토 카운터 5곳에서
+                          가능하며, 구매 후 발행된 18자리 바코드(모바일 또는 인쇄)를
+                          제시해야 수령 가능
+                        </li>
+                    </ul>
+                </div>
+                  <span>포토존 위치 안내</span>
+                  <ul>
+                      <li>파크 Entry Plaza 앞</li>
+                      <li>파크입구 공룡 조형물 앞</li>
+                      <li>브릭스트리트 광장 앞</li>
+                  </ul>
+                </dl>
+              </div>
+            </div>
+            <div class="dtf03_wrap">
+              <div>
+                <input
+                  type="radio"
+                  name="daytime_pre_reserve"
+                  value="daytime_mini_figure"
+                  id="daytime_mini_figure"
+                  readonly
+                  class="mini_figure"
+                />
+                <label for="daytime_mini_figure">미니 피규어 세트 사전구매</label>
+                <p class="dtf03_labelExp">
+                  <span>
+                    LEGOLAND®의 방문 필수템 귀여운 미니 피겨와 함께!
+                  </span>
+                  <span>
+                    현장구매가 <s>￦15,900</s>
+                    온라인 구매가격 <strong>￦15,000</strong>
+                  </span>
+                </p>
+                <p>
+                </p>
+                <div class="nc_wrap">
+                  <label for="daytime_mini_figure_number">수량</label>
+                  <div class="numberCheck">
+                    <input
+                      type="text"
+                      name="daytime_mini_figure_number"
+                      id="daytime_mini_figure_number"
+                      class="mini_figure_number"
+                      value="0"
+                      readonly
+                    />
+                    <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
+                    <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
+
+                  </div>
+                </div>
+              </div>
+              <div class="dtf03_w_exp">
+                  <span>미니 피겨 세트 사전구매 안내</span>
+                  <ul>
+                      <li>파크 정문에서 가장 가까운 리테일샵 '빅샵'에서 수령</li>
+                      <li>
+                        번 세트는 미니피겨 3개입 1세트 구성으로 디자인은 시즌에
+                        따라 변경
+                      </li>
+                      <li>
+                        세트의 구성품은 판매중인 개별 제품과 임의로 교환 및 환불
+                        불가
+                      </li>
+                  </ul>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="daytime_fieldset06 total_price_wrap">
+            <legend>가격 합계</legend>
+            <div class="dtf06_discount">
+              <span>할인 적용</span>
+              <ul class="dtf06_d_list">
+                <li class="empty_li">
+                  관련 혜택 없음
+                </li>
+              </ul>
+            </div>
+
+            <div class="dtf06_price">
+              <div class="dtf06_p_selectlist">
+                <ul>
+                  <li>
+                    <span><strong>예약 일자</strong></span>
+                    <div class="dtf06_p_s_date"></div>
+                  </li>
+                  <li>
+                    <span><strong>예약 인원</strong></span>
+                    <div class="dtf06_p_s_person">
+                      <span>대인 0 명</span>
+                      <span>소인 0 명</span>
+                    </div>
+                  </li>
+                  <li>
+                    <span><strong>부가 선택</strong></span>
+                    <div class="dtf06_p_s_extra">
+                      <div>
+                        <p class="dtf06_p_s_e_title03"></p>
+                        <p class="dtf06_p_s_e_number03"></p>
+                        <p class="dtf06_p_s_e_price03"></p>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <span><strong>할인 내역</strong></span>
+                    <div class="dtf06_p_s_discount">
+                      <div>
+                        <p class="dtf06_p_s_e_title06"></p>
+                        <p class="dtf06_p_s_e_number06"></p>
+                        <p class="dtf06_p_s_e_price06"></p>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="dtf06_p_total">
+                <label for="daytime_total_price">합계</label>
+                <span class="dtf06_p_t_text"></span>
+                <input type="text" name="daytime_total_price" id="daytime_total_price" readonly class="total_price">
+              </div>
+            </div>
+          </fieldset>
+          <div class="daytime_ticket_submit ticket_submit">
+            <button type="submit" class="submit_btn">장바구니에 담기</button>
+            <button type="button" class="reset_btn">다시 입력</button>
+          </div>
+        </form>
+    </div>
+    <script>
+        $(function(){
+          // for Total Price ----------
+          var discountRate = 1;
+          var dtf03_number = 0, dtf03_price = 0;
+          var df04_price = [0,0,0];
+          var df05_price = 0;
+
+          //------------Load-------------
+          const today = new Date();
+          let $selYear = today.getFullYear();
+          let $selMonth = today.getMonth() +1;
+              const $selMonthText = $selMonth < 10? "0"+($selMonth) : $selMonth;
+          let $selDate = today.getDate();
+              const $selDateText = $selDate < 10? "0"+$selDate : $selDate;
+          let $selDay = today.getDay();
+          $("#dated_date_value").val((i,v) => `${$selYear}-${$selMonthText}-${$selDateText}`);
+          $(".date_inputs label").text(`${$selYear}년 ${$selMonth}월 ${$selDate}일`);
+          
+          calenderLoad();
+          if ( !$(".calender_table_cell").eq($selDay + $selDate-1).hasClass("disabled_cell") ) {
+              $(".calender_table_cell").eq($selDay + $selDate-1).children().addClass("active_cell");
+              $(".df06_p_s_date").text(`${$selYear}년 ${$selMonth}월 ${$selDate}일`);
+          }
+          //---------------------------- 01. 달력 생성 & 날짜 입력 
+          function calenderLoad() { 
+            const monthFirst = new Date($selYear, $selMonth-1, 1);
+            const firstStart = monthFirst.getDay();
+            const lastEnd = new Date($selYear, $selMonth, 0).getDate();
+            $(".cm_sb_yearnumber").text($selYear);
+            $(".cm_sb_monthnumber").text($selMonth);
+            $(".cdt_date").children().remove();
+
+            for ( let num = 0; num < firstStart+lastEnd; num++) {
+              const k = num-firstStart+1;
+              const $newCell = $("<li class='calender_table_cell'></li>");
+                $newCell.prop("id",`${$selYear}-${$selMonth < 10? "0"+($selMonth) : $selMonth}-${k<10? "0"+k : k}`);
+                $(".cdt_date").append($newCell);
+              if ( 0 < k && k <= lastEnd) {
+                if ( new Date($selYear,$selMonth-1,k) < today ) {
+                  $newCell.text(k);
+                  $newCell.addClass("disabled_cell");
+                } else {
+                  const $accept = $("<a href='#none' class='able_cell'></a>");
+                  $accept.text(k);
+                  $newCell.append($accept).removeClass("disabled_cell");
+                  // 이전 선택 계속 유지
+                  if (+new Date($("#dated_date_value").val()) == +new Date($newCell.prop("id"))) {
+                    console.log(k);
+                    $accept.addClass("active_cell");
+                  }
+                  $accept.click(function(e){
+                    $("#dated_date_value").val((i,v) => `${$selYear}-${$selMonth < 10? "0"+($selMonth) : $selMonth}-${k<10? "0"+k: k}`);
+                    $(".date_inputs label").text(`${$selYear}년 ${$selMonth}월 ${k}일`);
+                    $(this).addClass("active_cell");
+                    $(".able_cell").not($(this)).removeClass("active_cell");
+                    $(".df06_p_s_date").text(`${$selYear}년 ${$selMonth}월 ${k}일`)
+                    total()
+                  });
+                }
+              } 
+            }
+          }
+          
+          $(".calender_month .gotoback").click(function(){
+            if (!($selYear == today.getFullYear() && $selMonth-1 == today.getMonth())) {
+              if ( $selMonth == 1 ) {
+                $selMonth = 12;
+                $selYear -= 1;
+              } else {
+                $selMonth -= 1;
+              }
+              calenderLoad();
+            }
+          })
+          $(".calender_month .gotonext").click(function(){
+            if ( $selMonth == 12 ) {
+              $selMonth = 1;
+              $selYear += 1;
+            } else {
+              $selMonth += 1;
+            }
+              calenderLoad();
+          });           
+          // -------------------------------------- 02. 인원 선택
+          $(".decrease_btn").click(function(e){
+            if( $(this).siblings("input").val() > 0) {
+              $(this).siblings("input").val((i,v) => +v-1);
+              $(this).siblings("input").trigger("change");           
+            }
+          })
+          $(".increase_btn").click(function(e){
+            $(this).siblings("input").val((i,v) => +v+1);
+            $(this).siblings("input").trigger("change");
+          });
+
+          $("#daytime_numbers_grown").change(function(){
+            $(".dtf06_p_s_person").children("span:first-child").text(`대인 ${$(this).val()} 명`);
+            total()
+          })
+          $("#daytime_numbers_little").change(function(){
+            $(".dtf06_p_s_person").children("span:last-child").text(`소인 ${$(this).val()} 명`);
+            total()
+          })
+          
+          // ------------------------------------- 03. 사전 구매
+          $(".dtf03_wrap input:radio").each(function(i){
+            $(".dtf03_wrap .nc_wrap input").eq(i).change(function(){
+              $(".dtf03_wrap input:radio").eq(i).trigger("click");
+            })
+
+            $(this).click(function(){
+              $(".dtf03_wrap .nc_wrap input").not(":eq("+i+")").prop("disabled",true);
+              $(".dtf03_wrap .nc_wrap input").eq(i).prop("disabled",false);
+
+              if ($(".dtf03_wrap .nc_wrap input").eq(i).val() == 0) {
+                $(".dtf06_p_s_extra >div").eq(0).hide()
+              } else {
+                $(".dtf06_p_s_extra >div").eq(0).show()
+              }
+              if ( i == 0 ) {
+                const digitalPhotoPrice = 25000;
+                dtf03_number = $("#daytime_digital_photo_number").val();
+                dtf03_price = digitalPhotoPrice;
+                $(".dtf06_p_s_e_title03").eq(0).text("디지털 기념 사진 사전구매");
+                $(".dtf06_p_s_e_number03").eq(0).text($("#daytime_digital_photo_number").val());
+                $(".dtf06_p_s_e_price03").eq(0).text("￦" + $("#daytime_digital_photo_number").val()*digitalPhotoPrice);
+              }
+              if ( i == 1 ) {
+                const miniFigurePrice = 15000;
+                dtf03_number = $("#daytime_mini_figure_number").val();
+                dtf03_price = miniFigurePrice;
+                $(".dtf06_p_s_e_title03").eq(0).text("미니 피겨 사전구매");
+                $(".dtf06_p_s_e_number03").eq(0).text($("#daytime_mini_figure_number").val());
+                $(".dtf06_p_s_e_price03").eq(0).text("￦" + $("#daytime_mini_figure_number").val()*miniFigurePrice);
+              }
+              
+              total()
+            });
+          });
+          // ------------------------------------- 04. 패스트트랙
+          
+          // ------------------------------------- 05. VIP EXPERIENCES
+
+          // ------------------------------------- 06-1. 할인적용
+          if ($(".dtf06_d_list").has(".empty_li")) {
+            $(".dtf06_p_s_discount").parent().remove();
+          }
+          $(".dtf06_d_list li").each(function(i){
+            $(this).find(".dtf06_d_l_listopen").click(function(){
+              $(".dtf06_d_l_detail").eq(i).slideToggle();
+              $(".dtf06_d_l_detail").not(":eq("+i+")").slideUp()
+              $(".dtf06_d_l_w_exp").eq(i).slideToggle();
+              $(".dtf06_d_l_w_exp").not(":eq("+i+")").slideDown();
+            })
+          });
+
+          const holiday = [
+            { month: 1, date: 1}, // 신정
+            { month: 3, date: 1}, // 삼일절
+            { month: 5, date: 5}, // 어린이날
+            { month: 6, date: 6}, // 현충일
+            { month: 8, date: 15}, // 광복절
+            { month: 10, date: 3}, // 개천절
+            { month: 10, date: 9}, // 한글날
+            { month: 12, date: 25} // 성탄절
+          ]                        // 기타 음력 공휴일/ 대체휴일은 직접 입력 (설날, 추석, 석가탄신일)
+
+          $(".dtf06_d_l_select").each(function(i){
+            $(this).click(function(){
+              $(".dtf06_d_list li").eq(i).toggleClass("active_discount");
+              $(".dtf06_d_list li").not(`:eq(${i})`).removeClass("active_discount");
+              // $(".dtf06_d_list li").eq(i).removeClass("not_discount");
+              // $(".dtf06_d_list li").not(`:eq(${i})`).addClass("not_discount");
+              $(".dtf06_d_list li input:checkbox").eq(i).prop("checked",function(){
+                $(".dtf06_d_list li input:checkbox").not($(this)).prop("checked",false);
+                return !$(this).prop("checked");
+              });
+
+              if ( $(".dtf06_d_list li input:checkbox").eq(i).is(":checked")) {
+                $(".dtf06_p_s_discount > div").show();
+                const selectDate = new Date($selYear, $selMonth-1, $selDate);
+                const selectDay = selectDate.getDay();
+                const holidayCheck = holiday.some(function(v){
+                  return v.month == $selMonth && v.date == $selDate;
+                });
+
+              } else if (!$(".dtf06_d_list li input:checkbox").is(":checked")) {
+                $(".dtf06_p_s_discount > div").hide();
+              }
+              
+              total();
+            });
+          });
+         
+
+          // ------------------------------------- 06-2. 가격 합산
+          
+          const total = function() {
+            const grownDatedPrice = 
+              today.getFullYear()==$selYear && today.getMonth()==$selMonth-1 && today.getDate()==$selDate ? 60000 : 54000;
+            const littleDatedPrice = 
+              today.getFullYear()==$selYear && today.getMonth()==$selMonth-1 && today.getDate()==$selDate ? 50000 : 45000;
+
+            const t_1 = grownDatedPrice * $("#daytime_numbers_grown").val() + littleDatedPrice * $("#daytime_numbers_little").val();
+            const t_2 = dtf03_number * dtf03_price;
+            // const t_3 = df04_price.reduce((a,b) => a+b, 0);
+            // const t_4 = df05_price;
+
+            function comma(x) {
+                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+            $("#daytime_total_price").val(function(i,v) {
+              return t_1 * discountRate + t_2;
+            })
+            $(".dtf06_p_t_text").text("￦"+comma(t_1 * discountRate + t_2));
+            
+          }
+          
+
+          
+          function addBasket(m) {
+            const $newBasket = $(`
+              <div class='nb_${m}'>
+                <ul>
+                  <li class='nb_${m}_sort'>일일이용권</li>
+                  <li class='nb_${m}_date'></li>
+                  <li class='nb_${m}_number'></li>
+                  <li class='nb_${m}_price'></li>
+                </ul>
+              </div>
+              `);
+            const $closeBtn = $("<a href='#none' class='rb_remove'></a>");
+              $closeBtn.click(function(){
+                $(this).parent().remove();
+                localStorage.removeItem(`dated_ticket_${m}`);
+              });
+            const ticketData = JSON.parse(localStorage.getItem("basket_list"))[`dated_ticket_${m}`];
+              const dateData = `${new Date(ticketData.dated_date_value).getFullYear()}년${new Date(ticketData.dated_date_value).getMonth()}월${new Date(ticketData.dated_date_value).getDate()}일`;
+              $newBasket.find(`.nb_${m}_date`).text(dateData);
+              const numberData = `대인 : ${ticketData.dated_numbers_grown}명, 소인 : ${ticketData.dated_numbers_little}명`
+              $newBasket.find(`.nb_${m}_number`).text(numberData);
+              const priceData = `￦ ${ticketData.dated_total_price}`
+              $newBasket.find(`.nb_${m}_price`).text(priceData);
+            $newBasket.append($closeBtn);
+            $(".rb_list > div").append($newBasket);
+          }
+          function aaa(e) {
+            const bbb = new FormData(e.target);
+            const ccc = Object.fromEntries(bbb.entries());
+            const submitTime = Date.now();
+            ccc.submitTime = submitTime;
+
+            const getList = JSON.parse(localStorage.getItem("basket_list"));
+            getList[`dated_ticket_${submitTime}`] = ccc;
+            localStorage.setItem("basket_list",JSON.stringify(getList));
+            // localStorage.setItem(`dated_ticket_${submitTime}`,JSON.stringify(ccc));
+            addBasket(submitTime);
+          }
+          $("#daytime_ticket_form").submit(function(e){
+            e.preventDefault();
+            total();
+            aaa(e);
+          });
+
+          
+          //페이지 리셋
+        $(".reset_btn").click(function(){
+          $(".formBox").load("./t_use_reser01_1.html");
+        })
+        });
+    </script>
+   
+</body>
+</html>

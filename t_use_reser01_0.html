@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+       /* ============ common ================ */
+      :root {
+        --whole-max-width: 1300px;
+        --exp-color: #666;
+        --calender-td-size: 30px;
+        --calender-table-size: 400px;
+        --calender-select-color: rgb(2, 172, 2);
+        --calender-month-button: 1em;
+        --inputbox-bg-color: palegoldenrod;
+      }
+      body {margin: 0px;padding: 0px;}
+      ul {list-style: none;padding: 0px;margin: 0px;}
+      a {text-decoration: none; color: initial;}
+      /* 수량 버튼 */
+      .gotoback {
+        font-size: 0px;
+        display: block;
+        width: 30px;
+        height: 100%;
+        background: url("img/arrow_back.png") no-repeat center/25px;
+        opacity: 0.4;
+        position:absolute;
+        bottom: 0px;
+        left: 40px;
+      }
+      .gotonext {
+        font-size: 0px;
+        display: block;
+        width: 30px;
+        height: 100%;
+        background: url("img/arrow_forward.png") no-repeat center/25px;
+        opacity: 0.4;
+        position: absolute;
+        bottom: 0px;
+        right: 40px;
+      }
+      /* number input 버튼 숨기기 */
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      input[type='number'] {
+        appearance: textfield;
+      }
+      /* ============== main ================= */
+      .mainWrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .tapBox {
+        width: 100%;
+        margin: auto;
+        position: relative;
+      }
+      .tapBox ul {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+      }
+      .tapBox li {
+        border: 2px solid #bbb;
+
+      }
+      .formBox {
+        width: 900px;
+        border: 2px solid black;
+        box-sizing: border-box;
+        margin-right: 250px;
+      }
+      .reservation_basket {
+        position: fixed;
+        bottom: 100px;
+        right: 10px;
+        min-height: 300px;
+        width: 200px;
+        border: 2px solid black;
+        background-color: tomato;
+      }
+      .rb_list > div {
+        position: relative;
+      }
+      .rb_remove {
+        display: block;
+        width: 15px;
+        height: 15px;
+        border: 1px solid black;
+        border-radius: 50%;
+        background: url("img/close_button.png") no-repeat center/15px;
+
+        position: absolute;
+        top: 0px;
+        left: 0px;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="mainWrap">
+        <div class="tapBox">
+          <ul>
+            <li><a href="#none" class="tapBox_btn" >일일이용권</a></li>
+            <li><a href="#none" class="tapBox_btn">오후이용권</a></li>
+            <li><a href="#none" class="tapBox_btn">연간이용권</a></li>
+            <li><a href="#none" class="tapBox_btn">시즌이용권</a></li>
+            <li><a href="#none" class="tapBox_btn">VIP EXPERIENCES</a></li>
+            <li><a href="#none" class="tapBox_btn">연간이용권 날짜 예약</a></li>
+          </ul>
+        </div>
+        <div class="formBox"></div>
+      </div>
+
+      <div class="reservation_basket">
+        <div class="rb_list">
+          <span>구매 목록</span>
+          <ul>
+
+          </ul>
+        </div>
+        <div class="rb_total">
+          <span>합계</span>
+        </div>
+        <div class="paymentBtn">
+          <a href="#none">장바구니 이동</a>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      $(function () {
+        //=========================== load =================================
+        //localStorage setting
+        localStorage.setItem("payment_list","[]");
+        if ( !localStorage.getItem("basket_list") ) {
+          const itemList = new Object();
+          localStorage.setItem("basket_list", "{}");
+          console.log("done");
+        }
+        // page load
+        $(".tapBox_btn").each(function (i) {
+          $(this).click(function () {
+            $(".formBox").children().remove();
+            $(".formBox").load(`./t_use_reser01_${i + 1}.html`, function () {
+              
+            });
+          });
+        });
+        // basket setting
+        const basketList = JSON.parse(localStorage.getItem("basket_list"));
+        for( const key in basketList ) {
+          const $listSetting = $("<li class='rb_l_list'></li>");
+          const $closeBtn = $("<a href='#none' class='rb_remove'></a>");
+          $closeBtn.click(function(){
+            $(this).parent().remove();
+
+            const getList = JSON.parse(localStorage.getItem("basket_list"));
+            delete getList[`dated_ticket_${m}`];
+            localStorage.setItem("basket_list",JSON.stringify(getList));
+          });
+          
+          //불러오기
+          const bl_list_date = basketList[key]["dated_date_value"];
+          const bl_list_number = 0;
+
+        }
+
+        $(".formBox").load(`./t_use_reser01_1.html`)
+
+        
+      });
+    </script>
+  </body>
+</html>

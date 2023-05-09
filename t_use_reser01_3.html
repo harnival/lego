@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+    <style>
+        :root {
+          --exp-color: #666;
+        }
+        body {margin: 0px; padding: 0px;}
+        a {text-decoration: none; color: initial;}
+        .gotoback {
+            font-size: 0px;
+            display: block;
+            width: 30px;
+            height: 100%;
+            background: url("img/arrow_back.png") no-repeat center/25px;
+            opacity: 0.4;
+            position:absolute;
+            bottom: 0px;
+            left: 40px;
+
+        }
+        .gotonext {
+            font-size: 0px;
+            display: block;
+            width: 30px;
+            height: 100%;
+            background: url("img/arrow_forward.png") no-repeat center/25px;
+            opacity: 0.4;
+            position: absolute;
+            bottom: 0px;
+            right: 40px;
+        }
+        /* ====================== */
+
+          /* ======================== */
+        .numberCheck {
+          position: relative;
+          display: flex;
+          justify-content: center;
+          width: fit-content;
+          padding: 5px 40px;
+          border-radius: 25px;
+          background-color: yellowgreen;
+        }
+        .nc_wrap label {
+                display: none;
+              }
+          .numberCheck input {
+            width: 40px;
+            height: 30px;
+            text-align: center;
+
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+            font-size: 20px;
+            border: none;
+            background-color: transparent;
+          }
+          .decrease_btn {
+            font-size: 0px;
+            display: block;
+            background-color: rgb(240, 240, 89);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+
+            position: absolute;
+            top: 5px;
+            left: 5px;
+          }
+            .decrease_btn img {
+              width: 30px;
+              opacity: 0.7;
+            }
+          .increase_btn {
+            font-size: 0px;
+            display: block;
+            background-color: rgb(240, 240, 89);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+
+            position: absolute;
+            top: 5px;
+            right: 5px;
+          }
+            .increase_btn img {
+              width: 30px;
+              opacity: 0.7;
+            }
+            /* ============================= */
+
+            /* ------------------------------ */
+            .ticket_formWrap {
+              width: 900px;
+              border: 1px solid tomato;
+              margin: auto;
+            }
+            fieldset {
+              /* border: none; */
+              position: relative;
+              margin: 0px;
+              padding: 0px;
+              padding-top: 100px;
+            }
+            .annual_fieldset01 {
+              width: 100%;
+              box-sizing: border-box;
+              position: relative;
+            }
+              fieldset legend {
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                font-size: 25px;
+              }
+              .annual_fieldset01 legend::before {
+                content: "01";
+                display: inline-block;
+                text-align: center;
+                vertical-align: middle;
+                line-height: 1.5;
+                width: 30px;
+                height: 30px;
+                background-color: royalblue;
+                border-radius: 50%;
+                font-size: 18px;
+                color: white;
+                margin-right: 10px;
+              }
+              .af01_tcWrap {
+                display: flex;
+                position: relative;
+                width: 100%;
+                box-sizing: border-box;
+                gap: 4px;
+                padding-bottom: 20px;
+              }
+              .af01_ticketcard {
+                border: 1px solid black;
+                box-sizing: border-box;
+                width: calc(100% / 3);
+              }
+              .af01_tc_select{
+                display: block;
+                width: 100%;
+                height: 300px;
+              }
+              .af01_tc_select img {
+                width: 100%;
+                aspect-ratio : 1/0.7;
+              }
+              .af01_exp {
+                width: 100%;
+                box-sizing: border-box;
+                padding: 2px;
+              }
+                .af01_exp > a {
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  position: relative;
+                  width: 100%;
+                  height: 40px;
+                  background-color: #ddd;
+                  border-radius: 10px;
+                  box-sizing: border-box;
+
+                  color: #666;
+                  font-size: 15px;
+                  font-weight: 600;
+                }
+                .af01_exp > a::before {
+                  content: "";
+                    display: inline-block;
+                    background: url("./img/arrow_drop_down.png") no-repeat center/30px;
+                    width: 30px;
+                    height: 30px;
+                    opacity: 0.7;
+                }
+              .af01_e_list {
+                display: flex;
+                flex-wrap:wrap;
+                box-sizing: border-box;
+                margin: 5px 0px 0px 0px;
+                padding: 0px;
+              }
+              .af01_e_listWrap {
+                display: none;
+              }
+                .af01_e_list dt {
+                  width: 100%;
+                  box-sizing: border-box;
+                  height: 40px;
+                  padding-left: 10%;
+                  margin: 2px 0px;
+                  display: flex;
+                  align-items: center;
+
+                  background-color: paleturquoise;
+                  border-radius: 10px;
+                }
+                  .af01_e_list dt a {
+                    position: relative;
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                  }
+                  .af01_e_list dt a::before {
+                    content: "";
+                    display: inline-block;
+                    position: absolute;
+                    left: -25px;
+                    background: url("./img/arrow_drop_down.png") no-repeat center/25px;
+                    width: 25px;
+                    height: 25px;
+                    opacity: 0.7;
+                  }
+                  .af01_e_list dt span {
+                    color: #888;
+                    font-size: 14px;
+                    padding-left: 10px;
+                  }
+                .af01_e_list dd:not(.af01_e_l_detail) {
+                  width: calc(100% / 3 - 4px);
+                  box-sizing: border-box;
+                  height: 40px;
+                  margin: 0px 2px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  background-color: palegreen;
+
+                  font-weight: 600;
+                  color: #333;
+                }
+                .af01_e_list dd:not(.af01_e_l_detail) svg {
+                  filter: brightness(100%);
+                }
+                .af01_e_l_name {
+                  display: none;
+                }
+                .af01_e_l_detail {
+                  width: 100%;
+                  box-sizing: border-box;
+                  text-align: start;
+                  display: none;
+                }
+
+             
+              
+      
+      /* --------------------------- */
+      .annual_fieldset04 legend::before {
+                content: "04";
+                display: inline-block;
+                text-align: center;
+                vertical-align: middle;
+                line-height: 1.5;
+                width: 30px;
+                height: 30px;
+                background-color: royalblue;
+                border-radius: 50%;
+                font-size: 18px;
+                color: white;
+                margin-right: 10px;
+              }
+              .af04_labelexp {
+                position: relative;
+              }
+              .af04_labelexp >span {
+                color: var(--exp-color);
+              }
+              .af04_labelexp a {
+                float: right;
+                display: flex;
+                text-decoration: none;
+                color: #444;
+                gap: 5px;
+                border: 2px solid #ddd;
+                width: fit-content;
+                padding: 2px 5px;
+                border-radius: 20px;
+                font-size: 14px;
+              }
+              .af04_labelexp a::before {
+                content: url("img/info.png");
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 20px;
+                height: 20px;
+                transform: scale(0.4,0.4);
+                opacity: 0.7;
+              }
+              
+      .af04_l_ride {
+        background-color: bisque;
+        position: absolute;
+        padding: 20px;
+        list-style: square;
+
+        display: none;
+      }
+      .af04_ft {
+        margin-top: 20px;
+        position: relative;
+      }
+      .af04_ft .nc_wrap {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+      }
+      .af04_ft_exp {
+        color: var(--exp-color);
+        text-indent: 10px;
+        font-size: 15px;
+      }
+      /* ---------------------------------- */
+      .annual_fieldset05 legend::before {
+        content: "05";
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 1.5;
+        width: 30px;
+        height: 30px;
+        background-color: royalblue;
+        border-radius: 50%;
+        font-size: 18px;
+        color: white;
+        margin-right: 10px;
+      }
+      /* ----------------------------------------- */
+      .annual_fieldset06 {
+        display: flex;
+        position: relative;
+      }
+      .af06_discount {
+        width: 50%;
+      }
+      .af06_d_list {
+        list-style: none;
+        padding: 0px;
+        border: 1px solid rgba(0,0,0,0.4);
+        border-bottom: none;
+      }
+        .af06_d_list li {
+          border-bottom: 1px solid rgba(0,0,0,0.4);
+        }
+        .af06_d_l_wrap {
+          position: relative;
+          display: flex;
+          align-items:flex-start;
+          flex-direction: column;
+        }
+        .af06_d_l_listopen {
+          display: block;
+          width: 50%;
+          background: url("img/arrow_drop_down.png") no-repeat center left/30px;
+          padding-left: 30px;
+          line-height: 2;
+          text-decoration: none;
+          color: black;
+        }
+        .af06_d_l_select {
+          position: absolute;
+          top: 0px;
+          right: 0px;
+        }
+        .af06_d_l_detail {
+          display: none;
+        }
+          .af06_d_l_detail table {
+            border: 1px solid rgb(121, 121, 121);
+            box-sizing: border-box;
+          }
+          .af06_d_l_detail th {
+            background-color: rgb(187, 255, 255);
+          }
+          .af06_d_l_detail tr {
+            background-color: rgb(207, 255, 255);
+          }
+
+        .af06_d_l_w_exp {
+          color: var(--exp-color);
+          padding-left: 20px;
+          font-size: 15px;
+        }
+        .active_discount {
+          background-color: rgb(247, 206, 199);
+        }
+        .not_discount .af06_d_l_wrap {
+          opacity: 0.5;
+        }
+        .af06_d_list li input[type="checkbox"] {
+          display: block;
+        }
+
+        .af06_price {
+          width: 50%;
+        }
+        /* ------------------ */
+        .af06_p_s_extra > div {
+          border: 1px solid tomato;
+          box-sizing: border-box;
+          display: none;
+        }
+
+        .af06_discount_select {
+          display: none;
+        }
+        .af06_p_s_discount >div {
+          border: 1px solid tomato;
+        }
+        #annual_total_price {
+          display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="ticket_formWrap annual_ticket_formWrap">
+        <div class="annual_form_title form_title">
+            <h4>연간이용권 구매하기</h4>
+            <div>
+              <ul>
+                <li>Bricktastic한 Family Fun이 여러분을 기다리고 있습니다!</li>
+              </ul>
+            </div>
+        </div>
+        <form action="" id="annual_ticket_form" class="ticket_form">
+
+          <fieldset class="annual_fieldset01">
+            <legend>이용권 선택</legend>
+            <div class="af01_labelexp">
+              <span>LEGOLAND® Korea Resort를 운영일 기준 1년 동안 즐길 수 있는 특별한 선물! 연간 이용권 3종을 꼼꼼히 비교해보고 나에게 꼭 맞는 연간 이용권을 선택해보세요.</span>
+            </div>
+            <div class="af01_tcWrap">
+              <div class="af01_ticketcard">
+                <a href="#none" class="af01_tc_select">
+                  <img src="./img/standard_pass.png" alt="">
+                  <span class="af01_tc_title">STANDARD PASS</span>
+                </a>
+                <div class="af01_tc_number">
+                  <div class="numberCheck">
+                    <input
+                      type="text"
+                      name="annual_standard_number"
+                      id="annual_standard_number"
+                      value="0"
+                      readonly
+                    />
+                    <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
+                    <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
+                  </div>
+                </div>
+                <div class="af01_tc_exp">
+                  ￦ 119,000
+                </div>
+              </div>
+              <div class="af01_ticketcard">
+                <a href="#none" class="af01_tc_select">
+                  <img src="./img/gold_pass.png" alt="">
+                  <span class="af01_tc_title">GOLD PASS</span>
+                </a>
+                <div class="af01_tc_number">
+                  <div class="numberCheck">
+                    <input
+                      type="text"
+                      name="annual_gold_number"
+                      id="annual_gold_number"
+                      value="0"
+                      readonly
+                    />
+                    <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
+                    <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
+                  </div>
+                </div>
+                <div class="af01_tc_exp">
+                  ￦ 169,000
+                </div>
+              </div>
+              <div class="af01_ticketcard">
+                <a href="#none" class="af01_tc_select">
+                  <img src="./img/platinum_pass.png" alt="">
+                  <span class="af01_tc_title">PLATINUM PASS</span>
+                </a>
+                <div class="af01_tc_number">
+                  <div class="numberCheck">
+                    <input
+                      type="text"
+                      name="annual_platinum_number"
+                      id="annual_platinum_number"
+                      value="0"
+                      readonly
+                    />
+                    <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
+                    <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
+                  </div>
+                </div>
+                <div class="af01_tc_exp">
+                  ￦ 249,000
+                </div>
+              </div>
+            </div>
+            <div class="af01_exp">
+              <a href="#none">
+                혜택 비교하기
+              </a>
+              <div class="af01_e_listWrap">
+                <dl class="af01_e_list">
+                  <dt>이용 제한일 없음 <span>(레고랜드® 코리아 리조트 운영일 기준)</span></dt>
+                    <dd><span class="af01_e_l_name">standard</span></dd>
+                    <dd><span class="af01_e_l_name">gold</span></dd>
+                    <dd>
+                      <span class="af01_e_l_name">platinum</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                    </dd>
+                  <dt>레고랜드® 코리아 리조트 운영일 기준 1년간 입장 가능한 연간이용권</dt>
+                    <dd>
+                      <span class="af01_e_l_name">standard</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                    </dd>
+                    <dd>
+                      <span class="af01_e_l_name">gold</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                    </dd>
+                    <dd>
+                      <span class="af01_e_l_name">platinum</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                    </dd>
+                  <dt><a href="#none">레고랜드® 코리아 리조트 내 식음료 할인</a></dt>
+                    <dd class="af01_e_l_detail">
+                      <ul>
+                        <li>식음료 및 소매 할인은 다른 혜택, 할인 또는 보상/충성 프로그램과 함께 사용할 수 없습니다.</li>
+                        <li>특별한 초대 이벤트에서는 혜택이 제외됩니다. (프리뷰 이벤트 한정 적용 가능)</li>
+                        <li>Tasty Treats를 제외한 모든 음식점에서 할인이 적용됩니다.</li>
+                        <li>소매 제품 할인은 개인 용도로만 제공되며 재판매를 엄격히 금지합니다. </li>
+                        <li>주류는 할인에서 제외됩니다.</li>
+                      </ul>
+                    </dd>
+                    <dd><span class="af01_e_l_name">standard</span></dd>
+                    <dd>
+                      <span class="af01_e_l_name">gold</span>
+                      10%
+                    </dd>
+                    <dd>
+                      <span class="af01_e_l_name">platinum</span>
+                      20%
+                    </dd>
+                  <dt><a href="#none">레고랜드® 코리아 리조트 내 리테일샵 할인 <span>(중복할인 불가)</span></a></dt>
+                    <dd class="af01_e_l_detail">
+                      <ul>
+                        <li>식음료 및 소매 할인은 다른 혜택, 할인 또는 로열티/멤버십 프로그램과 함께 사용할 수 없습니다.</li>
+                        <li>특별한 초대 이벤트에서는 혜택이 제외됩니다. (프리뷰 이벤트 한정 적용 가능)</li>
+                        <li>일부 품목은 해당 혜택에서 제외됩니다. </li>
+                        <li>소매 제품 할인은 개인 용도로만 제공되며 재판매를 엄격히 금지합니다. </li>
+                        <li>유모차 대여시 골드 패스 15%, 플래티넘 패스 30% 할인 제공됩니다.</li>
+                      </ul>
+                    </dd>
+                    <dd><span class="af01_e_l_name">standard</span></dd>
+                    <dd><span class="af01_e_l_name">gold</span>10%</dd>
+                    <dd><span class="af01_e_l_name">platinum</span>10%</dd>
+                  <dt>레고랜드® 코리아 호텔 숙박료 할인 <span>(일부 사용 제한일 및 프로모션 제외)</span></dt>
+                    <dd>
+                      <span class="af01_e_l_name">standard</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                    </dd>
+                    <dd>
+                      <span class="af01_e_l_name">gold</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                    </dd>
+                    <dd>
+                      <span class="af01_e_l_name">platinum</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                    </dd>
+                  <dt><a href="#none">브릭토피아 다이너 뷔페 성인 1명 결제 시 동반 어린이 1명 무료 이용 <span>(주말 및 공휴일 제외, 주중만 가능)</span></a></dt>
+                    <dd class="af01_e_l_detail">
+                      <ul>
+                        <li>본 혜택은 패스당 제공되며 성인 패스 소지자 1명이 정상 결제 시, 동반 어린이 1명이 무료 이용 가능 (*중복할인 불가)</li>
+                        <li>혜택 제공 다이닝: 브릭토피아 다이너</li>
+                        <li>혜택 제공 내역은 사정에 따라 임의로 변경 될 수 있으며, 변경되는 경우 홈페이지 또는 모바일 앱을 통해 공지 예정</li>
+                        <li>주말과 공휴일에는 본 혜택 미적용</li>
+                      </ul>
+                    </dd>
+                    <dd><span class="af01_e_l_name">standard</span></dd>
+                    <dd>
+                      <span class="af01_e_l_name">gold</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                    </dd>
+                    <dd>
+                      <span class="af01_e_l_name">platinum</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                    </dd>
+                  <dt><a href="#none">방문 당일 생일자 선물 무료 제공</a></dt>
+                    <dd class="af01_e_l_detail">
+                      <ul>
+                        <li>브릭스트릿에 위치한 ‘브릭스트릿 카페’에서 "커피 또는 핫 초코(음료 택 1) + 쿠키 1개”를 무료로 제공해 드립니다. </li>
+                        <li>증빙 서류 제시가 현장에서 요구되며 미제공시 혜택 이용이 제한됩니다.</li>
+                        <li>2023년 1월 - 3월 동절기 유지 보수 기간 동안 생일을 맞으시는 연간 이용권 소지자분들은 2023년 5월까지 증빙 서류를 지참하여 파크를 방문하시면 동일 혜택을 드립니다.</li>
+                      </ul>
+                    </dd>
+                    <dd>
+                      <span class="af01_e_l_name">standard</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                    </dd>
+                    <dd>
+                      <span class="af01_e_l_name">gold</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                    </dd>
+                    <dd>
+                      <span class="af01_e_l_name">platinum</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                    </dd>
+                  <dt><a href="#none">파크 전용 혜택</a></dt>
+                    <dd class="af01_e_l_detail">
+                      <ul>
+                        <li>파크 공식 개장 시간부터 30분간 Fastrack(어트렉션 우선탑승) 이용 가능
+                          ※ 사전 이용 시간 및 기구는 변동 될 수 있습니다.</li>
+                      </ul>
+                    </dd>
+                    <dd>
+                      <span class="af01_e_l_name">standard</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                    </dd>
+                    <dd>
+                      <span class="af01_e_l_name">gold</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                    </dd>
+                    <dd>
+                      <span class="af01_e_l_name">platinum</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                    </dd>
+                </dl>
+              </div>
+            
+            </div>
+          </fieldset>
+
+          <fieldset class="annual_fieldset04">
+              <legend>패스트 트랙</legend>
+              <div class="af04_labelexp">
+                <span>
+                  기다리는 시간을 단축하여 더 많은 어트렉션을 즐길 수 있는 방법!
+                </span>
+                <a href="#none">이용 가능한 라이드 목록</a>                  
+                <div>
+                  <ul class="af04_l_ride">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="af04_ft">
+                <label for="ft_virtual_number">
+                  패스트트랙 버츄얼
+                </label>
+                  <span>￦40,000</span>
+                  <div class="af04_ft_exp">
+                    대기줄을 기다릴 필요 없이 가상으로 대기하는 동안 파크를 더 즐길 수 있어요!
+                  </div>
+                  <div class="nc_wrap">
+                    
+                    <div class="numberCheck">
+                      <input
+                        type="text"
+                        name="annual_ft_virtual_number"
+                        id="annual_ft_virtual_number"
+                        value="0"
+                        readonly
+                      />
+                      <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
+                      <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
+                    </div>
+                  </div>
+              </div>
+              <div class="af04_ft">
+                
+                <label for="ft_express_number">패스트트랙 익스프레스</label>
+                <span>￦70,000</span>
+                <div class="af04_ft_exp">
+                  어트렉션 대기 시간을 절반으로 단축하여 더 많은 어트렉션을 즐길 수 있어요!
+                </div>
+                <div class="nc_wrap">
+                  <div class="numberCheck">
+                    <input
+                      type="text"
+                      name="annual_ft_express_number"
+                      id="annual_ft_express_number"
+                      value="0"
+                      readonly
+                    />
+                    <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
+                    <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
+                  </div>
+                </div>
+              </div>
+              <div class="af04_ft">
+                <label for="ft_ultimate_number">패스트트랙 얼티밋</label>
+                <span>￦130,000</span>
+                <div class="af04_ft_exp">
+                  대기시간을 95% 줄여주는 슈퍼 아이템! 가장 적은 대기시간으로 많은 어트렉션 체험이 가능해요!
+                </div>
+                <div class="nc_wrap">
+                  <div class="numberCheck">
+                    <input
+                      type="text"
+                      name="annual_ft_ultimate_number"
+                      id="annual_ft_ultimate_number"
+                      value="0"
+                      readonly
+                    />
+                    <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
+                    <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
+                  </div>
+                </div>
+              </div>
+          </fieldset>
+
+          <fieldset class="annual_fieldset05">
+
+          </fieldset>
+
+          <fieldset class="annual_fieldset06 total_price_wrap">
+            <legend>가격 합계</legend>
+            <div class="af06_discount">
+              <span>할인 적용</span>
+              <ul class="af06_d_list">
+                <li>
+                  <div class="af06_d_l_wrap">
+                    <a href="#none" class="af06_d_l_listopen">
+                      KB국민카드 제휴 할인
+                    </a>
+                    <div class="af06_d_l_w_exp">
+                      연간이용권 (Gold Pass) 4장 이상 구매 시 10% 할인
+                    </div>
+
+                    <a href="#none" class="af06_d_l_select" id="af06_d_l_KBcard">적용하기</a>
+                    <input type="checkbox" name="af06_d_l_select_02" id="af06_d_l_select_02">
+                  </div>
+                  <div class="af06_d_l_detail">
+                    <dl>
+                      <dt>✔ 기간:</dt>
+                        <dd>2022년 5월 5일(목) ~ 2027년 5월 4일(화)</dd>
+                      <dt>✔ 대상:</dt>
+                        <dd>KB국민카드 회원 (KB국민 비씨, 기업, 선불카드 제외)</dd>
+                      <dt>✔ 내용:</dt>
+                        <dd>KB국민카드로 LEGOLAND® 연간이용권(Gold Pass)를 4장 이상 구매시 1장 당 10% 할인 혜택 제공</dd>
+                      <dt>✔ KB국민카드 회원 할인 혜택</dt>
+                        <dd>
+                          <table>
+                            <thead>
+                              <tr>
+                              <th style="width: 33.3333%; text-align: center;">구분</th>
+                              <th style="width: 33.3333%; text-align: center;">대인<br />(만 13세 이상)</th>
+                              <th style="width: 33.3333%; text-align: center;">소인<br />(만 2세 이상<br />~12세 이하)</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                              <td style="width: 33.3333%; text-align: center;">정상가</td>
+                              <td style="width: 33.3333%; text-align: center;">60,000원</td>
+                              <td style="width: 33.3333%; text-align: center;">50,000원</td>
+                              </tr>
+                              <tr>
+                              <td style="width: 33.3333%; text-align: center;">KB국민카드 할인가<br />(평일)</td>
+                              <td style="width: 33.3333%; text-align: center;">48,000원</td>
+                              <td style="width: 33.3333%; text-align: center;">40,000원</td>
+                              </tr>
+                              <tr>
+                              <td style="width: 33.3333%; text-align: center;">KB국민카드 할인가<br />(주말,공휴일)</td>
+                              <td style="width: 33.3333%; text-align: center;">54,000원</td>
+                              <td style="width: 33.3333%; text-align: center;">45,000원</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </dd>
+                        <dd>* 4장 구매시 정상가 대비 67,600원 할인</dd>
+                        <dd>* 4장 부터 구매 가능하며, 4장 미만 구매는 LEGOLAND® 공식 홈페이지를 통해 구매 가능(4장 미만 구매는 할인 제공 불가)</dd>
+                        <dd>* 연간이용권(Gold Pass) 혜택 자세히보기 (클릭)</dd>
+                      <dt>✔ 이용 전 확인해 주세요.</dt>
+                        <dd>- 다른 할인권 및 우대행사와 중복할인이 불가합니다.</dd>
+                        <dd>- 이용권 구매 및 유의사항은 레고랜드 코리아 리조트 홈페이지에서 확인 바랍니다.</dd>
+                        <dd>- 본 행사는 KB국민카드 영업정책 및 제휴업체 상황에 따라 변경 또는 중단될 수 있습니다.</dd>
+                        <dd>- 문의: KB국민카드 고객센터(1588-1688)</dd>
+                        <dd>- 계약을 체결하기 전에 상품설명서와 약관을 확인하시기 바랍니다.</dd>
+                        <dd>- 상환능력에 비해 신용카드 사용액이 과도할 경우 귀하의 개인신용평점이 하락할 수 있습니다.</dd>
+                        <dd>- 개인신용평점 하락 시 금융거래 관련된 불이익이 발생할 수 있습니다.</dd>
+                        <dd>- 일정기간 원리금을 연체할 경우, 모든 원리금을 변제할 의무가 발생할 수 있습니다.</dd>
+                        <dd>- 신용카드 발급이 부적정한 경우 (개인신용평점 낮음, 연체금 보유 등) 카드발급이 제한될 수 있습니다.</dd>
+                        <dd>- 카드 이용대금과 이에 수반되는 모든 수수료를 지정된 대금 결제일에 상환합니다.</dd>
+                        <dd>- 금융소비자는 금소법 제19조 제1항에 따라 해당 상품 또는 서비스에 대하여 설명을 받을 권리가 있으며, 그 설명을 듣고 내용을 충분히 이해한 후 거래하시기 바랍니다.</dd>
+                    </dl>
+                    
+                    
+                  </div>
+                </li>
+                
+              </ul>
+            </div>
+
+            <div class="af06_price">
+              <div class="af06_p_selectlist">
+                <ul>
+                  
+                  <li>
+                    <span><strong>구매 수량</strong></span>
+                    <div class="af06_p_s_numbers">
+                    </div>
+                  </li>
+                  <li>
+                    <span><strong>부가 선택</strong></span>
+                    <div class="af06_p_s_extra">
+                      <div>
+                        <p class="af06_p_s_e_title03"></p>
+                        <p class="af06_p_s_e_number03"></p>
+                        <p class="af06_p_s_e_price03"></p>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <span><strong>할인 내역</strong></span>
+                    <div class="af06_p_s_discount">
+                      <div>
+                        <p class="af06_p_s_e_title06"></p>
+                        <p class="af06_p_s_e_number06"></p>
+                        <p class="af06_p_s_e_price06"></p>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="af06_p_total">
+                <label for="annual_total_price">합계</label>
+                <span class="af06_p_t_text"></span>
+                <input type="text" name="annual_total_price" id="annual_total_price" readonly class="total_price">
+              </div>
+            </div>
+          </fieldset>
+          <div class="annual_ticket_submit ticket_submit">
+            <button type="submit" class="submit_btn">장바구니에 담기</button>
+            <button type="button" class="reset_btn">다시 입력</button>
+          </div>
+        </form>
+    </div>
+    <script>
+        $(function(){
+            
+            // for Total Price ----------
+            var discountRate = 1;
+            var af01_price = [0,0,0];
+            var af04_price = [0,0,0];
+          //------------Load-------------
+          $(".decrease_btn").click(function(e){
+            if( $(this).siblings("input").val() > 0) {
+              $(this).siblings("input").val((i,v) => +v-1);
+              $(this).siblings("input").trigger("change");           
+            }
+          })
+          $(".increase_btn").click(function(e){
+            $(this).siblings("input").val((i,v) => +v+1);
+            $(this).siblings("input").trigger("change");
+          });
+          //---------------------------- 01. 이용권 선택 
+            $(".af01_e_list dt a").each(function(i){
+              $(this).click(function(){
+                $(".af01_e_l_detail").eq(i).slideToggle();
+                $(".af01_e_l_detail").not(`:eq(${i})`).slideUp();
+              })
+            });
+            $(".af01_exp > a").click(function(){
+              $(".af01_e_listWrap").slideToggle();
+            });
+
+            $(".af01_tc_number input").each(function(i){
+              const $newDiv = $("<div><p class='af06_p_s_n_title'></p><p class='af06_p_s_n_number'></p><p class='af06_p_s_n_price'></p></div>");
+              $(".af06_p_s_numbers").append($newDiv);
+
+              $(this).change(function(){
+                if ( $(this).val() == 0 ) {
+                  $newDiv.hide();
+                } else {
+                  $newDiv.show()
+                  if ( i == 0 ) {
+                    const price = 119000;
+                    $(".af06_p_s_n_title").eq(i).text("STANDARD PASS");
+                    $(".af06_p_s_n_number").eq(i).text($(this).val());
+                    $(".af06_p_s_n_price").eq(i).text("￦" + $(this).val() * price);
+                    af01_price[i] = $(this).val() * price;
+                  }
+                  if ( i == 1 ) {
+                    const price = 169000;
+                    $(".af06_p_s_n_title").eq(i).text("GOLD PASS");
+                    $(".af06_p_s_n_number").eq(i).text($(this).val());
+                    $(".af06_p_s_n_price").eq(i).text("￦" + $(this).val() * price);
+                    af01_price[i] = $(this).val() * price;
+                  }
+                  if ( i == 2 ) {
+                    const price = 249000;
+                    $(".af06_p_s_n_title").eq(i).text("PLATINUM PASS");
+                    $(".af06_p_s_n_number").eq(i).text($(this).val());
+                    $(".af06_p_s_n_price").eq(i).text("￦" + $(this).val() * price);
+                    af01_price[i] = $(this).val() * price;
+                  }
+                }
+                total();
+              })
+            })
+
+          // ------------------------------------- 04. 패스트트랙
+          
+          $(".af04_ft .nc_wrap input").each(function(i) {
+            
+            const $newbox04 = $('<div><p class="af06_p_s_e_title04"></p><p class="af06_p_s_e_number04"></p><p class="af06_p_s_e_price04"></p></div>');
+            $(".af06_p_s_extra").append($newbox04);
+
+            if ( $(this).val() == 0) { $newbox04.hide() }
+            else { $newbox04.show()}
+            
+            $(this).change(function() {
+              if ( $(this).val() == 0) { $newbox04.hide() }
+              else { $newbox04.show()}
+
+              const fasttrackPrice = 
+                i==0? 40000 : 
+                i==1? 70000 :
+                i==2? 130000 : null; 
+              $(".af06_p_s_e_title04").eq(i).text($(".af04_ft label").eq(i).text());
+              $(".af06_p_s_e_number04").eq(i).text($(this).val());
+              $(".af06_p_s_e_price04").eq(i).text("￦" + $(this).val()*fasttrackPrice);
+              af04_price[i] = $(this).val()*fasttrackPrice;
+              total()
+            })
+          })
+          // ------------------------------------- 05. VIP EXPERIENCES
+          
+          
+
+          // ------------------------------------- 06-1. 할인적용
+          $(".af06_d_list li").each(function(i){
+            $(this).find(".af06_d_l_listopen").click(function(){
+              $(".af06_d_l_detail").eq(i).slideToggle();
+              $(".af06_d_l_detail").not(":eq("+i+")").slideUp()
+              $(".af06_d_l_w_exp").eq(i).slideToggle();
+              $(".af06_d_l_w_exp").not(":eq("+i+")").slideDown();
+            })
+          });
+
+          
+          $(".af06_d_l_select").each(function(i){
+            $(this).click(function(){
+              $(".af06_d_list li").eq(i).toggleClass("active_discount");
+              $(".af06_d_list li").not(`:eq(${i})`).removeClass("active_discount");
+              $(".af06_d_list li input:checkbox").eq(i).prop("checked",function(){
+                $(".af06_d_list li input:checkbox").not($(this)).prop("checked",false);
+                return !$(this).prop("checked");
+              });
+
+              if ( $(".af06_d_list li input:checkbox").eq(i).is(":checked")) {
+
+                $(".af06_p_s_discount > div").show();
+                if ( i==0 ) {
+                  if ($(".af01_tc_number input").eq(1).val() >= 4 ) {
+                    $(".af06_p_s_e_title06").text("KB국민카드 제휴 할인");
+                    $(".af06_p_s_e_number06").text("GOLD PASS 4장 이상 구매 시 10% 할인")
+                    discountRate = 1 - 0.1;
+                  } else {
+                    alert("GOLD PASS 4장 이상 구매 시 적용 가능합니다.");
+                    $(".af06_d_list li").eq(i).removeClass("active_discount");
+                    $(".af06_d_list li input:checkbox").eq(i).prop("checked",false);
+                    discountRate = 1;
+                  }
+                }    
+              } else if (!$(".af06_d_list li input:checkbox").is(":checked")) {
+                $(".af06_p_s_discount > div").hide();
+              }
+              
+              total();
+            });
+          });
+         
+
+          // ------------------------------------- 06-2. 가격 합산
+          
+          const total = function() {
+
+            function comma(x) {
+              return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+
+            $("#annual_total_price").val(function(i,v) {
+              if ($(".af01_tc_number input").eq(1).val() >= 4) {
+                af01_price[1] *= discountRate;
+              }
+              const t_1 = af01_price.reduce((a,b) => a+b);
+              const t_2 = af04_price.reduce((a,b) => a+b);
+              $(".af06_p_t_text").text("￦"+comma(t_1+t_2));
+              
+              return t_1 + t_2
+            })
+            
+          }
+          
+
+          
+          function addBasket(m) {
+            const $newBasket = $(`<div id='nb_${m}'></div>`);
+            $newBasket.text(localStorage.getItem(`annual_ticket_${m}`));
+            $newBasket.appendTo($(".rb_list"));
+          }
+          function aaa(e) {
+            const bbb = new FormData(e.target);
+            const ccc = Object.fromEntries(bbb.entries());
+            const submitTime = Date.now();
+            ccc.submitTime = submitTime;
+            localStorage.setItem(`annual_ticket_${submitTime}`,JSON.stringify(ccc));
+            addBasket(submitTime);
+          }
+          $("#annual_ticket_form").submit(function(e){
+            e.preventDefault();
+            total();
+            aaa(e);
+          });
+
+          
+          //페이지 리셋
+        $(".reset_btn").click(function(){
+          $(".formBox").load("./t_use_reser01_1.html");
+        })
+        });
+    </script>
+   
+</body>
+</html>

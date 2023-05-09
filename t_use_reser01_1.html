@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+     
+      
+        /* ===============================================================  calender common elements*/
+      .disabled_cell {
+        color: #bbb;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .able_cell {
+        display: flex;
+        text-decoration: none;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        color: rgb(2, 172, 2);
+      }
+        .active_cell{
+          background-color: rgb(2, 172, 2);
+          color: white;
+          position: relative;
+        }
+        .active_cell::before {
+          content: "";
+          display: block;
+          position: absolute;
+          width: 20%;
+          height: 10%;
+          background-color: rgb(2, 172, 2);
+          top: -10%;
+          left: 15%;
+        }
+        .active_cell::after {
+          content: "";
+          display: block;
+          position: absolute;
+          width: 20%;
+          height: 10%;
+          background-color: rgb(2, 172, 2);
+          top: -10%;
+          right: 15%;
+        }
+      .calender {
+        border: 2px solid rgba(0,0,0,0.2);
+        box-sizing: border-box;
+        border-radius: 30px;
+        height: fit-content;
+        overflow: hidden;
+        padding: 40px 10px 10px;
+      }
+        .calender .cdt_date {
+          width: var(--calender-table-size);
+          display: flex;
+          flex-wrap: wrap;
+        }
+        .calender .calender_table_cell{
+          aspect-ratio: 1/1;
+          width: calc(100% / 7 - 4px);
+          font-size: 27px;
+          margin: 4px 2px;
+        }
+        .calender .cdt_week {
+          width: 100%;
+          height: 30px;
+          justify-content: space-around;
+          align-items: center;
+          display: flex;
+          text-align: center;
+          color: #666;
+        }
+        .calender_month {
+          width: 100%;
+          height: 50px;
+          text-align: center;
+          box-sizing: border-box;
+          display: flex;
+          position: relative;
+        }
+          .cm_spanbox {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px; 
+          }
+            .cm_sb_yearnumber,
+            .cm_sb_monthnumber {
+              color: tomato;
+            }
+      .date_inputs {
+        padding: 100px 30px;
+        box-sizing: border-box;
+      }
+        .date_inputs label{
+          font-size: 20px;
+        }
+        .date_inputs input{
+          display: none;
+        }
+      
+      /* ================================ number check common elements */
+      .numberCheck {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        width: fit-content;
+        padding: 5px 40px;
+        border-radius: 25px;
+        background-color: yellowgreen;
+      }
+      .nc_wrap label {
+        display: none;
+      }
+        .numberCheck input {
+          width: 40px;
+          height: 30px;
+          text-align: center;
+
+          padding: 0px;
+          margin: 0px;
+          box-sizing: border-box;
+          font-size: 20px;
+          border: none;
+          background-color: transparent;
+        }
+      .decrease_btn {
+        font-size: 0px;
+        display: block;
+        background-color: rgb(240, 240, 89);
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+
+        position: absolute;
+        top: 5px;
+        left: 5px;
+      }
+        .decrease_btn img {
+          width: 30px;
+          opacity: 0.7;
+        }
+      .increase_btn {
+        font-size: 0px;
+        display: block;
+        background-color: rgb(240, 240, 89);
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+
+        position: absolute;
+        top: 5px;
+        right: 5px;
+      }
+        .increase_btn img {
+          width: 30px;
+          opacity: 0.7;
+        }
+      /* ======================================= 0. form common elements */
+      .ticket_formWrap {
+        width: 900px;
+        border: 1px solid tomato;
+        margin: auto;
+      }
+      fieldset {
+        /* border: none; */
+        position: relative;
+        margin: 0px;
+        padding: 0px;
+        padding-top: 100px;
+      }
+      fieldset legend {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        font-size: 25px;
+      }
+      /* ======================================= 01. 날짜 선택 */
+      .dated_fieldset01 {
+        height: 634px;
+        display: flex;
+        justify-content: center;
+        position: relative;
+      }    
+        .dated_fieldset01 legend::before {
+          content: "01";
+          display: inline-block;
+          text-align: center;
+          vertical-align: middle;
+          line-height: 1.5;
+          width: 30px;
+          height: 30px;
+          background-color: royalblue;
+          border-radius: 50%;
+          font-size: 18px;
+          color: white;
+          margin-right: 10px;
+        }
+      /* ======================================= 02. 인원 선택 */
+      .dated_fieldset02 {
+        display: flex;
+      }
+        .dated_fieldset02 legend::before {
+          content: "02";
+          display: inline-block;
+          text-align: center;
+          vertical-align: middle;
+          line-height: 1.5;
+          width: 30px;
+          height: 30px;
+          background-color: royalblue;
+          border-radius: 50%;
+          font-size: 18px;
+          color: white;
+          margin-right: 10px;
+        }
+        .df02_wrap {
+          width: 50%;
+          display: flex;
+          flex-direction: column;
+          position: relative;
+        }
+          .df02_wrap > label {
+            font-size: 20px;
+            font-weight: 600;
+          }
+          .df02_wrap > span:first-of-type {
+            font-size: 15px;
+            color: var(--exp-color);
+          }
+          .df02_wrap > span:last-of-type {
+            padding-top: 10px;
+          }
+          .df02_wrap > span:last-of-type span {
+            color: var(--exp-color);
+            font-weight: 600;
+            font-size: 15px;
+          }
+          .df02_wrap .nc_wrap {
+            position: absolute;
+            top: 0px;
+            right: 20%;
+          }
+              
+      /* ============================================ 03. 사전 구매 */
+      .dated_fieldset03 label {
+        font-size: 18px;
+      }
+      .dated_fieldset03 legend::before {
+        content: "03";
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 1.5;
+        width: 30px;
+        height: 30px;
+        background-color: royalblue;
+        border-radius: 50%;
+        font-size: 18px;
+        color: white;
+        margin-right: 10px;
+      }
+      .df03_labelExp {
+        color: var(--exp-color);
+        text-indent: 40px;
+        margin: 0px;
+        display: flex;
+        flex-direction: column;
+      }
+      .df03_wrap .nc_wrap {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+      } 
+      .df03_wrap {
+        position: relative;
+      }
+      .df03_w_exp {
+        padding: 20px;
+        border: 1px solid rgba(0,0,0,0.1);
+        width: 70%;
+        margin: auto;
+      }
+      .df03_w_exp span {
+        font-weight: 500;
+        font-size: 15px;
+      }
+      .df03_w_exp ul {
+        list-style:square;
+        padding: 10px 0px 10px 30px;
+        margin: 0px;
+        font-size: 13px;
+        color: #666;
+
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      /* ============================================== 04. 패스트트랙 */
+      .dated_fieldset04 legend::before {
+        content: "04";
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 1.5;
+        width: 30px;
+        height: 30px;
+        background-color: royalblue;
+        border-radius: 50%;
+        font-size: 18px;
+        color: white;
+        margin-right: 10px;
+      }
+      .df04_labelexp {
+        position: relative;
+      }
+      .df04_labelexp >span {
+        color: var(--exp-color);
+      }
+      .df04_labelexp a {
+        float: right;
+        display: flex;
+        text-decoration: none;
+        color: #444;
+        gap: 5px;
+        border: 2px solid #ddd;
+        width: fit-content;
+        padding: 2px 5px;
+        border-radius: 20px;
+        font-size: 14px;
+      }
+      .df04_labelexp a::before {
+        content: url("img/info.png");
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 20px;
+        height: 20px;
+        transform: scale(0.4,0.4);
+        opacity: 0.7;
+      }       
+      .df04_l_ride {
+        background-color: bisque;
+        position: absolute;
+        padding: 20px;
+        list-style: square;
+
+        display: none;
+      }
+      .df04_ft {
+        margin-top: 20px;
+        position: relative;
+      }
+      .df04_ft .nc_wrap {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+      }
+      .df04_ft_exp {
+        color: var(--exp-color);
+        text-indent: 10px;
+        font-size: 15px;
+      }
+      /* =========================================== 05. master builder */
+      .dated_fieldset05 legend::before {
+        content: "05";
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 1.5;
+        width: 30px;
+        height: 30px;
+        background-color: royalblue;
+        border-radius: 50%;
+        font-size: 18px;
+        color: white;
+        margin-right: 10px;
+      }
+      .df05_wrap {
+        position: relative;
+      }
+      .df05_wrap .nc_wrap {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+      }
+
+      .df05_w_exp {
+        padding: 20px;
+        border: 1px solid rgba(0,0,0,0.1);
+        width: 70%;
+        margin: auto;
+      }
+      .df05_w_exp ul {
+        list-style:square;
+        padding: 10px 0px 10px 30px;
+        margin: 0px;
+        font-size: 13px;
+        color: #666;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      /* ================================================  06. 합계 */
+      .dated_fieldset06 {
+        display: flex;
+        position: relative;
+      }
+      .df06_discount {
+        width: 50%;
+      }
+      .df06_d_list {
+        list-style: none;
+        padding: 0px;
+        border: 1px solid rgba(0,0,0,0.4);
+        border-bottom: none;
+      }
+      .df06_d_list li {
+        border-bottom: 1px solid rgba(0,0,0,0.4);
+      }
+      .df06_d_l_wrap {
+        position: relative;
+        display: flex;
+        align-items:flex-start;
+        flex-direction: column;
+      }
+      .df06_d_l_listopen {
+        display: block;
+        width: 50%;
+        background: url("img/arrow_drop_down.png") no-repeat center left/30px;
+        padding-left: 30px;
+        line-height: 2;
+        text-decoration: none;
+        color: black;
+      }
+      .df06_d_l_select {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+      }
+      .df06_d_l_detail {
+        display: none;
+      }
+      .df06_d_l_w_exp {
+        color: var(--exp-color);
+        padding-left: 20px;
+        font-size: 15px;
+      }
+      .active_discount {
+        background-color: rgb(247, 206, 199);
+      }
+      .not_discount .df06_d_l_wrap {
+        opacity: 0.5;
+      }
+      .df06_d_list li input[type="checkbox"] {
+        display: block;
+      }
+      .df06_price {
+        width: 50%;
+      }
+      .df06_p_s_extra > div {
+        border: 1px solid tomato;
+        box-sizing: border-box;
+        display: none;
+      }
+      .df06_discount_select {
+        display: none;
+      }
+      .df06_p_s_discount >div {
+        border: 1px solid tomato;
+      }
+      #dated_total_price {
+        display: none;
+      }
+    </style>
+</head>
+<body>
+    <div class="ticket_formWrap dated_ticket_formWrap">
+        <div class="dated_form_title form_title">
+            <h4>일일이용권 구매하기</h4>
+            <div>
+              <ul>
+                <li>정상가 및 오프라인 가격은 어른 60,000원 어린이 50,000원입니다.</li>
+                <li>홈페이지 또는 모바일 앱을 통한 사전 구매 시 당일 현장 구매보다 낮은 가격이 제공될 수 있습니다.</li>
+                <li>만 12세 이하 어린이는 입장 및 이용 시 만 16세 이상의 보호자 동반입장이 필수입니다.</li>
+                <li>날짜 지정 필수</li>
+              </ul>
+            </div>
+        </div>
+        <form action="" id="dated_ticket_form" class="ticket_form">
+
+          <fieldset class="dated_fieldset01"> 
+            <legend>날짜 지정</legend>
+            <div class="date_inputs">
+              <label for="dated_date_value"></label>
+              <input type="date" name="dated_date_value" id="dated_date_value">
+            </div>
+            <div class="calender">
+              <div class="calender_month dated_calender_month">
+                <div class="cm_spanbox">
+                  <span class="cm_sb_yearnumber"></span>
+                  <span style="color: #666">년</span>
+                  <span class="cm_sb_monthnumber"></span>
+                  <span style="color: #666">월</span>
+                </div>
+                <a href="#none" class="gotoback">이전</a>
+                <a href="#none" class="gotonext">다음</a>
+              </div>
+              <div class="calender_date_table dated_calender_date_table">
+                <div class="cdt_week">
+                  <div>일</div>
+                  <div>월</div>
+                  <div>화</div>
+                  <div>수</div>
+                  <div>목</div>
+                  <div>금</div>
+                  <div>토</div>
+                </div>
+                <ul class="cdt_date"></ul>
+              </div>
+            </div>
+            
+          </fieldset>
+
+          <fieldset class="dated_fieldset02">
+            <legend>인원 지정</legend>
+            <div class="df02_wrap">
+              <label for="dated_numbers_grown">대인</label>
+              <span>만 13세 이상</span>
+              <span>
+                <span>온라인 판매가격</span> 
+                <s>￦60,000</s>
+                <strong> ￦54,000</strong>
+              </span>
+              <div class="nc_wrap">
+                <div class="numberCheck">
+                  <input type="text" name="dated_numbers_grown" id="dated_numbers_grown" class="numbers_grown"  value="0" readonly/>
+                  <a href="#none" class="decrease_btn">인원 제외<img src="./img/minus.png" alt=""></a>
+                  <a href="#none" class="increase_btn">인원 추가<img src="./img/plus.png" alt=""></a>
+                </div>
+              </div>
+            </div>
+            <div class="df02_wrap">
+              <label for="dated_numbers_little">소인</label>
+              <span>만 2세 ~ 12세</span>
+              <span>
+                <span>온라인 판매가격</span> 
+                <s>￦50,000</s>
+                <strong> ￦45,000</strong>
+              </span>
+              <div class="nc_wrap">
+                <div class="numberCheck">
+                  <input type="text" name="dated_numbers_little" id="dated_numbers_little" class="numbers_little" value="0" readonly />
+                  <a href="#none" class="decrease_btn">인원 제외<img src="./img/minus.png" alt=""></a>
+                  <a href="#none" class="increase_btn">인원 추가<img src="./img/plus.png" alt=""></a>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="dated_fieldset03">
+            <legend>사전구매</legend>
+            <div class="df03_wrap">
+              <div>
+                <input
+                  type="radio"
+                  name="dated_pre_reserve"
+                  value="dated_digital_photo"
+                  id="dated_digital_photo"
+                  class="digital_photo"
+                />
+                <label for="dated_digital_photo">디지털 기념 사진 사전 구매</label>
+                <p class="df03_labelExp">
+                  <span>
+                    LEGOLAND® 와 함께 한 소중한 추억을 고화질 사진으로
+                    간직하세요!
+                  </span>
+                  <span>온라인 구매가격 ￦25,000</span>
+                </p>
+                <p>
+                </p>
+                <div class="nc_wrap">
+                  <label for="dated_digital_photo_number">수량</label>
+                  <div class="numberCheck">
+                    <div class="dpnWrap">
+                      <input
+                        type="text"
+                        name="dated_digital_photo_number"
+                        id="dated_digital_photo_number"
+                        class="digital_photo_number"
+                        value="0"
+                        readonly
+                      />
+                      <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
+                      <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
+                    </div>
+                </div>
+                </div>
+              </div>
+              <div class="df03_w_exp">
+                <div>
+                    <span>기념 사진 사전 구매 안내</span>
+                    <ul>
+                        <li>
+                          시그니쳐 포토존 위티는 파크 운영 상황에 따라 변경될 수
+                          있음.
+                        </li>
+                        <li>
+                          어트랙션 탑승 중 촬영한 사진은 다운로드 항목에서 제외
+                        </li>
+                        <li>
+                          사진 파일 수령은 LEGOLAND® 파크 내 포토 카운터 5곳에서
+                          가능하며, 구매 후 발행된 18자리 바코드(모바일 또는 인쇄)를
+                          제시해야 수령 가능
+                        </li>
+                    </ul>
+                </div>
+                  <span>포토존 위치 안내</span>
+                  <ul>
+                      <li>파크 Entry Plaza 앞</li>
+                      <li>파크입구 공룡 조형물 앞</li>
+                      <li>브릭스트리트 광장 앞</li>
+                  </ul>
+                </dl>
+              </div>
+            </div>
+            <div class="df03_wrap">
+              <div>
+                <input
+                  type="radio"
+                  name="dated_pre_reserve"
+                  value="dated_mini_figure"
+                  id="dated_mini_figure"
+                  readonly
+                  class="mini_figure"
+                />
+                <label for="dated_mini_figure">미니 피규어 세트 사전구매</label>
+                <p class="df03_labelExp">
+                  <span>
+                    LEGOLAND®의 방문 필수템 귀여운 미니 피겨와 함께!
+                  </span>
+                  <span>
+                    현장구매가 <s>￦15,900</s>
+                    온라인 구매가격 <strong>￦15,000</strong>
+                  </span>
+                </p>
+                <p>
+                </p>
+                <div class="nc_wrap">
+                  <label for="dated_mini_figure_number">수량</label>
+                  <div class="numberCheck">
+                    <input
+                      type="text"
+                      name="dated_mini_figure_number"
+                      id="dated_mini_figure_number"
+                      class="mini_figure_number"
+                      value="0"
+                      readonly
+                    />
+                    <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
+                    <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
+
+                  </div>
+                </div>
+              </div>
+              <div class="df03_w_exp">
+                  <span>미니 피겨 세트 사전구매 안내</span>
+                  <ul>
+                      <li>파크 정문에서 가장 가까운 리테일샵 '빅샵'에서 수령</li>
+                      <li>
+                        번 세트는 미니피겨 3개입 1세트 구성으로 디자인은 시즌에
+                        따라 변경
+                      </li>
+                      <li>
+                        세트의 구성품은 판매중인 개별 제품과 임의로 교환 및 환불
+                        불가
+                      </li>
+                  </ul>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="dated_fieldset04">
+              <legend>패스트 트랙</legend>
+              <div class="df04_labelexp">
+                <span>
+                  기다리는 시간을 단축하여 더 많은 어트렉션을 즐길 수 있는 방법!
+                </span>
+                <a href="#none">이용 가능한 라이드 목록</a>                  
+                <div>
+                  <ul class="df04_l_ride">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="df04_ft">
+                <label for="ft_virtual_number">
+                  패스트트랙 버츄얼
+                </label>
+                  <span>￦40,000</span>
+                  <div class="df04_ft_exp">
+                    대기줄을 기다릴 필요 없이 가상으로 대기하는 동안 파크를 더 즐길 수 있어요!
+                  </div>
+                  <div class="nc_wrap">
+                    
+                    <div class="numberCheck">
+                      <input
+                        type="text"
+                        name="dated_ft_virtual_number"
+                        id="dated_ft_virtual_number"
+                        value="0"
+                        readonly
+                      />
+                      <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
+                      <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
+                    </div>
+                  </div>
+              </div>
+              <div class="df04_ft">
+                
+                <label for="ft_express_number">패스트트랙 익스프레스</label>
+                <span>￦70,000</span>
+                <div class="df04_ft_exp">
+                  어트렉션 대기 시간을 절반으로 단축하여 더 많은 어트렉션을 즐길 수 있어요!
+                </div>
+                <div class="nc_wrap">
+                  <div class="numberCheck">
+                    <input
+                      type="text"
+                      name="dated_ft_express_number"
+                      id="dated_ft_express_number"
+                      value="0"
+                      readonly
+                    />
+                    <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
+                    <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
+                  </div>
+                </div>
+              </div>
+              <div class="df04_ft">
+                <label for="ft_ultimate_number">패스트트랙 얼티밋</label>
+                <span>￦130,000</span>
+                <div class="df04_ft_exp">
+                  대기시간을 95% 줄여주는 슈퍼 아이템! 가장 적은 대기시간으로 많은 어트렉션 체험이 가능해요!
+                </div>
+                <div class="nc_wrap">
+                  <div class="numberCheck">
+                    <input
+                      type="text"
+                      name="dated_ft_ultimate_number"
+                      id="dated_ft_ultimate_number"
+                      value="0"
+                      readonly
+                    />
+                    <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
+                    <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
+                  </div>
+                </div>
+              </div>
+          </fieldset>
+
+          <fieldset class="dated_fieldset05">
+              <legend>LEGOLAND® Master Builder Program 신청</legend>
+              <div class="df05_wrap">
+                <input type="checkbox" name="dated_master_builder" id="dated_master_builder" class="master_builder">
+                <label for="dated_master_builder">LEGOLAND® Master Builder Program 신청하기</label>
+                <div>
+                  <span>온라인 구매가격</span>
+                  <span>￦165,000</span>
+                  <span>연간이용권 사용 시</span>
+                  <span>￦148,000</span>
+                </div>
+                <div class="nc_wrap">
+                  <label for="dated_master_builder_number"></label>
+                  <div class="numberCheck">
+                    <input
+                      type="text"
+                      name="dated_master_builder_number"
+                      id="dated_master_builder_number"
+                      value="0"
+                      readonly
+                    />
+                    <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
+                    <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
+                  </div>
+                </div>
+              </div>
+              <div class="df05_w_exp">
+                <p>LEGOLAND® Master Builder는 ‘LEGO® 마스터 빌더'가 LEGO® 작품을 디자인하고 제작하는 과정에 대해 배우고, 실제로 나만의 개성이 담긴 LEGO® 모델을 직접 만들어 볼 수 있는 어린이 손님 대상 체험 프로그램입니다.</p>
+                <p>3시간 동안 진행되는 이 프로그램을 통해 어린이 손님은 직접 주니어 LEGO® 모델 빌더가 되어, LEGO® 디자인 프로그램 ‘Studio'의 사용 방법을 배울 수 있습니다. 모든 프로그램 과정을 성공적으로 수료하고 ‘LEGOLAND® 주니어 마스터 빌더' 라이센스를 획득해보세요!</p>
+                <p>
+                  <span>LEGOLAND® Master Builder 포함 사항</span>
+                  <ul>
+                    <li>LEGO® 클래식 조립판</li>
+                    <li>직접 만든 LEGO® 모델 작품</li>
+                    <li>LEGOLAND® 주니어 마스터 빌더' 라이센스 카드</li>
+                    <li>생수 1병 포함</li>
+                    <li>LEGOLAND® 미니피규어 & QR코드가 각인된 LEGO® 브릭(QR코드 링크에 접속하여 프로그램 중 촬영 사진 다운로드 가능)</li>
+                    <li>프로그램 종료 후에도 LEGO®를 더욱 즐길 수 있는, 추가 LEGO® 브릭 1컵 & 조립 설명서</li>
+                    <li>LEGOLAND® 미니랜드 클러스터 투어</li>
+                  </ul>
+                </p>
+                <p>
+                  <span>이용 안내</span>
+                  <ul>
+                    <li>LEGOLAND® Master Builder 프로그램은 만 6세부터 만 12세 사이의 어린이 손님만 참여할 수 있으며, 한 타임 기준 최대 6명 정원으로 구성됩니다.</li>
+                    <li>LEGOLAND® Master Builder 에 대한 상세 내용은 여기를 눌러 이용 약관을 반드시 확인해주세요.</li>
+                  </ul>
+                </p>
+              </div>
+          </fieldset>
+
+          <fieldset class="dated_fieldset06 total_price_wrap">
+            <legend>가격 합계</legend>
+            <div class="df06_discount">
+              <span>할인 적용</span>
+              <ul class="df06_d_list">
+                <li>
+                  <div class="df06_d_l_wrap">
+                    <a href="#none" class="df06_d_l_listopen" >
+                      강원도민 할인 혜택
+                    </a>
+                    <div class="df06_d_l_w_exp">
+                      강원도 거주자 일일이용권 평일 30% 할인, 주말 및 공휴일 10% 할인 혜택
+                    </div>
+                    <a href="#none" class="df06_d_l_select" id="df06_d_l_gangwon">적용하기</a>
+                    <input type="checkbox" name="df06_d_l_select_01" id="df06_d_l_select_01">
+                  </div>
+                  <div class="df06_d_l_detail">
+                    <dl>
+                      <dt><strong>✔ 대상:</strong></dt>
+                        <dd>강원도 거주자</dd>
+                      <dt><strong>✔ 내용:</strong></dt>
+                        <dd>* <strong>평일 30% 할인, 주말 및 공휴일 10% 할인</strong></dd>
+                      <dt>* 이용 전 확인해주세요!</dt>
+                        <dd>- 본 혜택은 방문일로부터 <strong>최소 1일 전 온라인 구매 시에만</strong> 적용되며 당일 온라인/현장 구매 시 정가 판매 됩니다.</dd>
+                        <dd>- 만 12세 이하 어린이는 입장 및 이용 시 만 16세 이상의 보호자 동반 입장 필수</dd>
+                        <dd>- 해당 이용권은 강원도민 전용으로 입장 시 반드시 강원도민임을 입증할 수 있는 서류가 필요합니다. 본인 확인이 불가한 경우 혜택 적용이 불가능하며, 당일 구매 요금과의 차액에 해당하는 추가 요금이 발생됩니다.</dd>
+                        <dd>- 강원도 거주 증빙서류 : 주민등록증, 가족관계증명서, 학생증, 공무원증, 운전면허증, 군인의 경우 공무원증 및 개인 휴가증/외박증 원본과 신분증</dd>
+                        <dd>- 기타 프로모션 및 카드할인 등의 우대혜택과 중복 적용되지 않습니다.</dd>
+                        <dd>- 환불을 원하시는 경우, 예약하신 방문일 1일 전까지 회사의 홈페이지 내 취소 요청 절차를 통해 구매 철회를 요청해야 합니다.</dd>
+                        <dd>- 입장일 기준, 만 2세 (24개월 미만) 유아는 무료 입장이 가능합니다.</dd>
+                        <dd>- 티켓번호(사전 예약 시 필요)가 포함된 영수증이 발송될 이메일 주소는 정확히 기재 부탁 드립니다.</dd>
+                        <dd>- 주차는 포함되지 않습니다.</dd>
+                    </dl>
+                  </div>
+                </li>
+                <li>
+                  <div class="df06_d_l_wrap">
+                    <a href="#none" class="df06_d_l_listopen">
+                      KB국민카드 제휴 할인
+                    </a>
+                    <div class="df06_d_l_w_exp">
+                      KB국민카드로 일일이용권 구매 시, 평일 20% 할인, 주말 및 공휴일 10% 할인 혜택
+                    </div>
+
+                    <a href="#none" class="df06_d_l_select" id="df06_d_l_KBcard">적용하기</a>
+                    <input type="checkbox" name="df06_d_l_select_02" id="df06_d_l_select_02">
+                  </div>
+                  <div class="df06_d_l_detail">
+                      <dl>
+                        <dt><strong>✔ 기간:</strong></dt>
+                          <dd>2022년 5월 5일(목) ~ 2027년 5월 4일(화)</dd>
+                        <dt><strong>✔ 대상:</strong></dt>
+                          <dd>KB국민카드 회원 (KB국민 비씨, 기업, 선불카드 제외)</dd>
+                        <dt><strong>✔ 내용:</strong></dt>
+                          <dd>KB국민카드로 LEGOLAND® 1일 이용권 구매 시 정상가에서 평일 20%, 주말·공휴일 10% 할인 혜택 제공(최소 1일 전 구매 시 할인 적용되며 방문일 당일 입장권 구매 시 할인 없이 정가 적용 됩니다.)</dd>
+                        <dt><strong>✔ KB국민카드 회원 할인 혜택</strong></dt>
+                        <dd>
+                          <table>
+                            <thead>
+                              <tr>
+                                <th style="width: 33.3333%; text-align: center;">구분</th>
+                                <th style="width: 33.3333%; text-align: center;">대인<br />(만 13세 이상)</th>
+                                <th style="width: 33.3333%; text-align: center;">소인<br />(만 2세 이상<br />~12세 이하)</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td style="width: 33.3333%; text-align: center;">정상가</td>
+                                <td style="width: 33.3333%; text-align: center;">60,000원</td>
+                                <td style="width: 33.3333%; text-align: center;">50,000원</td>
+                              </tr>
+                              <tr>
+                                <td style="width: 33.3333%; text-align: center;">KB국민카드 할인가<br />(평일)</td>
+                                <td style="width: 33.3333%; text-align: center;">48,000원</td>
+                                <td style="width: 33.3333%; text-align: center;">40,000원</td>
+                              </tr>
+                              <tr>
+                                <td style="width: 33.3333%; text-align: center;">KB국민카드 할인가<br />(주말,공휴일)</td>
+                                <td style="width: 33.3333%; text-align: center;">54,000원</td>
+                                <td style="width: 33.3333%; text-align: center;">45,000원</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </dd>
+                        <dt><strong>✔ 이용 전 확인해 주세요.</strong></dt>
+                          <dd>- 다른 할인권 및 우대행사와 중복할인이 불가합니다.</dd>
+                          <dd>- 이용권 구매 및 유의사항은 LEGOLAND® 코리아 리조트 홈페이지에서 확인 바랍니다.</dd>
+                          <dd>- 본 행사는 KB국민카드 영업정책 및 제휴업체 상황에 따라 변경 또는 중단될 수 있습니다.</dd>
+                          <dd>- 문의: KB국민카드 고객센터(1588-1688)</dd>
+                          <dd>- 계약을 체결하기 전에 상품설명서와 약관을 확인하시기 바랍니다.</dd>
+                          <dd>- 상환능력에 비해 신용카드 사용액이 과도할 경우 귀하의 개인신용평점이 하락할 수 있습니다.</dd>
+                          <dd>- 개인신용평점 하락 시 금융거래 관련된 불이익이 발생할 수 있습니다.</dd>
+                          <dd>- 일정기간 원리금을 연체할 경우, 모든 원리금을 변제할 의무가 발생할 수 있습니다.</dd>
+                          <dd>- 신용카드 발급이 부적정한 경우 (개인신용평점 낮음, 연체금 보유 등) 카드발급이 제한될 수 있습니다.</dd>
+                          <dd>- 카드 이용대금과 이에 수반되는 모든 수수료를 지정된 대금 결제일에 상환합니다.</dd>
+                          <dd>- 금융소비자는 금소법 제19조 제1항에 따라 해당 상품 또는 서비스에 대하여 설명을 받을 권리가 있으며, 그 설명을 듣고 내용을 충분히 이해한 후 거래하시기 바랍니다.</dd>
+                      </dl>         
+                  </div>
+                </li>
+                <li>
+                  <div class="df06_d_l_wrap">
+                    <a href="#none" class="df06_d_l_listopen">
+                      LG U+ 제휴 할인
+                    </a>
+                    <div class="df06_d_l_w_exp">
+                      LG U+ 가입 고객 평일 20% 할인, 주말 및 공휴일 10% 할인 혜택
+                    </div>
+
+                    <a href="#none" class="df06_d_l_select" id="df06_d_l_LGUplus">적용하기</a>
+                    <input type="checkbox" name="df06_d_l_select_03" id="df06_d_l_select_03">
+                  </div>
+                  <div class="df06_d_l_detail">
+                        <dl>
+                          <dt><strong>✔ 기간:<br /></strong></dt>
+                            <dd>2022년 6월 1일(수) ~ 2027년 5월 4일(화)</dd>
+                          <dt><strong><br /><br />✔ 대상: <br /></strong></dt>
+                            <dd>LG U+ 가입 고객</dd>
+                          <dt><strong>✔ 내용:<br /></strong></dt>
+                            <dd>* 주중 20%, 주말 10% 할인 적용(정상가 성인/청소년 60,000원, 어린이 50,000원)</dd>
+                            <dd>* 본인 포함 동반 4인까지 할인 적용 가능(최대 48,000원 할인 혜택)</dd>
+                          <dt><strong>✔ 이용 전 확인해 주세요.</strong></dt>
+                            <dd>- 파크 입장 시 현장에서 모바일 통신사를 확인할 수 있습니다.</dd>
+                            <dd>- 개장일과 운영시간 등 보다 자세한 정보는 LEGOLAND® 공식 홈페이지-이용가이드에서 확인하실 수 있습니다.</dd>
+                            <dd>- 본 이용권은 재판매가 불가하며, 티켓환불은 구매일로부터 1일 이내만 가능합니다.</dd>
+                            <dd>- 입장일 기준 만 2세(24개월 미만) 유아는 무료 입장이 가능합니다.</dd>
+                            <dd>- 주차 정보는 LEGOLAND® 공식 홈페이지-이용가이드에서 확인 하실 수 있습니다. </dd>
+                            <dd>- 파크 1일 이용권 티켓 가격은 성수기/비수기에 따라 일 변동될 수 있습니다.</dd>
+                        </dl>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="df06_price">
+              <div class="df06_p_selectlist">
+                <ul>
+                  <li>
+                    <span><strong>예약 일자</strong></span>
+                    <div class="df06_p_s_date"></div>
+                  </li>
+                  <li>
+                    <span><strong>예약 인원</strong></span>
+                    <div class="df06_p_s_person">
+                      <span>대인 0 명</span>
+                      <span>소인 0 명</span>
+                    </div>
+                  </li>
+                  <li>
+                    <span><strong>부가 선택</strong></span>
+                    <div class="df06_p_s_extra">
+                      <div>
+                        <p class="df06_p_s_e_title03"></p>
+                        <p class="df06_p_s_e_number03"></p>
+                        <p class="df06_p_s_e_price03"></p>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <span><strong>할인 내역</strong></span>
+                    <div class="df06_p_s_discount">
+                      <div>
+                        <p class="df06_p_s_e_title06"></p>
+                        <p class="df06_p_s_e_number06"></p>
+                        <p class="df06_p_s_e_price06"></p>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="df06_p_total">
+                <label for="dated_total_price">합계</label>
+                <span class="df06_p_t_text"></span>
+                <input type="text" name="dated_total_price" id="dated_total_price" readonly class="total_price">
+              </div>
+            </div>
+          </fieldset>
+          <div class="dated_ticket_submit ticket_submit">
+            <button type="submit" class="submit_btn">장바구니에 담기</button>
+            <button type="button" class="reset_btn">다시 입력</button>
+          </div>
+        </form>
+    </div>
+    <script>
+        $(function(){
+          
+          // for Total Price ----------
+          var discountRate = 1;
+          var df03_number = 0, df03_price = 0;
+          var df04_price = [0,0,0];
+          var df05_price = 0;
+          
+          //------------Load-------------
+          const today = new Date();
+          let $selYear = today.getFullYear();
+          let $selMonth = today.getMonth() +1;
+            const $selMonthText = $selMonth < 10? "0"+($selMonth) : $selMonth;
+          let $selDate = today.getDate();
+            const $selDateText = $selDate < 10? "0"+$selDate : $selDate;
+          let $selDay = today.getDay();
+          $("#dated_date_value").val((i,v) => `${$selYear}-${$selMonthText}-${$selDateText}`);
+          $(".date_inputs label").text(`${$selYear}년 ${$selMonth}월 ${$selDate}일`);
+          
+          calenderLoad();
+          if ( !$(".calender_table_cell").eq($selDay + $selDate-1).hasClass("disabled_cell") ) {
+            $(".calender_table_cell").eq($selDay + $selDate-1).children().addClass("active_cell");
+            $(".df06_p_s_date").text(`${$selYear}년 ${$selMonth}월 ${$selDate}일`);
+          }
+          //---------------------------- 01. 달력 생성 & 날짜 입력 
+            function calenderLoad() { 
+              const monthFirst = new Date($selYear, $selMonth-1, 1);
+              const firstStart = monthFirst.getDay();
+              const lastEnd = new Date($selYear, $selMonth, 0).getDate();
+              $(".cm_sb_yearnumber").text($selYear);
+              $(".cm_sb_monthnumber").text($selMonth);
+              $(".cdt_date").children().remove();
+
+              for ( let num = 0; num < firstStart+lastEnd; num++) {
+                const k = num-firstStart+1;
+                const $newCell = $("<li class='calender_table_cell'></li>");
+                  $newCell.prop("id",`${$selYear}-${$selMonth < 10? "0"+($selMonth) : $selMonth}-${k<10? "0"+k : k}`);
+                  $(".cdt_date").append($newCell);
+                if ( 0 < k && k <= lastEnd) {
+                  if ( new Date($selYear,$selMonth-1,k) < today ) {
+                    $newCell.text(k);
+                    $newCell.addClass("disabled_cell");
+                  } else {
+                    const $accept = $("<a href='#none' class='able_cell'></a>");
+                    $accept.text(k);
+                    $newCell.append($accept).removeClass("disabled_cell");
+                    // 이전 선택 계속 유지
+                    if (+new Date($("#dated_date_value").val()) == +new Date($newCell.prop("id"))) {
+                      console.log(k);
+                      $accept.addClass("active_cell");
+                    }
+                    $accept.click(function(e){
+                      $("#dated_date_value").val((i,v) => `${$selYear}-${$selMonth<10? "0"+$selMonth : $selMonth}-${k<10? "0"+k: k}`);
+                      $(".date_inputs label").text(`${$selYear}년 ${$selMonth}월 ${k}일`);
+                      $(this).addClass("active_cell");
+                      $(".able_cell").not($(this)).removeClass("active_cell");
+                      $(".df06_p_s_date").text(`${$selYear}년 ${$selMonth}월 ${k}일`)
+                      total()
+                    });
+                  }
+                } 
+              }
+            }
+           
+            $(".calender_month .gotoback").click(function(){
+              if (!($selYear == today.getFullYear() && $selMonth-1 == today.getMonth())) {
+                if ( $selMonth == 1 ) {
+                  $selMonth = 12;
+                  $selYear -= 1;
+                } else {
+                  $selMonth -= 1;
+                }
+                calenderLoad();
+              }
+            })
+            $(".calender_month .gotonext").click(function(){
+              if ( $selMonth == 12 ) {
+                $selMonth = 1;
+                $selYear += 1;
+              } else {
+                $selMonth += 1;
+              }
+                calenderLoad();
+            });
+           
+          // -------------------------------------- 02. 인원 선택
+          $(".decrease_btn").click(function(e){
+            if( $(this).siblings("input").val() > 0) {
+              $(this).siblings("input").val((i,v) => +v-1);
+              $(this).siblings("input").trigger("change");           
+            }
+          })
+          $(".increase_btn").click(function(e){
+            $(this).siblings("input").val((i,v) => +v+1);
+            $(this).siblings("input").trigger("change");
+          });
+
+          $("#dated_numbers_grown").change(function(){
+            $(".df06_p_s_person").children("span:first-child").text(`대인 ${$(this).val()} 명`);
+            total()
+          })
+          $("#dated_numbers_little").change(function(){
+            $(".df06_p_s_person").children("span:last-child").text(`소인 ${$(this).val()} 명`);
+            total()
+          })
+          
+          // ------------------------------------- 03. 사전 구매
+          $(".df03_wrap input:radio").each(function(i){
+            $(".df03_wrap .nc_wrap input").eq(i).change(function(){
+              $(".df03_wrap input:radio").eq(i).trigger("click");
+            })
+
+            $(this).click(function(){
+              $(".df03_wrap .nc_wrap input").not(":eq("+i+")").prop("disabled",true);
+              $(".df03_wrap .nc_wrap input").eq(i).prop("disabled",false);
+
+              if ($(".df03_wrap .nc_wrap input").eq(i).val() == 0) {
+                $(".df06_p_s_extra >div").eq(0).hide()
+              } else {
+                $(".df06_p_s_extra >div").eq(0).show()
+              }
+              if ( i == 0 ) {
+                const digitalPhotoPrice = 25000;
+                df03_number = $("#dated_digital_photo_number").val();
+                df03_price = digitalPhotoPrice;
+                $(".df06_p_s_e_title03").eq(0).text("디지털 기념 사진 사전구매");
+                $(".df06_p_s_e_number03").eq(0).text($("#dated_digital_photo_number").val());
+                $(".df06_p_s_e_price03").eq(0).text("￦" + $("#dated_digital_photo_number").val()*digitalPhotoPrice);
+              }
+              if ( i == 1 ) {
+                const miniFigurePrice = 15000;
+                df03_number = $("#dated_mini_figure_number").val();
+                df03_price = miniFigurePrice;
+                $(".df06_p_s_e_title03").eq(0).text("미니 피겨 사전구매");
+                $(".df06_p_s_e_number03").eq(0).text($("#dated_mini_figure_number").val());
+                $(".df06_p_s_e_price03").eq(0).text("￦" + $("#dated_mini_figure_number").val()*miniFigurePrice);
+              }
+              
+              total()
+            });
+          });
+          // ------------------------------------- 04. 패스트트랙
+          
+          $(".df04_ft .nc_wrap input").each(function(i) {
+            
+            const $newbox04 = $('<div><p class="df06_p_s_e_title04"></p><p class="df06_p_s_e_number04"></p><p class="df06_p_s_e_price04"></p></div>');
+            $(".df06_p_s_extra").append($newbox04);
+
+            if ( $(this).val() == 0) { $newbox04.hide() }
+            else { $newbox04.show()}
+            
+            $(this).change(function() {
+              if ( $(this).val() == 0) { $newbox04.hide() }
+              else { $newbox04.show()}
+
+              const fasttrackPrice = 
+                i==0? 40000 : 
+                i==1? 70000 :
+                i==2? 130000 : null; 
+              $(".df06_p_s_e_title04").eq(i).text($(".df04_ft label").eq(i).text());
+              $(".df06_p_s_e_number04").eq(i).text($(this).val());
+              $(".df06_p_s_e_price04").eq(i).text("￦" + $(this).val()*fasttrackPrice);
+              df04_price[i] = $(this).val()*fasttrackPrice;
+              total()
+            })
+          })
+          // ------------------------------------- 05. VIP EXPERIENCES
+          
+          const $newbox05 = $('<div><p class="df06_p_s_e_title05"></p><p class="df06_p_s_e_number05"></p><p class="df06_p_s_e_price05"></p></div>');
+          $(".df06_p_s_extra").append($newbox05);
+          $(".df06_p_s_e_title05").text("LEGOLAND® Master Builder Program");
+
+          $(".df05_wrap .nc_wrap input").change(function(){
+            if ( $("#dated_master_builder").is(":checked")) {
+              if ($(this).val()==0 ) {
+                df05_price = 0;
+                $("#dated_master_builder").prop("checked",false)
+                $newbox05.hide()
+              } else {
+                $newbox05.show();
+                const vipPrice = 165000;
+                $(".df06_p_s_e_number05").text($(this).val());
+                $(".df06_p_s_e_price05").text("￦" + $(this).val()*vipPrice);
+
+                df05_price = $(this).val()*vipPrice;
+              }
+            } else {
+              if ( !$(this).val()==0 ) {
+                $newbox05.show();
+                $("#dated_master_builder").prop("checked",true);
+                const vipPrice = 165000;
+                $(".df06_p_s_e_number05").text($(this).val());
+                $(".df06_p_s_e_price05").text("￦" + $(this).val()*vipPrice);
+
+                df05_price = $(this).val()*vipPrice;
+              }
+            }
+            total();
+          })
+
+          // ------------------------------------- 06-1. 할인적용
+          $(".df06_d_list li").each(function(i){
+            $(this).find(".df06_d_l_listopen").click(function(){
+              $(".df06_d_l_detail").eq(i).slideToggle();
+              $(".df06_d_l_detail").not(":eq("+i+")").slideUp()
+              $(".df06_d_l_w_exp").eq(i).slideToggle();
+              $(".df06_d_l_w_exp").not(":eq("+i+")").slideDown();
+            })
+          });
+
+          const holiday = [
+            { month: 1, date: 1}, // 신정
+            { month: 3, date: 1}, // 삼일절
+            { month: 5, date: 5}, // 어린이날
+            { month: 6, date: 6}, // 현충일
+            { month: 8, date: 15}, // 광복절
+            { month: 10, date: 3}, // 개천절
+            { month: 10, date: 9}, // 한글날
+            { month: 12, date: 25} // 성탄절
+          ]                        // 기타 음력 공휴일/ 대체휴일은 직접 입력 (설날, 추석, 석가탄신일)
+
+          $(".df06_d_l_select").each(function(i){
+            $(this).click(function(){
+              $(".df06_d_list li").eq(i).toggleClass("active_discount");
+              $(".df06_d_list li").not(`:eq(${i})`).removeClass("active_discount");
+              // $(".df06_d_list li").eq(i).removeClass("not_discount");
+              // $(".df06_d_list li").not(`:eq(${i})`).addClass("not_discount");
+              $(".df06_d_list li input:checkbox").eq(i).prop("checked",function(){
+                $(".df06_d_list li input:checkbox").not($(this)).prop("checked",false);
+                return !$(this).prop("checked");
+              });
+
+              if ( $(".df06_d_list li input:checkbox").eq(i).is(":checked")) {
+                $(".df06_p_s_discount > div").show();
+                const selectDate = new Date($selYear, $selMonth-1, $selDate);
+                const selectDay = selectDate.getDay();
+                const holidayCheck = holiday.some(function(v){
+                  return v.month == $selMonth && v.date == $selDate;
+                });
+
+
+                 
+                if ( i==0 ) {
+                  $(".df06_p_s_e_title06").text("강원도민 할인");
+                  if (selectDay== ( 0 || 6 ) || holidayCheck ) {
+                    $(".df06_p_s_e_number06").text("10%");
+                    discountRate = 1 - 0.1;
+                  } else {
+                    $(".df06_p_s_e_number06").text("30%") ;
+                    discountRate = 1 - 0.3
+                  }
+                }
+                if ( i==1 ) {
+                  $(".df06_p_s_e_title06").text("국민카드 할인");
+                  if (selectDay== ( 0 || 6 ) || holidayCheck ) {
+                    $(".df06_p_s_e_number06").text("10%");
+                    discountRate = 1 - 0.1;
+                  } else {
+                    $(".df06_p_s_e_number06").text("20%") ;
+                    discountRate = 1 - 0.2;
+                  }
+                }
+                if ( i==2 ) {
+                  $(".df06_p_s_e_title06").text("LG U+ 할인");
+                  if (selectDay== ( 0 || 6 ) || holidayCheck ) {
+                    $(".df06_p_s_e_number06").text("10%");
+                    discountRate = 1 - 0.1;
+                  } else {
+                    $(".df06_p_s_e_number06").text("20%") ;
+                    discountRate = 1 - 0.2;
+                  }
+                }
+              } else if (!$(".df06_d_list li input:checkbox").is(":checked")) {
+                $(".df06_p_s_discount > div").hide();
+              }
+              
+              total();
+            });
+          });
+         
+
+          // ------------------------------------- 06-2. 가격 합산
+          
+          const total = function() {
+            const grownDatedPrice = 
+              today.getFullYear()==$selYear && today.getMonth()==$selMonth-1 && today.getDate()==$selDate ? 60000 : 54000;
+            const littleDatedPrice = 
+              today.getFullYear()==$selYear && today.getMonth()==$selMonth-1 && today.getDate()==$selDate ? 50000 : 45000;
+
+            const t_1 = grownDatedPrice * $("#dated_numbers_grown").val() + littleDatedPrice * $("#dated_numbers_little").val();
+            const t_2 = df03_number * df03_price;
+            const t_3 = df04_price.reduce((a,b) => a+b, 0);
+            const t_4 = df05_price;
+
+            function comma(x) {
+                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+            $("#dated_total_price").val(function(i,v) {
+              return t_1 * discountRate + t_2 + t_3 + t_4;
+            })
+            $(".df06_p_t_text").text("￦"+comma(t_1 * discountRate + t_2 + t_3 + t_4));
+            
+          }
+          
+
+          
+          function addBasket(m) {
+            const $newBasket = $(`
+              <div class='nb_${m}'>
+                <ul>
+                  <li class='nb_${m}_sort'>일일이용권</li>
+                  <li class='nb_${m}_date'></li>
+                  <li class='nb_${m}_number'></li>
+                  <li class='nb_${m}_price'></li>
+                </ul>
+              </div>
+              `);
+              $newBasket.append($closeBtn);
+            
+            $(".rb_list > div").append($newBasket);
+          }
+          function aaa(e) {
+            const bbb = new FormData(e.target);
+            const ccc = Object.fromEntries(bbb.entries());
+            const submitTime = Date.now();
+            ccc.submitTime = submitTime;
+
+            const getList = JSON.parse(localStorage.getItem("basket_list"));
+            getList[`dated_ticket_${submitTime}`] = ccc;
+            localStorage.setItem("basket_list",JSON.stringify(getList));
+            
+          }
+          $("#dated_ticket_form").submit(function(e){
+            e.preventDefault();
+            total();
+            aaa(e);
+          });
+
+          
+          //페이지 리셋
+        $(".reset_btn").click(function(){
+          $(".formBox").load("./t_use_reser01_1.html");
+        })
+        });
+    </script>
+   
+</body>
+</html>
