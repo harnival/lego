@@ -17,3 +17,13 @@ https://studiomeal.com/archives/197
 https://www.learnwithjason.dev/blog/get-form-values-as-json
     //정규식
 https://inpa.tistory.com/entry/JS-%F0%9F%93%9A-%EC%A0%95%EA%B7%9C%EC%8B%9D-RegExp-%EB%88%84%EA%B5%AC%EB%82%98-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-%EC%89%BD%EA%B2%8C-%EC%A0%95%EB%A6%AC
+
+    //git
+
+    - 지금 사용할 branch 전환 : git checkout '전환할 branch 이름'
+    - branch 생성 + 생성한 branch로 전환 : git checkout -b '생성할 이름'
+    - 기존 branch와 병합 : git stash
+    - branch 확인 : remote서버 branch 확인 .... git branch -r
+                    local branch 확인 ... git branch
+    - 먼저 init 으로 디렉토리 만든 후 -> 해당 폴더의 파일들을 원격서버 파일과 비교하기 위해
+    commit으로 선상에 올려둠 -> 그 다음 pull 해야 비교한 파일을 불러올 수 있음.

@@ -10,19 +10,24 @@
      <!-- 
         호텔 가격 책정 기준을 모르겠음. 성수기/비성수기, 기간 상관 없이 
         균일가격으로 설정하여 설정하여 제작함. 후에 기준에 맞춰 제작 필요.
+        (월 280000 화 280000 수 280000 목 320000 금 360000 토 440000 일 380000) : 프리미엄
       -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>호텔 예약 페이지 │</title>
+    <title>호텔 예약 페이지 │ </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
         :root {
-            --main-width: 1200px;
+            --main-width: 1350px;
             --roomInfo-slide-unit: 15vw;
             --inputBox-bg: white;
+            --main-bg-color: rgba(0, 128, 0, 0.671);
         }
-        body {padding: 0px;margin: 0px;}
+        body {padding: 0px;margin: 0px; font-family: 'Noto Sans KR', sans-serif;}
         a {text-decoration: none;}
         ul,li {list-style: none; padding: 0px; margin: 0px;}
         h1,h2,h3,h4,h5,h6 {margin: 0px; padding: 0px;}
@@ -36,21 +41,21 @@
             appearance: textfield;
         }
         /* ================================================================== */
+        main {
+            background-color: var(--main-bg-color);
+        }
         .mainWrap {
             max-width: var(--main-width);
             margin: auto;
         }
         .shortReservation {
-            background-color: wheat;
+            background-color: transparent;
         }
         .shortReservation_wrap {
             width: 90%;
             margin: auto;
             border: 2px solid #aaa;
             border-radius: 20px;
-        }
-
-        .sr_date {
             background-color: white;
         }
 
@@ -182,6 +187,9 @@
             border: none;
             padding: 5px;
         }
+        .sr_c_active {
+            background-color: yellow;
+        }
         /* ================================================================ */
         .sr_numbers h4::after {
             content: "(객실 하나 당 최대 6인)";
@@ -222,10 +230,13 @@
         }
         /* ================================================================ */
         .roomInfo {
-            background-color: palegreen;
+            background-color: transparent;
         }
         .roomInfo_wrap {
             padding: 20px;            
+        }
+        .roomInfo_wrap > div {
+            background-color: var(--inputBox-bg);
         }
         .ri_elem_info {
             box-sizing: border-box;
@@ -254,13 +265,13 @@
             flex-wrap: wrap;
         }
         /* -----slide------- */
-        .ri_e_t_p_slide {
+        .ri_e_t_slide {
             width: var(--roomInfo-slide-unit);
             max-width: 400px;
             position: relative;
             overflow: hidden;
         }
-        .ri_e_t_p_slide a {
+        .ri_e_t_slide a {
             display: block;
             position: absolute;
             top: 50%;
@@ -278,27 +289,27 @@
             right: 0px;
             background: url("img/arrow_forward.png") no-repeat center/50%;
         }
-        .ri_e_t_p_slide ul {
+        .ri_e_t_slide ul {
             display: flex;
         }
-        .ri_e_t_p_slide li img {
+        .ri_e_t_slide li img {
             display: block;
             width: var(--roomInfo-slide-unit);
             max-width: 400px;
         }
         /* ---------------------- */
-        .ri_e_t_p_exp {
+        .ri_e_t_exp {
             width: calc( 100% - 25vw );
             box-sizing: border-box;
             padding-left: 10px;    
         }
-        .ri_e_t_p_exp_title {
+        .ri_e_t_exp_title {
             font-size: 20px;
             font-weight: 600;
             display: block;
         }
         /* ---------------------- */
-        .ri_e_t_p_e_charWrap {
+        .ri_e_t_e_charWrap {
             position: fixed;
             top: 0px;
             left: 0px;
@@ -308,26 +319,22 @@
             z-index: 9999;
 
             display: none;
+            justify-content: center;
+            align-items: center;
         }
-        .ri_e_t_p_e_char:nth-of-type(1) {
-            position: fixed;
-            top: 0px;
-            left: 0px;
+        .ri_e_t_e_char {
+            position: relative;
 
-            width: 60vw;
-            height: 70vh;
-            margin: 15vh 20vw;
             padding: 30px 50px;
-            display: flex;
-            justify-content: space-between;
+            display: none;
+            justify-content: center;
             align-items: start;
-            gap: 20px;
             background-color: white;
             box-shadow: 2px 2px 5px #666;
             border-radius: 10px;
             box-sizing: border-box;
         }
-        .ri_e_t_p_e_char > a {
+        .ri_e_t_e_char > a {
             position: absolute;
             top: 10px;
             right: 10px;
@@ -338,12 +345,12 @@
             background: rgb(248, 175, 162) url("img/close_button.png") no-repeat center/20px;
             border-radius: 50%;
         }
-        .ri_e_t_p_e_char dl{
-            width: 30%;
-            padding: 0px;
-            margin: 0px;
+        .ri_e_t_e_char dl{
+            width: fit-content;
+            max-width: 30%;
+            padding-right: 30px;
         }
-        .ri_e_t_p_e_char dt {
+        .ri_e_t_e_char dt {
             margin: 10px;
             padding: 5px;
             width: 70%;
@@ -351,13 +358,13 @@
             font-size: 105%;
             color: rgb(113, 150, 38);
         }
-        .ri_e_t_p_e_char dd {
+        .ri_e_t_e_char dd {
             padding-bottom: 5px;
             position: relative;
             font-size: 95%;
             word-break: keep-all;
         }
-        .ri_e_t_p_e_char dd::before {
+        .ri_e_t_e_char dd::before {
             content: "•";
             display: inline-block;
             position: absolute;
@@ -366,7 +373,10 @@
             color: yellowgreen;
             opacity: 0.7;
         }
-        .ri_e_t_p_e_room span{
+        .ri_e_t_e_room {
+            padding-right: 20px;
+        }
+        .ri_e_t_e_room span{
             position: relative;
             display: flex;
             justify-content: center;
@@ -378,7 +388,7 @@
             border-radius: 20px;
             box-sizing: border-box;
         }
-        .ri_e_t_p_e_room span:nth-of-type(1)::before {
+        .ri_e_t_e_room span:nth-of-type(1)::before {
            content: "수용 인원";
            display: block;
            position: absolute;
@@ -387,7 +397,7 @@
            font-size: 13px;
            color: #666;
         }
-        .ri_e_t_p_e_room span:nth-of-type(2)::before {
+        .ri_e_t_e_room span:nth-of-type(2)::before {
            content: "메인 객실";
            display: block;
            position: absolute;
@@ -396,7 +406,7 @@
            font-size: 13px;
            color: #666;
         }
-        .ri_e_t_p_e_room span:nth-of-type(3)::before {
+        .ri_e_t_e_room span:nth-of-type(3)::before {
            content: "어린이 객실";
            display: block;
            position: absolute;
@@ -405,7 +415,7 @@
            font-size: 13px;
            color: #666;
         }
-        .ri_e_t_p_e_room span:nth-of-type(4)::before {
+        .ri_e_t_e_room span:nth-of-type(4)::before {
            content: "욕실";
            display: block;
            position: absolute;
@@ -414,7 +424,7 @@
            font-size: 13px;
            color: #666;
         }
-        .ri_e_t_p_e_room span:nth-of-type(5)::before {
+        .ri_e_t_e_room span:nth-of-type(5)::before {
            content: "객실 면적";
            display: block;
            position: absolute;
@@ -423,7 +433,7 @@
            font-size: 13px;
            color: #666;
         }
-        .ri_e_t_p_e_room span:nth-of-type(6):not(.notroom)::before {
+        .ri_e_t_e_room span:nth-of-type(6):not(.notroom)::before {
            content: "뷰";
            display: block;
            position: absolute;
@@ -433,14 +443,18 @@
            color: #666;
         }
         /* ======================================================= */
-        .ri_e_t_p_choice {
+        .ri_e_t_choice_body {
+            height: 10vh;
+            min-height: 80px;
+        }
+        .ri_e_t_choice {
             width: 100%;
         }
-        .ri_e_t_p_choice li {
+        .ri_e_t_choice li {
             background-color: wheat;
             position: relative;
         }
-        .ri_e_t_p_c_price {
+        .ri_e_t_c_price {
             display: block;
             width: 200px;
             height: 50%;
@@ -466,7 +480,7 @@
     <main>
         <div class="mainWrap">
             <div class="shortReservation">
-                <div class="shortReservation_wrap">
+                <form class="shortReservation_wrap">
                     <div class="sr_date">
                         <h4>기간 선택</h4>
                         <div class="inputBox">
@@ -479,7 +493,11 @@
                             <div class="checkout">
                               <label for="checkout_input">체크아웃</label>
                               <input type="date" name="checkout" id="checkout_input" />
-                              <span>날짜 입력</span> </div> </div> <div class="sr_date_calender"  </div></div>
+                              <span>날짜 입력</span>
+                            </div>
+                        </div> 
+                        <div class="sr_date_calender"></div>
+                    </div>
                     <div class="sr_numbers">
                         <h4>객실 및 투숙인원 선택</h4>
                         <table>
@@ -508,21 +526,21 @@
                                     </th>
                                     <td>
                                         <div class="numberCheck">
-                                            <input type="number" name="sr_n_adult" id="sr_n_adult" value="0" readonly/>
+                                            <input type="number" name="sr_n_adult" id="sr_n_adult" value="0" max="3" readonly/>
                                             <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
                                             <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="numberCheck">
-                                            <input type="number" name="sr_n_child" id="sr_n_child" value="0" readonly/>
+                                            <input type="number" name="sr_n_child" id="sr_n_child" value="0" max="3" readonly/>
                                             <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
                                             <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="numberCheck">
-                                            <input type="text" name="sr_n_toddler" id="sr_n_toddler" value="0" readonly/>
+                                            <input type="text" name="sr_n_toddler" id="sr_n_toddler" value="0" max="2" readonly/>
                                             <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
                                             <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
                                         </div>
@@ -538,16 +556,20 @@
                             <h4>할인코드</h4>
                             <input type="text" name="dc_code" id="sr_c_input" placeholder="할인코드 직접 입력">
                         </div>
-                        <ul>
-                            <li><a href="#none" class="sr_c_early">#얼리버드 패키지</a></li>
-                            <li><a href="#none" class="sr_c_awesome">#어썸 초이스</a></li>
-                            <li><a href="#none" class="sr_c_birthday">#브릭스타틱 생일 패키지</a></li>
-                            <li><a href="#none" class="sr_c_friends">#NEW LEGO® 프렌즈 패키지</a></li>
-                            <li><a href="#none" class="sr_c_twodays">#LEGOLAND® 파크 2일+호텔 패키지</a></li>
-                            <li><a href="#none" class="sr_c_disabled">#장애인 친화 객실</a></li>
+                        <ul class="sr_c_list">
+                            <li><a href="#none" class="sr_c_early" data-code="early">#얼리버드 패키지</a></li>
+                            <li><a href="#none" class="sr_c_awesome" data-code="awesome">#어썸 초이스</a></li>
+                            <li><a href="#none" class="sr_c_birthday" data-code="birthday">#브릭스타틱 생일 패키지</a></li>
+                            <li><a href="#none" class="sr_c_friends" data-code="friends">#NEW LEGO® 프렌즈 패키지</a></li>
+                            <li><a href="#none" class="sr_c_twodays" data-code="twodays">#LEGOLAND® 파크 2일+호텔 패키지</a></li>
+                            <li><a href="#none" class="sr_c_disabled" data-code="disabled">#장애인 친화 객실</a></li>
+                            <li><a href="#none" class="sr_c_default" data-code="default">#조식 패키지</a></li>
                         </ul>
                     </div>
-                </div>
+                    <div class="sr_searchBtn">
+                        <button type="submit">검색</button>
+                    </div>
+                </form>
             </div>
             <div class="promotionSlide">
 
@@ -567,17 +589,21 @@
         </div>
         <script>
             $(function(){
+                const oneday = 86400000;
                 // common -------------------------------------------------
-                $(".decrease_btn").click(function(e){
-                    if( $(this).siblings("input").val() > 0) {
-                    $(this).siblings("input").val((i,v) => +v-1);
-                    $(this).siblings("input").trigger("change");           
-                    }
-                });
-                $(".increase_btn").click(function(e){
-                    $(this).siblings("input").val((i,v) => +v+1);
-                    $(this).siblings("input").trigger("change");
-                });
+                $(document)
+                    .delegate(".decrease_btn",'click',function(e){
+                        if( $(this).siblings("input").val() > 0) {
+                        $(this).siblings("input").val((i,v) => +v-1);
+                        $(this).siblings("input").trigger("change");           
+                        }
+                    })
+                    .delegate(".increase_btn",'click',function(e){
+                        $(this).siblings("input").val((i,v) => +v+1);
+                        $(this).siblings("input").trigger("change");
+                    });
+                    
+               
                 // list load-----------------------------------------------
                 $(".ri_load_pirate").load("./t_hotel_reser01_p.html");
                 $(".ri_load_kingdom").load("./t_hotel_reser01_k.html");
@@ -588,20 +614,126 @@
                 // 객실 추가/삭제--------------------------------------------
                 $(".sr_addRoom").click(function(){
                     const trLength = $(".sr_n_list").length;
-                    const $cloneTr = $(".sr_n_list_origin").clone(true);
+                    if (trLength <4) {
+                        const $cloneTr = $(".sr_n_list_origin").clone(true);
                         $cloneTr.removeClass("sr_n_list_origin");
                         $cloneTr.children("th").text(`객실 ${trLength + 1}`);
-                    $(".sr_numbers table").append($cloneTr)
+                        $(".sr_numbers table").append($cloneTr);
+                    }
                 });
-                $(".sr_deleteRoom").click(function(){
-                    const trLength = $(".sr_n_list").length;
-                    if (trLength > 1) {
-                        $(this).parents("tr").remove();
-                        $(".sr_n_list th").each(function(i){
-                            $(this).text(`객실 ${i+1}`);
+                $(document).delegate(".sr_deleteRoom",'click',function(e){
+                        const trLength = $(".sr_n_list").length;
+                        if (trLength > 1) {
+                            $(this).parents("tr").remove();
+                            $(".sr_n_list th").each(function(i){
+                                $(this).text(`객실 ${i+1}`);
+                            });
+                        }
+                    });
+                // 요금 계산 ------------------------------------------------
+                const priceArray_premium = [340000, 320000, 320000, 320000, 320000, 380000, 520000];
+                const priceArray_park = priceArray_premium.map(x => x+50000);
+                const priceArray_corner = priceArray_premium.map(x => x+100000);
+                const priceArray_suite = priceArray_premium.map(x => x+200000);
+                const priceArray_deluxe = priceArray_premium.map(x => x+300000);
+
+                $(".sr_c_list").find("a").click(function(){
+                    $(".sr_c_input").trigger("change");
+                    if ( $(this).hasClass("sr_c_active")) {
+                        $(this).removeClass("sr_c_active");
+                        $(".ri_e_t_choice li").show();
+                    } else {
+                        $(this).addClass("sr_c_active");
+                        $(".sr_c_list").find("a").not($(this)).removeClass("sr_c_active");
+
+                        const q = $(this).data("code");
+                        $(".ri_e_t_choice li").each(function(){
+                            if ($(this).data("code") == q) {
+                                $(this).show();
+                            } else {
+                                $(this).hide();
+                            }
                         });
                     }
                 });
+                let basketArray = [];
+                $(".shortReservation_wrap").on("submit",function(e){
+                    e.preventDefault();
+                    const d = new FormData(e.target);
+                    const c = Object.fromEntries(d.entries());
+                    basketArray.push(c);
+
+                    const checkinDate = new Date(c["checkin"]);
+                    const checkoutDate = new Date(c["checkout"]);
+                    // --------------------- li show/hide -----------------
+                    const originLi = $(`
+                        <li data-code="">
+                            <div class="ri_e_t_choice_body">
+                                <strong><a href="#none"></a></strong>
+                                <a href="#none" class="ri_e_t_c_price"></a>
+                            </div>
+                            <div class="ri_e_t_choice_slide">
+                                <div class="cs_exp"></div>
+                                <div class="cs_price"></div>
+                            </div>
+                        </li>                        
+                    `);
+                    $(".ri_e_t_choice li").each(function(){
+                        //1. 파크 2일 이용권
+                        if ( checkoutDate - checkinDate == oneday) {                        
+                            if ($(this).data("code") == "twodays") {
+                                $(this).show();
+                            }
+                        }
+                    });
+                    $(".ri_e_t_choice_extra").each(function(){
+                        //2. 얼리버드
+                        const todayDate = new Date();
+                        if ( checkinDate - todayDate > oneday*21 && checkinDate.getDay() == (1||2) && checkoutDate.getDay() == (2||3)) {
+                            if ( todayDate < new Date(2023,6,28) && checkoutDate < new Date(2023,7,19)) {
+                                if ($(this).parents(".ri_e_t_box").data("room") == ("premium" || "park") && $(this).parents(".ri_e_t_box").data("theme") != "friends") {
+                                    const $earlyLi = originLi.clone(true);
+                                    $earlyLi
+                                        .data("code","early")
+                                        .find("strong a").text("얼리버드 조식 패키지")
+                                        .appendTo($(this));
+                                    const $earlyLiTwo = originLi.clone(true);
+                                    $earlyLiTwo
+                                        .data("code","early")
+                                        .data("annual",true)
+                                        .find("strong a").text("[연간회원권 할인]얼리버드 조식 패키지")
+                                        .appendTo($(this));
+                                }
+
+                                    
+                            }
+                        }
+                        //3. 어썸초이스
+                        if ( checkoutDate - checkinDate >= oneday*2) {
+                            if (checkoutDate < new Date(2023,12,31)) {
+                               
+                            }
+                        }
+                        //4. 프렌즈 이벤트
+                        if ( checkoutDate < new Date(2023,6,6)) {
+                            
+                        }
+                        //5. 브릭스타틱 생일 이벤트
+                        if ( checkoutDate - checkinDate == oneday) {                        
+                            
+                        }
+                    });
+                     //----------------------------------------------------
+                    // ---------------- 요금 계산 -----------------------------
+                    $(".ri_e_t_choice li").each(function(i){
+
+                    })
+
+
+                });
+                    
+                               
+                
                 
             });
         </script>
