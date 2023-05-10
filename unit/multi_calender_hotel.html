@@ -11,7 +11,7 @@
         --dataCell-height: 50px;
         --dataTable-max-width: 500px;
         --cell-text-color: green;
-        --slide-btn-color: rgb(240,240,89);
+        --slide-btn-color: #ffcf00;;
       }
       /* rgb(255, 141, 121) */
       body {margin: 0px;padding: 0px;}
@@ -96,7 +96,6 @@
 
         border-radius: 50%;
         text-align: center;
-        opacity: 0.5;
       }
       /* -------------------- */
       .checkin_active {
@@ -247,37 +246,140 @@
               $(".calenderWrap .dates").append(newDateBox);
             }
             
+            // function rrrrr(n,m) {
+            //   if ( $(this).hasClass(`check${n}_active`)) {
+            //       $(`.check${m}_active`).removeClass(`check${m}_active`);
+            //       $(this)
+            //         .removeClass(`check${n}_active`)
+            //         .addClass(`check${m}_active`)
+            //       $(`.check${m} input`)
+            //         .val((i, v) => $(this).prop("id"))
+            //         .data( "value", $(this).data("value"))
+            //         .trigger("change");
+            //       const weekday = new Date($(`.check${m} input`).val()).getDay();
+            //       $(`.check${m} span`)
+            //         .text( `${selYear}년 ${selMonth + 1}월 ${$(`.check${m}_active`).text()}일 (${week[weekday]})` )
+            //         .toggleClass("on");
+            //       $(`.check${n} input`)
+            //         .val((i, v) => null)
+            //         .data( "value", "")
+            //         .trigger("change");
+            //       $(`.check${n} span`)
+            //         .text( "날짜 입력" );
+            //     } else if ( $(this).hasClass(`check${m}_active`)) {
+            //       $(this).removeClass(`check${m}_active`);
+            //       $(`.check${m} input`)
+            //         .val((i, v) => null)
+            //         .data( "value", "")
+            //         .trigger("change");
+            //       $(`.check${m} span`)
+            //         .text( "날짜 입력" )
+            //         .toggleClass("on");
+            //     } else {
+            //       $(`.check${m}_active`).removeClass(`check${m}_active`);
+            //       $(this).addClass(`check${m}_active`);
+            //       $(`.check${m} input`)
+            //         .val((i, v) => $(this).prop("id"))
+            //         .data( "value", $(this).data("value"))
+            //         .trigger("change");
+            //       const weekday = new Date($(`.check${m} input`).val()).getDay();
+            //       $(`.check${m} span`)
+            //         .text( `${selYear}년 ${selMonth + 1}월 ${$(`.check${m}_active`).text()}일 (${week[weekday]})` )
+            //         .toggleClass("on");
+            //     }
+            // }
+            // $(".clickBox").click(function(){
+            //   if ($(".checkin span").hasClass("on")) { 
+            //     rrrrr("out","in");
+            //   }
+            //   if ($(".checkout span").hasClass("on")) { 
+            //     rrrrr("in","out");
+            //   }
+            // })
 
             $(".clickBox").click(function() {
               if ($(".checkin span").hasClass("on")) {
-                if ( !$(this).hasClass("checkout_active")) {
-                    $(".checkin_active").removeClass("checkin_active");
-                    $(this).addClass("checkin_active");
-                    $(".checkin input")
-                      .val((i, v) => $(this).prop("id"))
-                      .data( "value", $(this).data("value"))
-                      .trigger("change");
-                    const weekday = new Date($(".checkin input").val()).getDay();
-                    $(".checkin span")
-                      .text( `${selYear}년 ${selMonth + 1}월 ${$(".checkin_active").text()}일 (${week[weekday]})` )
-                      .toggleClass("on");
-                  
+                if ( $(this).hasClass("checkout_active")) {
+                  $(".checkin_active").removeClass("checkin_active");
+                  $(this)
+                    .removeClass("checkout_active")
+                    .addClass("checkin_active")
+                  $(".checkin input")
+                    .val((i, v) => $(this).prop("id"))
+                    .data( "value", $(this).data("value"))
+                    .trigger("change");
+                  const weekday = new Date($(".checkin input").val()).getDay();
+                  $(".checkin span")
+                    .text( `${selYear}년 ${selMonth + 1}월 ${$(".checkin_active").text()}일 (${week[weekday]})` )
+                    .toggleClass("on");
+                  $(".checkout input")
+                    .val((i, v) => null)
+                    .data( "value", "")
+                    .trigger("change");
+                  $(".checkout span")
+                    .text( "날짜 입력" );
+                } else if ( $(this).hasClass("checkin_active")) {
+                  $(this).removeClass("checkin_active");
+                  $(".checkin input")
+                    .val((i, v) => null)
+                    .data( "value", "")
+                    .trigger("change");
+                  $(".checkin span")
+                    .text( "날짜 입력" )
+                    .toggleClass("on");
+                } else {
+                  $(".checkin_active").removeClass("checkin_active");
+                  $(this).addClass("checkin_active");
+                  $(".checkin input")
+                    .val((i, v) => $(this).prop("id"))
+                    .data( "value", $(this).data("value"))
+                    .trigger("change");
+                  const weekday = new Date($(".checkin input").val()).getDay();
+                  $(".checkin span")
+                    .text( `${selYear}년 ${selMonth + 1}월 ${$(".checkin_active").text()}일 (${week[weekday]})` )
+                    .toggleClass("on");
                 }
               }
               if ($(".checkout span").hasClass("on")) {
-                if ( !$(this).hasClass("checkin_active") ) {
-                  
-                    $(".checkout_active").removeClass("checkout_active");
-                    $(this).addClass("checkout_active");
-                    $(".checkout input")
-                      .val( (i, v) => $(this).prop("id") )
-                      .data( "value", $(this).data("value"))
-                      .trigger("change");
-                    const weekday = new Date($(".checkout input").val()).getDay();
-                    $(".checkout span")
-                      .text( `${selYear}년 ${selMonth + 1}월 ${$(".checkout_active").text()}일 (${week[weekday]})` )
-                      .toggleClass("on");
-                  
+                if ( $(this).hasClass("checkin_active")) {
+                  $(".checkout_active").removeClass("checkout_active");
+                  $(this)
+                    .removeClass("checkin_active")
+                    .addClass("checkout_active")
+                  $(".checkout input")
+                    .val((i, v) => $(this).prop("id"))
+                    .data( "value", $(this).data("value"))
+                    .trigger("change");
+                  const weekday = new Date($(".checkout input").val()).getDay();
+                  $(".checkout span")
+                    .text( `${selYear}년 ${selMonth + 1}월 ${$(".checkout_active").text()}일 (${week[weekday]})` )
+                    .toggleClass("on");
+                  $(".checkin input")
+                    .val((i, v) => null)
+                    .data( "value", "")
+                    .trigger("change");
+                  $(".checkin span")
+                    .text( "날짜 입력" );
+                } else if ( $(this).hasClass("checkout_active")) {
+                  $(this).removeClass("checkout_active");
+                  $(".checkout input")
+                    .val((i, v) => null)
+                    .data( "value", "")
+                    .trigger("change");
+                  $(".checkout span")
+                    .text( "날짜 입력" )
+                    .toggleClass("on");
+                } else {
+                  $(".checkout_active").removeClass("checkout_active");
+                  $(this).addClass("checkout_active");
+                  $(".checkout input")
+                    .val((i, v) => $(this).prop("id"))
+                    .data( "value", $(this).data("value"))
+                    .trigger("change");
+                  const weekday = new Date($(".checkout input").val()).getDay();
+                  $(".checkout span")
+                    .text( `${selYear}년 ${selMonth + 1}월 ${$(".checkout_active").text()}일 (${week[weekday]})` )
+                    .toggleClass("on");
                 }
               }
               bridge();

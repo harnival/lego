@@ -10,7 +10,6 @@
      <!-- 
         호텔 가격 책정 기준을 모르겠음. 성수기/비성수기, 기간 상관 없이 
         균일가격으로 설정하여 설정하여 제작함. 후에 기준에 맞춰 제작 필요.
-        (월 280000 화 280000 수 280000 목 320000 금 360000 토 440000 일 380000) : 프리미엄
       -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,6 +25,8 @@
             --roomInfo-slide-unit: 15vw;
             --inputBox-bg: white;
             --main-bg-color: rgba(0, 128, 0, 0.671);
+            --main-yellow-color: #ffcf00;
+            --button-yellow: rgb(240, 240, 89);
         }
         body {padding: 0px;margin: 0px; font-family: 'Noto Sans KR', sans-serif;}
         a {text-decoration: none;}
@@ -135,7 +136,7 @@
         .decrease_btn {
             font-size: 0px;
             display: block;
-            background-color: rgb(240, 240, 89);
+            background-color: var(--main-yellow-color);
             width: 30px;
             height: 30px;
             border-radius: 50%;
@@ -151,7 +152,7 @@
         .increase_btn {
             font-size: 0px;
             display: block;
-            background-color: rgb(240, 240, 89);
+            background-color: var(--main-yellow-color);
             width: 30px;
             height: 30px;
             border-radius: 50%;
@@ -611,6 +612,9 @@
                 $(".ri_load_ninja").load("./t_hotel_reser01_n.html");
 
                 $(".sr_date_calender").load("./unit/multi_calender_hotel.html");
+                if ( !localStorage.getItem("hotelBasket")) {
+                    localStorage.setItem("hotelBasket", JSON.stringify([]));
+                }
                 // 객실 추가/삭제--------------------------------------------
                 $(".sr_addRoom").click(function(){
                     const trLength = $(".sr_n_list").length;
@@ -636,6 +640,9 @@
                 const priceArray_corner = priceArray_premium.map(x => x+100000);
                 const priceArray_suite = priceArray_premium.map(x => x+200000);
                 const priceArray_deluxe = priceArray_premium.map(x => x+300000);
+                const A1 = [ [],priceArray_premium, priceArray_premium, priceArray_park, priceArray_corner, priceArray_suite, priceArray_deluxe];
+                // data-theme [1 : pirate , 2 : kingdom , 3 : friends , 4 : ninja ]
+                // data-room [1 : premium , 2 : disabled , 3 : park , 4 : corner , 5 : suite , 6 : deluxe]
 
                 $(".sr_c_list").find("a").click(function(){
                     $(".sr_c_input").trigger("change");
@@ -656,18 +663,23 @@
                         });
                     }
                 });
-                let basketArray = [];
                 $(".shortReservation_wrap").on("submit",function(e){
                     e.preventDefault();
                     const d = new FormData(e.target);
                     const c = Object.fromEntries(d.entries());
-                    basketArray.push(c);
-
+                    let basketArray = JSON.parse(localStorage.getItem("hotelBasket"));
+                    basketArray.push(JSON.stringify(c));
+                    localStorage.setItem("hotelBasket", JSON.stringify(basketArray));
+                    
+                    const todayDate = new Date();
+                    const adultNumber = c["sr_n_adult"];
+                    const childNumber = c["sr_n_child"];
+                    const toddlerNumber = c["sr_n_toddler"];
                     const checkinDate = new Date(c["checkin"]);
                     const checkoutDate = new Date(c["checkout"]);
-                    // --------------------- li show/hide -----------------
+                    
                     const originLi = $(`
-                        <li data-code="">
+                        <li>
                             <div class="ri_e_t_choice_body">
                                 <strong><a href="#none"></a></strong>
                                 <a href="#none" class="ri_e_t_c_price"></a>
@@ -678,34 +690,62 @@
                             </div>
                         </li>                        
                     `);
-                    $(".ri_e_t_choice li").each(function(){
-                        //1. 파크 2일 이용권
+                    //1. 파크 2일 이용권 -------------------------------------- 
+                    $(".twodays_li").each(function(){
                         if ( checkoutDate - checkinDate == oneday) {                        
-                            if ($(this).data("code") == "twodays") {
                                 $(this).show();
-                            }
+                                const q = checkinDate.getDay();
+                                const w = checkoutDate.getDay();
+                                const ticket = adultNumber * 60000 + childNumber * 50000;
+                                $(".twodays_li").each(function(){
+                                    const par = $(this).parents(".ri_e_t_box").data("room");
+                                    $(this).find(".ri_e_t_c_price").text( A1[par][q] + ticket );
+                                });
+                        } else {
+                            $(this).hide();
                         }
                     });
                     $(".ri_e_t_choice_extra").each(function(){
                         //2. 얼리버드
-                        const todayDate = new Date();
-                        if ( checkinDate - todayDate > oneday*21 && checkinDate.getDay() == (1||2) && checkoutDate.getDay() == (2||3)) {
+                        const r = $(this).parents(".ri_e_t_box").data("room");
+                        const t = $(this).parents(".ri_e_t_box").data("theme");
+                        console.log( 1 == (1||2) && 3 == (2||3))
+                        if ( checkinDate - todayDate > oneday*21 && 0<checkinDate.getDay() && checkinDate.getDay()<4 && 0<checkoutDate.getDay() && checkoutDate.getDay()<4) {
                             if ( todayDate < new Date(2023,6,28) && checkoutDate < new Date(2023,7,19)) {
-                                if ($(this).parents(".ri_e_t_box").data("room") == ("premium" || "park") && $(this).parents(".ri_e_t_box").data("theme") != "friends") {
+                                if ( r == (1||3) &&  t != 3) {
+                                    let m = 0;
+                                    for ( let j = checkinDate; j < checkoutDate; j += oneday) {
+                                        const d = new Date(j).getDay();
+                                        m += A1[r][d];
+                                    }
                                     const $earlyLi = originLi.clone(true);
                                     $earlyLi
                                         .data("code","early")
-                                        .find("strong a").text("얼리버드 조식 패키지")
-                                        .appendTo($(this));
-                                    const $earlyLiTwo = originLi.clone(true);
-                                    $earlyLiTwo
-                                        .data("code","early")
-                                        .data("annual",true)
-                                        .find("strong a").text("[연간회원권 할인]얼리버드 조식 패키지")
-                                        .appendTo($(this));
-                                }
+                                        .addClass("early_li")
+                                        .appendTo($(this))
+                                    $earlyLi.find("strong a").text("얼리버드 조식 패키지")
+                                    $earlyLi.find(".ri_e_t_c_price").text(m * 0.8);
 
                                     
+                                    const $earlyAnnualLi = originLi.clone(true);
+                                    $earlyAnnualLi
+                                        .data("code","early")
+                                        .addClass("earlyAnnual_li")
+                                        .data("annual",true)
+                                        .appendTo($(this))
+                                    $earlyAnnualLi.find("strong a").text("[연간회원권 할인]얼리버드 조식 패키지");
+                                    $earlyAnnualLi.find(".ri_e_t_c_price").text(m * 0.8 * 0.9);
+
+                                    if (  checkoutDate - checkinDate == oneday ) {
+                                        const ticket = adultNumber * 60000 + childNumber * 50000;
+                                        const $earlyTwoLi = originLi.clone(true);
+                                        $earlyTwoLi
+                                            .data("code","early")
+                                            .appendTo($(this));
+                                        $earlyTwoLi.find("strong a").text("얼리버드 파크 2일 이용권 패키지");
+                                        $earlyTwoLi.find(".ri_e_t_c_price").text(m * 0.8 + ticket);
+                                    }
+                                }  
                             }
                         }
                         //3. 어썸초이스
