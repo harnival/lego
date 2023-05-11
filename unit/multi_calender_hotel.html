@@ -21,6 +21,9 @@
 
       /* ==================================== */
       .calender {
+        width: 100%;
+        padding: 0px 8%;
+        box-sizing: border-box;
         display: flex;
         justify-content: center;
         position: relative;
@@ -34,24 +37,32 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        height:100%;
-        
+        width: 45%;
+        min-width: 400px;
+        height: fit-content;
       }
       .calenderWrap {
         z-index: 10;
         box-shadow: 3px 3px 9px #999;
       }
       .calenderWrap_next {
-        transform-origin: -10% top;
+        transform-origin: left top;
         transform: scale(0.8,0.8);
         filter: blur(1px) ;
         box-shadow: 1px 1px 5px #bbb;
+
+        position: absolute;
+        top: 0px;
+        right: 0px;
       }
       .calenderWrap_prev {
-        transform-origin: 110% top;
+        transform-origin: right top;
         transform: scale(0.8,0.8);
         filter: blur(1px) ;
         box-shadow: 1px 1px 5px #bbb;
+        position: absolute;
+        top: 0px;
+        left: 0px;
       }
       .dateTable {
         max-width: var(--dataTable-max-width);
@@ -468,11 +479,20 @@
         $(".checkin span").click(function () {
           $(this).toggleClass("on");
           $(".checkout span").removeClass("on");
+          $(".sr_date_calender").slideDown();
+          if ( !$(this).hasClass("on") && !$(".checkout span").hasClass("on")) {
+            $(".sr_date_calender").slideUp();
+          }
         });
         $(".checkout span").click(function () {
           $(this).toggleClass("on");
           $(".checkin span").removeClass("on");
+          $(".sr_date_calender").slideDown();
+          if ( !$(this).hasClass("on") && !$(".checkout span").hasClass("on")) {
+            $(".sr_date_calender").slideUp();
+          }
         });
+        
       });
     </script>
   </body>
