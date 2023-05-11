@@ -84,7 +84,7 @@
                     </div>                                       
                 </div>
                 <div class="ri_e_t_choice">
-                    <ul>
+                    <ul class="ri_e_t_choice_default">
                         <li data-code="twodays" class="twodays_li">
                             <div class="ri_e_t_choice_body">
                                 <strong><a href="#none">조식 및 파크 2일 이용권 패키지</a></strong>
@@ -116,6 +116,8 @@
                             </div>
                         </li>
                     </ul>
+                    <ul class="ri_e_t_choice_extra"></ul>
+
                 </div>
             </div>
             
@@ -183,7 +185,7 @@
                     </div>
                 </div>
                 <div class="ri_e_t_choice">
-                    <ul>
+                    <ul class="ri_e_t_choice_default">
                         <li data-code="twodays" class="twodays_li">
                             <div class="ri_e_t_choice_body">
                                 <strong><a href="#none">조식 및 파크 2일 이용권 패키지</a></strong>
@@ -215,6 +217,8 @@
                             </div>
                         </li>
                     </ul>
+                    <ul class="ri_e_t_choice_extra"></ul>
+
                 </div>
             </div>
 
@@ -282,7 +286,7 @@
                     </div>
                 </div>
                 <div class="ri_e_t_choice">
-                    <ul>
+                    <ul class="ri_e_t_choice_default">
                         <li data-code="twodays" class="twodays_li">
                             <div class="ri_e_t_choice_body">
                                 <strong><a href="#none">조식 및 파크 2일 이용권 패키지</a></strong>
@@ -314,6 +318,8 @@
                             </div>
                         </li>
                     </ul>
+                    <ul class="ri_e_t_choice_extra"></ul>
+
                 </div>
             </div>
             
@@ -381,7 +387,7 @@
                     
                 </div>
                 <div class="ri_e_t_choice">
-                    <ul>
+                    <ul class="ri_e_t_choice_default">
                         <li data-code="twodays" class="twodays_li">
                             <div class="ri_e_t_choice_body">
                                 <strong><a href="#none">조식 및 파크 2일 이용권 패키지</a></strong>
@@ -413,6 +419,8 @@
                             </div>
                         </li>
                     </ul>
+                    <ul class="ri_e_t_choice_extra"></ul>
+
                 </div>
             </div>
 
@@ -482,7 +490,7 @@
                     </div>
                 </div>
                 <div class="ri_e_t_choice">
-                    <ul>
+                    <ul class="ri_e_t_choice_default">
                         <li data-code="twodays" class="twodays_li">
                             <div class="ri_e_t_choice_body">
                                 <strong><a href="#none">조식 및 파크 2일 이용권 패키지</a></strong>
@@ -514,6 +522,8 @@
                             </div>
                         </li>
                     </ul>
+                    <ul class="ri_e_t_choice_extra"></ul>
+
                 </div>
             </div>
 
@@ -582,7 +592,7 @@
                     </div>
                 </div>
                 <div class="ri_e_t_choice">
-                    <ul>
+                    <ul class="ri_e_t_choice_default">
                         <li data-code="twodays" class="twodays_li">
                             <div class="ri_e_t_choice_body">
                                 <strong><a href="#none">조식 및 파크 2일 이용권 패키지</a></strong>
@@ -614,6 +624,8 @@
                             </div>
                         </li>
                     </ul>
+                    <ul class="ri_e_t_choice_extra"></ul>
+
                 </div>
             </div>
         </div>
@@ -624,6 +636,9 @@
            $(".ri_e_t_choice strong a").click(function(){
             $(this).parents("li").find(".choice_slide").slideToggle();
            });
+           // 시작 세팅 -------
+           $(".ri_e_t_choice").hide();
+
            // 설명창 열기 --------------------------------------------
            $(".ri_e_t_exp_open").click(function(){
             $(this).siblings(".ri_e_t_e_charWrap")

@@ -11,7 +11,8 @@
         --dataCell-height: 50px;
         --dataTable-max-width: 500px;
         --cell-text-color: green;
-        --slide-btn-color: #ffcf00;;
+        --slide-btn-color: #ffcf00;
+        --bridge-cell-color: green;
       }
       /* rgb(255, 141, 121) */
       body {margin: 0px;padding: 0px;}
@@ -19,15 +20,38 @@
       ul {list-style: none;padding: 0px;margin: 0px;}
 
       /* ==================================== */
-     
-      .calenderWrap {
-        border: 2px solid black;
+      .calender {
+        display: flex;
+        justify-content: center;
+        position: relative;
+      }
+      .calenderWrap,
+      .calenderWrap_prev,
+      .calenderWrap_next {
         border-radius: 20px;
         box-sizing: border-box;
-        
+        background-color: white;        
         display: flex;
         flex-direction: column;
         align-items: center;
+        height:100%;
+        
+      }
+      .calenderWrap {
+        z-index: 10;
+        box-shadow: 3px 3px 9px #999;
+      }
+      .calenderWrap_next {
+        transform-origin: -10% top;
+        transform: scale(0.8,0.8);
+        filter: blur(1px) ;
+        box-shadow: 1px 1px 5px #bbb;
+      }
+      .calenderWrap_prev {
+        transform-origin: 110% top;
+        transform: scale(0.8,0.8);
+        filter: blur(1px) ;
+        box-shadow: 1px 1px 5px #bbb;
       }
       .dateTable {
         max-width: var(--dataTable-max-width);
@@ -44,14 +68,26 @@
         width: 100%;
         text-align: center;
       }
-      .yearMonth {
+      .calenderWrap .yearMonth {
         width: 100%;
         max-width: var(--dataTable-max-width);
         display: flex;
         justify-content: space-between;
         align-items: center;
         height: 100px;
+        padding: 0px 5%;
+        box-sizing: border-box;
       }
+      .calenderWrap_prev .yearMonth,
+      .calenderWrap_next .yearMonth {
+        width: 100%;
+        max-width: var(--dataTable-max-width);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+      }
+      
       .yearMonth > div {
         display: flex;
         align-items: center;
@@ -78,14 +114,14 @@
         width: calc(100% / 7);
         height: var(--dataCell-height);
         box-sizing: border-box;
-        margin: 2px 0px;
+        margin: 4px 0px;
 
         font-size: 20px;
       }
-      .dataCell.nonClickBox {
+      .nonClickBox {
         color: #bbb;
       }
-      .dataCell.clickBox {
+      .clickBox {
         color: green;
       }
       .gotoback,
@@ -98,11 +134,13 @@
         text-align: center;
       }
       /* -------------------- */
-      .checkin_active {
-        background-color: tomato;
+      .dataCell.checkin_active {
+        background-color: rgb(173, 3, 3);
         color: white;
         position: relative;
       }
+      
+      .bridgeCell::before,
       .checkin_active::before,
       .checkout_active::before {
         content: "";
@@ -115,6 +153,7 @@
         top: -12%;
         left: 20%;
       }
+      .bridgeCell::after,
       .checkin_active::after,
       .checkout_active::after {
         content: "";
@@ -127,31 +166,48 @@
         top: -12%;
         right: 20%;
       }
-      .checkout_active {
-        background-color: royalblue;
+      .dataCell.checkout_active {
+        background-color: rgb(0, 0, 180);
         color: white;
         position: relative;
       }
+      .bridgeCell {
+        position: relative;
+      }
       .select_0 {
-        background-color: yellow;
-        color: rgb(0, 0, 0);
+        background-color: rgba(255, 208, 0, 0.2);
+        color: var(--bridge-cell-color);
       }
       .select_1 {
-        background-color: green;
-        color: white;
+        background-color: rgba(0, 128, 0, 0.2);
+        color: var(--bridge-cell-color);
       }
       .select_2 {
-        background-color: purple;
-        color: white;
+        background-color: rgba(1, 1, 182, 0.2);
+        color: var(--bridge-cell-color);
       }
       .select_3 {
-        background-color: red;
-        color: white;
+        background-color: rgba(201, 2, 2, 0.2);
+        color: var(--bridge-cell-color);
       }
     </style>
   </head>
   <body>
     <div class="calender">
+      <div class="calenderWrap_prev">
+        <div class="yearMonth">
+          <div>
+            <span class="ym_text1"></span>
+            <span class="ym_text2">년</span>
+            <span class="ym_text1"></span>
+            <span class="ym_text2">월</span>
+          </div>
+        </div>
+        <div class="dateTable">
+          <div class="week"></div>
+          <div class="dates"></div>
+        </div>
+      </div>
       <div class="calenderWrap">
         <div class="yearMonth">
           <a href="#none" class="gotoback" style="background: var(--slide-btn-color) url('./img/arrow_back.png') no-repeat center/50%"></a>
@@ -168,226 +224,222 @@
           <div class="dates"></div>
         </div>
       </div>
+      <div class="calenderWrap_next">
+        <div class="yearMonth">
+          <div>
+            <span class="ym_text1"></span>
+            <span class="ym_text2">년</span>
+            <span class="ym_text1"></span>
+            <span class="ym_text2">월</span>
+          </div>
+        </div>
+        <div class="dateTable">
+          <div class="week"></div>
+          <div class="dates"></div>
+        </div>
+      </div>
     </div>
 
     
     <script>
       $(function () {
-        // 요일
-        const week = ["일", "월", "화", "수", "목", "금", "토"];
-        for (let i = 0; i < 7; i++) {
-          const newDay = $("<div></div>");
-          newDay.addClass("weekCell");
-          $(".week").append(newDay);
-          newDay.text(week[i]);
-        }
-
-        // 날짜
-        //================ load ======================
+        //================ common ======================
         const today = new Date();
         let selYear = today.getFullYear();
         let selMonth = today.getMonth(); // 실제 월은 +1 해야함.
         let selDate = today.getDate();
         let selDay = today.getDay();
+        const week = ["일", "월", "화", "수", "목", "금", "토"];
 
-    
-        calenderLoad();
         //================ function ==================
         function bridge() {
           const inValue = $(".checkin input").data("value")? JSON.parse($(".checkin input").data("value")) : 999999999;
           const outValue = $(".checkout input").data("value")? JSON.parse($(".checkout input").data("value")) : 0;
-          $(".calenderWrap .clickBox").removeClass(["select_0","select_1","select_2","select_3"])
-          $(".calenderWrap .clickBox").each(function(i){
+          $(".clickBox").removeClass(["select_0","select_1","select_2","select_3"])
+          $(".clickBox").each(function(i){
             const idValue = JSON.parse($(this).data("value"));
             if ( inValue < idValue && idValue < outValue ) {
-              $(this).addClass(`select_${idValue%4}`);
+              $(this)
+                .addClass([`select_${idValue%4}`, "bridgeCell"]);
             }
           });
         }
-        function calenderLoad() { //--------------------------------------------
-          let monthStart = new Date(selYear, selMonth, 1);
-          let monthEnd = new Date(selYear, selMonth + 1, 0);
-          $(".calenderWrap .ym_text1").eq(0).text(selYear);
-          $(".calenderWrap .ym_text1").eq(1).text(selMonth+1);
 
-
-
-          $(".dates").children().remove();
-          const i = monthStart.getDay() + monthEnd.getDate();
-
-          for (let j = 1; j <= i; j++) {
-           
-            const n = j - monthStart.getDay();
-            if (n > 0) {
-              if ( selYear == today.getFullYear() && selMonth == today.getMonth() && n < today.getDate() ) {
-                const nonClickBox = $("<div class='nonClickBox dataCell'></div>");
-                nonClickBox.text(n);
-                $(".dates").append(nonClickBox);
-              } else {
-                const clickBox = $("<a href='#none' class='clickBox dataCell'></a>");
-                clickBox.text(n);
-                clickBox.data(
-                  "value",
-                  `${selYear}${selMonth + 1 < 10 ?  "0" + (selMonth + 1) : selMonth + 1 }${n < 10 ? "0"+n : n}`
-                ).prop(
-                  "id",
-                  `${selYear}-${selMonth + 1 < 10 ? "0" + (selMonth + 1) : selMonth + 1 }-${n < 10 ? "0"+n : n}`
-                );
-                if ( clickBox.data("value") == $(".checkin input").data("value") ) {
-                  clickBox.addClass("checkin_active");
-                }
-                if (clickBox.data("value") == $(".checkout input").data("value")) {
-                  clickBox.addClass("checkout_active");
-                }
-                $(".calenderWrap .dates").append(clickBox);
-              }
-            } else {
-              const newDateBox = $("<div class='dataCell'></div>");
-              $(".calenderWrap .dates").append(newDateBox);
+        $.fn.extend({
+          week : function() {
+            for (let i = 0; i < 7; i++) {
+              const newDay = $("<div></div>");
+              newDay.addClass("weekCell");
+              $(this).find(".week").append(newDay);
+              newDay.text(week[i]);
             }
-            
-            // function rrrrr(n,m) {
-            //   if ( $(this).hasClass(`check${n}_active`)) {
-            //       $(`.check${m}_active`).removeClass(`check${m}_active`);
-            //       $(this)
-            //         .removeClass(`check${n}_active`)
-            //         .addClass(`check${m}_active`)
-            //       $(`.check${m} input`)
-            //         .val((i, v) => $(this).prop("id"))
-            //         .data( "value", $(this).data("value"))
-            //         .trigger("change");
-            //       const weekday = new Date($(`.check${m} input`).val()).getDay();
-            //       $(`.check${m} span`)
-            //         .text( `${selYear}년 ${selMonth + 1}월 ${$(`.check${m}_active`).text()}일 (${week[weekday]})` )
-            //         .toggleClass("on");
-            //       $(`.check${n} input`)
-            //         .val((i, v) => null)
-            //         .data( "value", "")
-            //         .trigger("change");
-            //       $(`.check${n} span`)
-            //         .text( "날짜 입력" );
-            //     } else if ( $(this).hasClass(`check${m}_active`)) {
-            //       $(this).removeClass(`check${m}_active`);
-            //       $(`.check${m} input`)
-            //         .val((i, v) => null)
-            //         .data( "value", "")
-            //         .trigger("change");
-            //       $(`.check${m} span`)
-            //         .text( "날짜 입력" )
-            //         .toggleClass("on");
-            //     } else {
-            //       $(`.check${m}_active`).removeClass(`check${m}_active`);
-            //       $(this).addClass(`check${m}_active`);
-            //       $(`.check${m} input`)
-            //         .val((i, v) => $(this).prop("id"))
-            //         .data( "value", $(this).data("value"))
-            //         .trigger("change");
-            //       const weekday = new Date($(`.check${m} input`).val()).getDay();
-            //       $(`.check${m} span`)
-            //         .text( `${selYear}년 ${selMonth + 1}월 ${$(`.check${m}_active`).text()}일 (${week[weekday]})` )
-            //         .toggleClass("on");
-            //     }
-            // }
-            // $(".clickBox").click(function(){
-            //   if ($(".checkin span").hasClass("on")) { 
-            //     rrrrr("out","in");
-            //   }
-            //   if ($(".checkout span").hasClass("on")) { 
-            //     rrrrr("in","out");
-            //   }
-            // })
+          },
+          calender: function(years,months){
+            if ( months < 0) {
+              years -= 1;
+              months = 11;
+            } else if (months > 11) {
+              years += 1;
+              months = 0;
+            }
+            let monthStart = new Date(years, months, 1);
+            let monthEnd = new Date(years, months + 1, 0);
+            $(this).find(".ym_text1").eq(0).text(years);
+            $(this).find(".ym_text1").eq(1).text(months+1);
 
-            $(".clickBox").click(function() {
-              if ($(".checkin span").hasClass("on")) {
-                if ( $(this).hasClass("checkout_active")) {
-                  $(".checkin_active").removeClass("checkin_active");
-                  $(this)
-                    .removeClass("checkout_active")
-                    .addClass("checkin_active")
-                  $(".checkin input")
-                    .val((i, v) => $(this).prop("id"))
-                    .data( "value", $(this).data("value"))
-                    .trigger("change");
-                  const weekday = new Date($(".checkin input").val()).getDay();
-                  $(".checkin span")
-                    .text( `${selYear}년 ${selMonth + 1}월 ${$(".checkin_active").text()}일 (${week[weekday]})` )
-                    .toggleClass("on");
-                  $(".checkout input")
-                    .val((i, v) => null)
-                    .data( "value", "")
-                    .trigger("change");
-                  $(".checkout span")
-                    .text( "날짜 입력" );
-                } else if ( $(this).hasClass("checkin_active")) {
-                  $(this).removeClass("checkin_active");
-                  $(".checkin input")
-                    .val((i, v) => null)
-                    .data( "value", "")
-                    .trigger("change");
-                  $(".checkin span")
-                    .text( "날짜 입력" )
-                    .toggleClass("on");
+            $(this).find(".dates").children().remove();
+            const i = monthStart.getDay() + monthEnd.getDate();
+
+            for (let j = 1; j <= i; j++) {
+            
+              const n = j - monthStart.getDay();
+              if (n > 0) {
+                if ( new Date(years, months, n) < today ) {
+                  const nonClickBox = $("<div class='nonClickBox dataCell'></div>");
+                  nonClickBox.text(n);
+                  $(this).find(".dates").append(nonClickBox);
                 } else {
-                  $(".checkin_active").removeClass("checkin_active");
-                  $(this).addClass("checkin_active");
-                  $(".checkin input")
-                    .val((i, v) => $(this).prop("id"))
-                    .data( "value", $(this).data("value"))
-                    .trigger("change");
-                  const weekday = new Date($(".checkin input").val()).getDay();
-                  $(".checkin span")
-                    .text( `${selYear}년 ${selMonth + 1}월 ${$(".checkin_active").text()}일 (${week[weekday]})` )
-                    .toggleClass("on");
+                  const clickBox = $("<a href='#none' class='clickBox dataCell'></a>");
+                  clickBox.text(n);
+                  clickBox.data(
+                    "value",
+                    `${years}${months + 1 < 10 ?  "0" + (months + 1) : months + 1 }${n < 10 ? "0"+n : n}`
+                  ).prop(
+                    "id",
+                    `${years}-${months + 1 < 10 ? "0" + (months + 1) : months + 1 }-${n < 10 ? "0"+n : n}`
+                  );
+                  if ( clickBox.data("value") == $(".checkin input").data("value") ) {
+                    clickBox.addClass("checkin_active");
+                  }
+                  if (clickBox.data("value") == $(".checkout input").data("value")) {
+                    clickBox.addClass("checkout_active");
+                  }
+                  $(this).find(".dates").append(clickBox);
                 }
+              } else {
+                const newDateBox = $("<div class='dataCell'></div>");
+                $(this).find(".dates").append(newDateBox);
+              } 
+            }
+            bridge();
+          }
+        });
+        // ========================== load =================================
+        $(".calenderWrap_prev").calender(selYear,selMonth-1);
+        $(".calenderWrap").calender(selYear,selMonth);
+        $(".calenderWrap_next").calender(selYear,selMonth+1);
+        $(".calenderWrap_prev").week();
+        $(".calenderWrap").week();
+        $(".calenderWrap_next").week();
+
+        
+        // ================================================================
+        $(document).delegate(".clickBox","click",function() {
+          if ($(".checkin span").hasClass("on")) {
+            if ( $(this).hasClass("checkout_active")) {
+              $(".checkin_active").removeClass("checkin_active");
+              $(this)
+                .removeClass("checkout_active")
+                .addClass("checkin_active")
+              $(".checkin input")
+                .val((i, v) => $(this).prop("id"))
+                .data( "value", $(this).data("value"))
+                .trigger("change");
+              const weekday = new Date($(".checkin input").val()).getDay();
+              $(".checkin span")
+                .text( `${selYear}년 ${selMonth + 1}월 ${$(".checkin_active").text()}일 (${week[weekday]})` )
+                .toggleClass("on");
+              $(".checkout input")
+                .val((i, v) => null)
+                .data( "value", "")
+                .trigger("change");
+              $(".checkout span")
+                .text( "날짜 입력" );
+            } else if ( $(this).hasClass("checkin_active")) {
+              $(this).removeClass("checkin_active");
+              $(".checkin input")
+                .val((i, v) => null)
+                .data( "value", "")
+                .trigger("change");
+              $(".checkin span")
+                .text( "날짜 입력" )
+                .toggleClass("on");
+            } else {
+              if ( +$(this).data("value") > +$(".checkout_active").data("value") ) {
+                $(".checkout_active").removeClass("checkout_active")
+                $(".checkout input")
+                .val((i, v) => null)
+                .data( "value", "")
+                .trigger("change");
+              $(".checkout span")
+                .text( "날짜 입력" );
               }
-              if ($(".checkout span").hasClass("on")) {
-                if ( $(this).hasClass("checkin_active")) {
-                  $(".checkout_active").removeClass("checkout_active");
-                  $(this)
-                    .removeClass("checkin_active")
-                    .addClass("checkout_active")
-                  $(".checkout input")
-                    .val((i, v) => $(this).prop("id"))
-                    .data( "value", $(this).data("value"))
-                    .trigger("change");
-                  const weekday = new Date($(".checkout input").val()).getDay();
-                  $(".checkout span")
-                    .text( `${selYear}년 ${selMonth + 1}월 ${$(".checkout_active").text()}일 (${week[weekday]})` )
-                    .toggleClass("on");
-                  $(".checkin input")
-                    .val((i, v) => null)
-                    .data( "value", "")
-                    .trigger("change");
-                  $(".checkin span")
-                    .text( "날짜 입력" );
-                } else if ( $(this).hasClass("checkout_active")) {
-                  $(this).removeClass("checkout_active");
-                  $(".checkout input")
-                    .val((i, v) => null)
-                    .data( "value", "")
-                    .trigger("change");
-                  $(".checkout span")
-                    .text( "날짜 입력" )
-                    .toggleClass("on");
-                } else {
-                  $(".checkout_active").removeClass("checkout_active");
-                  $(this).addClass("checkout_active");
-                  $(".checkout input")
-                    .val((i, v) => $(this).prop("id"))
-                    .data( "value", $(this).data("value"))
-                    .trigger("change");
-                  const weekday = new Date($(".checkout input").val()).getDay();
-                  $(".checkout span")
-                    .text( `${selYear}년 ${selMonth + 1}월 ${$(".checkout_active").text()}일 (${week[weekday]})` )
-                    .toggleClass("on");
-                }
+              $(".checkin_active").removeClass("checkin_active");
+              $(this).addClass("checkin_active");
+              $(".checkin input")
+                .val((i, v) => $(this).prop("id"))
+                .data( "value", $(this).data("value"))
+                .trigger("change");
+              const weekday = new Date($(".checkin input").val()).getDay();
+              $(".checkin span")
+                .text( `${selYear}년 ${selMonth + 1}월 ${$(".checkin_active").text()}일 (${week[weekday]})` )
+                .toggleClass("on");
+            }
+          }
+          if ($(".checkout span").hasClass("on")) {
+            if ( $(this).hasClass("checkin_active")) {
+              $(".checkout_active").removeClass("checkout_active");
+              $(this)
+                .removeClass("checkin_active")
+                .addClass("checkout_active")
+              $(".checkout input")
+                .val((i, v) => $(this).prop("id"))
+                .data( "value", $(this).data("value"))
+                .trigger("change");
+              const weekday = new Date($(".checkout input").val()).getDay();
+              $(".checkout span")
+                .text( `${selYear}년 ${selMonth + 1}월 ${$(".checkout_active").text()}일 (${week[weekday]})` )
+                .toggleClass("on");
+              $(".checkin input")
+                .val((i, v) => null)
+                .data( "value", "")
+                .trigger("change");
+              $(".checkin span")
+                .text( "날짜 입력" );
+            } else if ( $(this).hasClass("checkout_active")) {
+              $(this).removeClass("checkout_active");
+              $(".checkout input")
+                .val((i, v) => null)
+                .data( "value", "")
+                .trigger("change");
+              $(".checkout span")
+                .text( "날짜 입력" )
+                .toggleClass("on");
+            } else {
+              if ( +$(this).data("value") < +$(".checkin_active").data("value") ) {
+                $(".checkin_active").removeClass("checkin_active")
+                $(".checkin input")
+                .val((i, v) => null)
+                .data( "value", "")
+                .trigger("change");
+              $(".checkin span")
+                .text( "날짜 입력" );
               }
-              bridge();
-            });
-          
+              $(".checkout_active").removeClass("checkout_active");
+              $(this).addClass("checkout_active");
+              $(".checkout input")
+                .val((i, v) => $(this).prop("id"))
+                .data( "value", $(this).data("value"))
+                .trigger("change");
+              const weekday = new Date($(".checkout input").val()).getDay();
+              $(".checkout span")
+                .text( `${selYear}년 ${selMonth + 1}월 ${$(".checkout_active").text()}일 (${week[weekday]})` )
+                .toggleClass("on");
+            }
           }
           bridge();
-        } //----------------------------------------------------------------------
+        });
+      
         $(".gotonext").click(function () {
           if (selMonth + 1 >= 12) {
             selYear += 1;
@@ -395,10 +447,12 @@
           } else {
             selMonth += 1;
           }
-          calenderLoad();
+          $(".calenderWrap_prev").calender(selYear,selMonth-1);
+          $(".calenderWrap").calender(selYear,selMonth);
+          $(".calenderWrap_next").calender(selYear,selMonth+1);
         });
         $(".gotoback").click(function () {
-          if ( today.getFullYear() <= selYear && today.getMonth() < selMonth) {
+          if ( today <= new Date(selYear, selMonth, 0)) {
             if (selMonth + 1 <= 1) {
               selYear -= 1;
               selMonth = 11;
@@ -406,7 +460,9 @@
               selMonth -= 1;
             }
           }
-          calenderLoad();
+          $(".calenderWrap_prev").calender(selYear,selMonth-1);
+          $(".calenderWrap").calender(selYear,selMonth);
+          $(".calenderWrap_next").calender(selYear,selMonth+1);
         });
         // 체크인
         $(".checkin span").click(function () {

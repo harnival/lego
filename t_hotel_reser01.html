@@ -191,6 +191,9 @@
         .sr_c_active {
             background-color: yellow;
         }
+        .sr_c_disabled_active {
+            background-color: palevioletred;
+        }
         /* ================================================================ */
         .sr_numbers h4::after {
             content: "(객실 하나 당 최대 6인)";
@@ -456,14 +459,20 @@
             position: relative;
         }
         .ri_e_t_c_price {
-            display: block;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             width: 200px;
             height: 50%;
-            background-color: tomato;
+            background-color: orange;
 
             position: absolute;
-            top: 0px;
+            bottom: 0px;
             right: 0px;
+
+            font-size: 16px;
+            font-weight: 600;
+
         }
         /* ===================================================== */
         .hotel_basket {
@@ -563,8 +572,8 @@
                             <li><a href="#none" class="sr_c_birthday" data-code="birthday">#브릭스타틱 생일 패키지</a></li>
                             <li><a href="#none" class="sr_c_friends" data-code="friends">#NEW LEGO® 프렌즈 패키지</a></li>
                             <li><a href="#none" class="sr_c_twodays" data-code="twodays">#LEGOLAND® 파크 2일+호텔 패키지</a></li>
-                            <li><a href="#none" class="sr_c_disabled" data-code="disabled">#장애인 친화 객실</a></li>
                             <li><a href="#none" class="sr_c_default" data-code="default">#조식 패키지</a></li>
+                            <li><a href="#none" class="sr_c_disabled" data-code="disabled">#장애인 친화 객실</a></li>
                         </ul>
                     </div>
                     <div class="sr_searchBtn">
@@ -584,13 +593,14 @@
                     <div class="ri_load_ninja"></div>
                 </div>
             </div>
-            <div class="hotel_basket" hidden>
+            <div class="hotel_basket">
 
             </div>
         </div>
-        <script>
+        <script>          
             $(function(){
                 const oneday = 86400000;
+                const todayDate = new Date();
                 // common -------------------------------------------------
                 $(document)
                     .delegate(".decrease_btn",'click',function(e){
@@ -602,9 +612,10 @@
                     .delegate(".increase_btn",'click',function(e){
                         $(this).siblings("input").val((i,v) => +v+1);
                         $(this).siblings("input").trigger("change");
-                    });
-                    
-               
+                    });                
+                function comma(x) {
+                    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                }
                 // list load-----------------------------------------------
                 $(".ri_load_pirate").load("./t_hotel_reser01_p.html");
                 $(".ri_load_kingdom").load("./t_hotel_reser01_k.html");
@@ -615,6 +626,7 @@
                 if ( !localStorage.getItem("hotelBasket")) {
                     localStorage.setItem("hotelBasket", JSON.stringify([]));
                 }
+
                 // 객실 추가/삭제--------------------------------------------
                 $(".sr_addRoom").click(function(){
                     const trLength = $(".sr_n_list").length;
@@ -626,14 +638,14 @@
                     }
                 });
                 $(document).delegate(".sr_deleteRoom",'click',function(e){
-                        const trLength = $(".sr_n_list").length;
-                        if (trLength > 1) {
-                            $(this).parents("tr").remove();
-                            $(".sr_n_list th").each(function(i){
-                                $(this).text(`객실 ${i+1}`);
-                            });
-                        }
-                    });
+                    const trLength = $(".sr_n_list").length;
+                    if (trLength > 1) {
+                        $(this).parents("tr").remove();
+                        $(".sr_n_list th").each(function(i){
+                            $(this).text(`객실 ${i+1}`);
+                        });
+                    }
+                });
                 // 요금 계산 ------------------------------------------------
                 const priceArray_premium = [340000, 320000, 320000, 320000, 320000, 380000, 520000];
                 const priceArray_park = priceArray_premium.map(x => x+50000);
@@ -644,7 +656,7 @@
                 // data-theme [1 : pirate , 2 : kingdom , 3 : friends , 4 : ninja ]
                 // data-room [1 : premium , 2 : disabled , 3 : park , 4 : corner , 5 : suite , 6 : deluxe]
 
-                $(".sr_c_list").find("a").click(function(){
+                $(".sr_c_list a").not(".sr_c_disabled").click(function(){
                     $(".sr_c_input").trigger("change");
                     if ( $(this).hasClass("sr_c_active")) {
                         $(this).removeClass("sr_c_active");
@@ -663,21 +675,85 @@
                         });
                     }
                 });
+                $(".sr_c_disabled").click(function(){
+                    $(this).toggleClass("sr_c_disabled_active");
+                });
                 $(".shortReservation_wrap").on("submit",function(e){
+                    $(".ri_e_t_choice").show();
+                    $(".ri_e_t_choice_extra").children().remove();
+
                     e.preventDefault();
                     const d = new FormData(e.target);
                     const c = Object.fromEntries(d.entries());
-                    let basketArray = JSON.parse(localStorage.getItem("hotelBasket"));
-                    basketArray.push(JSON.stringify(c));
-                    localStorage.setItem("hotelBasket", JSON.stringify(basketArray));
                     
-                    const todayDate = new Date();
                     const adultNumber = c["sr_n_adult"];
                     const childNumber = c["sr_n_child"];
                     const toddlerNumber = c["sr_n_toddler"];
                     const checkinDate = new Date(c["checkin"]);
                     const checkoutDate = new Date(c["checkout"]);
                     
+                    // ================= default ======================
+
+                    $(".ri_e_t_choice_default").each(function(){
+                        if ( $(".sr_c_active").length == 0 || $(".sr_c_default").hasClass("sr_c_active")) {
+                            const $par = $(this).parents(".ri_e_t_box");
+                            const t = $par.data("theme");
+                            const r = $par.data("room");
+                            let m = 0;
+                            for ( let j = checkinDate; j < checkoutDate; j += oneday) {
+                                const d = new Date(j).getDay();
+                                m += A1[r][d];
+                            }
+                            $(this).children(".default_li")
+                                .show()
+                                .find(".ri_e_t_c_price")
+                                    .data("price",m)
+                                    .text("￦" + comma(m));
+                            $(this).children(".defaultAnnual_li")
+                                .show()
+                                .find(".ri_e_t_c_price")
+                                    .data("price",m*0.9)
+                                    .text("￦" + comma(m*0.9));
+                        } else {
+                            $(".default_li, .defaultAnnual_li").hide();
+                        }
+                    });
+                    // 장애인 친화 객실 -----------
+                    
+                    if ( $(".sr_c_disabled").hasClass("sr_c_disabled_active")) {
+                        $(".ri_e_t_box").each(function(){
+                            if($(this).data("room") == 2) {
+                                $(this).show();
+                            } else {
+                                $(this).hide()
+                            }
+                        })
+                    } else {
+                        $("ri_e_t_box").show();
+                    }
+                    
+                    //1. 파크 2일 이용권 --------------------------------------
+                    $(".twodays_li").each(function(){
+                        if ( $(".sr_c_active").length == 0 || $(".sr_c_twodays").hasClass("sr_c_active")) {
+                            if ( checkoutDate - checkinDate == oneday) {                        
+                                    $(this).show();
+                                    const q = checkinDate.getDay();
+                                    const w = checkoutDate.getDay();
+                                    const ticket = adultNumber * 60000 + childNumber * 50000;
+                                    $(".twodays_li").each(function(){
+                                        const par = $(this).parents(".ri_e_t_box").data("room");
+                                        $(this).find(".ri_e_t_c_price")
+                                            .data("price", A1[par][q] + ticket )
+                                            .text( "￦" + comma(A1[par][q] + ticket) );
+                                    });
+                            } else {
+                                $(this).hide();
+                            }
+                        } else {
+                            $(this).hide();
+                        }
+                    });
+                    // =================== 새로 제작 ====================
                     const originLi = $(`
                         <li>
                             <div class="ri_e_t_choice_body">
@@ -690,92 +766,185 @@
                             </div>
                         </li>                        
                     `);
-                    //1. 파크 2일 이용권 -------------------------------------- 
-                    $(".twodays_li").each(function(){
-                        if ( checkoutDate - checkinDate == oneday) {                        
-                                $(this).show();
-                                const q = checkinDate.getDay();
-                                const w = checkoutDate.getDay();
-                                const ticket = adultNumber * 60000 + childNumber * 50000;
-                                $(".twodays_li").each(function(){
-                                    const par = $(this).parents(".ri_e_t_box").data("room");
-                                    $(this).find(".ri_e_t_c_price").text( A1[par][q] + ticket );
-                                });
-                        } else {
-                            $(this).hide();
-                        }
-                    });
+                     
+                    
                     $(".ri_e_t_choice_extra").each(function(){
-                        //2. 얼리버드
                         const r = $(this).parents(".ri_e_t_box").data("room");
                         const t = $(this).parents(".ri_e_t_box").data("theme");
-                        console.log( 1 == (1||2) && 3 == (2||3))
-                        if ( checkinDate - todayDate > oneday*21 && 0<checkinDate.getDay() && checkinDate.getDay()<4 && 0<checkoutDate.getDay() && checkoutDate.getDay()<4) {
-                            if ( todayDate < new Date(2023,6,28) && checkoutDate < new Date(2023,7,19)) {
-                                if ( r == (1||3) &&  t != 3) {
-                                    let m = 0;
-                                    for ( let j = checkinDate; j < checkoutDate; j += oneday) {
-                                        const d = new Date(j).getDay();
-                                        m += A1[r][d];
-                                    }
-                                    const $earlyLi = originLi.clone(true);
-                                    $earlyLi
-                                        .data("code","early")
-                                        .addClass("early_li")
-                                        .appendTo($(this))
-                                    $earlyLi.find("strong a").text("얼리버드 조식 패키지")
-                                    $earlyLi.find(".ri_e_t_c_price").text(m * 0.8);
+                        //2. 얼리버드
 
-                                    
-                                    const $earlyAnnualLi = originLi.clone(true);
-                                    $earlyAnnualLi
-                                        .data("code","early")
-                                        .addClass("earlyAnnual_li")
-                                        .data("annual",true)
-                                        .appendTo($(this))
-                                    $earlyAnnualLi.find("strong a").text("[연간회원권 할인]얼리버드 조식 패키지");
-                                    $earlyAnnualLi.find(".ri_e_t_c_price").text(m * 0.8 * 0.9);
-
-                                    if (  checkoutDate - checkinDate == oneday ) {
-                                        const ticket = adultNumber * 60000 + childNumber * 50000;
-                                        const $earlyTwoLi = originLi.clone(true);
-                                        $earlyTwoLi
+                        if ( $(".sr_c_active").length == 0 || $(".sr_c_early").hasClass("sr_c_active")) {
+                            if ( checkinDate - todayDate > oneday*21 && 0<checkinDate.getDay() && checkinDate.getDay()<4 && 0<checkoutDate.getDay() && checkoutDate.getDay()<4) {
+                                if ( todayDate < new Date(2023,5,28) && checkoutDate < new Date(2023,6,19)) {
+                                    if ( (r == 1 || r == 3) &&  t != 3) {
+                                        let m = 0;
+                                        for ( let j = checkinDate; j < checkoutDate; j += oneday) {
+                                            const d = new Date(j).getDay();
+                                            m += A1[r][d];
+                                        }
+                                        const $earlyLi = originLi.clone(true);
+                                        $earlyLi
                                             .data("code","early")
-                                            .appendTo($(this));
-                                        $earlyTwoLi.find("strong a").text("얼리버드 파크 2일 이용권 패키지");
-                                        $earlyTwoLi.find(".ri_e_t_c_price").text(m * 0.8 + ticket);
-                                    }
-                                }  
+                                            .addClass("early_li")
+                                            .appendTo($(this))
+                                        $earlyLi.find("strong a").text("얼리버드 조식 패키지")
+                                        $earlyLi.find(".ri_e_t_c_price")
+                                            .data("price", m*0.8)
+                                            .text("￦" + comma(m*0.8));
+    
+                                        
+                                        const $earlyAnnualLi = originLi.clone(true);
+                                        $earlyAnnualLi
+                                            .data("code","early")
+                                            .addClass("earlyAnnual_li")
+                                            .data("annual",true)
+                                            .appendTo($(this))
+                                        $earlyAnnualLi.find("strong a").text("[연간회원권 할인]얼리버드 조식 패키지");
+                                        $earlyAnnualLi.find(".ri_e_t_c_price")
+                                            .data("price", m*0.8*0.9)
+                                            .text("￦" + comma(m*0.8*0.9));
+    
+                                        if (  checkoutDate - checkinDate == oneday ) {
+                                            const ticket = adultNumber * 60000 + childNumber * 50000;
+                                            const $earlyTwoLi = originLi.clone(true);
+                                            $earlyTwoLi
+                                                .data("code","early")
+                                                .addClass("earlyTwo_li")
+                                                .appendTo($(this));
+                                            $earlyTwoLi.find("strong a").text("얼리버드 파크 2일 이용권 패키지");
+                                            $earlyTwoLi.find(".ri_e_t_c_price")
+                                                .data("price", m*0.8 + ticket)
+                                                .text("￦" + comma(m * 0.8 + ticket));
+                                        }
+                                    }  
+                                }
                             }
+                            
+                        } else {
+                            $(".early_li, .earlyAnnual_li, .earlyTwo_li").remove();
                         }
-                        //3. 어썸초이스
-                        if ( checkoutDate - checkinDate >= oneday*2) {
-                            if (checkoutDate < new Date(2023,12,31)) {
-                               
+
+                        //3. 어썸초이스 - 프리미엄 only 파크뷰는 연간회원권만 , 프렌즈 x
+                        if ( $(".sr_c_active").length == 0 || $(".sr_c_awesome").hasClass("sr_c_active")) {
+                            if ( checkoutDate - checkinDate >= oneday*2) {
+                                if (checkoutDate < new Date(2023,11,31)) {
+                                    if ( t != 3 && t != 2 ) {
+                                        let m = 0;
+                                        for ( let j = checkinDate; j < checkoutDate; j += oneday) {
+                                            const d = new Date(j).getDay();
+                                            m += A1[r][d];
+                                        }
+                                        if( r == 1 ) {
+                                           const $awesomeLi = originLi.clone(true);
+                                           $awesomeLi
+                                                .data("code", "awesome")
+                                                .addClass("awesome_li")
+                                                .appendTo($(this));
+                                            $awesomeLi.find("strong a").text("어썸 초이스");
+                                            $awesomeLi.find(".ri_e_t_c_price")
+                                                .data("price",m*0.95)
+                                                .text("￦" + comma(m*0.95));
+        
+                                           const $awesomeAnnualLi = originLi.clone(true);
+                                           $awesomeAnnualLi
+                                                .data("code", "awesome")
+                                                .data("annual",true)
+                                                .addClass("awesomeAnnual_li")
+                                                .appendTo($(this));
+                                            $awesomeAnnualLi.find("strong a").text("[연간회원권 할인]어썸 초이스");
+                                            $awesomeAnnualLi.find(".ri_e_t_c_price")
+                                                .data("price", m*0.85)
+                                                .text("￦" + comma(m*0.85));
+                                        }
+                                        if ( r == 3 ) {
+                                            const $awesomeAnnualLi = originLi.clone(true);
+                                            $awesomeAnnualLi
+                                                 .data("code", "awesome")
+                                                 .data("annual",true)
+                                                 .addClass("awesomeAnnual_li")
+                                                 .appendTo($(this));
+                                             $awesomeAnnualLi.find("strong a").text("[연간회원권 할인]어썸 초이스");
+                                             $awesomeAnnualLi.find(".ri_e_t_c_price")
+                                                .data("price", m * 0.85)
+                                                .text("￦" + comma(m*0.85));
+                                        }
+                                    }
+    
+                                }
                             }
+                           
+                        } else {
+                            $(".awesome_li, .awesomeAnnual_li").remove();
                         }
                         //4. 프렌즈 이벤트
-                        if ( checkoutDate < new Date(2023,6,6)) {
-                            
+                        if ($(".sr_c_friends").hasClass("sr_c_active")) {
+                            $(".roomInfo_wrap > div").not(".ri_load_friends").hide();
+                            $(".ri_load_friends").show();
+                        } else {
+                            $(".roominfo_wrap > div").show();
+                        }
+                        if ( t == 3 ) {
+                            const $sib = $(this).siblings(".ri_e_t_choice_fixed");
+                            if ( checkoutDate < new Date(2023,5,6)) {
+                                $sib.children("li").eq(0)
+                                    .find("strong a").text("[NEW LEGO® 프렌즈 패키지]조식 및 파크 2일 이용권 패키지")
+                                $sib.children("li").eq(1)
+                                    .find("strong a").text("[NEW LEGO® 프렌즈 패키지]조식 패키지")
+                                $sib.children("li").eq(2)
+                                    .find("strong a").text("[NEW LEGO® 프렌즈 패키지] 연간회원권 할인 - 조식 패키지")
+                            }
                         }
                         //5. 브릭스타틱 생일 이벤트
-                        if ( checkoutDate - checkinDate == oneday) {                        
-                            
+                        if ( $(".sr_c_active").length == 0 || $(".sr_c_birthday").hasClass("sr_c_active")) {
+                            if ( (r == 1 || r == 3) && (t != 3)) {
+                                if ( checkoutDate - checkinDate == oneday) {                        
+                                    const $birthdayLi = originLi.clone(true);
+                                    $birthdayLi
+                                        .data("code", "birthday")
+                                        .addClass("birthday_li")
+                                        .appendTo($(this));
+                                    $birthdayLi.find("strong a").text("레고랜드® 브릭타스틱 생일 패키지");
+                                    $birthdayLi.find(".ri_e_t_c_price").text("￦" + comma(m+100000));
+                                   
+                                    const $birthdayAnnualLi = originLi.clone(true);
+                                    $birthdayAnnualLi
+                                        .data("code", "birthday")
+                                        .data("annual",true)
+                                        .addClass("birthdayAnnual_li")
+                                        .appendTo($(this));
+                                    $birthdayAnnualLi.find("strong a").text("[연간회원권 할인]레고랜드® 브릭타스틱 생일 패키지");
+                                    $birthdayAnnualLi.find(".ri_e_t_c_price").text("￦" + comma(m+90000));
+                                }
+                            }
+                        
+                        } else {
+                            $(".birthday_li, .birthdayAnnual_li").remove();
                         }
-                    });
-                     //----------------------------------------------------
-                    // ---------------- 요금 계산 -----------------------------
-                    $(".ri_e_t_choice li").each(function(i){
+                    });                    
+                });
+
+                // ========= 제출
+                $(".ri_e_t_c_price").each(function(){
+                    const g = $(this).siblings("strong").find("a").text();
+                    $(this).data("title",g);
+
+                    $(this).click(function(){
+                        $(".shortReservation_wrap")
+                            .trigger("submit")
+                            .submit(function(e){
+                                const d = new FormData(e.target);
+                                const c = Object.fromEntries(d.entries());
+                                let basketArray = JSON.parse(localStorage.getItem("hotelBasket"));
+                                    basketArray.push(JSON.stringify(c));
+                                    localStorage.setItem("hotelBasket", JSON.stringify(basketArray));
+                                
+                                
+                            });
 
                     })
-
-
-                });
-                    
-                               
-                
-                
+                })
             });
+        
         </script>
     </main>
 </body>
