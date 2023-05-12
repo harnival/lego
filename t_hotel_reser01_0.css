@@ -1,0 +1,107 @@
+/* slide Up 형식 */
+body .shortReservation_wrap_up {
+    max-width: 100%;
+    height: 20vh;
+    border-radius: 0px;
+    display: flex;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    padding: 20px;
+
+    z-index: 9999;
+}
+
+body .sr_date_calender.uup {
+    height: fit-content;
+}
+body .shortReservation_wrap_up .sr_numbers .table.uup,
+body .shortReservation_wrap_up .sr_numbers .tbody.uup {
+    height: fit-content;
+}
+body .shortReservation_wrap_up .sr_numbers .tf.uup{
+    display: block;
+}
+/* ----------------------- ---------------------- 1. date */
+body .shortReservation_wrap_up .sr_date {
+    width: 100%;
+    min-height: 100%;
+    margin-bottom: 0px;
+    border: none;
+    padding: 30px 1% 0px;
+}
+body .shortReservation_wrap_up .sr_date h4 {
+    display: none;
+}
+/* ----------------------------------------------- 2. numbers */
+body .shortReservation_wrap_up .sr_numbers {
+    width: 100%;
+    padding: 30px 1% 0px;
+    margin-bottom: 0px;
+    border: none;
+    border-right: 2px solid black;
+    border-left: 2px solid black;
+}
+body .shortReservation_wrap_up .sr_numbers h4 {
+    display: none;
+}
+body .shortReservation_wrap_up .sr_numbers .table {
+    width: 100%;
+    height: 100px;
+}
+body .shortReservation_wrap_up .sr_numbers .tbody {
+    display: block;
+    overflow: hidden;
+    height: calc( 100% - 100px );
+}
+.shortReservation_wrap_up .sr_numbers .tfoot {
+    width: 100%;
+    height: 50px;
+    visibility: visible;
+    font-size: initial;
+}
+.shortReservation_wrap_up .sr_addRoom {
+    display: none;
+}
+.shortReservation_wrap_up .sr_numbers .tf {
+    display: none;
+}
+/* ----------------------------------------------- 3. code */
+body .shortReservation_wrap_up .sr_code {
+    height: 100%;
+    padding: 30px 1% 0px;
+    margin-bottom: 0px;
+    border: none;
+}
+body .shortReservation_wrap_up .sr_code ul {
+    display: none;
+    gap: 5px;
+    padding: 0px;
+    justify-content: center;
+}
+body .shortReservation_wrap_up .sr_c_list li {
+    width: 45%;
+}
+body .shortReservation_wrap_up .sr_c_title {
+    width: fit-content;
+    position: static;    
+    font-size: 110%;
+}
+body .shortReservation_wrap_up #sr_c_input {
+    width: 200px;
+    padding: 10px 3px;
+    font-size: 90%;
+}
+/* ----------------------------------------------- 4. button */
+.shortReservation_wrap_up .sr_searchBtn {
+    width: 10%;
+}
+.shortReservation_wrap_up .sr_open {
+    display: block;
+    position: absolute;
+    bottom: 0px;
+    left: 40%;
+
+    width: 20%;
+    background-color: tomato;
+}

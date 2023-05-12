@@ -8,7 +8,7 @@
     <script src="./jquery.js"></script>
     <style>
         .ri_elem_p_info {
-            background: url("img/hotel_img/pirate_theme2.png") no-repeat center left/cover;
+            background: url("img/hotel_img/pirate_theme2.png") no-repeat top 40% left/cover scroll;
         }
         .choice_slide {
             height: 500px;
@@ -19,12 +19,15 @@
 <body>
     <div class="ri_elem ri_elem_pirates">
         <div class="ri_elem_info ri_elem_p_info">
-            <h4>파이럿츠 테마 객실</h4>
-            <div>
-                어이~ 꼬맹이 친구! 어서 오게! 나, 빨간 수염 선장의 아지트에 온 것을 환영한다! 여기 전체는 해적 침구, 커튼, 벽지로 장식되어 있다고! 아주 멋지지? LEGO® 앵무새인 폴리는 자네가 자는 모습을 지켜보는 것을 좋아하니 조심하게나! 껄껄껄!
-                즐거운 모험을 한 후 취하는 달콤한 휴식에는 여기만한 곳이 없지! 아무렴!
+            <div class="ri_elem_info_wrap">
+                <h4>파이러츠 테마 객실</h4>
+                <div>
+                    어이~ 꼬맹이 친구! 어서 오게! 나, 빨간 수염 선장의 아지트에 온 것을 환영한다!
+                    <br/>여기 전체는 해적 침구, 커튼, 벽지로 장식되어 있다고! 아주 멋지지?
+                    <br/>LEGO® 앵무새인 폴리는 자네가 자는 모습을 지켜보는 것을 좋아하니 조심하게나! 껄껄껄!
+                    <br/>즐거운 모험을 한 후 취하는 달콤한 휴식에는 여기만한 곳이 없지! 아무렴!
+                </div>
             </div>
-            
         </div>
         <div class="ri_elem_tag_page">
             <div class="ri_e_t_box" data-theme="1" data-room="1">
@@ -563,7 +566,8 @@
                     $(this).find(".ri_e_t_e_char").fadeOut(200);
                 }
             });
-
+            
+            
         })
     </script>
 </body>
