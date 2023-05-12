@@ -21,8 +21,15 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
         :root {
+            /* length */
             --main-width: 1350px;
             --roomInfo-slide-unit: 15vw;
+            --inputBox-span-min-width: 200px;
+            --inputBox-span-border-color: rgba(4, 116, 0, 0.2);
+            --sr-title-top: -15px;
+            --sr-title-left: 3%;
+            --sr-title-font-size:16px;
+            /* color */
             --inputBox-bg: white;
             --main-bg-color: rgba(0, 128, 0, 0.671);
             --main-yellow-color: #ffcf00;
@@ -46,31 +53,80 @@
             background-color: var(--main-bg-color);
         }
         .mainWrap {
-            max-width: var(--main-width);
-            margin: auto;
+            width: 100vw;
         }
         .shortReservation {
-            background-color: transparent;
+            width: 100%;
+            margin: auto;
+            background-color: rgba(255,255,255,0.7);
+            display: flex;
+            justify-content: center;
         }
         .shortReservation_wrap {
-            width: 90%;
+            max-width: var(--main-width);
+            width: 100%;
+            max-height: 100vh;
+            padding: 2%;
+            box-sizing: border-box;
             margin: auto;
-            border: 2px solid #aaa;
             border-radius: 20px;
             background-color: white;
-        }
 
-        .sr_numbers li {
-            display: flex;
+            transition: 1s ease;
         }
+            body .shortReservation_wrap_up {
+                max-width: 100%;
+                max-height: 20vh;
+                border-radius: 0px;
+                display: flex;
+                justify-content: space-between;
+            }
+
+        .sr_date {
+            border: 2px solid black;
+            box-sizing: border-box;
+            padding: 1%;
+            margin-bottom: 20px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+            body .shortReservation_wrap_up .sr_date {
+                width: 30%;
+                margin-bottom: 0px;
+            }
+        .sr_date h4 {
+            position: absolute;
+            top: var(--sr-title-top);
+            left: var(--sr-title-left);
+            font-size: var(--sr-title-font-size);
+            padding: 0px 3px;
+            background-color: var(--inputBox-bg);
+        }
+        .sr_date_calender {
+            width: 100%;
+            display: none;
+            
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.562);
+            backdrop-filter: blur(5px);
+
+            border: 2px solid black;
+        }
+        body .shortReservation_wrap_up .sr_date_calender {
+            width: 100vw;
+        }
+        
         
         /* inputbox ----------------- */
         .inputBox {
             display: flex;
-            width: 500px;
-            height: 100px;
             gap: 10px;
             align-items: center;
+            width: 90%;
+            height: 100px;
+            padding: 12px 0px;
             background-color: var(--inputBox-bg);
         }
         .inputBox .checkin,
@@ -84,28 +140,38 @@
         .inputBox span {
             display: block;
             width: 100%;
-            padding: 10px 0px 10px 20px;
-            border: 2px solid black;
+            min-width: 200px;
+            padding: 10px 0px 10px 10%;
+            border-style: solid;
+            border-width: 2px;
             border-radius: 20px;
             box-sizing: border-box;
             font-size: 110%;
+            transition: .5s ease;
+            cursor: pointer;
+        }
+        .inputBox span:hover {
+            border-color: var(--inputBox-span-border-color);
+            color: #999;
+        }
+        .on {
+            border-color: transparent;
+            background-color: var(--inputBox-span-border-color);
         }
         .inputBox label {
             position: absolute;
-            top: -13px;
+            top: -30px;
             left: 20px;
-            font-size: 90%;
+            font-size: 100%;
             color: black;
             padding: 0px 5px;
-            background-color: var(--inputBox-bg);
         }
         .inputBox > img {
             display: block;
             width: 30px;
         }
-        .on {
-            background-color: wheat;
-        }
+        
+        
         /* number check ---------------------- */
         .numberCheck {
             position: relative;
@@ -167,26 +233,42 @@
         }
 
         /* ================================================================ */
+        .sr_code {
+            border: 2px solid black;
+            position: relative;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .sr_code .sr_c_title {
+            display: flex;
+            position: absolute;
+            top: var(--sr-title-top);
+            left: var(--sr-title-left);
+            background-color: var(--inputBox-bg);
+            padding: 0px 3px;
+        }
         .sr_code ul {
             display: flex;
+            flex-wrap: wrap;
             gap: 20px;
+            padding-left: 10%;
+
         }
-        .sr_code li a {
+        .sr_c_list a {
             display: flex;
             justify-content: center;
             align-items: center;
             border: 2px solid gray;
             border-radius: 30px;
-            padding: 10px 5px;
+            padding: 8px 18px;
             box-sizing: border-box;
         }
-        .sr_code > div {
-            display: flex;
-
-        }
+        
         #sr_c_input {
-            border: none;
-            padding: 5px;
+            border: 2px solid black;
+            margin-left: 10px;
+            padding: 3px;
+            text-align: center;
         }
         .sr_c_active {
             background-color: yellow;
@@ -195,19 +277,40 @@
             background-color: palevioletred;
         }
         /* ================================================================ */
+        .sr_numbers {
+            border: 2px solid black;
+            position: relative;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .sr_numbers h4 {
+            position: absolute;
+            top: var(--sr-title-top);
+            left: var(--sr-title-left);
+            font-size: var(--sr-title-font-size);
+            padding: 0px 3px;
+            background-color: var(--inputBox-bg);
+        }
         .sr_numbers h4::after {
             content: "(객실 하나 당 최대 6인)";
             color: #777;
             font-size: 80%;
             margin-left: 10px;
         }
-        .sr_n_l_head {
-            text-align: center;
-            vertical-align: top;
+        .sr_numbers table {
+            border-collapse: collapse;
+            width: 70%;
+            margin-bottom: 10px;
         }
-        .sr_numbers td {
-            width: 150px;
-            /* border: 1px solid black; */
+        .sr_numbers tbody th {
+            width: 10%;
+        }
+        .sr_numbers tr td:nth-of-type(4) {
+            width: 30px;
+        }
+        .sr_numbers tbody td:not(:nth-of-type(4)) {
+            width: 30%;
+            height: 50px;
         }
         .sr_numbers thead {
             height: 60px;
@@ -216,6 +319,11 @@
             font-size: 13px;
             color: #777;
         }
+        .sr_n_l_head {
+            text-align: center;
+            vertical-align: top;
+        }
+        
         .sr_deleteRoom {
             display: block;
             width: 30px;
@@ -223,20 +331,42 @@
             font-size: 0px;
             background: rgb(248, 175, 162) url("img/close_button.png") no-repeat center/20px;
             border-radius: 50%;
+            margin-left: 20px;
+            box-sizing: border-box;
         }
         .sr_addRoom {
             display: block;
             width: 30px;
             height: 30px;
+            margin-left: 15px;
             font-size: 0px;
             background: rgb(143, 171, 255) url("img/plus.png") no-repeat center/20px;
             border-radius: 50%;
         }
+        /* ----------------------------- */
+        .sr_searchBtn button {
+            border: 2px solid black;
+            width: 100px;
+            height: 50px;
+            padding-left: 10px;
+            background: url("img/search.svg") no-repeat left 10px center/ 30px;
+            font-size: var(--sr-title-font-size);
+            font-weight: bold;
+            font-family: 'Noto Sans KR';
+            cursor: pointer;
+        }
+        .sr_searchBtn button:active {
+            background-color: tomato;
+        }
         /* ================================================================ */
         .roomInfo {
             background-color: transparent;
+            width: 100%;
         }
         .roomInfo_wrap {
+            max-width: var(--main-width);
+            width: 100%;
+            margin: auto;
             padding: 20px;            
         }
         .roomInfo_wrap > div {
@@ -562,7 +692,7 @@
                         <a href="#none" class="sr_addRoom">객실 추가</a>
                     </div>
                     <div class="sr_code">
-                        <div>
+                        <div class="sr_c_title">
                             <h4>할인코드</h4>
                             <input type="text" name="dc_code" id="sr_c_input" placeholder="할인코드 직접 입력">
                         </div>
@@ -578,11 +708,12 @@
                     </div>
                     <div class="sr_searchBtn">
                         <button type="submit">검색</button>
+                        <a href="#none">UP</a>
                     </div>
                 </form>
             </div>
             <div class="promotionSlide">
-
+                <div class="promotionSlide_wrap"></div>
             </div>
             <div class="roomInfo">
                 <div class="roomInfo_wrap">
@@ -593,7 +724,7 @@
                     <div class="ri_load_ninja"></div>
                 </div>
             </div>
-            <div class="hotel_basket">
+            <div class="hotel_basket" hidden>
 
             </div>
         </div>
@@ -626,7 +757,10 @@
                 if ( !localStorage.getItem("hotelBasket")) {
                     localStorage.setItem("hotelBasket", JSON.stringify([]));
                 }
-
+                // shortReservation slide ----------------------------------
+                $(".sr_searchBtn a").click(function(){
+                    $(".shortReservation_wrap").toggleClass("shortReservation_wrap_up");
+                })
                 // 객실 추가/삭제--------------------------------------------
                 $(".sr_addRoom").click(function(){
                     const trLength = $(".sr_n_list").length;
@@ -655,15 +789,16 @@
                 const A1 = [ [],priceArray_premium, priceArray_premium, priceArray_park, priceArray_corner, priceArray_suite, priceArray_deluxe];
                 // data-theme [1 : pirate , 2 : kingdom , 3 : friends , 4 : ninja ]
                 // data-room [1 : premium , 2 : disabled , 3 : park , 4 : corner , 5 : suite , 6 : deluxe]
-
+                
                 $(".sr_c_list a").not(".sr_c_disabled").click(function(){
-                    $(".sr_c_input").trigger("change");
                     if ( $(this).hasClass("sr_c_active")) {
                         $(this).removeClass("sr_c_active");
                         $(".ri_e_t_choice li").show();
+                        $("#sr_c_input").val((i,v) => "");
                     } else {
                         $(this).addClass("sr_c_active");
                         $(".sr_c_list").find("a").not($(this)).removeClass("sr_c_active");
+                        $("#sr_c_input").val((i,v) => $(this).data("code"));
 
                         const q = $(this).data("code");
                         $(".ri_e_t_choice li").each(function(){
@@ -675,10 +810,22 @@
                         });
                     }
                 });
+                $("#sr_c_input").change(function(){
+                    const q = $(this).val();
+                    $(".sr_c_list a").each(function(i){
+                        if($(this).data("code")==q) {
+                            $(this).addClass("sr_c_active");
+                        } else {
+                            $(this).removeClass("sr_c_active");
+                        }
+                    })
+                })
+
                 $(".sr_c_disabled").click(function(){
                     $(this).toggleClass("sr_c_disabled_active");
                 });
-                $(".shortReservation_wrap").on("submit",function(e){
+                
+                $(".shortReservation_wrap").on("submit",function(e){ //===================================
                     $(".ri_e_t_choice").show();
                     $(".ri_e_t_choice_extra").children().remove();
 
