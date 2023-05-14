@@ -116,7 +116,8 @@
 }
 
 .shortReservation_wrap_up .tbody_add {
-    display: none;
+    overflow: hidden;
+    transition: .5s ease;
 }
 .shortReservation_wrap_up .changeDelBtn {
     display: none;
