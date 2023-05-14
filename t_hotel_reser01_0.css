@@ -1,40 +1,76 @@
 /* slide Up 형식 */
 :root {
     --wrap-max-width: 1350px;
-    --wrap-up-height2 : 16vh;
+    --wrap-up-height2 : 12vh;
     --wrap-up-min-height2 : 120px;
+}
+.shortReservation {
+    width: 100%;
+    height: var(--wrap-up-height);
+    min-height: var(--wrap-up-min-height);
+    background-color: rgba(255,255,255,0.5);
+    display: flex;
+    justify-content: center;
 }
 .shortReservation_wrap_up {
     width: 100%;
     max-width: var(--wrap-max-width);
-    height: var(--wrap-up-height2);
-    min-height: var(--wrap-up-min-height2);
-    margin: auto;
+    height: var(--wrap-up-height);
+    min-height: var(--wrap-up-min-height);
     display: flex;
     position: fixed;
     top: 0px;
-    z-index: 9999;
     background-color: white;
+    z-index: 9999;
+    
+    transition: .5s ease;
 }
+.shortReservation_wrap_up .sr_date h4,
+.shortReservation_wrap_up .sr_numbers h4 {
+    display: none;
+}
+/* slide down 시 */
 .shortReservation_wrap_up.uup {
     height: 620px;
+    background-color: rgba(255,255,255,0.8);
+    backdrop-filter: blur(10px);
 }
-.shortReservation_wrap_up .sr_numbers .table.uup {
-    height: 100%;
+.shortReservation_wrap_up.uup .sr_numbers .tfoot_wrap{
+    opacity: 0;
 }
-.shortReservation_wrap_up .sr_numbers .tfoot_wrap.uup {
-    display: none;
+.shortReservation_wrap_up.uup .sr_numbers .tbody {
+    padding-top: 40px;
+}
+.shortReservation_wrap_up.uup .sr_numbers,
+.shortReservation_wrap_up.uup .sr_date,
+.shortReservation_wrap_up.uup .sr_codeSearch {
+    margin-top: 30px;
 }
 /* ----------------------- ---------------------- 1. date */
 .shortReservation_wrap_up .sr_date {
-    width: 30%;
+    width: 35%;
     overflow: hidden;
+    position: relative;
+    padding: 0px 5px;
+    transition: .5s ease;
 }
-.shortReservation_wrap_up .sr_date h4 {
-    display: none;
+.shortReservation_wrap_up .sr_date::after {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(to bottom,transparent 10%,black,transparent 90%);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+
+}
+.sr_date_calender {
+    width: 100%;
+    overflow: hidden;
+    z-index: 1000;
 }
 .shortReservation_wrap_up .inputBox {
-
     width: 100%;
     height: var(--wrap-up-height2);
     min-height: var(--wrap-up-min-height2);
@@ -44,65 +80,104 @@
     align-items: center;
     box-sizing: border-box;
 }
-
 /* ----------------------------------------------- 2. numbers */
 .shortReservation_wrap_up .sr_numbers {
-    width: 40%;
-    border-right: 2px solid black;
-    border-left: 2px solid black;
-}
-.shortReservation_wrap_up .sr_numbers h4 {
-    display: none;
-}
-.shortReservation_wrap_up .table {
-    width: 100%;
-    height: var(--wrap-up-height2);
-    display: flex;
-    flex-direction: column;
-}
-.shortReservation_wrap_up .tbody{
-    display: block;
-    overflow: hidden;
+    width: fit-content;
+    position: relative;
+    padding: 0px 20px;
     transition: .5s ease;
 }
-.shortReservation_wrap_up .sr_numbers .tfoot_wrap {
+.shortReservation_wrap_up .sr_numbers::after {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(to bottom,transparent 10%,black,transparent 90%);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+.shortReservation_wrap_up .table {
+    width: fit-content;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: .5s ease;
+}
+.shortReservation_wrap_up .tbody{
+    overflow: hidden;
+    box-sizing: border-box;
+
+    transition: .5s ease;
+}
+.shortReservation_wrap_up .tfoot_wrap {
     display: block;
     width: 100%;
-
 }
 
 .shortReservation_wrap_up .tbody_add {
     display: none;
 }
-
-/* ----------------------------------------------- 3. code */
-.shortReservation_wrap_up .sr_code {
-    width: 10%;
-    height: 160px;
-    border: 1px dashed tomato;
-}
-.shortReservation_wrap_up .sr_code ul {
+.shortReservation_wrap_up .changeDelBtn {
     display: none;
-    gap: 5px;
-    padding: 0px;
+}
+/* ----------------------------------------------- 3. code */
+.shortReservation_wrap_up .sr_codeSearch {
+    width: 20%;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: left;
+    overflow: hidden;
+    padding: 0px 5px;
+    margin: 0px auto;
+
+    transition: .5s ease;
+}
+.shortReservation_wrap_up .sr_code {
+    position: relative;
+}
+.shortReservation_wrap_up .sr_c_list {
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding-top: 5px;
+    transition: .5s ease;
 }
 .shortReservation_wrap_up .sr_c_list li {
-    width: 45%;
+    width: 100%
 }
 .shortReservation_wrap_up .sr_c_title {
-    width: fit-content;
-    position: static;    
-    font-size: 110%;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: calc( var(--wrap-up-height2) * 0.3 );
+    min-height: calc( var(--wrap-up-min-height2) * 0.3 );
+    word-break: keep-all;
+}
+.shortReservation_wrap_up .sr_c_title a:hover {
+    color: red;
+}
+.shortReservation_wrap_up .sr_code > div:nth-of-type(2) {
+    position: absolute;
+    top: calc( 100% + 20px );
+    left: 0px;
+
 }
 .shortReservation_wrap_up #sr_c_input {
-    width: 200px;
-    padding: 10px 3px;
-    font-size: 90%;
+    display: block;
+    width: 100%;
+    padding: 5px 3px;
+    font-size: 100%;
+    border: 2px solid black;
+    box-sizing: border-box;
+    text-align: center;
 }
 /* ----------------------------------------------- 4. button */
 .shortReservation_wrap_up .sr_searchBtn {
-    width: 10%;
+    height: calc( var(--wrap-up-height2) * 0.7 );
+    min-height: calc( var(--wrap-up-min-height2) * 0.7 );
 }
 .shortReservation_wrap_up .sr_open {
     display: block;

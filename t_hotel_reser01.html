@@ -30,8 +30,8 @@
             --sr-title-top: -15px;
             --sr-title-left: 3%;
             --sr-title-font-size:16px;
-            --wrap-up-height: 16vh;
-            --wrap-up-min-height: 160px;
+            --wrap-up-height: 12vh;
+            --wrap-up-min-height: 120px;
             /* color */
             --inputBox-bg: rgb(255,255,255);
             --main-bg-color: rgba(0, 128, 0, 0.671);
@@ -52,72 +52,15 @@
             appearance: textfield;
         }
         /* ================================================================== */
-        main {
+        .mainWrap {
             background-color: var(--main-bg-color);
         }
-        .shortReservation {
-            width: 100%;
-            background-color: rgba(255,255,255,0.7);
-            display: flex;
-            justify-content: center;
-        }
-        .shortReservation_wrap {
-            max-width: var(--main-width);
-            width: 100%;
-            padding: 2%;
-            box-sizing: border-box;
-            margin: auto;
-            border-radius: 20px;
-            background-color: var(--inputBox-bg);
-
-            transition: .5s ease;
-        }
-
-        .shortReservation_wrap .sr_date {
-            border: 2px solid black;
-            box-sizing: border-box;
-            margin-bottom: 20px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-            
-        .sr_date h4 {
-            position: absolute;
-            top: var(--sr-title-top);
-            left: var(--sr-title-left);
-            font-size: var(--sr-title-font-size);
-            padding: 0px 3px;
-            background-color: var(--inputBox-bg);
-        }
-        .sr_date_calender {
-            width: 100%;
-            overflow: hidden;
-            z-index: 1000;
-            background-color: rgba(255, 255, 255, 0.562);
-            backdrop-filter: blur(5px);
-        }
-        
-        
         
         /* inputbox ----------------- */
-        .shortReservation_wrap .inputBox {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            width: 90%;
-            height: var(--wrap-up-height);
-            min-height: var(--wrap-up-min-height);
-            background-color: var(--inputBox-bg);
-            box-sizing: border-box;
-        }
+        
         .inputBox .checkin,
         .inputBox .checkout {
             width: 100%;
-        }
-        .inputBox > img {
-
         }
         .inputBox input {
             display: none;
@@ -153,8 +96,6 @@
             display: block;
             width: 30px;
         }
-        
-        
         /* number check ---------------------- */
         .numberCheck {
             position: relative;
@@ -215,30 +156,7 @@
             opacity: 0.7;
         }
 
-        /* ================================================================ */
-        .shortReservation_wrap .sr_code {
-            border: 2px solid black;
-            position: relative;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-        .sr_code .sr_c_title {
-            display: flex;
-            align-items: center;
-            position: absolute;
-            top: var(--sr-title-top);
-            left: var(--sr-title-left);
-            background-color: var(--inputBox-bg);
-            padding: 0px 3px;
-            word-break: keep-all;
-        }
-        .sr_code ul {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            padding-left: 10%;
-
-        }
+        /* ================================================================ */       
         .sr_c_list a {
             display: flex;
             justify-content: center;
@@ -250,32 +168,16 @@
             padding: 8px 18px;
             box-sizing: border-box;
             transition: .5s ease;
-        }
-        
-        #sr_c_input {
-            border: 2px solid black;
-            margin-left: 10px;
-            padding: 3px;
-            text-align: center;
-        }
-        body .sr_c_active {
+        }        
+        .sr_c_active {
             background-color: var(--main-yellow-color);
             border-color: transparent;
         }
-        body .sr_c_disabled_active {
+        .sr_c_disabled_active {
             background-color: palevioletred;
             border-color: transparent;
         }
         /* ================================================================ */
-        .shortReservation_wrap .sr_numbers {
-            border: 2px solid black;
-            box-sizing: border-box;
-            padding: 30px 0px;
-            
-            position: relative;
-            display: flex;
-            flex-direction: column;
-        }
         .sr_numbers h4 {
             position: absolute;
             top: var(--sr-title-top);
@@ -290,10 +192,11 @@
             font-size: 100%;
             margin-left: 10px;
         }
-        .shortReservation_wrap .table {
-            width: 60%;
-            margin: 0px auto;
-            transition: .5s ease;
+        .tfoot_wrap {
+            transition: .3s ease;
+        }
+        .sr_n_list {
+            padding: 10px 0px;
         }
         .thead, 
         .tfoot,
@@ -303,16 +206,21 @@
             display: flex;
             box-sizing: border-box;
         }
-        
-        .shortReservation_wrap .tfoot_wrap {
-            display: none;
-        }
-        .thead .td,
-        .tfoot .td,
-        .tbody .td {
+        .td {
+            width: 130px;
             height: calc( var(--wrap-up-height) / 2 );
+            min-height: calc( var(--wrap-up-min-height) / 2 );
             display: flex;
             flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+        }
+        .th {
+            width: 80px;
+            height: calc( var(--wrap-up-height) / 2 );
+            min-height: calc( var(--wrap-up-min-height) / 2 );
+            display: flex;
             justify-content: center;
             align-items: center;
             box-sizing: border-box;
@@ -321,24 +229,9 @@
             font-size: 13px;
             color: #777;
         }
-        
-        .td{
-            width: 130px;
-            text-align: center;
+        .sr_n_tdBtn {
             box-sizing: border-box;
-        }
-        .th,
-        .th_add,
-        .tf {
-            min-width: 70px;
-            box-sizing: border-box;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             font-weight: 600;
-        }
-        .shortReservation_wrap .thead .th{
-            font-size: 0px;
         }
         .sr_deleteRoom {
             display: block;
@@ -698,7 +591,7 @@
                         <h4>객실 및 투숙인원 선택</h4>
                         <div class="table">
                                 <div class="thead">
-                                        <div class="td">
+                                        <div class="th">
                                             <strong>객실</strong>
                                         </div>
                                         <div class="td sr_n_l_head">
@@ -713,12 +606,12 @@
                                             <strong>유아</strong>
                                             <div>만 2세 미만</div>
                                         </div>
-                                        <div class="tf"></div>
                                 </div>
                                 <div class="tbody">
                                     <div class="sr_n_list">
-                                        <div class="td">
-                                            객실 1
+                                        <div class="th">
+                                            <a href="#none" class="sr_n_tdBtn">객실 1</a>
+                                            <a href="#none" class="sr_deleteRoom changeDelBtn">취소</a>
                                         </div>
                                         <div class="td">
                                             <div class="numberCheck">
@@ -741,45 +634,49 @@
                                                 <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
                                             </div>
                                         </div>
-                                        <div class="tf"><a href="#none" class="sr_deleteRoom">취소</a></div>
+                                    </div>
+                                </div>
+                                <div class="tbody_add">
+                                    <div class="th">
+                                        <a href="#none" class="sr_addRoom">객실 추가</a>
                                     </div>
                                 </div>
                                 <div class="tfoot_wrap">
                                     <div class="tfoot">
-                                            <div class="td">1</div>
-                                            <div class="td">0</div>
-                                            <div class="td">0</div>
-                                            <div class="td">0</div>
-                                            <div class="tf"></div>
-                                    </div>
-                                </div>
-                                <div class="tbody_add">
-                                    <div class="th_add">
-                                        <a href="#none" class="sr_addRoom">객실 추가</a>
+                                            <div class="th f0">1</div>
+                                            <div class="td f1">0</div>
+                                            <div class="td f2">0</div>
+                                            <div class="td f3">0</div>
                                     </div>
                                 </div>
                         </div>
                     </div>
-                    <div class="sr_code">
-                        <div class="sr_c_title">
-                            <h4>할인코드</h4>
-                            <input type="text" name="dc_code" id="sr_c_input" placeholder="할인코드 직접 입력">
+                    <div class="sr_codeSearch">
+                        <div class="sr_code">
+                            <div class="sr_c_title">
+                                <h4>
+                                    <a href="#none">할인코드</a>
+                                </h4>
+                                <input type="text" name="dc_code" id="sr_c_input" placeholder="할인코드 직접 입력">
+                            </div>
+                            <div>
+                                <ul class="sr_c_list">
+                                    <li><a href="#none" class="sr_c_early" data-code="early">#얼리버드 패키지</a></li>
+                                    <li><a href="#none" class="sr_c_awesome" data-code="awesome">#어썸 초이스</a></li>
+                                    <li><a href="#none" class="sr_c_birthday" data-code="birthday">#브릭스타틱 생일 패키지</a></li>
+                                    <li><a href="#none" class="sr_c_friends" data-code="friends">#NEW LEGO® 프렌즈 패키지</a></li>
+                                    <li><a href="#none" class="sr_c_twodays" data-code="twodays">#LEGOLAND® 파크 2일+호텔 패키지</a></li>
+                                    <li><a href="#none" class="sr_c_default" data-code="default">#조식 패키지</a></li>
+                                    <li><a href="#none" class="sr_c_disabled" data-code="disabled">#장애인 친화 객실</a></li>
+                                </ul>
+                            </div>
                         </div>
-                        <ul class="sr_c_list">
-                            <li><a href="#none" class="sr_c_early" data-code="early">#얼리버드 패키지</a></li>
-                            <li><a href="#none" class="sr_c_awesome" data-code="awesome">#어썸 초이스</a></li>
-                            <li><a href="#none" class="sr_c_birthday" data-code="birthday">#브릭스타틱 생일 패키지</a></li>
-                            <li><a href="#none" class="sr_c_friends" data-code="friends">#NEW LEGO® 프렌즈 패키지</a></li>
-                            <li><a href="#none" class="sr_c_twodays" data-code="twodays">#LEGOLAND® 파크 2일+호텔 패키지</a></li>
-                            <li><a href="#none" class="sr_c_default" data-code="default">#조식 패키지</a></li>
-                            <li><a href="#none" class="sr_c_disabled" data-code="disabled">#장애인 친화 객실</a></li>
-                        </ul>
+                        <div class="sr_searchBtn">
+                            <button type="submit">검색</button>
+                            <!-- <a href="#none" class="sr_up">UP</a> -->
+                        </div>
                     </div>
-                    <div class="sr_searchBtn">
-                        <button type="submit">검색</button>
-                        <a href="#none" class="sr_up">UP</a>
-                        <a href="#none" class="sr_open">열기</a>
-                    </div>
+                    <a href="#none" class="sr_open">열기</a>
                 </form>
             </div>
             <div class="promotionSlide">
@@ -832,26 +729,25 @@
                         }
                         $(this).siblings("input").trigger("change");
                     })
+                    //객실 취소
                     .delegate(".sr_deleteRoom",'click',function(e){
                         const trLength = $(".sr_n_list").length;
                         if (trLength > 1) {
                             $(this).parents(".sr_n_list").remove();
                             $(".sr_n_list").each(function(i){
-                                $(this).children(".td").eq(0).text(`객실 ${i+1}`);
+                                $(this).find(".sr_n_tdBtn").text(`객실 ${i+1}`);
                             });
                         }
                     })
-                    .delegate("a","click",function(){
-                        let f1=0,f2=0,f3=0;
-                        $(".sr_n_list").each(function(i){
-                            f1 += +$(this).find(".sr_n_adult").val();
-                            f2 += +$(this).find(".sr_n_child").val();
-                            f3 += +$(this).find(".sr_n_toddler").val();
-                        })
-                        $(".sr_numbers tfoot td").eq(0).text($(".sr_n_list").length);
-                        $(".sr_numbers tfoot td").eq(1).text(f1);
-                        $(".sr_numbers tfoot td").eq(2).text(f2);
-                        $(".sr_numbers tfoot td").eq(3).text(f3);
+                    // 취소버튼 토글
+                    .delegate(".sr_deleteRoom",'mouseleave',function(e){
+                        $(this).addClass("changeDelBtn");
+                        $(this).siblings(".sr_n_tdBtn").removeClass("changeDelBtn")
+
+                    })
+                    .delegate(".sr_n_tdBtn",'mouseenter',function(e){
+                        $(this).addClass("changeDelBtn");
+                        $(this).siblings(".sr_deleteRoom").removeClass("changeDelBtn")
                     })
 
                 function comma(x) {
@@ -876,7 +772,7 @@
                         $(".sr_n_list").eq(0).addClass("sr_n_list_origin");
                         const $cloneTr = $(".sr_n_list_origin").clone(true);
                         $cloneTr.removeClass("sr_n_list_origin");
-                        $cloneTr.children(".td").eq(0).text(`객실 ${trLength + 1}`);
+                        $cloneTr.find(".th .sr_n_tdBtn").text(`객실 ${trLength + 1}`);
                         $cloneTr.find("input").each(function(){
                             $(this)
                             .prop("id", function(i,v){ return v + (trLength+1) })
@@ -889,8 +785,19 @@
                 // slide ---------------------------------------------------
                 
                 $(".sr_open").click(function(){
-                    $(".shortReservation_wrap_up, .sr_date_calender, .table, .tbody, .tf").toggleClass("uup");
-                    
+                    $(".shortReservation_wrap_up").toggleClass("uup");
+                    $(".tbody_add").toggle();
+                    let f1=0,f2=0,f3=0;
+                    const f0 = $(".sr_n_list").length;
+                    $(".sr_n_list").each(function(){
+                        f1 += +$(this).find(".sr_n_adult").val();
+                        f2 += +$(this).find(".sr_n_child").val();
+                        f3 += +$(this).find(".sr_n_toddler").val();
+                    });
+                    $(".f0").text(f0);
+                    $(".f1").text(f1);
+                    $(".f2").text(f2);
+                    $(".f3").text(f3);
                 })
                 // 요금 계산 ------------------------------------------------
                 const priceArray_premium = [340000, 320000, 320000, 320000, 320000, 380000, 520000];
@@ -937,10 +844,9 @@
                     $(this).toggleClass("sr_c_disabled_active");
                 });
                 
-                $(".shortReservation_wrap").on("submit",function(e){ //===================================
+                $(".shortReservation_wrap_up").on("submit",function(e){ //===================================
                     $(".ri_e_t_choice").show();
                     $(".ri_e_t_choice_extra").children().remove();
-
                     e.preventDefault();
                     const d = new FormData(e.target);
                     const c = Object.fromEntries(d.entries());
@@ -951,6 +857,7 @@
                     const checkinDate = new Date(c["checkin"]);
                     const checkoutDate = new Date(c["checkout"]);
                     
+
                     // ================= default ======================
 
                     $(".ri_e_t_choice_default").each(function(){
