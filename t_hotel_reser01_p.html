@@ -566,8 +566,30 @@
                     $(this).find(".ri_e_t_e_char").fadeOut(200);
                 }
             });
-            
-            
+            // 슬라이드 (다른 페이지와 통합)
+            $(".ri_e_t_slide").each(function(){
+                    let m = 0;
+                    $(this).find(".slideback").click(function(){
+                        const $p = $(this).siblings("ul");
+                        const wid = $p.find("li").width();
+                        const len = $p.find("li").length;
+                        if (m > 0) {
+                            m--;
+                            $p.css({ left: -m*wid });
+                        }
+                    });
+                    $(this).find(".slidenext").click(function(){
+                        const $p = $(this).siblings("ul");
+                        const wid = $p.find("li").width();
+                        const len = $p.find("li").length;
+                        if (m < len-1) {
+                            m++;
+                            $p.css({
+                                left: -m*wid
+                            });
+                        }
+                    })
+                });
         })
     </script>
 </body>
