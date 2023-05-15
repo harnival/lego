@@ -396,8 +396,8 @@
                 .text( `${selYear}년 ${selMonth + 1}월 ${$(".checkin_active").text()}일 (${week[weekday]})` )
                 .toggleClass("on");
             }
-          }
-          if ($(".checkout span").hasClass("on")) {
+            $(".checkout span").addClass("on");
+          } else if ($(".checkout span").hasClass("on")) {
             if ( $(this).hasClass("checkin_active")) {
               $(".checkout_active").removeClass("checkout_active");
               $(this)
@@ -477,20 +477,14 @@
         });
         // 체크인
         $(".checkin span").click(function () {
+          $(".calender").slideToggle();
           $(this).toggleClass("on");
           $(".checkout span").removeClass("on");
-          $(".sr_date_calender").slideDown();
-          if ( !$(this).hasClass("on") && !$(".checkout span").hasClass("on")) {
-            $(".sr_date_calender").slideUp();
-          }
         });
         $(".checkout span").click(function () {
+          $(".calender").slideToggle();
           $(this).toggleClass("on");
           $(".checkin span").removeClass("on");
-          $(".sr_date_calender").slideDown();
-          if ( !$(this).hasClass("on") && !$(".checkout span").hasClass("on")) {
-            $(".sr_date_calender").slideUp();
-          }
         });
         
       });

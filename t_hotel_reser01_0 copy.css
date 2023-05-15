@@ -1,0 +1,428 @@
+/* slide Up 형식 */
+:root {
+    --wrap-up-width: 35vw;
+}
+.shortReservation {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    z-index: 9999;
+}
+.shortReservation_wrap_up {
+    width: var(--wrap-up-width);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    position: relative;    
+    transition: .5s ease;
+}
+.shortReservation_wrap_up .sr_date h4,
+.shortReservation_wrap_up .sr_numbers h4 {
+    display: none;
+}
+/* slide down 시 */
+body .shortReservation_wrap_up.uup,
+body .hb_basket.uup {
+    width: 0px;
+}
+/* ----------------------- ---------------------- 1. date */
+.shortReservation_wrap_up .sr_date {
+    width: 100%;
+    position: relative;
+    transition: .5s ease;
+    border: 1px dashed tomato;
+
+}
+.shortReservation_wrap_up .sr_date::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right,transparent 10%,black,transparent 90%);
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+
+}
+.sr_date_calender {
+    width: 100%;
+    overflow: hidden;
+    z-index: 1000;
+}
+.shortReservation_wrap_up .inputBox {
+    width: 100%;
+    height: var(--wrap-up-height2);
+    min-height: var(--wrap-up-min-height2);
+    padding: 0px 5%;
+
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+/* ----------------------------------------------- 2. numbers */
+.shortReservation_wrap_up .sr_numbers {
+    width: 100%;
+    position: relative;
+    transition: .5s ease;
+}
+.shortReservation_wrap_up .sr_numbers::after {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(to bottom,transparent 10%,black,transparent 90%);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+.shortReservation_wrap_up .table {
+    width: fit-content;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: .5s ease;
+}
+.shortReservation_wrap_up .tbody{
+    overflow: hidden;
+    box-sizing: border-box;
+
+    transition: .5s ease;
+}
+.shortReservation_wrap_up .tfoot_wrap {
+    display: block;
+    width: 100%;
+}
+
+.shortReservation_wrap_up .tbody_add {
+    overflow: hidden;
+    transition: .5s ease;
+}
+.shortReservation_wrap_up .changeDelBtn {
+    display: none;
+}
+/* ----------------------------------------------- 3. code */
+.shortReservation_wrap_up .sr_codeSearch {
+    width: 20%;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: left;
+    overflow: hidden;
+    padding: 0px 5px;
+    margin: 0px auto;
+
+    transition: .5s ease;
+}
+.shortReservation_wrap_up .sr_code {
+    position: relative;
+}
+.shortReservation_wrap_up .sr_c_list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding-top: 5px;
+    transition: .5s ease;
+}
+.shortReservation_wrap_up .sr_c_list li {
+    width: 100%
+}
+.shortReservation_wrap_up .sr_c_title {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: calc( var(--wrap-up-height2) * 0.3 );
+    min-height: calc( var(--wrap-up-min-height2) * 0.3 );
+    word-break: keep-all;
+}
+.shortReservation_wrap_up .sr_c_title a:hover {
+    color: red;
+}
+.shortReservation_wrap_up .sr_code > div:nth-of-type(2) {
+    position: absolute;
+    top: calc( 100% + 20px );
+    left: 0px;
+
+}
+.shortReservation_wrap_up #sr_c_input {
+    display: block;
+    width: 100%;
+    padding: 5px 3px;
+    font-size: 100%;
+    border: 2px solid black;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: inherit;
+    outline-color: var(--main-yellow-color);
+    transition: .5s ease;
+}
+/* ----------------------------------------------- 4. button */
+.shortReservation_wrap_up .sr_searchBtn {
+    height: calc( var(--wrap-up-height2) * 0.7 );
+    min-height: calc( var(--wrap-up-min-height2) * 0.7 );
+}
+.shortReservation_wrap_up .sr_openBox {
+    position: absolute;
+    width: 30px;
+    height: 100vh;
+    top: 0px;
+    left: -30px;
+}
+.shortReservation_wrap_up .sr_open {
+    display: block;
+    margin: auto;
+    height: 100%;
+    background-color: tomato;
+    text-align: center;
+}
+
+/* ======================================== */
+/* ======================================== */
+/* ======================================== */
+/* ======================================== */
+/* ======================================== */
+/* ======================================== */
+/* ======================================== */
+:root {
+    /* length */
+    --main-width: 1350px;
+    --roomInfo-slide-unit: 15vw;
+    --inputBox-span-min-width: 200px;
+    --inputBox-span-border-color: rgba(4, 116, 0, 0.2);
+    --sr-title-top: -15px;
+    --sr-title-left: 3%;
+    --sr-title-font-size:16px;
+    --price-btn-width: 200px;
+    /* color */
+    --inputBox-bg: rgb(255,255,255);
+    --main-bg-color: rgba(0, 128, 0, 0.671);
+    --main-yellow-color: #ffcf00;
+    --button-yellow: rgb(240, 240, 89);
+}
+body {padding: 0px;margin: 0px; font-family: 'Noto Sans KR', sans-serif; font-size: 16px;}
+a {text-decoration: none;}
+ul,li {list-style: none; padding: 0px; margin: 0px;}
+h1,h2,h3,h4,h5,h6 {margin: 0px; padding: 0px;}
+/* number input 버튼 숨기기 */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type='number'] {
+    appearance: textfield;
+}
+/* ================================================================== */
+.mainWrap {
+    background-color: var(--main-bg-color);
+}
+
+/* inputbox ----------------- */
+
+.inputBox .checkin,
+.inputBox .checkout {
+    width: 100%;
+}
+.inputBox input {
+    display: none;
+}
+.inputBox span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-width: 150px;
+    height: 60px;
+    border-style: solid;
+    border-width: 2px;
+    box-sizing: border-box;
+    font-size: 100%;
+    transition: .5s ease;
+    cursor: pointer;
+}
+.inputBox span:hover {
+    border-color: var(--inputBox-span-border-color);
+    color: #999;
+}
+.on {
+    border-color: transparent;
+    background-color: var(--inputBox-span-border-color);
+}
+.inputBox label {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+.inputBox > img {
+    display: block;
+    width: 30px;
+}
+/* number check ---------------------- */
+.numberCheck {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+    padding: 5px 40px;
+    border-radius: 25px;
+    background-color: yellowgreen;
+
+    margin: auto;
+}
+.nc_wrap label {
+    display: none;
+}
+.numberCheck input {
+    width: 40px;
+    height: 30px;
+    text-align: center;
+
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-size: 20px;
+    border: none;
+    background-color: transparent;
+}
+.decrease_btn {
+    font-size: 0px;
+    display: block;
+    background-color: var(--main-yellow-color);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+.decrease_btn img {
+    width: 30px;
+    opacity: 0.7;
+}
+.increase_btn {
+    font-size: 0px;
+    display: block;
+    background-color: var(--main-yellow-color);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+.increase_btn img {
+    width: 30px;
+    opacity: 0.7;
+}
+
+/* ================================================================ */       
+.sr_c_list a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-width: 2px;
+    border-style: solid;
+    border-color: var(--main-yellow-color);
+    border-radius: 30px;
+    padding: 8px 18px;
+    box-sizing: border-box;
+    transition: .5s ease;
+}        
+.sr_c_active {
+    background-color: var(--main-yellow-color);
+    border-color: transparent;
+}
+.sr_c_disabled_active {
+    background-color: palevioletred;
+    border-color: transparent;
+}
+/* ================================================================ */
+.sr_numbers h4 {
+    position: absolute;
+    top: var(--sr-title-top);
+    left: var(--sr-title-left);
+    font-size: var(--sr-title-font-size);
+    padding: 0px 3px;
+    background-color: var(--inputBox-bg);
+}
+.sr_numbers h4::after {
+    content: "(객실 하나 당 최대 6인)";
+    color: #777;
+    font-size: 100%;
+    margin-left: 10px;
+}
+.tfoot_wrap {
+    transition: .3s ease;
+}
+.sr_n_list {
+    padding: 10px 0px;
+}
+.thead, 
+.tfoot,
+.sr_n_list,
+.tbody_add {
+    width: 100%;
+    display: flex;
+    box-sizing: border-box;
+}
+.td {
+    width: 130px;
+    height: calc( var(--wrap-up-height) / 2 );
+    min-height: calc( var(--wrap-up-min-height) / 2 );
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+.th {
+    width: 80px;
+    height: calc( var(--wrap-up-height) / 2 );
+    min-height: calc( var(--wrap-up-min-height) / 2 );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+.thead .td > div {
+    font-size: 13px;
+    color: #777;
+}
+.sr_n_tdBtn {
+    box-sizing: border-box;
+    font-weight: 600;
+}
+.sr_deleteRoom {
+    display: block;
+    width: 30px;
+    height: 30px;
+    font-size: 0px;
+    background: rgb(248, 175, 162) url("img/close_button.png") no-repeat center/20px;
+    border-radius: 50%;
+    box-sizing: border-box;
+}
+.sr_addRoom {
+    display: block;
+    width: 30px;
+    height: 30px;
+    font-size: 0px;
+    background: rgb(143, 171, 255) url("img/plus.png") no-repeat center/20px;
+    border-radius: 50%;
+}
+.sr_searchBtn button {
+    border: 2px solid black;
+    width: 100px;
+    height: 50px;
+    padding-left: 10px;
+    background: url("img/search.svg") no-repeat left 10px center/ 30px;
+    font-size: var(--sr-title-font-size);
+    font-weight: bold;
+    font-family: 'Noto Sans KR';
+    cursor: pointer;
+}
+.sr_searchBtn button:active {
+    background-color: tomato;
+}

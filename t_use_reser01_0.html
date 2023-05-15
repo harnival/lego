@@ -6,10 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>티켓 구매하기</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./t_use_reser01_0.css">
     <style>
        /* ============ common ================ */
       :root {
-        --whole-max-width: 1300px;
+        --whole-max-width: 1350px;
         --exp-color: #666;
         --calender-td-size: 30px;
         --calender-table-size: 400px;
@@ -17,7 +21,7 @@
         --calender-month-button: 1em;
         --inputbox-bg-color: palegoldenrod;
       }
-      body {margin: 0px;padding: 0px;}
+      body {margin: 0px;padding: 0px; font-size: 15px; font-family: "Noto Sans KR", "Sans serif";}
       ul {list-style: none;padding: 0px;margin: 0px;}
       a {text-decoration: none; color: initial;}
       /* 수량 버튼 */
@@ -54,29 +58,44 @@
       }
       /* ============== main ================= */
       .mainWrap {
+        width: 100vw;
         display: flex;
         flex-direction: column;
         align-items: center;
       }
       .tapBox {
+        max-width: var(--whole-max-width);
         width: 100%;
+        height: 10vh;
         margin: auto;
         position: relative;
       }
       .tapBox ul {
         display: flex;
-        justify-content: center;
         width: 100%;
+        height: 100%;
       }
       .tapBox li {
+        width: 100%;
+        height: 100%;
+      }
+      .tapBox li a{
         border: 2px solid #bbb;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .active_tap {
+        background-color: yellow;
 
       }
       .formBox {
-        width: 900px;
-        border: 2px solid black;
+        max-width: var(--whole-max-width);
+        width: 100%;
         box-sizing: border-box;
-        margin-right: 250px;
+        margin: auto;
+        background-color: yellow;
       }
       .reservation_basket {
         position: fixed;
@@ -150,6 +169,8 @@
         // page load
         $(".tapBox_btn").each(function (i) {
           $(this).click(function () {
+            $(".tapBox a").not($(this)).removeClass("active_tap");
+            $(this).addClass("active_tap");
             $(".formBox").children().remove();
             $(".formBox").load(`./t_use_reser01_${i + 1}.html`, function () {
               

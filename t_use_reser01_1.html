@@ -7,8 +7,10 @@
     <title>일일이용권</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
-     
-      
+      :root {
+        --datecell-color:  rgb(2, 172, 2);
+        --main-max-width: 1350px;
+      }
         /* ===============================================================  calender common elements*/
       .disabled_cell {
         color: #bbb;
@@ -23,10 +25,10 @@
         height: 100%;
         justify-content: center;
         align-items: center;
-        color: rgb(2, 172, 2);
+        color: var(--datecell-color);
       }
         .active_cell{
-          background-color: rgb(2, 172, 2);
+          background-color: var(--datecell-color);
           color: white;
           position: relative;
         }
@@ -36,7 +38,7 @@
           position: absolute;
           width: 20%;
           height: 10%;
-          background-color: rgb(2, 172, 2);
+          background-color: var(--datecell-color);
           top: -10%;
           left: 15%;
         }
@@ -46,7 +48,7 @@
           position: absolute;
           width: 20%;
           height: 10%;
-          background-color: rgb(2, 172, 2);
+          background-color: var(--datecell-color);
           top: -10%;
           right: 15%;
         }
@@ -54,9 +56,8 @@
         border: 2px solid rgba(0,0,0,0.2);
         box-sizing: border-box;
         border-radius: 30px;
-        height: fit-content;
-        overflow: hidden;
         padding: 40px 10px 10px;
+        background-color: white;
       }
         .calender .cdt_date {
           width: var(--calender-table-size);
@@ -169,26 +170,25 @@
         }
       /* ======================================= 0. form common elements */
       .ticket_formWrap {
-        width: 900px;
-        border: 1px solid tomato;
+        max-width: var(--main-max-width);
+        width: 100%;
         margin: auto;
+        padding-bottom: 500px;
       }
       fieldset {
         /* border: none; */
         position: relative;
         margin: 0px;
-        padding: 0px;
-        padding-top: 100px;
+        padding: 0px 20%;
       }
       fieldset legend {
         position: absolute;
         top: 20px;
         left: 20px;
-        font-size: 25px;
+        font-size: 200%;
       }
       /* ======================================= 01. 날짜 선택 */
       .dated_fieldset01 {
-        height: 634px;
         display: flex;
         justify-content: center;
         position: relative;
@@ -210,6 +210,8 @@
       /* ======================================= 02. 인원 선택 */
       .dated_fieldset02 {
         display: flex;
+        flex-direction: column;
+        align-items: center;
       }
         .dated_fieldset02 legend::before {
           content: "02";
@@ -226,10 +228,11 @@
           margin-right: 10px;
         }
         .df02_wrap {
-          width: 50%;
+          width: 100%;
           display: flex;
           flex-direction: column;
           position: relative;
+          padding-left: 55px;
         }
           .df02_wrap > label {
             font-size: 20px;
@@ -254,9 +257,6 @@
           }
               
       /* ============================================ 03. 사전 구매 */
-      .dated_fieldset03 label {
-        font-size: 18px;
-      }
       .dated_fieldset03 legend::before {
         content: "03";
         display: inline-block;
@@ -270,6 +270,9 @@
         font-size: 18px;
         color: white;
         margin-right: 10px;
+      }
+      .dated_fieldset03 {
+        padding: 0px 20%;
       }
       .df03_labelExp {
         color: var(--exp-color);
@@ -360,6 +363,7 @@
       }
       .df04_ft {
         margin-top: 20px;
+        padding-bottom: 40px;
         position: relative;
       }
       .df04_ft .nc_wrap {
@@ -389,13 +393,17 @@
       }
       .df05_wrap {
         position: relative;
+        margin-top: 100px;
       }
       .df05_wrap .nc_wrap {
         position: absolute;
         top: 0px;
         right: 0px;
       }
-
+      .df05_price {
+        color: var(--exp-color);
+        text-indent: 10px;
+      }
       .df05_w_exp {
         padding: 20px;
         border: 1px solid rgba(0,0,0,0.1);
@@ -415,12 +423,18 @@
       /* ================================================  06. 합계 */
       .dated_fieldset06 {
         display: flex;
+        gap: 40px;
         position: relative;
+        padding: 0px 20%;
+      }
+      .dated_fieldset06 legend {
+        display: none;
       }
       .df06_discount {
         width: 50%;
       }
       .df06_d_list {
+        width: 100%;
         list-style: none;
         padding: 0px;
         border: 1px solid rgba(0,0,0,0.4);
@@ -428,6 +442,8 @@
       }
       .df06_d_list li {
         border-bottom: 1px solid rgba(0,0,0,0.4);
+        position: relative;
+        padding: 20px 15px;
       }
       .df06_d_l_wrap {
         position: relative;
@@ -451,6 +467,12 @@
       }
       .df06_d_l_detail {
         display: none;
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0px;
+        background-color: yellow;
+        z-index: 100;
       }
       .df06_d_l_w_exp {
         color: var(--exp-color);
@@ -464,10 +486,14 @@
         opacity: 0.5;
       }
       .df06_d_list li input[type="checkbox"] {
-        display: block;
+        display: none;
       }
       .df06_price {
         width: 50%;
+        border: 1px dashed royalblue;
+      }
+      .df06_p_selectlist li span {
+        display: block;
       }
       .df06_p_s_extra > div {
         border: 1px solid tomato;
@@ -483,6 +509,24 @@
       #dated_total_price {
         display: none;
       }
+      .df06_p_s_e_4 {
+        display: flex;
+
+      }
+      .df06_p_s_e_title04 {
+        margin: 0px;
+        padding: 0px;
+      }
+      .df06_p_s_e_number04 {
+        margin: 0px;
+        padding: 0px;
+        float: right;
+      }
+      .df06_p_s_e_price04 {
+        margin: 0px;
+        padding: 0px;
+      }
+
     </style>
 </head>
 <body>
@@ -784,7 +828,7 @@
               <div class="df05_wrap">
                 <input type="checkbox" name="dated_master_builder" id="dated_master_builder" class="master_builder">
                 <label for="dated_master_builder">LEGOLAND® Master Builder Program 신청하기</label>
-                <div>
+                <div class="df05_price">
                   <span>온라인 구매가격</span>
                   <span>￦165,000</span>
                   <span>연간이용권 사용 시</span>
@@ -1158,7 +1202,7 @@
           
           $(".df04_ft .nc_wrap input").each(function(i) {
             
-            const $newbox04 = $('<div><p class="df06_p_s_e_title04"></p><p class="df06_p_s_e_number04"></p><p class="df06_p_s_e_price04"></p></div>');
+            const $newbox04 = $('<div class="df06_p_s_e_4"><p class="df06_p_s_e_title04"></p><p class="df06_p_s_e_number04"></p><p class="df06_p_s_e_price04"></p></div>');
             $(".df06_p_s_extra").append($newbox04);
 
             if ( $(this).val() == 0) { $newbox04.hide() }
