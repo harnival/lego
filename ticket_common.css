@@ -1,0 +1,222 @@
+/* 공통 요소 */
+:root {
+    /* length */
+    --whole-max-width: 1350px;
+    --calender-table-size: 400px;
+    --calender-month-button: 1em;
+    /* color */
+    --exp-color: #666;
+    --calender-select-color: rgb(2, 172, 2);
+    --inputbox-bg-color: palegoldenrod;
+    --main-yellow-color: #ffcf00;
+}
+
+body {margin: 0px;padding: 0px; font-size: 15px; font-family: "Noto Sans KR", "Sans serif";}
+ul {list-style: none;padding: 0px;margin: 0px;}
+a {text-decoration: none; color: initial;}
+
+/* number input 버튼 숨기기 */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type='number'] {
+  appearance: textfield;
+}
+
+/* 달력 이동 버튼 */
+.gotoback {
+    font-size: 0px;
+    display: block;
+    width: 10%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    background: var(--main-yellow-color) url("img/arrow_back.png") no-repeat left 40% center/25px;
+    position:absolute;
+    left: 40px;
+}
+.gotonext {
+    font-size: 0px;
+    display: block;
+    width: 10%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    background: var(--main-yellow-color) url("img/arrow_forward.png") no-repeat right 40% center/25px;
+    position: absolute;
+    right: 40px;
+}
+
+  /* (단일)달력 공통 디자인 =====================================================*/
+.calender {
+    width: 80%;
+    padding: 0px 8%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    background: linear-gradient(to right, transparent ,white 15% 85%,transparent);
+    height: max-content;
+    overflow: hidden;
+}
+.calender_wrap {
+    padding: 10px;
+}
+.calender_wrap_prev,
+.calender_wrap_next {
+    filter: blur(2px);
+    opacity: 0.8;
+    padding: 10px;
+}
+.calender_date_table {
+display: flex;
+flex-direction: column;
+}
+.cdt_date {
+width: var(--calender-table-size);
+min-height: fit-content;
+display: flex;
+flex-wrap: wrap;
+}      
+.cdt_week {
+height: 30px;
+justify-content: space-around;
+align-items: center;
+display: flex;
+text-align: center;
+color: #aaa;
+}
+.calender_month {
+width: 100%;
+padding: 20px 0px 30px;
+box-sizing: border-box;
+display: flex;
+align-items: center;
+position: relative;
+}
+.cm_spanbox {
+width: 100%;
+height: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 10px;
+font-size: 150%; 
+}
+.cm_sb_span1 {
+    color: var(--main-yellow-color);
+}
+.cm_sb_span2 {
+    color: #666;
+}
+.date_inputs {
+box-sizing: border-box;
+position: absolute;
+top: 100px;
+left: 10%;
+}
+.date_inputs label{
+    font-size: 150%;
+    padding: 10px 20px;
+}
+.date_inputs input{
+    display: none;
+}
+/* calender cell */
+.dataCell {
+    width: calc(100% / 7 - 4px);
+    margin: 2px;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .disabled_cell {
+    color: #bbb;
+  }
+  .able_cell {
+    color: var(--calender-select-color);
+  }
+  .active_cell{
+    background-color: var(--calender-select-color);
+    color: white;
+    position: relative;
+  }
+  .active_cell::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 20%;
+    height: 10%;
+    background-color: var(--calender-select-color);
+    top: -10%;
+    left: 15%;
+  }
+  .active_cell::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 20%;
+    height: 10%;
+    background-color: var(--calender-select-color);
+    top: -10%;
+    right: 15%;
+  }
+
+/* 공통 수량 입력 버튼 */
+.numberCheck {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+    padding: 5px 40px;
+    border-radius: 25px;
+    background-color: yellowgreen;
+  }
+  .nc_wrap label {
+    display: none;
+  }
+    .numberCheck input {
+      width: 40px;
+      height: 30px;
+      text-align: center;
+
+      padding: 0px;
+      margin: 0px;
+      box-sizing: border-box;
+      font-size: 20px;
+      border: none;
+      background-color: transparent;
+    }
+  .decrease_btn {
+    font-size: 0px;
+    display: block;
+    background-color: rgb(240, 240, 89);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+
+    position: absolute;
+    top: 5px;
+    left: 5px;
+  }
+    .decrease_btn img {
+      width: 30px;
+      opacity: 0.7;
+    }
+  .increase_btn {
+    font-size: 0px;
+    display: block;
+    background-color: rgb(240, 240, 89);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+    .increase_btn img {
+      width: 30px;
+      opacity: 0.7;
+    }

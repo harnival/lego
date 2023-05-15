@@ -7,280 +7,124 @@
     <title>오후이용권 예약 │ </title>
     <script src="./jquery.js"></script>
     <style>
-      .disabled_cell {
-        color: #bbb;
-        text-align: center;
-      }
-      .disabled_cell {
-            color: #bbb;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .able_cell {
-            display: flex;
-            text-decoration: none;
-            width: 100%;
-            height: 100%;
-            justify-content: center;
-            align-items: center;
-            color: rgb(2, 172, 2);
-        }
-        .active_cell{
-          background-color: rgb(2, 172, 2);
-          color: white;
-          position: relative;
-        }
-        .active_cell::before {
-          content: "";
-          display: block;
-          position: absolute;
-          width: 20%;
-          height: 10%;
-          background-color: rgb(2, 172, 2);
-          top: -10%;
-          left: 15%;
-        }
-        .active_cell::after {
-          content: "";
-          display: block;
-          position: absolute;
-          width: 20%;
-          height: 10%;
-          background-color: rgb(2, 172, 2);
-          top: -10%;
-          right: 15%;
-        }
-        .calender {
-            border: 2px solid rgba(0,0,0,0.2);
-            box-sizing: border-box;
-            border-radius: 30px;
-            height: fit-content;
-            overflow: hidden;
-            padding: 40px 10px 10px;
-        }
-        .calender .cdt_date {
-          width: var(--calender-table-size);
-          display: flex;
-          flex-wrap: wrap;
-        }
-        .calender .calender_table_cell{
-          aspect-ratio: 1/1;
-          width: calc(100% / 7 - 4px);
-          font-size: 27px;
-          margin: 4px 2px;
-        }
-        .calender .cdt_week {
-          width: 100%;
-          height: 30px;
-          justify-content: space-around;
-          align-items: center;
-          display: flex;
-          text-align: center;
-          color: #666;
-        }
-        .calender_month {
-          width: 100%;
-          height: 50px;
-          text-align: center;
-          box-sizing: border-box;
-          display: flex;
-          position: relative;
-        }
-        .cm_spanbox {
+      /* main */
+      .ticket_formWrap {
+        max-width: var(--whole-max-width);
         width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        font-size: 20px; 
-        }
-        .cm_sb_yearnumber,
-        .cm_sb_monthnumber {
-            color: tomato;
-        }
-        .date_inputs {
-            padding: 100px 30px;
-            box-sizing: border-box;
-        }
-        .date_inputs label{
-          font-size: 20px;
-        }
-        .date_inputs input{
-          display: none;
-        }
-
-
-          /* ======================== */
-        .numberCheck {
-          position: relative;
-          display: flex;
-          justify-content: center;
-          width: fit-content;
-          padding: 5px 40px;
-          border-radius: 25px;
-          background-color: yellowgreen;
-        }
-        .nc_wrap label {
-                display: none;
-              }
-          .numberCheck input {
-            width: 40px;
-            height: 30px;
-            text-align: center;
-
-            padding: 0px;
-            margin: 0px;
-            box-sizing: border-box;
-            font-size: 20px;
-            border: none;
-            background-color: transparent;
-          }
-          .decrease_btn {
-            font-size: 0px;
-            display: block;
-            background-color: rgb(240, 240, 89);
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-
-            position: absolute;
-            top: 5px;
-            left: 5px;
-          }
-            .decrease_btn img {
-              width: 30px;
-              opacity: 0.7;
-            }
-          .increase_btn {
-            font-size: 0px;
-            display: block;
-            background-color: rgb(240, 240, 89);
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-
-            position: absolute;
-            top: 5px;
-            right: 5px;
-          }
-            .increase_btn img {
-              width: 30px;
-              opacity: 0.7;
-            }
-            /* ============================= */
-
-            /* ------------------------------ */
-            .ticket_formWrap {
-              width: 900px;
-              border: 1px solid tomato;
-              margin: auto;
-            }
-            fieldset {
-              /* border: none; */
-              position: relative;
-              margin: 0px;
-              padding: 0px;
-              padding-top: 100px;
-            }
-            .daytime_fieldset01 {
-              height: 634px;
-              display: flex;
-              justify-content: center;
-              position: relative;
-            }
-              fieldset legend {
-                position: absolute;
-                top: 20px;
-                left: 20px;
-                font-size: 25px;
-              }
-              .daytime_fieldset01 legend::before {
-                content: "01";
-                display: inline-block;
-                text-align: center;
-                vertical-align: middle;
-                line-height: 1.5;
-                width: 30px;
-                height: 30px;
-                background-color: royalblue;
-                border-radius: 50%;
-                font-size: 18px;
-                color: white;
-                margin-right: 10px;
-              }
-              /* ----------------------------------- */
-            .daytime_fieldset02 {
-              display: flex;
-            }
-              .daytime_fieldset02 legend::before {
-                content: "02";
-                display: inline-block;
-                text-align: center;
-                vertical-align: middle;
-                line-height: 1.5;
-                width: 30px;
-                height: 30px;
-                background-color: royalblue;
-                border-radius: 50%;
-                font-size: 18px;
-                color: white;
-                margin-right: 10px;
-              }
-              .dtf02_wrap {
-                width: 50%;
-                display: flex;
-                flex-direction: column;
-                position: relative;
-              }
-                .dtf02_wrap > label {
-                  font-size: 20px;
-                  font-weight: 600;
-                }
-                .dtf02_wrap > span:first-of-type {
-                  font-size: 15px;
-                  color: var(--exp-color);
-                }
-                .dtf02_wrap > span:last-of-type {
-                  padding-top: 10px;
-                }
-                .dtf02_wrap > span:last-of-type span {
-                  color: var(--exp-color);
-                  font-weight: 600;
-                  font-size: 15px;
-                }
-              .dtf02_wrap .nc_wrap {
-                position: absolute;
-                top: 0px;
-                right: 20%;
-              }
-              
-      /* ---------------------- */
-      .daytime_fieldset03 label {
-        font-size: 18px;
+        margin: auto;
+        padding-bottom: 500px;
       }
-      .daytime_fieldset03 legend::before {
-                content: "03";
-                display: inline-block;
-                text-align: center;
-                vertical-align: middle;
-                line-height: 1.5;
-                width: 30px;
-                height: 30px;
-                background-color: royalblue;
-                border-radius: 50%;
-                font-size: 18px;
-                color: white;
-                margin-right: 10px;
-              }
-        .dtf03_labelExp {
-          color: var(--exp-color);
-          text-indent: 40px;
-          margin: 0px;
+      fieldset {
+        /* border: none; */
+        position: relative;
+        margin: 0px;
+        padding: 0px;
+      }
+      fieldset legend {
+        display: block;
+        width: fit-content;
+        position: absolute;
+        top: 20px;
+        left: 7%;
+        font-size: 200%;
+      }
+      /* 01. 날짜 */
+      .daytime_fieldset01 {
+        display: flex;
+        justify-content: right;
+        position: relative;
+        padding-left: 20%;
+      }    
+      .daytime_fieldset01 legend::before {
+        content: "01";
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 1.5;
+        width: 30px;
+        height: 30px;
+        background-color: royalblue;
+        border-radius: 50%;
+        font-size: 18px;
+        color: white;
+        margin-right: 10px;
+      }
+      /* ----------------------------------- */
+      .daytime_fieldset02 {
+        padding: 30px 20%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+        .daytime_fieldset02 legend::before {
+          content: "02";
+          display: inline-block;
+          text-align: center;
+          vertical-align: middle;
+          line-height: 1.5;
+          width: 30px;
+          height: 30px;
+          background-color: royalblue;
+          border-radius: 50%;
+          font-size: 18px;
+          color: white;
+          margin-right: 10px;
+        }
+        .dtf02_wrap {
+          width: 100%;
           display: flex;
           flex-direction: column;
+          position: relative;
+          padding-left: 55px;
         }
+          .dtf02_wrap > label {
+            font-size: 20px;
+            font-weight: 600;
+          }
+          .dtf02_wrap > span:first-of-type {
+            font-size: 15px;
+            color: var(--exp-color);
+          }
+          .dtf02_wrap > span:last-of-type {
+            padding-top: 10px;
+          }
+          .dtf02_wrap > span:last-of-type span {
+            color: var(--exp-color);
+            font-weight: 600;
+            font-size: 15px;
+          }
+          .dtf02_wrap .nc_wrap {
+            position: absolute;
+            top: 0px;
+            right: 20%;
+          }
+          
+      /* ---------------------- */
+      .daytime_fieldset03 legend::before {
+        content: "03";
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 1.5;
+        width: 30px;
+        height: 30px;
+        background-color: royalblue;
+        border-radius: 50%;
+        font-size: 18px;
+        color: white;
+        margin-right: 10px;
+      }
+      .daytime_fieldset03 {
+        padding: 30px 20%;
+      }
+      .dtf03_labelExp {
+        color: var(--exp-color);
+        text-indent: 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding-bottom: 20px;
+      }
       .dtf03_wrap .nc_wrap {
         position: absolute;
         top: 0px;
@@ -288,6 +132,7 @@
       } 
       .dtf03_wrap {
         position: relative;
+        padding-bottom: 40px;
       }
       .dtf03_w_exp {
         padding: 20px;
@@ -310,7 +155,6 @@
         flex-direction: column;
         gap: 8px;
       }
-      /* --------------------------- */
       /* ----------------------------------------- */
       .daytime_fieldset06 {
         display: flex;
@@ -413,34 +257,55 @@
           <fieldset class="daytime_fieldset01"> 
             <legend>날짜 지정</legend>
             <div class="date_inputs">
-              <label for="dated_date_value"></label>
-              <input type="date" name="dated_date_value" id="dated_date_value">
+              <label for="daytime_date_value"></label>
+              <input type="date" name="daytime_date_value" id="daytime_date_value">
             </div>
             <div class="calender">
-              <div class="calender_month dated_calender_month">
-                <div class="cm_spanbox">
-                  <span class="cm_sb_yearnumber"></span>
-                  <span style="color: #666">년</span>
-                  <span class="cm_sb_monthnumber"></span>
-                  <span style="color: #666">월</span>
+              <div class="calender_wrap_prev">
+                <div class="calender_month dated_calender_month">
+                  <div class="cm_spanbox">
+                    <span class="cm_sb_span1"></span>
+                    <span class="cm_sb_span2">년</span>
+                    <span class="cm_sb_span1"></span>
+                    <span class="cm_sb_span2">월</span>
+                  </div>
                 </div>
-                <a href="#none" class="gotoback">이전</a>
-                <a href="#none" class="gotonext">다음</a>
+                <div class="calender_date_table daytime_calender_date_table">
+                  <div class="cdt_week"></div>
+                  <div class="cdt_date"></div>
+                </div>
               </div>
-              <div class="calender_date_table dated_calender_date_table">
-                <div class="cdt_week">
-                  <div>일</div>
-                  <div>월</div>
-                  <div>화</div>
-                  <div>수</div>
-                  <div>목</div>
-                  <div>금</div>
-                  <div>토</div>
+              <div class="calender_wrap">
+                <div class="calender_month daytime_calender_month">
+                  <div class="cm_spanbox">
+                    <span class="cm_sb_span1"></span>
+                    <span class="cm_sb_span2">년</span>
+                    <span class="cm_sb_span1"></span>
+                    <span class="cm_sb_span2">월</span>
+                  </div>
+                  <a href="#none" class="gotoback">이전</a>
+                  <a href="#none" class="gotonext">다음</a>
                 </div>
-                <ul class="cdt_date"></ul>
+                <div class="calender_date_table daytime_calender_date_table">
+                  <div class="cdt_week"></div>
+                  <div class="cdt_date"></div>
+                </div>
+              </div>
+              <div class="calender_wrap_next">
+                <div class="calender_month daytime_calender_month">
+                  <div class="cm_spanbox">
+                    <span class="cm_sb_span1"></span>
+                    <span class="cm_sb_span2">년</span>
+                    <span class="cm_sb_span1"></span>
+                    <span class="cm_sb_span2">월</span>
+                  </div>
+                </div>
+                <div class="calender_date_table daytime_calender_date_table">
+                  <div class="cdt_week"></div>
+                  <div class="cdt_date"></div>
+                </div>
               </div>
             </div>
-            
           </fieldset>
 
           <fieldset class="daytime_fieldset02">
@@ -670,81 +535,123 @@
           var df05_price = 0;
 
           //------------Load-------------
-          const today = new Date();
+                    //------------Load-------------
+                    const today = new Date();
+          const weekArr = ["일", "월", "화", "수", "목", "금", "토"];
           let $selYear = today.getFullYear();
           let $selMonth = today.getMonth() +1;
-              const $selMonthText = $selMonth < 10? "0"+($selMonth) : $selMonth;
+            const $selMonthText = $selMonth < 10? "0"+($selMonth) : $selMonth;
           let $selDate = today.getDate();
-              const $selDateText = $selDate < 10? "0"+$selDate : $selDate;
+            const $selDateText = $selDate < 10? "0"+$selDate : $selDate;
           let $selDay = today.getDay();
-          $("#dated_date_value").val((i,v) => `${$selYear}-${$selMonthText}-${$selDateText}`);
-          $(".date_inputs label").text(`${$selYear}년 ${$selMonth}월 ${$selDate}일`);
+          $("#dated_date_value")
+            .val((i,v) => `${$selYear}-${$selMonthText}-${$selDateText}`)
+            .data("value",`${$selYear}${$selMonthText}${$selDateText}`);
+          $(".date_inputs label").text(`${$selYear}년 ${$selMonth}월 ${$selDate}일 (${weekArr[$selDay]})`);
           
-          calenderLoad();
           if ( !$(".calender_table_cell").eq($selDay + $selDate-1).hasClass("disabled_cell") ) {
-              $(".calender_table_cell").eq($selDay + $selDate-1).children().addClass("active_cell");
-              $(".df06_p_s_date").text(`${$selYear}년 ${$selMonth}월 ${$selDate}일`);
+            $(".calender_table_cell").eq($selDay + $selDate-1).children().addClass("active_cell");
+            $(".df06_p_s_date").text(`${$selYear}년 ${$selMonth}월 ${$selDate}일`);
           }
-          //---------------------------- 01. 달력 생성 & 날짜 입력 
-          function calenderLoad() { 
-            const monthFirst = new Date($selYear, $selMonth-1, 1);
-            const firstStart = monthFirst.getDay();
-            const lastEnd = new Date($selYear, $selMonth, 0).getDate();
-            $(".cm_sb_yearnumber").text($selYear);
-            $(".cm_sb_monthnumber").text($selMonth);
-            $(".cdt_date").children().remove();
-
-            for ( let num = 0; num < firstStart+lastEnd; num++) {
-              const k = num-firstStart+1;
-              const $newCell = $("<li class='calender_table_cell'></li>");
-                $newCell.prop("id",`${$selYear}-${$selMonth < 10? "0"+($selMonth) : $selMonth}-${k<10? "0"+k : k}`);
-                $(".cdt_date").append($newCell);
-              if ( 0 < k && k <= lastEnd) {
-                if ( new Date($selYear,$selMonth-1,k) < today ) {
-                  $newCell.text(k);
-                  $newCell.addClass("disabled_cell");
-                } else {
-                  const $accept = $("<a href='#none' class='able_cell'></a>");
-                  $accept.text(k);
-                  $newCell.append($accept).removeClass("disabled_cell");
-                  // 이전 선택 계속 유지
-                  if (+new Date($("#dated_date_value").val()) == +new Date($newCell.prop("id"))) {
-                    console.log(k);
-                    $accept.addClass("active_cell");
-                  }
-                  $accept.click(function(e){
-                    $("#dated_date_value").val((i,v) => `${$selYear}-${$selMonth < 10? "0"+($selMonth) : $selMonth}-${k<10? "0"+k: k}`);
-                    $(".date_inputs label").text(`${$selYear}년 ${$selMonth}월 ${k}일`);
-                    $(this).addClass("active_cell");
-                    $(".able_cell").not($(this)).removeClass("active_cell");
-                    $(".df06_p_s_date").text(`${$selYear}년 ${$selMonth}월 ${k}일`)
-                    total()
-                  });
-                }
-              } 
-            }
-          }
-          
-          $(".calender_month .gotoback").click(function(){
-            if (!($selYear == today.getFullYear() && $selMonth-1 == today.getMonth())) {
-              if ( $selMonth == 1 ) {
-                $selMonth = 12;
-                $selYear -= 1;
-              } else {
-                $selMonth -= 1;
+          //---------------------------- 01. 달력 생성 & 날짜 입력
+          $.fn.extend({
+            week : function() {
+              for (let i = 0; i < 7; i++) {
+                const newDay = $("<div></div>");
+                newDay.addClass("weekCell");
+                $(this).find(".cdt_week").append(newDay);
+                newDay.text(weekArr[i]);
               }
-              calenderLoad();
+            },
+            calender: function(years,months){
+              if ( months < 0) {
+                years -= 1;
+                months = 11;
+              } else if (months > 11) {
+                years += 1;
+                months = 0;
+              }
+              let monthStart = new Date(years, months, 1);
+              let monthEnd = new Date(years, months + 1, 0);
+              $(this).find(".cm_sb_span1").eq(0).text(years);
+              $(this).find(".cm_sb_span1").eq(1).text(months+1);
+
+              $(this).find(".cdt_date").children().remove();
+              const i = monthStart.getDay() + monthEnd.getDate();
+
+              for (let j = 1; j <= i; j++) {
+              
+                const n = j - monthStart.getDay();
+                if (n > 0) {
+                  if ( new Date(years, months, n) < today ) {
+                    const disabled_cell = $("<div class='disabled_cell dataCell'></div>");
+                    disabled_cell.text(n);
+                    $(this).find(".cdt_date").append(disabled_cell);
+                  } else {
+                    const able_cell = $("<a href='#none' class='able_cell dataCell'></a>");
+                    able_cell.text(n);
+                    able_cell.data(
+                      "value",
+                      `${years}${months + 1 < 10 ?  "0" + (months + 1) : months + 1 }${n < 10 ? "0"+n : n}`
+                    ).prop(
+                      "id",
+                      `${years}-${months + 1 < 10 ? "0" + (months + 1) : months + 1 }-${n < 10 ? "0"+n : n}`
+                    );
+                    if ( able_cell.data("value") == $("#dated_date_value").data("value") ) {
+                      able_cell.addClass("active_cell");
+                    }
+                    $(this).find(".cdt_date").append(able_cell);
+                  }
+                } else {
+                  const newDateBox = $("<div class='dataCell'></div>");
+                  $(this).find(".cdt_date").append(newDateBox);
+                } 
+              }
             }
-          })
-          $(".calender_month .gotonext").click(function(){
-            if ( $selMonth == 12 ) {
-              $selMonth = 1;
-              $selYear += 1;
-            } else {
-              $selMonth += 1;
-            }
-              calenderLoad();
-          });           
+          });
+          
+          $(".calender_wrap_prev").week();
+          $(".calender_wrap").week();
+          $(".calender_wrap_next").week();
+          $(".calender_wrap_prev").calender($selYear,$selMonth-2);
+          $(".calender_wrap").calender($selYear,$selMonth-1);
+          $(".calender_wrap_next").calender($selYear,$selMonth);
+
+            $(".calender_month .gotoback").click(function(){
+              if (!($selYear == today.getFullYear() && $selMonth-1 == today.getMonth())) {
+                if ( $selMonth == 1 ) {
+                  $selMonth = 12;
+                  $selYear -= 1;
+                } else {
+                  $selMonth -= 1;
+                }
+              }
+              $(".calender_wrap_prev").calender($selYear,$selMonth-2);
+              $(".calender_wrap").calender($selYear,$selMonth-1);
+              $(".calender_wrap_next").calender($selYear,$selMonth);
+            });
+            $(".calender_month .gotonext").click(function(){
+              if ( $selMonth == 12 ) {
+                $selMonth = 1;
+                $selYear += 1;
+              } else {
+                $selMonth += 1;
+              }
+              $(".calender_wrap_prev").calender($selYear,$selMonth-2);
+              $(".calender_wrap").calender($selYear,$selMonth-1);
+              $(".calender_wrap_next").calender($selYear,$selMonth);
+            });
+
+          $(".able_cell").on("click",function(){
+            $(this).addClass("active_cell");
+            $(".able_cell").not($(this)).removeClass("active_cell");
+            $("#daytime_date_value")
+              .val((i,v) => $(this).prop("id"))
+              .data("value",$(this).data("value"));
+            const q = new Date($(this).prop("id"));
+            $(".date_inputs label").text(`${q.getFullYear()} 년 ${q.getMonth()+1} 월 ${q.getDate()} 일 (${weekArr[q.getDay()]})`);
+            $(".dtf06_p_s_date").text(`${q.getFullYear()} 년 ${q.getMonth()+1} 월 ${q.getDate()} 일 (${weekArr[q.getDay()]})`);
+          })    
           // -------------------------------------- 02. 인원 선택
           $(".decrease_btn").click(function(e){
             if( $(this).siblings("input").val() > 0) {

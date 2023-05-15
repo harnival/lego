@@ -9,53 +9,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./t_use_reser01_0.css">
-    <style>
-       /* ============ common ================ */
-      :root {
-        --whole-max-width: 1350px;
-        --exp-color: #666;
-        --calender-td-size: 30px;
-        --calender-table-size: 400px;
-        --calender-select-color: rgb(2, 172, 2);
-        --calender-month-button: 1em;
-        --inputbox-bg-color: palegoldenrod;
-      }
-      body {margin: 0px;padding: 0px; font-size: 15px; font-family: "Noto Sans KR", "Sans serif";}
-      ul {list-style: none;padding: 0px;margin: 0px;}
-      a {text-decoration: none; color: initial;}
-      /* 수량 버튼 */
-      .gotoback {
-        font-size: 0px;
-        display: block;
-        width: 30px;
-        height: 100%;
-        background: url("img/arrow_back.png") no-repeat center/25px;
-        opacity: 0.4;
-        position:absolute;
-        bottom: 0px;
-        left: 40px;
-      }
-      .gotonext {
-        font-size: 0px;
-        display: block;
-        width: 30px;
-        height: 100%;
-        background: url("img/arrow_forward.png") no-repeat center/25px;
-        opacity: 0.4;
-        position: absolute;
-        bottom: 0px;
-        right: 40px;
-      }
-      /* number input 버튼 숨기기 */
-      input::-webkit-outer-spin-button,
-      input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-      }
-      input[type='number'] {
-        appearance: textfield;
-      }
+    <link rel="stylesheet" href="./ticket_common.css">
+    <style>      
       /* ============== main ================= */
       .mainWrap {
         width: 100vw;
@@ -87,7 +42,7 @@
         align-items: center;
       }
       .active_tap {
-        background-color: yellow;
+        background-color: var(--main-yellow-color);
 
       }
       .formBox {
@@ -95,7 +50,7 @@
         width: 100%;
         box-sizing: border-box;
         margin: auto;
-        background-color: yellow;
+        background-color: var(--main-yellow-color);
       }
       .reservation_basket {
         position: fixed;

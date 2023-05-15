@@ -7,170 +7,11 @@
     <title>일일이용권</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
-      :root {
-        --datecell-color:  rgb(2, 172, 2);
-        --main-max-width: 1350px;
-      }
-        /* ===============================================================  calender common elements*/
-      .disabled_cell {
-        color: #bbb;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      .able_cell {
-        display: flex;
-        text-decoration: none;
-        width: 100%;
-        height: 100%;
-        justify-content: center;
-        align-items: center;
-        color: var(--datecell-color);
-      }
-        .active_cell{
-          background-color: var(--datecell-color);
-          color: white;
-          position: relative;
-        }
-        .active_cell::before {
-          content: "";
-          display: block;
-          position: absolute;
-          width: 20%;
-          height: 10%;
-          background-color: var(--datecell-color);
-          top: -10%;
-          left: 15%;
-        }
-        .active_cell::after {
-          content: "";
-          display: block;
-          position: absolute;
-          width: 20%;
-          height: 10%;
-          background-color: var(--datecell-color);
-          top: -10%;
-          right: 15%;
-        }
-      .calender {
-        border: 2px solid rgba(0,0,0,0.2);
-        box-sizing: border-box;
-        border-radius: 30px;
-        padding: 40px 10px 10px;
-        background-color: white;
-      }
-        .calender .cdt_date {
-          width: var(--calender-table-size);
-          display: flex;
-          flex-wrap: wrap;
-        }
-        .calender .calender_table_cell{
-          aspect-ratio: 1/1;
-          width: calc(100% / 7 - 4px);
-          font-size: 27px;
-          margin: 4px 2px;
-        }
-        .calender .cdt_week {
-          width: 100%;
-          height: 30px;
-          justify-content: space-around;
-          align-items: center;
-          display: flex;
-          text-align: center;
-          color: #666;
-        }
-        .calender_month {
-          width: 100%;
-          height: 50px;
-          text-align: center;
-          box-sizing: border-box;
-          display: flex;
-          position: relative;
-        }
-          .cm_spanbox {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            font-size: 20px; 
-          }
-            .cm_sb_yearnumber,
-            .cm_sb_monthnumber {
-              color: tomato;
-            }
-      .date_inputs {
-        padding: 100px 30px;
-        box-sizing: border-box;
-      }
-        .date_inputs label{
-          font-size: 20px;
-        }
-        .date_inputs input{
-          display: none;
-        }
-      
       /* ================================ number check common elements */
-      .numberCheck {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        width: fit-content;
-        padding: 5px 40px;
-        border-radius: 25px;
-        background-color: yellowgreen;
-      }
-      .nc_wrap label {
-        display: none;
-      }
-        .numberCheck input {
-          width: 40px;
-          height: 30px;
-          text-align: center;
 
-          padding: 0px;
-          margin: 0px;
-          box-sizing: border-box;
-          font-size: 20px;
-          border: none;
-          background-color: transparent;
-        }
-      .decrease_btn {
-        font-size: 0px;
-        display: block;
-        background-color: rgb(240, 240, 89);
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-
-        position: absolute;
-        top: 5px;
-        left: 5px;
-      }
-        .decrease_btn img {
-          width: 30px;
-          opacity: 0.7;
-        }
-      .increase_btn {
-        font-size: 0px;
-        display: block;
-        background-color: rgb(240, 240, 89);
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-
-        position: absolute;
-        top: 5px;
-        right: 5px;
-      }
-        .increase_btn img {
-          width: 30px;
-          opacity: 0.7;
-        }
       /* ======================================= 0. form common elements */
       .ticket_formWrap {
-        max-width: var(--main-max-width);
+        max-width: var(--whole-max-width);
         width: 100%;
         margin: auto;
         padding-bottom: 500px;
@@ -179,36 +20,40 @@
         /* border: none; */
         position: relative;
         margin: 0px;
-        padding: 0px 20%;
+        padding: 0px;
       }
       fieldset legend {
+        display: block;
+        width: fit-content;
         position: absolute;
         top: 20px;
-        left: 20px;
+        left: 7%;
         font-size: 200%;
       }
       /* ======================================= 01. 날짜 선택 */
       .dated_fieldset01 {
         display: flex;
-        justify-content: center;
+        justify-content: right;
         position: relative;
+        padding-left: 20%;
       }    
-        .dated_fieldset01 legend::before {
-          content: "01";
-          display: inline-block;
-          text-align: center;
-          vertical-align: middle;
-          line-height: 1.5;
-          width: 30px;
-          height: 30px;
-          background-color: royalblue;
-          border-radius: 50%;
-          font-size: 18px;
-          color: white;
-          margin-right: 10px;
-        }
+      .dated_fieldset01 legend::before {
+        content: "01";
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 1.5;
+        width: 30px;
+        height: 30px;
+        background-color: royalblue;
+        border-radius: 50%;
+        font-size: 18px;
+        color: white;
+        margin-right: 10px;
+      }
       /* ======================================= 02. 인원 선택 */
       .dated_fieldset02 {
+        padding: 30px 20%;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -272,14 +117,15 @@
         margin-right: 10px;
       }
       .dated_fieldset03 {
-        padding: 0px 20%;
+        padding: 30px 20%;
       }
       .df03_labelExp {
         color: var(--exp-color);
         text-indent: 40px;
-        margin: 0px;
         display: flex;
         flex-direction: column;
+        gap: 5px;
+        padding-bottom: 20px;
       }
       .df03_wrap .nc_wrap {
         position: absolute;
@@ -288,6 +134,7 @@
       } 
       .df03_wrap {
         position: relative;
+        padding-bottom: 40px;
       }
       .df03_w_exp {
         padding: 20px;
@@ -311,6 +158,9 @@
         gap: 8px;
       }
       /* ============================================== 04. 패스트트랙 */
+      .dated_fieldset04 {
+        padding: 80px 20%;
+      }
       .dated_fieldset04 legend::before {
         content: "04";
         display: inline-block;
@@ -377,6 +227,9 @@
         font-size: 15px;
       }
       /* =========================================== 05. master builder */
+      .dated_fieldset05 {
+        padding: 80px 20%;
+      }
       .dated_fieldset05 legend::before {
         content: "05";
         display: inline-block;
@@ -393,7 +246,7 @@
       }
       .df05_wrap {
         position: relative;
-        margin-top: 100px;
+        padding: 0px 0px 40px;
       }
       .df05_wrap .nc_wrap {
         position: absolute;
@@ -488,6 +341,7 @@
       .df06_d_list li input[type="checkbox"] {
         display: none;
       }
+      /* --------------- */
       .df06_price {
         width: 50%;
         border: 1px dashed royalblue;
@@ -511,22 +365,7 @@
       }
       .df06_p_s_e_4 {
         display: flex;
-
       }
-      .df06_p_s_e_title04 {
-        margin: 0px;
-        padding: 0px;
-      }
-      .df06_p_s_e_number04 {
-        margin: 0px;
-        padding: 0px;
-        float: right;
-      }
-      .df06_p_s_e_price04 {
-        margin: 0px;
-        padding: 0px;
-      }
-
     </style>
 </head>
 <body>
@@ -551,30 +390,51 @@
               <input type="date" name="dated_date_value" id="dated_date_value">
             </div>
             <div class="calender">
-              <div class="calender_month dated_calender_month">
-                <div class="cm_spanbox">
-                  <span class="cm_sb_yearnumber"></span>
-                  <span style="color: #666">년</span>
-                  <span class="cm_sb_monthnumber"></span>
-                  <span style="color: #666">월</span>
+              <div class="calender_wrap_prev">
+                <div class="calender_month dated_calender_month">
+                  <div class="cm_spanbox">
+                    <span class="cm_sb_span1"></span>
+                    <span class="cm_sb_span2">년</span>
+                    <span class="cm_sb_span1"></span>
+                    <span class="cm_sb_span2">월</span>
+                  </div>
                 </div>
-                <a href="#none" class="gotoback">이전</a>
-                <a href="#none" class="gotonext">다음</a>
+                <div class="calender_date_table dated_calender_date_table">
+                  <div class="cdt_week"></div>
+                  <div class="cdt_date"></div>
+                </div>
               </div>
-              <div class="calender_date_table dated_calender_date_table">
-                <div class="cdt_week">
-                  <div>일</div>
-                  <div>월</div>
-                  <div>화</div>
-                  <div>수</div>
-                  <div>목</div>
-                  <div>금</div>
-                  <div>토</div>
+              <div class="calender_wrap">
+                <div class="calender_month dated_calender_month">
+                  <div class="cm_spanbox">
+                    <span class="cm_sb_span1"></span>
+                    <span class="cm_sb_span2">년</span>
+                    <span class="cm_sb_span1"></span>
+                    <span class="cm_sb_span2">월</span>
+                  </div>
+                  <a href="#none" class="gotoback">이전</a>
+                  <a href="#none" class="gotonext">다음</a>
                 </div>
-                <ul class="cdt_date"></ul>
+                <div class="calender_date_table dated_calender_date_table">
+                  <div class="cdt_week"></div>
+                  <div class="cdt_date"></div>
+                </div>
+              </div>
+              <div class="calender_wrap_next">
+                <div class="calender_month dated_calender_month">
+                  <div class="cm_spanbox">
+                    <span class="cm_sb_span1"></span>
+                    <span class="cm_sb_span2">년</span>
+                    <span class="cm_sb_span1"></span>
+                    <span class="cm_sb_span2">월</span>
+                  </div>
+                </div>
+                <div class="calender_date_table dated_calender_date_table">
+                  <div class="cdt_week"></div>
+                  <div class="cdt_date"></div>
+                </div>
               </div>
             </div>
-            
           </fieldset>
 
           <fieldset class="dated_fieldset02">
@@ -1025,9 +885,9 @@
                     <span><strong>부가 선택</strong></span>
                     <div class="df06_p_s_extra">
                       <div>
-                        <p class="df06_p_s_e_title03"></p>
-                        <p class="df06_p_s_e_number03"></p>
-                        <p class="df06_p_s_e_price03"></p>
+                        <div class="df06_p_s_e_title03"></div>
+                        <div class="df06_p_s_e_number03"></div>
+                        <div class="df06_p_s_e_price03"></div>
                       </div>
                     </div>
                   </li>
@@ -1058,69 +918,93 @@
     </div>
     <script>
         $(function(){
-          
           // for Total Price ----------
           var discountRate = 1;
           var df03_number = 0, df03_price = 0;
           var df04_price = [0,0,0];
           var df05_price = 0;
-          
           //------------Load-------------
           const today = new Date();
+          const weekArr = ["일", "월", "화", "수", "목", "금", "토"];
           let $selYear = today.getFullYear();
           let $selMonth = today.getMonth() +1;
             const $selMonthText = $selMonth < 10? "0"+($selMonth) : $selMonth;
           let $selDate = today.getDate();
             const $selDateText = $selDate < 10? "0"+$selDate : $selDate;
           let $selDay = today.getDay();
-          $("#dated_date_value").val((i,v) => `${$selYear}-${$selMonthText}-${$selDateText}`);
-          $(".date_inputs label").text(`${$selYear}년 ${$selMonth}월 ${$selDate}일`);
+          $("#dated_date_value")
+            .val((i,v) => `${$selYear}-${$selMonthText}-${$selDateText}`)
+            .data("value",`${$selYear}${$selMonthText}${$selDateText}`);
+          $(".date_inputs label").text(`${$selYear}년 ${$selMonth}월 ${$selDate}일 (${weekArr[$selDay]})`);
           
-          calenderLoad();
           if ( !$(".calender_table_cell").eq($selDay + $selDate-1).hasClass("disabled_cell") ) {
             $(".calender_table_cell").eq($selDay + $selDate-1).children().addClass("active_cell");
             $(".df06_p_s_date").text(`${$selYear}년 ${$selMonth}월 ${$selDate}일`);
           }
-          //---------------------------- 01. 달력 생성 & 날짜 입력 
-            function calenderLoad() { 
-              const monthFirst = new Date($selYear, $selMonth-1, 1);
-              const firstStart = monthFirst.getDay();
-              const lastEnd = new Date($selYear, $selMonth, 0).getDate();
-              $(".cm_sb_yearnumber").text($selYear);
-              $(".cm_sb_monthnumber").text($selMonth);
-              $(".cdt_date").children().remove();
+          //---------------------------- 01. 달력 생성 & 날짜 입력
+          $.fn.extend({
+            week : function() {
+              for (let i = 0; i < 7; i++) {
+                const newDay = $("<div></div>");
+                newDay.addClass("weekCell");
+                $(this).find(".cdt_week").append(newDay);
+                newDay.text(weekArr[i]);
+              }
+            },
+            calender: function(years,months){
+              if ( months < 0) {
+                years -= 1;
+                months = 11;
+              } else if (months > 11) {
+                years += 1;
+                months = 0;
+              }
+              let monthStart = new Date(years, months, 1);
+              let monthEnd = new Date(years, months + 1, 0);
+              $(this).find(".cm_sb_span1").eq(0).text(years);
+              $(this).find(".cm_sb_span1").eq(1).text(months+1);
 
-              for ( let num = 0; num < firstStart+lastEnd; num++) {
-                const k = num-firstStart+1;
-                const $newCell = $("<li class='calender_table_cell'></li>");
-                  $newCell.prop("id",`${$selYear}-${$selMonth < 10? "0"+($selMonth) : $selMonth}-${k<10? "0"+k : k}`);
-                  $(".cdt_date").append($newCell);
-                if ( 0 < k && k <= lastEnd) {
-                  if ( new Date($selYear,$selMonth-1,k) < today ) {
-                    $newCell.text(k);
-                    $newCell.addClass("disabled_cell");
+              $(this).find(".cdt_date").children().remove();
+              const i = monthStart.getDay() + monthEnd.getDate();
+
+              for (let j = 1; j <= i; j++) {
+              
+                const n = j - monthStart.getDay();
+                if (n > 0) {
+                  if ( new Date(years, months, n) < today ) {
+                    const disabled_cell = $("<div class='disabled_cell dataCell'></div>");
+                    disabled_cell.text(n);
+                    $(this).find(".cdt_date").append(disabled_cell);
                   } else {
-                    const $accept = $("<a href='#none' class='able_cell'></a>");
-                    $accept.text(k);
-                    $newCell.append($accept).removeClass("disabled_cell");
-                    // 이전 선택 계속 유지
-                    if (+new Date($("#dated_date_value").val()) == +new Date($newCell.prop("id"))) {
-                      console.log(k);
-                      $accept.addClass("active_cell");
+                    const able_cell = $("<a href='#none' class='able_cell dataCell'></a>");
+                    able_cell.text(n);
+                    able_cell.data(
+                      "value",
+                      `${years}${months + 1 < 10 ?  "0" + (months + 1) : months + 1 }${n < 10 ? "0"+n : n}`
+                    ).prop(
+                      "id",
+                      `${years}-${months + 1 < 10 ? "0" + (months + 1) : months + 1 }-${n < 10 ? "0"+n : n}`
+                    );
+                    if ( able_cell.data("value") == $("#dated_date_value").data("value") ) {
+                      able_cell.addClass("active_cell");
                     }
-                    $accept.click(function(e){
-                      $("#dated_date_value").val((i,v) => `${$selYear}-${$selMonth<10? "0"+$selMonth : $selMonth}-${k<10? "0"+k: k}`);
-                      $(".date_inputs label").text(`${$selYear}년 ${$selMonth}월 ${k}일`);
-                      $(this).addClass("active_cell");
-                      $(".able_cell").not($(this)).removeClass("active_cell");
-                      $(".df06_p_s_date").text(`${$selYear}년 ${$selMonth}월 ${k}일`)
-                      total()
-                    });
+                    $(this).find(".cdt_date").append(able_cell);
                   }
+                } else {
+                  const newDateBox = $("<div class='dataCell'></div>");
+                  $(this).find(".cdt_date").append(newDateBox);
                 } 
               }
             }
-           
+          });
+          
+          $(".calender_wrap_prev").week();
+          $(".calender_wrap").week();
+          $(".calender_wrap_next").week();
+          $(".calender_wrap_prev").calender($selYear,$selMonth-2);
+          $(".calender_wrap").calender($selYear,$selMonth-1);
+          $(".calender_wrap_next").calender($selYear,$selMonth);
+
             $(".calender_month .gotoback").click(function(){
               if (!($selYear == today.getFullYear() && $selMonth-1 == today.getMonth())) {
                 if ( $selMonth == 1 ) {
@@ -1129,9 +1013,11 @@
                 } else {
                   $selMonth -= 1;
                 }
-                calenderLoad();
               }
-            })
+              $(".calender_wrap_prev").calender($selYear,$selMonth-2);
+              $(".calender_wrap").calender($selYear,$selMonth-1);
+              $(".calender_wrap_next").calender($selYear,$selMonth);
+            });
             $(".calender_month .gotonext").click(function(){
               if ( $selMonth == 12 ) {
                 $selMonth = 1;
@@ -1139,9 +1025,21 @@
               } else {
                 $selMonth += 1;
               }
-                calenderLoad();
+              $(".calender_wrap_prev").calender($selYear,$selMonth-2);
+              $(".calender_wrap").calender($selYear,$selMonth-1);
+              $(".calender_wrap_next").calender($selYear,$selMonth);
             });
-           
+
+          $(".able_cell").on("click",function(){
+            $(this).addClass("active_cell");
+            $(".able_cell").not($(this)).removeClass("active_cell");
+            $("#dated_date_value")
+              .val((i,v) => $(this).prop("id"))
+              .data("value",$(this).data("value"));
+            const q = new Date($(this).prop("id"));
+            $(".date_inputs label").text(`${q.getFullYear()} 년 ${q.getMonth()+1} 월 ${q.getDate()} 일 (${weekArr[q.getDay()]})`);
+            $(".df06_p_s_date").text(`${q.getFullYear()} 년 ${q.getMonth()+1} 월 ${q.getDate()} 일 (${weekArr[q.getDay()]})`);
+          })
           // -------------------------------------- 02. 인원 선택
           $(".decrease_btn").click(function(e){
             if( $(this).siblings("input").val() > 0) {
@@ -1202,7 +1100,7 @@
           
           $(".df04_ft .nc_wrap input").each(function(i) {
             
-            const $newbox04 = $('<div class="df06_p_s_e_4"><p class="df06_p_s_e_title04"></p><p class="df06_p_s_e_number04"></p><p class="df06_p_s_e_price04"></p></div>');
+            const $newbox04 = $('<div class="df06_p_s_e_4"><div class="df06_p_s_e_title04"></div><div class="df06_p_s_e_number04"></div><div class="df06_p_s_e_price04"></div></div>');
             $(".df06_p_s_extra").append($newbox04);
 
             if ( $(this).val() == 0) { $newbox04.hide() }
@@ -1225,7 +1123,7 @@
           })
           // ------------------------------------- 05. VIP EXPERIENCES
           
-          const $newbox05 = $('<div><p class="df06_p_s_e_title05"></p><p class="df06_p_s_e_number05"></p><p class="df06_p_s_e_price05"></p></div>');
+          const $newbox05 = $('<div class="df06_p_s_e_5"><div class="df06_p_s_e_title05"></div><div class="df06_p_s_e_number05"></div><div class="df06_p_s_e_price05"></div></div>');
           $(".df06_p_s_extra").append($newbox05);
           $(".df06_p_s_e_title05").text("LEGOLAND® Master Builder Program");
 
@@ -1342,9 +1240,9 @@
           
           const total = function() {
             const grownDatedPrice = 
-              today.getFullYear()==$selYear && today.getMonth()==$selMonth-1 && today.getDate()==$selDate ? 60000 : 54000;
+              new Date($selYear,$selMonth-1,$selDate) == today ? 60000 : 54000;
             const littleDatedPrice = 
-              today.getFullYear()==$selYear && today.getMonth()==$selMonth-1 && today.getDate()==$selDate ? 50000 : 45000;
+              new Date($selYear,$selMonth-1,$selDate) == today ? 50000 : 45000;
 
             const t_1 = grownDatedPrice * $("#dated_numbers_grown").val() + littleDatedPrice * $("#dated_numbers_little").val();
             const t_2 = df03_number * df03_price;
