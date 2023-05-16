@@ -7,326 +7,12 @@
     <title>Document</title>
     <script src="./jquery.js"></script>
     <style>
-        :root {
-          --exp-color: #666;
-        }
-        body {margin: 0px; padding: 0px;}
-        a {text-decoration: none; color: initial;}
-        .gotoback {
-            font-size: 0px;
-            display: block;
-            width: 30px;
-            height: 100%;
-            background: url("img/arrow_back.png") no-repeat center/25px;
-            opacity: 0.4;
-            position:absolute;
-            bottom: 0px;
-            left: 40px;
-
-        }
-        .gotonext {
-            font-size: 0px;
-            display: block;
-            width: 30px;
-            height: 100%;
-            background: url("img/arrow_forward.png") no-repeat center/25px;
-            opacity: 0.4;
-            position: absolute;
-            bottom: 0px;
-            right: 40px;
-        }
-        /* ====================== */
-
-          /* ======================== */
-        .numberCheck {
-          position: relative;
-          display: flex;
-          justify-content: center;
-          width: fit-content;
-          padding: 5px 40px;
-          border-radius: 25px;
-          background-color: yellowgreen;
-        }
-        .nc_wrap label {
-                display: none;
-              }
-          .numberCheck input {
-            width: 40px;
-            height: 30px;
-            text-align: center;
-
-            padding: 0px;
-            margin: 0px;
-            box-sizing: border-box;
-            font-size: 20px;
-            border: none;
-            background-color: transparent;
-          }
-          .decrease_btn {
-            font-size: 0px;
-            display: block;
-            background-color: rgb(240, 240, 89);
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-
-            position: absolute;
-            top: 5px;
-            left: 5px;
-          }
-            .decrease_btn img {
-              width: 30px;
-              opacity: 0.7;
-            }
-          .increase_btn {
-            font-size: 0px;
-            display: block;
-            background-color: rgb(240, 240, 89);
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-
-            position: absolute;
-            top: 5px;
-            right: 5px;
-          }
-            .increase_btn img {
-              width: 30px;
-              opacity: 0.7;
-            }
-            /* ============================= */
-
-            /* ------------------------------ */
-            .ticket_formWrap {
-              width: 900px;
-              border: 1px solid tomato;
-              margin: auto;
-            }
-            fieldset {
-              /* border: none; */
-              position: relative;
-              margin: 0px;
-              padding: 0px;
-              padding-top: 100px;
-            }
-            .annual_fieldset01 {
-              width: 100%;
-              box-sizing: border-box;
-              position: relative;
-            }
-              fieldset legend {
-                position: absolute;
-                top: 20px;
-                left: 20px;
-                font-size: 25px;
-              }
-              .annual_fieldset01 legend::before {
-                content: "01";
-                display: inline-block;
-                text-align: center;
-                vertical-align: middle;
-                line-height: 1.5;
-                width: 30px;
-                height: 30px;
-                background-color: royalblue;
-                border-radius: 50%;
-                font-size: 18px;
-                color: white;
-                margin-right: 10px;
-              }
-              .af01_tcWrap {
-                display: flex;
-                position: relative;
-                width: 100%;
-                box-sizing: border-box;
-                gap: 4px;
-                padding-bottom: 20px;
-              }
-              .af01_ticketcard {
-                border: 1px solid black;
-                box-sizing: border-box;
-                width: calc(100% / 3);
-              }
-              .af01_tc_select{
-                display: block;
-                width: 100%;
-                height: 300px;
-              }
-              .af01_tc_select img {
-                width: 100%;
-                aspect-ratio : 1/0.7;
-              }
-              .af01_exp {
-                width: 100%;
-                box-sizing: border-box;
-                padding: 2px;
-              }
-                .af01_exp > a {
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
-                  position: relative;
-                  width: 100%;
-                  height: 40px;
-                  background-color: #ddd;
-                  border-radius: 10px;
-                  box-sizing: border-box;
-
-                  color: #666;
-                  font-size: 15px;
-                  font-weight: 600;
-                }
-                .af01_exp > a::before {
-                  content: "";
-                    display: inline-block;
-                    background: url("./img/arrow_drop_down.png") no-repeat center/30px;
-                    width: 30px;
-                    height: 30px;
-                    opacity: 0.7;
-                }
-              .af01_e_list {
-                display: flex;
-                flex-wrap:wrap;
-                box-sizing: border-box;
-                margin: 5px 0px 0px 0px;
-                padding: 0px;
-              }
-              .af01_e_listWrap {
-                display: none;
-              }
-                .af01_e_list dt {
-                  width: 100%;
-                  box-sizing: border-box;
-                  height: 40px;
-                  padding-left: 10%;
-                  margin: 2px 0px;
-                  display: flex;
-                  align-items: center;
-
-                  background-color: paleturquoise;
-                  border-radius: 10px;
-                }
-                  .af01_e_list dt a {
-                    position: relative;
-                    display: block;
-                    width: 100%;
-                    height: 100%;
-                    display: flex;
-                    align-items: center;
-                  }
-                  .af01_e_list dt a::before {
-                    content: "";
-                    display: inline-block;
-                    position: absolute;
-                    left: -25px;
-                    background: url("./img/arrow_drop_down.png") no-repeat center/25px;
-                    width: 25px;
-                    height: 25px;
-                    opacity: 0.7;
-                  }
-                  .af01_e_list dt span {
-                    color: #888;
-                    font-size: 14px;
-                    padding-left: 10px;
-                  }
-                .af01_e_list dd:not(.af01_e_l_detail) {
-                  width: calc(100% / 3 - 4px);
-                  box-sizing: border-box;
-                  height: 40px;
-                  margin: 0px 2px;
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
-                  background-color: palegreen;
-
-                  font-weight: 600;
-                  color: #333;
-                }
-                .af01_e_list dd:not(.af01_e_l_detail) svg {
-                  filter: brightness(100%);
-                }
-                .af01_e_l_name {
-                  display: none;
-                }
-                .af01_e_l_detail {
-                  width: 100%;
-                  box-sizing: border-box;
-                  text-align: start;
-                  display: none;
-                }
-
-             
-              
-      
-      /* --------------------------- */
-      .annual_fieldset04 legend::before {
-                content: "04";
-                display: inline-block;
-                text-align: center;
-                vertical-align: middle;
-                line-height: 1.5;
-                width: 30px;
-                height: 30px;
-                background-color: royalblue;
-                border-radius: 50%;
-                font-size: 18px;
-                color: white;
-                margin-right: 10px;
-              }
-              .af04_labelexp {
-                position: relative;
-              }
-              .af04_labelexp >span {
-                color: var(--exp-color);
-              }
-              .af04_labelexp a {
-                float: right;
-                display: flex;
-                text-decoration: none;
-                color: #444;
-                gap: 5px;
-                border: 2px solid #ddd;
-                width: fit-content;
-                padding: 2px 5px;
-                border-radius: 20px;
-                font-size: 14px;
-              }
-              .af04_labelexp a::before {
-                content: url("img/info.png");
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 20px;
-                height: 20px;
-                transform: scale(0.4,0.4);
-                opacity: 0.7;
-              }
-              
-      .af04_l_ride {
-        background-color: bisque;
-        position: absolute;
-        padding: 20px;
-        list-style: square;
-
-        display: none;
-      }
-      .af04_ft {
-        margin-top: 20px;
+      .annual_fieldset01 {
         position: relative;
+        padding: 80px 15% 30px;
       }
-      .af04_ft .nc_wrap {
-        position: absolute;
-        top: 0px;
-        right: 0px;
-      }
-      .af04_ft_exp {
-        color: var(--exp-color);
-        text-indent: 10px;
-        font-size: 15px;
-      }
-      /* ---------------------------------- */
-      .annual_fieldset05 legend::before {
-        content: "05";
+      .annual_fieldset01 legend::before {
+        content: "01";
         display: inline-block;
         text-align: center;
         vertical-align: middle;
@@ -339,91 +25,391 @@
         color: white;
         margin-right: 10px;
       }
-      /* ----------------------------------------- */
-      .annual_fieldset06 {
+      .af01_tcWrap {
         display: flex;
         position: relative;
+        width: 100%;
+        box-sizing: border-box;
+        gap: 5px;
+        padding-bottom: 20px;
       }
-      .af06_discount {
+      .af01_ticketcard {
+        border-radius: 20px;
+        box-sizing: border-box;
+        width: calc(100% / 3);
+        aspect-ratio: 1 / 1.2;
+        overflow: hidden;
+        box-shadow: 3px 3px 6px rgba(136, 136, 136, 0.5);
+      }
+      .af01_ticketcard:nth-of-type(1) {
+        background: linear-gradient(-45deg,#d3d3d4, #c4c3c3 10%, #d3d3d4 25%, #f0f0f0 50%, #d3d3d4 60%);
+      }
+      .af01_ticketcard:nth-of-type(2) {
+        background: linear-gradient(-45deg,#f5ca56, #f8e3a7 10%, #f5ca56 25%, #fae9bc 50%, #f5ca56 60%);
+      }
+      .af01_ticketcard:nth-of-type(3) {
+        background: linear-gradient(-45deg,#717077, #acaab4 10%, #717077 25%, #d1cfdb 50%, #717077 60%);
+      }
+      .af01_tc_select{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        box-sizing: border-box;
+        aspect-ratio: 1 / 0.6;
+        margin-bottom: 5px;
+      }
+      .af01_tc_select img {
+        width: 108%;
+      }
+      .af01_tc_title {
+        display: block;
+        text-align: start;
+        font-size: 150%;
+        font-weight: 600;
+
+        padding: 10px 20px;
+      }
+      .af01_exp {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 2px;
+      }
+      .af01_exp > a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        width: 100%;
+        height: 40px;
+        background-color: #dddddd75;
+        border-radius: 10px;
+        box-sizing: border-box;
+
+        color: #666;
+        font-size: 15px;
+        font-weight: 600;
+      }
+      .af01_exp > a::before {
+        content: "";
+          display: inline-block;
+          background: url("./img/arrow_drop_down.png") no-repeat center/30px;
+          width: 30px;
+          height: 30px;
+          opacity: 0.7;
+      }
+      .af01_e_list {
+        display: flex;
+        flex-wrap:wrap;
+        box-sizing: border-box;
+        margin: 5px 0px 0px 0px;
+        padding: 0px;
+      }
+      .af01_e_listWrap {
+        display: none;
+      }
+      .af01_e_list dt {
+        width: 100%;
+        box-sizing: border-box;
+        height: 40px;
+        padding-left: 10%;
+        margin: 2px 0px;
+        display: flex;
+        align-items: center;
+
+        background: linear-gradient(to left,rgb(39, 206, 39),rgb(72, 212, 72), rgb(39, 206, 39));
+      }
+      .af01_e_list dt a {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+      }
+      .af01_e_list dt a::before {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        left: -25px;
+        background: url("./img/arrow_drop_down.png") no-repeat center/25px;
+        width: 25px;
+        height: 25px;
+        opacity: 0.7;
+      }
+      .af01_e_list dt span {
+        color: #666;
+        font-size: 14px;
+        padding-left: 10px;
+      }
+      .af01_e_list dd:not(.af01_e_l_detail) {
+        width: calc(100% / 3 - 4px);
+        box-sizing: border-box;
+        height: 40px;
+        margin: 0px 2px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: palegreen;
+
+        font-weight: 600;
+        color: #333;
+      }
+      .af01_e_list dd:not(.af01_e_l_detail) svg {
+        filter: brightness(100%);
+      }
+      .af01_e_l_name {
+        display: none;
+      }
+      .af01_e_l_detail {
+        width: 100%;
+        box-sizing: border-box;
+        text-align: start;
+        display: none;
+      }
+    /* ----------------------------------------- */
+    .annual_fieldset02 {
+      position: relative;
+    }
+    .annual_fieldset02 legend::before {
+      content: "02";
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+      line-height: 1.5;
+      width: 30px;
+      height: 30px;
+      background-color: royalblue;
+      border-radius: 50%;
+      font-size: 18px;
+      color: white;
+      margin-right: 10px;
+    }
+    .af02_i_info_origin {
+    display: block;
+    }
+    .af02_i_info {
+      background-color:  var(--inputbox-bg-color);
+    }
+    .af02_i_i_tab {
+      height: 80px;
+      background-color: palevioletred;
+      position: relative;
+      padding-left: 40px;
+      display: flex;
+      align-items: center;
+    }
+    .af02_i_i_tab > a {
+      display: block;
+      font-size: 0px;
+      width: 20px;
+      height: 20px;
+      background: url("./img/close_button.png") no-repeat center/20px;
+      border: 2px solid black;
+      position: absolute;
+      left: 20px;
+    }
+    .af02_i_i_inputpage {
+      width: 80%;
+      height: 300px;
+      padding-top: 20px;
+      margin:auto;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      align-content: start;
+    }
+    .af02_i_i_inputpage > div:not(.user_photo) {
+      border: 1px dashed tomato;
+      position: relative;
+      height: calc(100% / 4);
+      width: calc(100% / 3);
+      box-sizing: border-box;
+    }
+    .af02_i_i_inputpage input {
+      background-color: transparent;
+      border: none;
+      border: 1px solid #666;
+      border-radius: 15px;
+      padding: 17px 0px 9px 20px ;
+      box-sizing: border-box;
+      width: 250px;
+      font-size: 15px;
+      outline-color:rgb(2, 172, 2);
+      transition: .5s ease;
+    }
+    .af02_i_i_inputpage input::placeholder {
+      opacity: 0.7;
+    }
+    .af02_i_i_inputpage input:focus {
+      border-color: yellow;
+    }
+    .af02_i_i_inputpage label:not(.user_birthday label),
+    .user_birthday span {
+      display: inline-block;
+      position: absolute;
+      top: -10px;
+      left: 0px;
+      font-size: 12px;
+      color: #666;
+      background-color: var(--inputbox-bg-color);
+      padding: 0px 3px;
+    }
+    .user_nationality_select {
+      position: relative;
+    }
+    .user_nationality_select ul {
+      display: none;
+
+      list-style: none;
+      padding: 0px;
+      margin: 0px;
+      width: 200px;
+      background-color: white;
+      border: 2px solid #bbb;
+      border-radius: 15px;
+      box-sizing: border-box;
+      position: absolute;
+      top: 50px;
+      left: 0px;
+      z-index: 9000;
+    }
+    .user_nationality_select li {
+      padding: 3px 0px 3px 15px;
+      
+    }
+    .user_nationality_select li a {
+      display: block;
+      width: 100%;
+    }
+    .user_nationality_select li:first-child {
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+    }
+    .user_nationality_select li:last-child {
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+      padding-bottom: 5px;
+    }
+    .user_nationality_select li:hover {
+      background-color: #ddd;
+    }
+    .user_nationality_select input {
+      
+      background: url("img/arrow_drop_down.png") no-repeat center right 8px / 20px 30px;
+      width: 200px;
+      
+    }
+    .user_birthday input:nth-of-type(1) {
+      width: 70px;
+      text-align: center;
+      padding-left: 0px;
+    }
+    .user_birthday input:nth-of-type(2),
+    .user_birthday input:nth-of-type(3) {
+      width: 50px;
+      text-align: center;
+      padding-left: 0px;
+    }
+    .user_photo {
+      border: 1px dashed tomato;
+      position: relative;
+      height: inherit;
+      width: calc(100% / 3);
+      box-sizing: border-box;
+    }
+    .user_photo_img_wrap {
+      height: 80%;
+      width: 100%;
+      border: 1px dashed royalblue;
+      padding: 10%;
+      box-sizing: border-box;
+    }
+    /* ----------------------------------------- */
+    .annual_fieldset06 {
+      display: flex;
+      position: relative;
+    }
+    .af06_discount {
+      width: 50%;
+    }
+    .af06_d_list {
+      list-style: none;
+      padding: 0px;
+      border: 1px solid rgba(0,0,0,0.4);
+      border-bottom: none;
+    }
+      .af06_d_list li {
+        border-bottom: 1px solid rgba(0,0,0,0.4);
+      }
+      .af06_d_l_wrap {
+        position: relative;
+        display: flex;
+        align-items:flex-start;
+        flex-direction: column;
+      }
+      .af06_d_l_listopen {
+        display: block;
+        width: 50%;
+        background: url("img/arrow_drop_down.png") no-repeat center left/30px;
+        padding-left: 30px;
+        line-height: 2;
+        text-decoration: none;
+        color: black;
+      }
+      .af06_d_l_select {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+      }
+      .af06_d_l_detail {
+        display: none;
+      }
+        .af06_d_l_detail table {
+          border: 1px solid rgb(121, 121, 121);
+          box-sizing: border-box;
+        }
+        .af06_d_l_detail th {
+          background-color: rgb(187, 255, 255);
+        }
+        .af06_d_l_detail tr {
+          background-color: rgb(207, 255, 255);
+        }
+
+      .af06_d_l_w_exp {
+        color: var(--exp-color);
+        padding-left: 20px;
+        font-size: 15px;
+      }
+      .active_discount {
+        background-color: rgb(247, 206, 199);
+      }
+      .not_discount .af06_d_l_wrap {
+        opacity: 0.5;
+      }
+      .af06_d_list li input[type="checkbox"] {
+        display: block;
+      }
+
+      .af06_price {
         width: 50%;
       }
-      .af06_d_list {
-        list-style: none;
-        padding: 0px;
-        border: 1px solid rgba(0,0,0,0.4);
-        border-bottom: none;
+      /* ------------------ */
+      .af06_p_s_extra > div {
+        border: 1px solid tomato;
+        box-sizing: border-box;
+        display: none;
       }
-        .af06_d_list li {
-          border-bottom: 1px solid rgba(0,0,0,0.4);
-        }
-        .af06_d_l_wrap {
-          position: relative;
-          display: flex;
-          align-items:flex-start;
-          flex-direction: column;
-        }
-        .af06_d_l_listopen {
-          display: block;
-          width: 50%;
-          background: url("img/arrow_drop_down.png") no-repeat center left/30px;
-          padding-left: 30px;
-          line-height: 2;
-          text-decoration: none;
-          color: black;
-        }
-        .af06_d_l_select {
-          position: absolute;
-          top: 0px;
-          right: 0px;
-        }
-        .af06_d_l_detail {
-          display: none;
-        }
-          .af06_d_l_detail table {
-            border: 1px solid rgb(121, 121, 121);
-            box-sizing: border-box;
-          }
-          .af06_d_l_detail th {
-            background-color: rgb(187, 255, 255);
-          }
-          .af06_d_l_detail tr {
-            background-color: rgb(207, 255, 255);
-          }
 
-        .af06_d_l_w_exp {
-          color: var(--exp-color);
-          padding-left: 20px;
-          font-size: 15px;
-        }
-        .active_discount {
-          background-color: rgb(247, 206, 199);
-        }
-        .not_discount .af06_d_l_wrap {
-          opacity: 0.5;
-        }
-        .af06_d_list li input[type="checkbox"] {
-          display: block;
-        }
-
-        .af06_price {
-          width: 50%;
-        }
-        /* ------------------ */
-        .af06_p_s_extra > div {
-          border: 1px solid tomato;
-          box-sizing: border-box;
-          display: none;
-        }
-
-        .af06_discount_select {
-          display: none;
-        }
-        .af06_p_s_discount >div {
-          border: 1px solid tomato;
-        }
-        #annual_total_price {
-          display: none;
-        }
+      .af06_discount_select {
+        display: none;
+      }
+      .af06_p_s_discount >div {
+        border: 1px solid tomato;
+      }
+      #annual_total_price {
+        display: none;
+      }
     </style>
 </head>
 <body>
@@ -447,8 +433,8 @@
               <div class="af01_ticketcard">
                 <a href="#none" class="af01_tc_select">
                   <img src="./img/standard_pass.png" alt="">
-                  <span class="af01_tc_title">STANDARD PASS</span>
                 </a>
+                <span class="af01_tc_title">STANDARD PASS</span>
                 <div class="af01_tc_number">
                   <div class="numberCheck">
                     <input
@@ -469,8 +455,8 @@
               <div class="af01_ticketcard">
                 <a href="#none" class="af01_tc_select">
                   <img src="./img/gold_pass.png" alt="">
-                  <span class="af01_tc_title">GOLD PASS</span>
                 </a>
+                <span class="af01_tc_title">GOLD PASS</span>
                 <div class="af01_tc_number">
                   <div class="numberCheck">
                     <input
@@ -491,8 +477,8 @@
               <div class="af01_ticketcard">
                 <a href="#none" class="af01_tc_select">
                   <img src="./img/platinum_pass.png" alt="">
-                  <span class="af01_tc_title">PLATINUM PASS</span>
                 </a>
+                <span class="af01_tc_title">PLATINUM PASS</span>
                 <div class="af01_tc_number">
                   <div class="numberCheck">
                     <input
@@ -645,96 +631,78 @@
             </div>
           </fieldset>
 
-          <fieldset class="annual_fieldset04">
-              <legend>패스트 트랙</legend>
-              <div class="af04_labelexp">
-                <span>
-                  기다리는 시간을 단축하여 더 많은 어트렉션을 즐길 수 있는 방법!
-                </span>
-                <a href="#none">이용 가능한 라이드 목록</a>                  
-                <div>
-                  <ul class="af04_l_ride">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                  </ul>
-                </div>
-              </div>
-              <div class="af04_ft">
-                <label for="ft_virtual_number">
-                  패스트트랙 버츄얼
-                </label>
-                  <span>￦40,000</span>
-                  <div class="af04_ft_exp">
-                    대기줄을 기다릴 필요 없이 가상으로 대기하는 동안 파크를 더 즐길 수 있어요!
+          <fieldset class="vip_fieldset02">
+            <legend>정보 입력</legend>
+            <div class="af02_wrap">
+              <div class="af02_inputBox">
+                <div class="af02_i_info_origin">
+                  <div class="af02_i_i_tab">
+                    <div class="af02_i_i_t_name"></div>
+                    <div class="af02_i_i_t_ticket"></div>
+                    <div class="af02_i_i_t_age"></div>
+                    <a href="#none">취소</a>
                   </div>
-                  <div class="nc_wrap">
-                    
-                    <div class="numberCheck">
-                      <input
-                        type="text"
-                        name="annual_ft_virtual_number"
-                        id="annual_ft_virtual_number"
-                        value="0"
-                        readonly
-                      />
-                      <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
-                      <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
+                  <div class="af02_i_i_inputpage">
+                    <div class="user_name">
+                      <label for="">이름</label>
+                      <input type="text" name="user_name" id="" >
+                    </div>
+                    <div class="user_birthday">
+                      <span>생년월일</span>
+                      <input type="number" name="user_birthYear" maxlength="4" placeholder="0000" id="">
+                      <label for="">년</label>
+                      <input type="number" name="user_birthMonth" maxlength="2" min="1" max="12" placeholder="00" id="">
+                      <label for="">월</label>
+                      <input type="number" name="user_birthDate" maxlength="2" min="1" max="31" placeholder="00" id="">
+                      <label for="">일</label>
+                    </div>
+                    <div class="user_phone">
+                      <label for="">전화번호</label>
+                      <input type="tel" name="user_phone" maxlength="20" placeholder="' - ' 빼고 입력하세요." id="">
+                    </div>
+                    <div class="user_email">
+                      <label for="">이메일</label>
+                      <input type="email" name="user_email" placeholder="ex. example@example.com" id="">
+                    </div>
+                    <div class="user_nationality_select">
+                      <label for="">국가</label>
+                      <input type="text" name="user_nationality" id="" placeholder="국가 선택" readonly>
+                      <ul>
+                        <li><a href="#none">대한민국</a></li>
+                        <li><a href="#none">미국</a></li>
+                        <li><a href="#none">오스트레일리아</a></li>
+                        <li><a href="#none">일본</a></li>
+                        <li><a href="#none">홍콩</a></li>
+                        <li><a href="#none">중국</a></li>
+                        <li><a href="#none">대만</a></li>
+                        <li><a href="#none">싱가포르</a></li>
+                        <li><a href="#none">오스트리아</a></li>
+                        <li><a href="#none">필리핀</a></li>
+                        <li><a href="#none">말레이시아</a></li>
+                        <li><a href="#none">영국</a></li>
+                        <li><a href="#none">태국</a></li>
+                      </ul>
+                    </div>
+                    <div class="user_states">
+                      <label for="">도/특별시/시</label>
+                      <input type="text" name="user_states" id="">
+                    </div>
+                    <div class="user_city">
+                      <label for="">시/군/구</label>
+                      <input type="text" name="user_city" id="">
+                    </div>
+                    <div class="user_photo">
+                      <div class="user_photo_img_wrap">
+                        <img src="" alt="" class="user_photo_img" height="200">
+                      </div>
+                      <div class="user_photo_input">
+                        <input type="file" name="" id="af02_user_photo" accept="image/png, image/jpeg, image/webp" onchange="qeqe()">
+                      </div>
                     </div>
                   </div>
-              </div>
-              <div class="af04_ft">
-                
-                <label for="ft_express_number">패스트트랙 익스프레스</label>
-                <span>￦70,000</span>
-                <div class="af04_ft_exp">
-                  어트렉션 대기 시간을 절반으로 단축하여 더 많은 어트렉션을 즐길 수 있어요!
-                </div>
-                <div class="nc_wrap">
-                  <div class="numberCheck">
-                    <input
-                      type="text"
-                      name="annual_ft_express_number"
-                      id="annual_ft_express_number"
-                      value="0"
-                      readonly
-                    />
-                    <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
-                    <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
-                  </div>
                 </div>
               </div>
-              <div class="af04_ft">
-                <label for="ft_ultimate_number">패스트트랙 얼티밋</label>
-                <span>￦130,000</span>
-                <div class="af04_ft_exp">
-                  대기시간을 95% 줄여주는 슈퍼 아이템! 가장 적은 대기시간으로 많은 어트렉션 체험이 가능해요!
-                </div>
-                <div class="nc_wrap">
-                  <div class="numberCheck">
-                    <input
-                      type="text"
-                      name="annual_ft_ultimate_number"
-                      id="annual_ft_ultimate_number"
-                      value="0"
-                      readonly
-                    />
-                    <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
-                    <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
-                  </div>
-                </div>
-              </div>
-          </fieldset>
-
-          <fieldset class="annual_fieldset05">
-
+            </div>
           </fieldset>
 
           <fieldset class="annual_fieldset06 total_price_wrap">
@@ -922,36 +890,11 @@
                 total();
               })
             })
-
-          // ------------------------------------- 04. 패스트트랙
+          // ------------------------------------- 02. 정보입력
           
-          $(".af04_ft .nc_wrap input").each(function(i) {
-            
-            const $newbox04 = $('<div><p class="af06_p_s_e_title04"></p><p class="af06_p_s_e_number04"></p><p class="af06_p_s_e_price04"></p></div>');
-            $(".af06_p_s_extra").append($newbox04);
-
-            if ( $(this).val() == 0) { $newbox04.hide() }
-            else { $newbox04.show()}
-            
-            $(this).change(function() {
-              if ( $(this).val() == 0) { $newbox04.hide() }
-              else { $newbox04.show()}
-
-              const fasttrackPrice = 
-                i==0? 40000 : 
-                i==1? 70000 :
-                i==2? 130000 : null; 
-              $(".af06_p_s_e_title04").eq(i).text($(".af04_ft label").eq(i).text());
-              $(".af06_p_s_e_number04").eq(i).text($(this).val());
-              $(".af06_p_s_e_price04").eq(i).text("￦" + $(this).val()*fasttrackPrice);
-              af04_price[i] = $(this).val()*fasttrackPrice;
-              total()
-            })
-          })
-          // ------------------------------------- 05. VIP EXPERIENCES
+          //photo
           
           
-
           // ------------------------------------- 06-1. 할인적용
           $(".af06_d_list li").each(function(i){
             $(this).find(".af06_d_l_listopen").click(function(){

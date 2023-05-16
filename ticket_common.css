@@ -26,7 +26,7 @@ input[type='number'] {
 }
 
 /* 달력 이동 버튼 */
-.gotoback {
+.calender .gotoback {
     font-size: 0px;
     display: block;
     width: 10%;
@@ -36,7 +36,7 @@ input[type='number'] {
     position:absolute;
     left: 40px;
 }
-.gotonext {
+.calender .gotonext {
     font-size: 0px;
     display: block;
     width: 10%;
@@ -48,6 +48,7 @@ input[type='number'] {
 }
 
   /* (단일)달력 공통 디자인 =====================================================*/
+  /* 정보입력용 달력은 디자인이 다름 */
 .calender {
     width: 80%;
     padding: 0px 8%;
@@ -72,13 +73,13 @@ input[type='number'] {
 display: flex;
 flex-direction: column;
 }
-.cdt_date {
+.calender .cdt_date {
 width: var(--calender-table-size);
 min-height: fit-content;
 display: flex;
 flex-wrap: wrap;
 }      
-.cdt_week {
+.calender .cdt_week {
 height: 30px;
 justify-content: space-around;
 align-items: center;
@@ -86,7 +87,7 @@ display: flex;
 text-align: center;
 color: #aaa;
 }
-.calender_month {
+.calender .calender_month {
 width: 100%;
 padding: 20px 0px 30px;
 box-sizing: border-box;
@@ -94,7 +95,7 @@ display: flex;
 align-items: center;
 position: relative;
 }
-.cm_spanbox {
+.calender .cm_spanbox {
 width: 100%;
 height: 100%;
 display: flex;
@@ -123,7 +124,7 @@ left: 10%;
     display: none;
 }
 /* calender cell */
-.dataCell {
+.calender .dataCell {
     width: calc(100% / 7 - 4px);
     margin: 2px;
     aspect-ratio: 1/1;
@@ -165,58 +166,80 @@ left: 10%;
 
 /* 공통 수량 입력 버튼 */
 .numberCheck {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    width: fit-content;
-    padding: 5px 40px;
-    border-radius: 25px;
-    background-color: yellowgreen;
-  }
-  .nc_wrap label {
-    display: none;
-  }
-    .numberCheck input {
-      width: 40px;
-      height: 30px;
-      text-align: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: fit-content;
+  padding: 5px 40px;
+  border-radius: 25px;
+  background-color: yellowgreen;
+}
+.nc_wrap label {
+  display: none;
+}
+.numberCheck input {
+  width: 40px;
+  height: 30px;
+  text-align: center;
 
-      padding: 0px;
-      margin: 0px;
-      box-sizing: border-box;
-      font-size: 20px;
-      border: none;
-      background-color: transparent;
-    }
-  .decrease_btn {
-    font-size: 0px;
-    display: block;
-    background-color: rgb(240, 240, 89);
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  font-size: 20px;
+  border: none;
+  background-color: transparent;
+}
+.decrease_btn {
+  font-size: 0px;
+  display: block;
+  background-color: var(--main-yellow-color);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
 
-    position: absolute;
-    top: 5px;
-    left: 5px;
-  }
-    .decrease_btn img {
-      width: 30px;
-      opacity: 0.7;
-    }
-  .increase_btn {
-    font-size: 0px;
-    display: block;
-    background-color: rgb(240, 240, 89);
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+.decrease_btn img {
+  width: 30px;
+  opacity: 0.7;
+}
+.increase_btn {
+  font-size: 0px;
+  display: block;
+  background-color: var(--main-yellow-color);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
 
-    position: absolute;
-    top: 5px;
-    right: 5px;
-  }
-    .increase_btn img {
-      width: 30px;
-      opacity: 0.7;
-    }
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+.increase_btn img {
+  width: 30px;
+  opacity: 0.7;
+}
+
+/* common main */
+.ticket_formWrap {
+  max-width: var(--whole-max-width);
+  width: 100%;
+  margin: auto;
+  padding-bottom: 500px;
+}
+fieldset {
+  /* border: none; */
+  position: relative;
+  margin: 0px;
+  padding: 0px;
+}
+fieldset legend {
+  display: block;
+  width: fit-content;
+  position: absolute;
+  top: 20px;
+  left: 7%;
+  font-size: 200%;
+}

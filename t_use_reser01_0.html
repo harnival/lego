@@ -29,17 +29,22 @@
         display: flex;
         width: 100%;
         height: 100%;
+        border-top: 2px solid #bbb;
+        border-left: 2px solid #bbb;
+        box-sizing: border-box;
       }
       .tapBox li {
         width: 100%;
         height: 100%;
       }
       .tapBox li a{
-        border: 2px solid #bbb;
+        border-right: 2px solid #bbb;
+        border-bottom: none;
         height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
+        box-sizing: border-box;
       }
       .active_tap {
         background-color: var(--main-yellow-color);
@@ -151,9 +156,18 @@
 
         }
 
-        $(".formBox").load(`./t_use_reser01_1.html`)
+        $(".formBox").load(`./t_use_reser01_3.html`)
 
-        
+        function qeqe() {
+            const q = document.querySelector(".user_photo_img");
+            const w = document.querySelector("#af02_user_photo");
+            const wl = w.files[0];
+            const read = new FileReader();
+            read.addEventListener("load",function() {
+              read.readAsDataURL(wl);
+              q.src = read.result;
+            })
+          }
       });
     </script>
   </body>
