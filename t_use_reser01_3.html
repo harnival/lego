@@ -170,6 +170,7 @@
     /* ----------------------------------------- */
     .annual_fieldset02 {
       position: relative;
+      padding: 80px 15% 30px;
     }
     .annual_fieldset02 legend::before {
       content: "02";
@@ -186,38 +187,40 @@
       margin-right: 10px;
     }
     .af02_i_info_origin {
-    display: block;
-    }
-    .af02_i_info {
-      background-color:  var(--inputbox-bg-color);
+      display: block;
     }
     .af02_i_i_tab {
       height: 80px;
-      background-color: palevioletred;
+      background-color: white;
       position: relative;
-      padding-left: 40px;
+      padding-left: 70px;
       display: flex;
       align-items: center;
     }
     .af02_i_i_tab > a {
       display: block;
       font-size: 0px;
-      width: 20px;
-      height: 20px;
-      background: url("./img/close_button.png") no-repeat center/20px;
-      border: 2px solid black;
+      width: 15px;
+      height: 15px;
+      background: #eee url("./img/close_button.png") no-repeat center/90%;
+      border: 2px solid #666;
       position: absolute;
       left: 20px;
     }
-    .af02_i_i_inputpage {
-      width: 80%;
+    .af02_i_i_inputpage_wrap {
       height: 300px;
-      padding-top: 20px;
+      border: 2px solid white;
+    }
+    .af02_i_i_inputpage {
+      box-sizing: border-box;
+      height: 300px;
+      padding: 20px 10px;
       margin:auto;
       display: flex;
       flex-wrap: wrap;
       flex-direction: column;
       align-content: start;
+      transition: .5s ease;
     }
     .af02_i_i_inputpage > div:not(.user_photo) {
       border: 1px dashed tomato;
@@ -266,11 +269,11 @@
       margin: 0px;
       width: 200px;
       background-color: white;
-      border: 2px solid #bbb;
+      border: 2px solid #ffffff41;
       border-radius: 15px;
       box-sizing: border-box;
       position: absolute;
-      top: 50px;
+      top: 45px;
       left: 0px;
       z-index: 9000;
     }
@@ -319,25 +322,33 @@
       box-sizing: border-box;
     }
     .user_photo_img_wrap {
-      height: 80%;
-      width: 100%;
+      width: 80%;
+      aspect-ratio: 1 / 0.7;
+      margin: 10px auto;
       border: 1px dashed royalblue;
       box-sizing: border-box;
       position: relative;
     }
+    .user_photo_img {
+      width: 100%;
+      height: max-content;
+    }
     .user_photo_cut {
       border: 2px solid red;
+      box-sizing: border-box;
       aspect-ratio: 1 / 1.3;
       width: 100px;
       position: absolute;
-      top: 40%;
-      left: 40%;
+      top: 0;
+      left: 0;
       
     }
     /* ----------------------------------------- */
     .annual_fieldset06 {
       display: flex;
       position: relative;
+      padding: 80px 15% 30px;
+      gap: 30px;
     }
     .af06_discount {
       width: 50%;
@@ -648,63 +659,65 @@
                     <div class="af02_i_i_t_age"></div>
                     <a href="#none">취소</a>
                   </div>
-                  <div class="af02_i_i_inputpage">
-                    <div class="user_name">
-                      <label for="">이름</label>
-                      <input type="text" name="user_name" id="" >
-                    </div>
-                    <div class="user_birthday">
-                      <span>생년월일</span>
-                      <input type="number" name="user_birthYear" maxlength="4" placeholder="0000" id="">
-                      <label for="">년</label>
-                      <input type="number" name="user_birthMonth" maxlength="2" min="1" max="12" placeholder="00" id="">
-                      <label for="">월</label>
-                      <input type="number" name="user_birthDate" maxlength="2" min="1" max="31" placeholder="00" id="">
-                      <label for="">일</label>
-                    </div>
-                    <div class="user_phone">
-                      <label for="">전화번호</label>
-                      <input type="tel" name="user_phone" maxlength="20" placeholder="' - ' 빼고 입력하세요." id="">
-                    </div>
-                    <div class="user_email">
-                      <label for="">이메일</label>
-                      <input type="email" name="user_email" placeholder="ex. example@example.com" id="">
-                    </div>
-                    <div class="user_nationality_select">
-                      <label for="">국가</label>
-                      <input type="text" name="user_nationality" id="" placeholder="국가 선택" readonly>
-                      <ul>
-                        <li><a href="#none">대한민국</a></li>
-                        <li><a href="#none">미국</a></li>
-                        <li><a href="#none">오스트레일리아</a></li>
-                        <li><a href="#none">일본</a></li>
-                        <li><a href="#none">홍콩</a></li>
-                        <li><a href="#none">중국</a></li>
-                        <li><a href="#none">대만</a></li>
-                        <li><a href="#none">싱가포르</a></li>
-                        <li><a href="#none">오스트리아</a></li>
-                        <li><a href="#none">필리핀</a></li>
-                        <li><a href="#none">말레이시아</a></li>
-                        <li><a href="#none">영국</a></li>
-                        <li><a href="#none">태국</a></li>
-                      </ul>
-                    </div>
-                    <div class="user_states">
-                      <label for="">도/특별시/시</label>
-                      <input type="text" name="user_states" id="">
-                    </div>
-                    <div class="user_city">
-                      <label for="">시/군/구</label>
-                      <input type="text" name="user_city" id="">
-                    </div>
-                    <div class="user_photo">
-                      <div class="user_photo_img_wrap">
-                        <img src="" alt="" class="user_photo_img" width="100%">
-                        <div class="user_photo_cut"></div>
+                  <div class="af02_i_i_inputpage_wrap">
+                    <div class="af02_i_i_inputpage">
+                      <div class="user_name">
+                        <label for="">이름</label>
+                        <input type="text" name="user_name" id="" >
                       </div>
-                      <div class="user_photo_input">
-                        <input type="file" name="" id="af02_user_photo" class="af02_user_photo" accept="image/png, image/jpeg, image/webp" style="display:none">
-                        <a href="#none">파일 열기</a>
+                      <div class="user_birthday">
+                        <span>생년월일</span>
+                        <input type="number" name="user_birthYear" maxlength="4" placeholder="0000" id="">
+                        <label for="">년</label>
+                        <input type="number" name="user_birthMonth" maxlength="2" min="1" max="12" placeholder="00" id="">
+                        <label for="">월</label>
+                        <input type="number" name="user_birthDate" maxlength="2" min="1" max="31" placeholder="00" id="">
+                        <label for="">일</label>
+                      </div>
+                      <div class="user_phone">
+                        <label for="">전화번호</label>
+                        <input type="tel" name="user_phone" maxlength="20" placeholder="' - ' 빼고 입력하세요." id="">
+                      </div>
+                      <div class="user_email">
+                        <label for="">이메일</label>
+                        <input type="email" name="user_email" placeholder="ex. example@example.com" id="">
+                      </div>
+                      <div class="user_nationality_select">
+                        <label for="">국가</label>
+                        <input type="text" name="user_nationality" id="" placeholder="국가 선택" readonly>
+                        <ul>
+                          <li><a href="#none">대한민국</a></li>
+                          <li><a href="#none">미국</a></li>
+                          <li><a href="#none">오스트레일리아</a></li>
+                          <li><a href="#none">일본</a></li>
+                          <li><a href="#none">홍콩</a></li>
+                          <li><a href="#none">중국</a></li>
+                          <li><a href="#none">대만</a></li>
+                          <li><a href="#none">싱가포르</a></li>
+                          <li><a href="#none">오스트리아</a></li>
+                          <li><a href="#none">필리핀</a></li>
+                          <li><a href="#none">말레이시아</a></li>
+                          <li><a href="#none">영국</a></li>
+                          <li><a href="#none">태국</a></li>
+                        </ul>
+                      </div>
+                      <div class="user_states">
+                        <label for="">도/특별시/시</label>
+                        <input type="text" name="user_states" id="">
+                      </div>
+                      <div class="user_city">
+                        <label for="">시/군/구</label>
+                        <input type="text" name="user_city" id="">
+                      </div>
+                      <div class="user_photo">
+                        <div class="user_photo_img_wrap">
+                          <img src="" alt="" class="user_photo_img" width="100%">
+                          <div class="user_photo_cut"></div>
+                        </div>
+                        <div class="user_photo_input">
+                          <input type="file" name="" class="af02_user_photo" accept="image/png, image/jpeg" style="display:none">
+                          <a href="#none">파일 열기</a>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -832,12 +845,12 @@
                 <span class="af06_p_t_text"></span>
                 <input type="text" name="annual_total_price" id="annual_total_price" readonly class="total_price">
               </div>
+              <div class="annual_ticket_submit ticket_submit">
+                <button type="submit" class="submit_btn">장바구니에 담기</button>
+                <button type="button" class="reset_btn">다시 입력</button>
+              </div>
             </div>
           </fieldset>
-          <div class="annual_ticket_submit ticket_submit">
-            <button type="submit" class="submit_btn">장바구니에 담기</button>
-            <button type="button" class="reset_btn">다시 입력</button>
-          </div>
         </form>
     </div>
     <script>
@@ -906,23 +919,6 @@
           // ------------------------------------- 02. 정보입력
           
           //photo
-          $(".user_photo_input a").each(function(i){
-            $(this).on("click",function(){
-              $("#af02_user_photo").trigger("click");
-            })
-          })
-          $(".af02_user_photo").each(function(i){
-            $(this).on("change",function(){
-              const $r = $(this).get(0).files[0];
-              const q = new FileReader();
-              q.readAsDataURL($r);
-              q.onload = function(e){
-                $(this).find(".user_photo_img").attr("src",e.target.result);
-                // localStorage.setItem("tytyty",e.target.result)
-              }
-            });
-          });
-
           const $w = $(".user_photo_cut").width()/2;
           const $h = $(".user_photo_cut").height()/2;
           
@@ -938,15 +934,17 @@
               const pt = $p.offset().top;
               const pl = $p.offset().left;
               if(mousekey["d"]){
-                if(e.pageY-$h-pt <= 0) {cut.offset({top: pt+1, left: e.pageX - $w})}
-                else if(e.pageY+$h-pt >= $p.height()) {cut.offset({top: pt+$p.height()-1, left: e.pageX - $w})}
-                else if(e.pageX-$w-pl <= 0) {cut.offset({top: e.pageY - $h, left: pl+1})}
-                else if(e.pageX+$w-pl >= $p.width()) {cut.offset({top: e.pageY - $h,left: pl+$p.width()-1})}
-                else {cut.offset({ top: e.pageY - $h , left: e.pageX - $w });}
+                if(e.pageY-$h-pt <= 0) {cut.offset({ top: pt+1 })}
+                else if(e.pageY+$h-pt >= $p.height()) {cut.offset({top: pt+$p.height()-2*$h})}
+                else {cut.offset({top : e.pageY - $h})}
+
+                if(e.pageX-$w-pl <= 0) {cut.offset({left: pl+1})}
+                else if(e.pageX+$w-pl >= $p.width()) {cut.offset({left: pl+$p.width()-2*$w})}
+                else {cut.offset({left : e.pageX - $w})}
               }
             })
           })
-
+          // 입력창 생성
           function makeInfo(classes) {
               if( $(`.af02_i_info_${classes}`).length < $(`#annual_${classes}_number`).val()) {
                 const $makeInfo = $(`.af02_i_info_origin`).clone(true);
@@ -958,16 +956,36 @@
                 //제거버튼
                 $makeInfo.find(".af02_i_i_tab a").click(function(){
                   $makeInfo.remove();
-                  $(`.af01_tc_input_${classes}`).val((i,v) => +v-1);
+                  $(`#annual_${classes}_number`).val((i,v) => +v-1);
                 });
               
                 //국가 선택
-                $makeInfo.find(".user_nationality_select input").click(function(){
-                  $(this).siblings("ul").slideToggle();
+                $makeInfo.find(".user_nationality_select input").on("click",function(){
+                  $(this).siblings("ul").toggle();
                 });
                 $makeInfo.find(".user_nationality_select li a").click(function(){
                   $(this).parents(".user_nationality_select").find("input").val((i,v) => $(this).text());
                   $(this).parents(".user_nationality_select").find("ul").slideUp("fast");
+                });
+                $makeInfo.find(".user_name input").on("change",function(){
+                  $makeInfo.find(".af02_i_i_t_name").text(`사용자 이름 : ${$(this).val()}`);
+                })
+                // 슬라이드
+                $makeInfo.find(".af02_i_i_tab").on("click",function(){
+                  $makeInfo.find(".af02_i_i_inputpage_wrap").slideToggle();
+                })
+                //이미지
+                $makeInfo.find(".user_photo_input a").on("click",function(){
+                  $makeInfo.find(".af02_user_photo").trigger("click");
+                });
+                $makeInfo.find(".af02_user_photo").on("change",function(e){
+                  const $pic = $makeInfo.find(".user_photo_img");
+                  const $r = $(this).get(0).files[0];
+                  const reader = new FileReader();
+                  reader.readAsDataURL($r);
+                  reader.onload = function(data){
+                    $pic.attr("src", data.target.result);
+                  }
                 })
               }
               // ------------------------------------------
