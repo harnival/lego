@@ -57,30 +57,8 @@
         margin: auto;
         background-color: var(--main-yellow-color);
       }
-      .reservation_basket {
-        position: fixed;
-        bottom: 100px;
-        right: 10px;
-        min-height: 300px;
-        width: 200px;
-        border: 2px solid black;
-        background-color: tomato;
-      }
-      .rb_list > div {
-        position: relative;
-      }
-      .rb_remove {
-        display: block;
-        width: 15px;
-        height: 15px;
-        border: 1px solid black;
-        border-radius: 50%;
-        background: url("img/close_button.png") no-repeat center/15px;
-
-        position: absolute;
-        top: 0px;
-        left: 0px;
-      }
+      
+      
       
     </style>
   </head>
@@ -98,21 +76,6 @@
           </ul>
         </div>
         <div class="formBox"></div>
-      </div>
-
-      <div class="reservation_basket">
-        <div class="rb_list">
-          <span>구매 목록</span>
-          <ul>
-
-          </ul>
-        </div>
-        <div class="rb_total">
-          <span>합계</span>
-        </div>
-        <div class="paymentBtn">
-          <a href="#none">장바구니 이동</a>
-        </div>
       </div>
     </main>
 
@@ -158,16 +121,7 @@
 
         $(".formBox").load(`./t_use_reser01_3.html`)
 
-        function qeqe() {
-            const q = document.querySelector(".user_photo_img");
-            const w = document.querySelector("#af02_user_photo");
-            const wl = w.files[0];
-            const read = new FileReader();
-            read.addEventListener("load",function() {
-              read.readAsDataURL(wl);
-              q.src = read.result;
-            })
-          }
+        
       });
     </script>
   </body>
