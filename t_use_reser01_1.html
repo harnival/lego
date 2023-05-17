@@ -1007,7 +1007,7 @@
               $(".calender_wrap_next").calender($selYear,$selMonth);
             });
 
-          $(".able_cell").on("click",function(){
+          $(".dated_fieldset01").on("click",".able_cell",function(){
             $(this).addClass("active_cell");
             $(".able_cell").not($(this)).removeClass("active_cell");
             $("#dated_date_value")

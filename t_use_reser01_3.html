@@ -7,6 +7,9 @@
     <title>Document</title>
     <script src="./jquery.js"></script>
     <style>
+      :root {
+        --af02-inputbox-height: 400px;
+      }
       .annual_fieldset01 {
         position: relative;
         padding: 80px 15% 30px;
@@ -208,12 +211,12 @@
       left: 20px;
     }
     .af02_i_i_inputpage_wrap {
-      height: 300px;
+      height: var(--af02-inputbox-height);
       border: 2px solid white;
     }
     .af02_i_i_inputpage {
       box-sizing: border-box;
-      height: 300px;
+      height: var(--af02-inputbox-height);
       padding: 20px 10px;
       margin:auto;
       display: flex;
@@ -322,26 +325,41 @@
       box-sizing: border-box;
     }
     .user_photo_img_wrap {
-      width: 80%;
-      aspect-ratio: 1 / 0.7;
+      width: 70%;
+      aspect-ratio: 1 / 1;
       margin: 10px auto;
       border: 1px dashed royalblue;
       box-sizing: border-box;
       position: relative;
     }
     .user_photo_img {
-      width: 100%;
-      height: max-content;
+      height: 100%;
     }
     .user_photo_cut {
       border: 2px solid red;
       box-sizing: border-box;
-      aspect-ratio: 1 / 1.3;
+      aspect-ratio: 1 / 1;
       width: 100px;
+      min-width: 30px;
+      min-height: 30px;
       position: absolute;
       top: 0;
       left: 0;
-      
+      transform-origin: center;
+    }
+    .user_photo_cut_size {
+      width: 15px;
+      aspect-ratio: 1/1;
+      margin: 2px;
+      background-color: red;
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      opacity: 0;
+    }
+    .user_photo_cut_size:hover {
+      opacity: 1;
+      cursor:nwse-resize;
     }
     /* ----------------------------------------- */
     .annual_fieldset06 {
@@ -711,12 +729,16 @@
                       </div>
                       <div class="user_photo">
                         <div class="user_photo_img_wrap">
+                          <canvas ></canvas>
                           <img src="" alt="" class="user_photo_img" width="100%">
-                          <div class="user_photo_cut"></div>
+                          <div class="user_photo_cut">
+                            <div class="user_photo_cut_size"></div>
+                          </div>
                         </div>
                         <div class="user_photo_input">
-                          <input type="file" name="" class="af02_user_photo" accept="image/png, image/jpeg" style="display:none">
+                          <input type="file" name="" class="af02_user_photo" accept="image/png, image/jpeg, image/webp" style="display:none">
                           <a href="#none">파일 열기</a>
+                          <a href="#none">잘라내기</a>
                         </div>
                       </div>
                     </div>
@@ -919,15 +941,18 @@
           // ------------------------------------- 02. 정보입력
           
           //photo
-          const $w = $(".user_photo_cut").width()/2;
-          const $h = $(".user_photo_cut").height()/2;
+          let $w = $(".user_photo_cut").width()/2;
+          let $h = $(".user_photo_cut").height()/2;
           
-          $(".user_photo_img_wrap").each(function(i){
+          $(".user_photo").each(function(i){
+            $(this).attr("draggable","false");
             const mousekey = {};
-            $(this).on("mousedown",function(){mousekey["d"] = true;});
-            $(this).on("mouseleave", function(){mousekey["d"] = false;});
-            $(document).on("mouseup",function(){mousekey["d"] = false;});
-            $(this).on("mousemove",function(e){
+            $(this).children(".user_photo_img_wrap").on("mousedown",function(){mousekey["d"] = true;});
+            $(this).children(".user_photo_img_wrap").on("mouseleave", function(){mousekey["d"] = false; mousekey["r"]=false;});
+            $(this).find(".user_photo_cut_size").on("mousedown", function(e){e.stopPropagation();mousekey["r"] = true;});
+            $(document).on("mouseup",function(){mousekey["d"] = false;mousekey["r"]=false;});
+            $(this).children(".user_photo_img_wrap").on("mousemove",function(e){
+              //move cut
               const cut = $(this).find(".user_photo_cut");
               const $t = cut.position();
               const $p = cut.offsetParent();
@@ -942,7 +967,25 @@
                 else if(e.pageX+$w-pl >= $p.width()) {cut.offset({left: pl+$p.width()-2*$w})}
                 else {cut.offset({left : e.pageX - $w})}
               }
-            })
+              //resize cut
+              const ex = event.movementX, ey = event.movementY;
+              if( ex >= ey && mousekey["r"]) {
+                cut.css({
+                  width: `-=${ex*2}`,
+                  height: `-=${ex*2}`
+                });
+                $w = cut.width()/2;
+                $h = cut.height()/2;
+              } else if ( ex < ey && mousekey["r"]){
+                cut.css({
+                  width: `-=${ey*2}`,
+                  height: `-=${ey*2}`
+                })
+                $w = cut.width()/2;
+                $h = cut.height()/2;
+              }
+            });
+            
           })
           // 입력창 생성
           function makeInfo(classes) {
@@ -975,18 +1018,34 @@
                   $makeInfo.find(".af02_i_i_inputpage_wrap").slideToggle();
                 })
                 //이미지
-                $makeInfo.find(".user_photo_input a").on("click",function(){
+                const $dummy = $("<img/>");
+                let realWidth, realHeight;
+                if ( $makeInfo.find(".af02_user_photo").get(0).files || $makeInfo.find(".af02_user_photo").get(0).files.length == 0) {
+                  $makeInfo.find(".user_photo_img").hide();
+                  $makeInfo.find(".user_photo_img_wrap canvas").hide();
+                }
+                $makeInfo.find(".user_photo_input a").eq(0).on("click",function(){
                   $makeInfo.find(".af02_user_photo").trigger("click");
                 });
                 $makeInfo.find(".af02_user_photo").on("change",function(e){
+                  $makeInfo.find(".user_photo_img").show();
+                  $makeInfo.find(".user_photo_img_wrap canvas").hide();
                   const $pic = $makeInfo.find(".user_photo_img");
                   const $r = $(this).get(0).files[0];
                   const reader = new FileReader();
                   reader.readAsDataURL($r);
                   reader.onload = function(data){
-                    $pic.attr("src", data.target.result);
+                    $pic.attr("src",data.target.result);
+                    $("<img/>")
+                      .attr("src",event.target.result)
+                      .on("load",function(){
+                        realWidth = this.width;
+                        realHeight = this.height;
+                      })
+                    
                   }
-                })
+                });
+                
               }
               // ------------------------------------------
               else if ($(`.af02_i_info_${classes}`).length > $(`#annual_${classes}_number`).val()) {

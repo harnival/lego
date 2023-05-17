@@ -533,10 +533,8 @@
           var dtf03_number = 0, dtf03_price = 0;
           var df04_price = [0,0,0];
           var df05_price = 0;
-
           //------------Load-------------
-                    //------------Load-------------
-                    const today = new Date();
+          const today = new Date();
           const weekArr = ["일", "월", "화", "수", "목", "금", "토"];
           let $selYear = today.getFullYear();
           let $selMonth = today.getMonth() +1;
@@ -642,7 +640,7 @@
               $(".calender_wrap_next").calender($selYear,$selMonth);
             });
 
-          $(".able_cell").on("click",function(){
+          $(".daytime_fieldset01").on("click",".able_cell",function(){
             $(this).addClass("active_cell");
             $(".able_cell").not($(this)).removeClass("active_cell");
             $("#daytime_date_value")
