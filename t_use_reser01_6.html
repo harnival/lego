@@ -5,6 +5,153 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>이용권 방문 예약</title>
+  <script src="./jquery.js"></script>
+  <style>
+    .visit_fieldset01 {
+      position: relative;
+      padding: 80px 12% 30px;
+    }
+    .visit_fieldset01 legend::before {
+      content: "01";
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+      line-height: 1.5;
+      width: 30px;
+      height: 30px;
+      background-color: royalblue;
+      border-radius: 50%;
+      font-size: 18px;
+      color: white;
+      margin-right: 10px;
+    }
+    .vif01_tcWrap {
+      display: flex;
+      flex-wrap: wrap;
+
+    }
+    .vif01_ticketcard {
+      width: 50%;
+      min-width: 350px;
+      height: 200px;
+      border: 1px dashed tomato;
+      box-sizing: border-box;
+      position: relative;
+
+      display: flex;
+    }
+    .vif01_tc_img {
+      height: 100%;
+      aspect-ratio: 1/1;
+      background-color: aqua;
+      overflow: hidden;
+      border-radius: 50%;
+    }
+    .vif01_tc_img img {
+      height: 100%;
+    }
+    .vif01_tc_disabled {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      background-color: rgba(255,255,255,0.6);
+
+      display: none;
+    }
+    .vif01_tc_check {
+      display: none;
+    }
+    /* ======================================================================================= */
+    .visit_fieldset02 {
+      display: flex;
+      justify-content: right;
+      position: relative;
+      padding-left: 20%;
+    }
+    .visit_fieldset02 legend::before {
+      content: "02";
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+      line-height: 1.5;
+      width: 30px;
+      height: 30px;
+      background-color: royalblue;
+      border-radius: 50%;
+      font-size: 18px;
+      color: white;
+      margin-right: 10px;
+    }
+    /* ================================================= */
+    .visit_fieldset03 {
+      position: relative;
+      padding: 80px 15% 30px;
+    }
+    .visit_fieldset03 legend::before {
+      content: "03";
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+      line-height: 1.5;
+      width: 30px;
+      height: 30px;
+      background-color: royalblue;
+      border-radius: 50%;
+      font-size: 18px;
+      color: white;
+      margin-right: 10px;
+    }
+    .vif03_c_unit {
+      width: 100%;
+      border: 1px dashed palegreen;
+    }
+    .vif03_c_u_title {
+      position: relative;
+      padding-left: 60px;
+      height: 50px;
+      background-color: tomato;
+
+      display: flex;
+      align-items: center;
+    }
+    .vif03_c_u_input {
+      display: flex;
+      align-items: center;
+      height: 90px;
+
+      position: relative;
+    }
+    .vif03_c_u_input_text {
+      width: 70%;
+      height: 40%;
+      margin: auto;
+    }
+    .deleteBtn {
+      display: block;
+      font-size: 0px;
+      width: 15px;
+      height: 15px;
+      background: #eee url("./img/close_button.png") no-repeat center/90%;
+      border: 2px solid #666;
+      position: absolute;
+      left: 20px;
+    }
+    .certification {
+      position: absolute;
+      right: 30px;
+    }
+    .cert_pass::before {
+      content: "";
+      display: block;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: green url("/img/check.svg") no-repeat center / 30px;
+
+    }
+  </style>
 </head>
 <body>
   <div class="ticket_formWrap visit_ticket_formWrap">
@@ -22,18 +169,429 @@
           <span class="vif01_labelexp_add">사용할 이용권을 선택해주세요.</span>
         </div>
         <div class="vif01_tcWrap">
-          <div class="vif01_ticketcard"></div>
-          <div class="vif01_ticketcard"></div>
-          <div class="vif01_ticketcard"></div>
-          <div class="vif01_ticketcard"></div>
-          <div class="vif01_ticketcard"></div>
-          <div class="vif01_ticketcard"></div>
-          <div class="vif01_ticketcard"></div>
-          <div class="vif01_ticketcard"></div>
-          <div class="vif01_ticketcard"></div>
+
+          <div class="vif01_ticketcard">
+            <div class="vif01_tc_img">
+            </div>
+            <div class="vif01_tc_content">
+              <div class="vif01_tc_title">
+                <strong>1st TO PLAY 패스 방문예약</strong>
+                <span></span>
+              </div>
+              <div class="vif01_tc_number">
+                <div class="numberCheck">
+                  <input type="text" name="" class="vif01_number" value="0" readonly/>
+                  <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
+                  <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
+                </div>
+              </div>
+            </div>
+            <div class="vif01_tc_check">
+              <input type="checkbox" name="vif01_check" id="">
+            </div>
+            <div class="vif01_tc_disabled">
+              <span></span>
+            </div>
+          </div>
+
+          <div class="vif01_ticketcard">
+            <div class="vif01_tc_img">
+              <img src="./img/1day_re.webp" alt="">
+            </div>
+            <div class="vif01_tc_content">
+              <div class="vif01_tc_title">
+                <strong>날짜 미지정 일일이용권 방문예약</strong>
+                <span></span>
+              </div>
+              <div class="vif01_tc_number">
+                <div class="numberCheck">
+                  <input type="text" name="" class="vif01_number" value="0" readonly/>
+                  <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
+                  <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
+                </div>
+              </div>
+            </div>
+            <div class="vif01_tc_check">
+              <input type="checkbox" name="vif01_check" id="">
+            </div>
+            <div class="vif01_tc_disabled">
+              <span></span>
+            </div>
+          </div>
+
+          <div class="vif01_ticketcard">
+            <div class="vif01_tc_img">
+            </div>
+            <div class="vif01_tc_content">
+              <div class="vif01_tc_title">
+                <strong>STANDARD PASS 방문예약</strong>
+                <span></span>
+              </div>
+              <div class="vif01_tc_number">
+                <div class="numberCheck">
+                  <input type="text" name="" class="vif01_number" value="0" readonly/>
+                  <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
+                  <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
+                </div>
+              </div>
+            </div>
+            <div class="vif01_tc_check">
+              <input type="checkbox" name="vif01_check" id="">
+            </div>
+            <div class="vif01_tc_disabled">
+              <span></span>
+            </div>
+          </div>
+
+          <div class="vif01_ticketcard">
+            <div class="vif01_tc_img">
+            </div>
+            <div class="vif01_tc_content">
+              <div class="vif01_tc_title">
+                <strong>GOLD PASS 방문예약</strong>
+                <span></span>
+              </div>
+              <div class="vif01_tc_number">
+                <div class="numberCheck">
+                  <input type="text" name="" class="vif01_number" value="0" readonly/>
+                  <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
+                  <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
+                </div>
+              </div>
+            </div>
+            <div class="vif01_tc_check">
+              <input type="checkbox" name="vif01_check" id="">
+            </div>
+            <div class="vif01_tc_disabled">
+              <span></span>
+            </div>
+          </div>
+
+          <div class="vif01_ticketcard">
+            <div class="vif01_tc_img">
+            </div>
+            <div class="vif01_tc_content">
+              <div class="vif01_tc_title">
+                <strong>PLATINUM PASS 방문예약</strong>
+                <span></span>
+              </div>
+              <div class="vif01_tc_number">
+                <div class="numberCheck">
+                  <input type="text" name="" class="vif01_number" value="0" readonly/>
+                  <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
+                  <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
+                </div>
+              </div>
+            </div>
+            <div class="vif01_tc_check">
+              <input type="checkbox" name="vif01_check" id="">
+            </div>
+            <div class="vif01_tc_disabled">
+              <span></span>
+            </div>
+          </div>
+
+          <div class="vif01_ticketcard">
+            <div class="vif01_tc_img">
+            </div>
+            <div class="vif01_tc_content">
+              <div class="vif01_tc_title">
+                <strong>SPRING 시즌 패스 방문예약</strong>
+                <span></span>
+              </div>
+              <div class="vif01_tc_number">
+                <div class="numberCheck">
+                  <input type="text" name="" class="vif01_number" value="0" readonly/>
+                  <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
+                  <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
+                </div>
+              </div>
+            </div>
+            <div class="vif01_tc_check">
+              <input type="checkbox" name="vif01_check" id="">
+            </div>
+            <div class="vif01_tc_disabled">
+              <span></span>
+            </div>
+          </div>
+
+          <div class="vif01_ticketcard">
+            <div class="vif01_tc_img">
+            </div>
+            <div class="vif01_tc_content">
+              <div class="vif01_tc_title">
+                <strong>SUMMER 시즌 패스 방문예약</strong>
+                <span></span>
+              </div>
+              <div class="vif01_tc_number">
+                <div class="numberCheck">
+                  <input type="text" name="" class="vif01_number" value="0" readonly/>
+                  <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
+                  <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
+                </div>
+              </div>
+            </div>
+            <div class="vif01_tc_check">
+              <input type="checkbox" name="vif01_check" id="">
+            </div>
+            <div class="vif01_tc_disabled">
+              <span></span>
+            </div>
+          </div>
+          
+          <div class="vif01_ticketcard">
+            <div class="vif01_tc_img">
+            </div>
+            <div class="vif01_tc_content">
+              <div class="vif01_tc_title">
+                <strong>레이니 데이 개런티(RAINY DAY GUARANTEE)</strong>
+                <span></span>
+              </div>
+              <div class="vif01_tc_number">
+                <div class="numberCheck">
+                  <input type="text" name="" class="vif01_number" value="0" readonly/>
+                  <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
+                  <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
+                </div>
+              </div>
+            </div>
+            <div class="vif01_tc_check">
+              <input type="checkbox" name="vif01_check" id="">
+            </div>
+            <div class="vif01_tc_disabled">
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="visit_fieldset02"> 
+        <legend>날짜 지정</legend>
+        <div class="date_inputs">
+          <label for="visit_date_value"></label>
+          <input type="date" name="visit_date_value" id="visit_date_value">
+        </div>
+        <div class="calender">
+          <div class="calender_wrap_prev">
+            <div class="calender_month dated_calender_month">
+              <div class="cm_spanbox">
+                <span class="cm_sb_span1"></span>
+                <span class="cm_sb_span2">년</span>
+                <span class="cm_sb_span1"></span>
+                <span class="cm_sb_span2">월</span>
+              </div>
+            </div>
+            <div class="calender_date_table visit_calender_date_table">
+              <div class="cdt_week"></div>
+              <div class="cdt_date"></div>
+            </div>
+          </div>
+          <div class="calender_wrap">
+            <div class="calender_month visit_calender_month">
+              <div class="cm_spanbox">
+                <span class="cm_sb_span1"></span>
+                <span class="cm_sb_span2">년</span>
+                <span class="cm_sb_span1"></span>
+                <span class="cm_sb_span2">월</span>
+              </div>
+              <a href="#none" class="gotoback">이전</a>
+              <a href="#none" class="gotonext">다음</a>
+            </div>
+            <div class="calender_date_table visit_calender_date_table">
+              <div class="cdt_week"></div>
+              <div class="cdt_date"></div>
+            </div>
+          </div>
+          <div class="calender_wrap_next">
+            <div class="calender_month visit_calender_month">
+              <div class="cm_spanbox">
+                <span class="cm_sb_span1"></span>
+                <span class="cm_sb_span2">년</span>
+                <span class="cm_sb_span1"></span>
+                <span class="cm_sb_span2">월</span>
+              </div>
+            </div>
+            <div class="calender_date_table visit_calender_date_table">
+              <div class="cdt_week"></div>
+              <div class="cdt_date"></div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="visit_fieldset03">
+        <legend>바코드 입력</legend>
+        <div class="vif03_code">
+
+          <div class="vif03_c_unit_origin">
+            <div class="vif03_c_u_title">
+              <strong>sample</strong>
+              <span>number</span>
+              <a href="#none" class="deleteBtn">입력창 삭제</a>
+            </div>
+            <div class="vif03_c_u_input cert_pass">
+              <input type="text" name="" class="vif03_c_u_input_text" placeholder="티켓 / 패스의 바코드 번호 입력">
+              <a href="#none" class="certification">입력정보 확인</a>
+            </div>
+          </div>
+
         </div>
       </fieldset>
     </form>
   </div>
+  <script>
+    $(function(){
+      // number check
+      $(".decrease_btn").click(function(e){
+        if( $(this).siblings("input").val() > 0) {
+          $(this).siblings("input").val((i,v) => +v-1);
+          $(this).siblings("input").trigger("change");           
+        }
+      })
+      $(".increase_btn").click(function(e){
+        $(this).siblings("input").val((i,v) => +v+1);
+        $(this).siblings("input").trigger("change");
+      });
+      //------------Load-------------
+      const today = new Date();
+      const weekArr = ["일", "월", "화", "수", "목", "금", "토"];
+      let $selYear = today.getFullYear();
+      let $selMonth = today.getMonth() +1;
+        const $selMonthText = $selMonth < 10? "0"+($selMonth) : $selMonth;
+      let $selDate = today.getDate();
+        const $selDateText = $selDate < 10? "0"+$selDate : $selDate;
+      let $selDay = today.getDay();
+      $("#dated_date_value")
+        .val((i,v) => `${$selYear}-${$selMonthText}-${$selDateText}`)
+        .data("value",`${$selYear}${$selMonthText}${$selDateText}`);
+      $(".date_inputs label").text(`${$selYear}년 ${$selMonth}월 ${$selDate}일 (${weekArr[$selDay]})`);
+      
+      if ( !$(".calender_table_cell").eq($selDay + $selDate-1).hasClass("disabled_cell") ) {
+        $(".calender_table_cell").eq($selDay + $selDate-1).children().addClass("active_cell");
+        $(".df06_p_s_date").text(`${$selYear}년 ${$selMonth}월 ${$selDate}일`);
+      }
+      //---------------------------- 02. 달력 생성 & 날짜 입력
+      $.fn.extend({
+        week : function() {
+          for (let i = 0; i < 7; i++) {
+            const newDay = $("<div></div>");
+            newDay.addClass("weekCell");
+            $(this).find(".cdt_week").append(newDay);
+            newDay.text(weekArr[i]);
+          }
+        },
+        calender: function(years,months){
+          if ( months < 0) {
+            years -= 1;
+            months = 11;
+          } else if (months > 11) {
+            years += 1;
+            months = 0;
+          }
+          let monthStart = new Date(years, months, 1);
+          let monthEnd = new Date(years, months + 1, 0);
+          $(this).find(".cm_sb_span1").eq(0).text(years);
+          $(this).find(".cm_sb_span1").eq(1).text(months+1);
+
+          $(this).find(".cdt_date").children().remove();
+          const i = monthStart.getDay() + monthEnd.getDate();
+
+          for (let j = 1; j <= i; j++) {
+          
+            const n = j - monthStart.getDay();
+            if (n > 0) {
+              if ( new Date(years, months, n) < today ) {
+                const disabled_cell = $("<div class='disabled_cell dataCell'></div>");
+                disabled_cell.text(n);
+                $(this).find(".cdt_date").append(disabled_cell);
+              } else {
+                const able_cell = $("<a href='#none' class='able_cell dataCell'></a>");
+                able_cell.text(n);
+                able_cell.data(
+                  "value",
+                  `${years}${months + 1 < 10 ?  "0" + (months + 1) : months + 1 }${n < 10 ? "0"+n : n}`
+                ).prop(
+                  "id",
+                  `${years}-${months + 1 < 10 ? "0" + (months + 1) : months + 1 }-${n < 10 ? "0"+n : n}`
+                );
+                if ( able_cell.data("value") == $("#visit_date_value").data("value") ) {
+                  able_cell.addClass("active_cell");
+                }
+                $(this).find(".cdt_date").append(able_cell);
+              }
+            } else {
+              const newDateBox = $("<div class='dataCell'></div>");
+              $(this).find(".cdt_date").append(newDateBox);
+            } 
+          }
+        }
+      });
+      
+      $(".calender_wrap_prev").week();
+      $(".calender_wrap").week();
+      $(".calender_wrap_next").week();
+      $(".calender_wrap_prev").calender($selYear,$selMonth-2);
+      $(".calender_wrap").calender($selYear,$selMonth-1);
+      $(".calender_wrap_next").calender($selYear,$selMonth);
+
+      $(".calender_month .gotoback").click(function(){
+        if (!($selYear <= today.getFullYear() && $selMonth-1 == today.getMonth())) {
+          if ( $selMonth == 1 ) {
+            $selMonth = 12;
+            $selYear -= 1;
+          } else {
+            $selMonth -= 1;
+          }
+        }
+        $(".calender_wrap_prev").calender($selYear,$selMonth-2);
+        $(".calender_wrap").calender($selYear,$selMonth-1);
+        $(".calender_wrap_next").calender($selYear,$selMonth); 
+      });
+      $(".calender_month .gotonext").click(function(){
+        if ( $selMonth == 12 ) {
+          $selMonth = 1;
+          $selYear += 1;
+        } else {
+          $selMonth += 1;
+        }
+        $(".calender_wrap_prev").calender($selYear,$selMonth-2);
+        $(".calender_wrap").calender($selYear,$selMonth-1);
+        $(".calender_wrap_next").calender($selYear,$selMonth);
+      });
+      $(".visit_fieldset02").on("click",".able_cell",function(){
+        $(this).addClass("active_cell");
+        $(".able_cell").not($(this)).removeClass("active_cell");
+        $("#visit_date_value")
+          .val((i,v) => $(this).prop("id"))
+          .data("value",$(this).data("value"));
+        const q = new Date($(this).prop("id"));
+        $(".date_inputs label").text(`${q.getFullYear()} 년 ${q.getMonth()+1} 월 ${q.getDate()} 일 (${weekArr[q.getDay()]})`);
+        $(".vif06_p_s_date").text(`${q.getFullYear()} 년 ${q.getMonth()+1} 월 ${q.getDate()} 일 (${weekArr[q.getDay()]})`);
+      })
+      //--------------------------------- 03. 바코드 입력
+      function makeCode(classes,texts) {
+        if( $(`.vif03_c_unit_${classes} vif03_c_u_input`).length < $(`#vif01_number_${classes}`).val() ) {
+          if ( !$(`.vif03_c_unit_${classes}`) ) {
+            const makeUnit = $(".vif03_c_unit_origin").clone(true);
+              makeUnit
+                .addClass(["vif03_c_unit", `vif03_c_unit_${classes}`])
+                .removeClass("vif03_c_unit_origin")
+                .appendTo("vif03_code")
+              makeUnit.find(".vif03_c_u_title strong")
+                .text(texts);
+          } else {
+            const makeInput = $(".vif03_c_unit_origin .vif03_c_u_input").clone(true);
+              makeInput
+                .addClass(`vif03_c_u_input_${classes}`)
+                .appendTo(`.vif03_c_unit_${classes}`)
+          }
+        }
+      }
+      $("vif03_code")
+        on("click",".deleteBtn",function(){
+          
+        })
+    });
+  </script>
 </body>
 </html>

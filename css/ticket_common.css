@@ -32,7 +32,7 @@ input[type='number'] {
     width: 10%;
     aspect-ratio: 1/1;
     border-radius: 50%;
-    background: var(--main-yellow-color) url("img/arrow_back.png") no-repeat left 40% center/25px;
+    background: var(--main-yellow-color) url("../img/arrow_back.png") no-repeat left 40% center/25px;
     position:absolute;
     left: 40px;
 }
@@ -42,7 +42,7 @@ input[type='number'] {
     width: 10%;
     aspect-ratio: 1/1;
     border-radius: 50%;
-    background: var(--main-yellow-color) url("img/arrow_forward.png") no-repeat right 40% center/25px;
+    background: var(--main-yellow-color) url("../img/arrow_forward.png") no-repeat right 40% center/25px;
     position: absolute;
     right: 40px;
 }
@@ -59,6 +59,8 @@ input[type='number'] {
     background: linear-gradient(to right, transparent ,white 15% 85%,transparent);
     height: max-content;
     overflow: hidden;
+
+    margin-top: 2px;
 }
 .calender_wrap {
     padding: 10px;

@@ -36,3 +36,4 @@ https://stackoverflow.com/questions/34156282/how-do-i-save-json-to-local-text-fi
 
     // canvas download
 https://stackoverflow.com/questions/10673122/how-to-save-canvas-as-an-image-with-canvas-todataurl
+https://codebb.tistory.com/22

@@ -175,7 +175,7 @@
       margin-right: 10px;
     }
     .sf02_i_info_origin {
-      display: block;
+      display: none;
     }
     .sf02_i_i_tab {
       height: 80px;
@@ -310,27 +310,32 @@
       box-sizing: border-box;
     }
     .user_photo_img_wrap {
-      width: 70%;
+      width: 100%;
       aspect-ratio: 1 / 1;
       margin: 10px auto;
       border: 1px dashed royalblue;
       box-sizing: border-box;
       position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-    .user_photo_img {
-      height: 100%;
+    .user_photo_canvas {
+      border: 1px dashed royalblue;
+      box-sizing: border-box;
     }
     .user_photo_cut {
+      display: none;
+
       border: 2px solid red;
       box-sizing: border-box;
       aspect-ratio: 1 / 1;
-      width: 100px;
-      min-width: 30px;
-      min-height: 30px;
+      width: 50px;
+      min-width: 40px;
+      min-height: 40px;
       position: absolute;
       top: 0;
       left: 0;
-      transform-origin: center;
     }
     .user_photo_cut_size {
       width: 15px;
@@ -338,8 +343,8 @@
       margin: 2px;
       background-color: red;
       position: absolute;
-      top: -10px;
-      left: -10px;
+      bottom: -10px;
+      right: -10px;
       opacity: 0;
     }
     .user_photo_cut_size:hover {
@@ -633,15 +638,15 @@
                         <input type="text" name="user_city" id="">
                       </div>
                       <div class="user_photo">
+                        <input type="hidden" name="user_photo" class="user_photo_submitOnly">
                         <div class="user_photo_img_wrap">
-                          <canvas ></canvas>
-                          <img src="" alt="" class="user_photo_img" width="100%">
+                          <canvas class="user_photo_canvas" width="0" height="0"></canvas>
                           <div class="user_photo_cut">
                             <div class="user_photo_cut_size"></div>
                           </div>
                         </div>
                         <div class="user_photo_input">
-                          <input type="file" name="" class="sf02_user_photo" accept="image/png, image/jpeg, image/webp" style="display:none">
+                          <input type="file" name="" class="af02_user_photo" accept="image/png, image/jpeg, image/webp" style="display:none">
                           <a href="#none">파일 열기</a>
                           <a href="#none">잘라내기</a>
                         </div>
@@ -779,49 +784,53 @@
           //photo
           let $w = $(".user_photo_cut").width()/2;
           let $h = $(".user_photo_cut").height()/2;
-          
+          // cut control
           $(".user_photo").each(function(i){
-            $(this).attr("draggable","false");
             const mousekey = {};
-            $(this).children(".user_photo_img_wrap").on("mousedown",function(){mousekey["d"] = true;});
-            $(this).children(".user_photo_img_wrap").on("mouseleave", function(){mousekey["d"] = false; mousekey["r"]=false;});
-            $(this).find(".user_photo_cut_size").on("mousedown", function(e){e.stopPropagation();mousekey["r"] = true;});
-            $(document).on("mouseup",function(){mousekey["d"] = false;mousekey["r"]=false;});
-            $(this).children(".user_photo_img_wrap").on("mousemove",function(e){
+            $(this).find(".user_photo_cut_size")
+            .on("mousedown", function(e){
+              e.stopPropagation();
+              mousekey["r"] = true;
+            });
+            $(document)
+            .on("mouseup",function(){
+              mousekey["d"] = false;
+              mousekey["r"]=false;
+            });
+            $(this).children(".user_photo_img_wrap")
+              .on("mousedown",".user_photo_cut",function(){
+                mousekey["d"] = true;
+              })
+              .on("mouseleave", function(){
+                mousekey["d"] = false;
+                mousekey["r"]=false;
+              })
+              .on("mousemove",function(e){
               //move cut
               const cut = $(this).find(".user_photo_cut");
-              const $t = cut.position();
-              const $p = cut.offsetParent();
-              const pt = $p.offset().top;
-              const pl = $p.offset().left;
+              const pt = $(this).children("canvas").offset().top, pl = $(this).children("canvas").offset().left, ph = $(this).children("canvas").height(), pw = $(this).children("canvas").width();
+              let ex = event.movementX, ey = event.movementY,
+                widen = ex*ex > ey*ey? ex : ey;
+              let ct = cut.offset().top, cl = cut.offset().left,
+                ch = cut.height(), cw = cut.width();
               if(mousekey["d"]){
-                if(e.pageY-$h-pt <= 0) {cut.offset({ top: pt+1 })}
-                else if(e.pageY+$h-pt >= $p.height()) {cut.offset({top: pt+$p.height()-2*$h})}
-                else {cut.offset({top : e.pageY - $h})}
+                if(ct < pt){ cut.offset({top: pt+1}); }
+                else if(ct+ch >= pt+ph){ cut.offset({top: pt+ph-ch-1}); }
+                else { cut.offset({top: ct+ey}); }
 
-                if(e.pageX-$w-pl <= 0) {cut.offset({left: pl+1})}
-                else if(e.pageX+$w-pl >= $p.width()) {cut.offset({left: pl+$p.width()-2*$w})}
-                else {cut.offset({left : e.pageX - $w})}
+                if(cl < pl){ cut.offset({left: pl+1}); }
+                else if(cl+cw >= pl+pw){ cut.offset({left: pl+pw-cw-1}); }
+                else { cut.offset({left: cl+ex}); }
               }
               //resize cut
-              const ex = event.movementX, ey = event.movementY;
-              if( ex >= ey && mousekey["r"]) {
-                cut.css({
-                  width: `-=${ex*2}`,
-                  height: `-=${ex*2}`
-                });
-                $w = cut.width()/2;
-                $h = cut.height()/2;
-              } else if ( ex < ey && mousekey["r"]){
-                cut.css({
-                  width: `-=${ey*2}`,
-                  height: `-=${ey*2}`
-                })
-                $w = cut.width()/2;
-                $h = cut.height()/2;
+              if(mousekey["r"]){
+                if(cl+cw < pl+pw && ct+ch < pt+ph) {
+                  cut.css({ width : `+=${widen}`, height: `+=${widen}` })
+                } else {
+                  cut.css({ width : cw-1, height: ch-1 })
+                }
               }
             });
-            
           })
           // 입력창 생성
           function makeInfo(classes) {
@@ -854,33 +863,49 @@
                   $makeInfo.find(".sf02_i_i_inputpage_wrap").slideToggle();
                 })
                 //이미지
-                const $dummy = $("<img/>");
-                let realWidth, realHeight;
-                if ( $makeInfo.find(".sf02_user_photo").get(0).files || $makeInfo.find(".sf02_user_photo").get(0).files.length == 0) {
-                  $makeInfo.find(".user_photo_img").hide();
-                  $makeInfo.find(".user_photo_img_wrap canvas").hide();
-                }
-                $makeInfo.find(".user_photo_input a").eq(0).on("click",function(){
-                  $makeInfo.find(".sf02_user_photo").trigger("click");
-                });
-                $makeInfo.find(".sf02_user_photo").on("change",function(e){
-                  $makeInfo.find(".user_photo_img").show();
-                  $makeInfo.find(".user_photo_img_wrap canvas").hide();
-                  const $pic = $makeInfo.find(".user_photo_img");
-                  const $r = $(this).get(0).files[0];
-                  const reader = new FileReader();
-                  reader.readAsDataURL($r);
-                  reader.onload = function(data){
-                    $pic.attr("src",data.target.result);
-                    $("<img/>")
-                      .attr("src",event.target.result)
-                      .on("load",function(){
-                        realWidth = this.width;
-                        realHeight = this.height;
-                      })
+                $makeInfo.find(".user_photo")
+                  .on("click",".user_photo_input a:eq(0)",function(){
+                    $(this).siblings(".af02_user_photo").trigger("click");
+                  })
+                  .on("change",".af02_user_photo",function(event){
+                    $makeInfo.find(".user_photo_cut").show();
+                    const loader = event.target.files[0];
+                    const reader = new FileReader();
+                    reader.readAsDataURL(loader);
+                    reader.onloadend = function(e){
+                      const img = new Image();
+                      img.src = e.target.result;
+                      const can = $makeInfo.find(".user_photo_canvas");
+                      can.data("originUrl",e.target.result);
+                      img.onload = function(){
+                        const iw = img.width, ih = img.height, max_canvas = can.parent().width();
+                        const tw = iw<ih? max_canvas*iw/ih: max_canvas, th = iw<ih? max_canvas: max_canvas*ih/iw;
+                        can.prop("width", tw).prop("height",th);
+                        const ctx = can.get(0).getContext("2d");
+                        ctx.drawImage(img, 0, 0,tw, th );
+                      }
+                    }
+                  })
+                  .on("click",".user_photo_input a:eq(1)",function(){
+                    const finalCanvasSize = 200;
+                    const can = $makeInfo.find(".user_photo_canvas");
+                    const draw = can.get(0).getContext("2d");
+                      draw.clearRect(0,0,can.width(),can.height());
+                    const cut = $makeInfo.find(".user_photo_cut"),
+                      ct = cut.position().top, cl = cut.position().left, cw = cut.width(), ch = cut.height(),
+                      pw = cut.parent().width(), ph = cut.parent().height();
+                    const iii = new Image();
+                    iii.src = can.data("originUrl");
+                    iii.onload = function(){
+                      const iw = iii.width, ih = iii.height
+                      can.prop("width", finalCanvasSize).prop("height",finalCanvasSize*cw/ch);
+                      draw.drawImage(iii,cl*iw/pw,ct*ih/ph,cw*iw/pw,ch*ih/ph,0,0,finalCanvasSize,finalCanvasSize*cw/ch)
+                      const da = can.get(0).toDataURL("image/png");
+                      can.data("replaceUrl",da);
+                      $makeInfo.find(".user_photo_submitOnly").val((i,v) => da);
+                    }
                     
-                  }
-                });
+                  })                
                 
               }
               // ------------------------------------------
