@@ -15,10 +15,10 @@
         --wrap-width-percent: 90%;
         /* color */
         --main-bg-color: #ffcf00;
-        --list-bg-color01 : rgb(228, 54, 41);
-        --list-bg-color02 : rgb(43, 43, 180);
-        --list-bg-color03 : rgb(22, 165, 22);
-        --list-bg-color04 : rgb(255, 255, 59);
+        --list-bg-color01 : rgba(228, 54, 41, 0.6);
+        --list-bg-color02 : rgba(43, 43, 180, 0.6);
+        --list-bg-color03 : rgba(22, 165, 22, 0.6);
+        --list-bg-color04 : rgba(255, 255, 59, 0.6);
       }
       /* ------------------------------------------------------------------------ */
       body {
@@ -39,6 +39,9 @@
         text-decoration: none;
       }
       /* ------------------------------------------------------------------------------------------ */
+      main {
+        background-color: #ffcf00;
+      }
       .mainWrap {
         width: var(--whole-max-width);
         min-width: var(--whole-min-width);
@@ -46,90 +49,131 @@
         margin: auto;
         position: relative;
       }
-      .list {
-        width: 100%;
-        padding: 0px 14%;
-        box-sizing: border-box;
+      .titlebnr {
+        width: 100vw;
+        height: 220px;
+        background-color: white;
+        position: absolute;
+        top: 0px;
       }
-        .list h4 {
-          height: 100px;
-          font-size: 150%;
-        }
-        .list_ul_wrap{
-          background: url("img/entrance_korea_0729.jpg") no-repeat center/ cover;
-        }
-        .t_r_list_ul {
-          background: url("img/background01.webp") no-repeat bottom center/ cover;
-        }
-        .e_list_ul{
-          background: url("img/background02.webp") no-repeat bottom center/ cover;
-        }
-        .list_ul {
-          width: calc(100% + 12px);
-          display: flex;
-          flex-wrap: wrap;
-          border-collapse: collapse;
-        }
-        .list_u_li_dated,
-        .list_u_li_period,
-        .list_u_li {
-          width: calc(100% / 3);
-          aspect-ratio: 1 / 0.6;          
-          position: relative;
-          border: 4px solid var(--main-bg-color);
-          box-sizing: border-box;
-        }
-        .list_u_li {
-          transition: .3s ease;
-        }
-        .list_u_li_empty {
-          width: calc(100% / 3);
-          aspect-ratio: 1 / 0.6;          
-          position: relative;
-          background-color: var(--main-bg-color);
-        }
-        .list_ul>li>a:hover {
-          background-color: rgba(0, 128, 0, 0.3);
-          color: #eee;
-        }
-
-        .list_ul >li>a {
-          display: flex;
-          height: 100%;
-          justify-content: center;
-          align-items: center;
-          font-size: 120%;
-          font-weight: 600;
-
-          box-sizing: border-box;
-          word-break: keep-all;
-          transition: .3s ease;
-          background-color: white;
-        }
-        
-
       .title {
         width: 100%;
         margin: 0px auto 60px;
         height: 220px;
         box-sizing: border-box;
+
+        z-index: 10;
       }
-        .title h3 {
-          font-size: 35px;
-          color: black;
-          position: relative;
-          max-width: var(--list-max-width);
-          padding: 0px 50px;
-          margin: auto;
-          text-shadow: 1px 1px 5px rgba(255,255,255,0.7);
-        }
+      .title h3 {
+        font-size: 35px;
+        color: black;
+        position: relative;
+        max-width: var(--list-max-width);
+        padding: 0px 50px;
+        margin: auto;
+        text-shadow: 1px 1px 5px rgba(255,255,255,0.7);
+      }
       .title_bg {
         width: 100%;
         height: 100%;
         padding: 80px 40px 0px;
         box-sizing: border-box;
-        background: linear-gradient(to right, white, transparent 50%);
+        /* background: linear-gradient(to right,white, white 5%, transparent 40% 90%,white 96%,white); */
+        background: linear-gradient(to right,white, white 5%, transparent 60%);
       }
+      /* --------------------------------------------------------- */
+      .list {
+        width: 100%;
+        padding: 0px 15%;
+        box-sizing: border-box;
+      }
+      .list h4 {
+        padding-bottom: 50px;
+        font-size: 150%;
+        position: relative;
+      }
+      .list h4::after {
+        content: "";
+        display: block;
+        width: 60%;
+        height: 2px;
+        background: linear-gradient(to right, rgba(0,0,0, 0.5), transparent);
+        position: absolute;
+        bottom: 35px;
+        left: 0px;
+
+      }
+      .list_ul_wrap{
+        background: url("img/entrance_korea_0729.jpg") no-repeat center/ cover;
+      }
+      .t_r_list_ul {
+        background: url("img/background4.webp") no-repeat center/ cover;
+      }
+      .e_list_ul{
+        background: url("img/background02.webp") no-repeat bottom center/ cover;
+      }
+      .c_list_ul {
+        background: url("img/background03.webp") no-repeat top left/ cover;
+      }
+      .list_ul {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        border-collapse: collapse;
+      }
+      .list_u_li_dated,
+      .list_u_li_period,
+      .list_u_li {
+        width: calc(100% / 3);
+        aspect-ratio: 1 / 0.6;          
+        position: relative;
+        border: 4px solid var(--main-bg-color);
+        box-sizing: border-box;
+      }
+      .list_u_li {
+        transition: .3s ease;
+      }
+      .list_u_li_empty {
+        width: calc(100% / 3);
+        aspect-ratio: 1 / 0.6;          
+        position: relative;
+        background-color: var(--main-bg-color);
+      }
+      .list_ul>li>a:hover {
+        background-color: rgba(0, 128, 0, 0.3);
+        color: #eee;
+      }
+
+      .list_ul >li>a {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        font-size: 120%;
+        font-weight: 600;
+
+        box-sizing: border-box;
+        word-break: keep-all;
+        transition: .3s ease;
+        background-color: white;
+      }
+      .list_ul >li>.dated_tc {
+        background-color: red;
+      }
+      .list_ul >li>.daytime_tc {
+        background-color: green;
+      }
+      .list_ul >li>.vip_tc {
+        background-color: blue;
+      }
+      .list_ul >li>.annual_tc {
+        background-color: orange;
+      }
+      .list_ul >li>.season_tc {
+        background-color: pink;
+      }
+      
       .list_exp {
         position: fixed;
         left: 0;
@@ -141,7 +185,6 @@
         justify-content: center;
         align-items: center;
         z-index: 9999;
-        
       }
       .list_exp_wrap {
         
@@ -157,62 +200,62 @@
         padding: 60px 40px 40px;
         
       }
-        .l_e_w_text {
-          width: 100%;
-          height: 85%;
-          padding: 10px 20px;
-          overflow-y: auto;
-          box-sizing: border-box;
-          margin-bottom: 10px;
-        }
-        .list_exp h5 {
-          font-size: 20px;
-          padding-bottom: 15px;
-          padding-left: 30px;
-        }
-        .list_exp ul {
-          list-style: circle;
-          padding-left: 40px;
-          padding-top: 40px;
-        }
-        .list_exp li {
-          padding: 10px 0px;
-        }
-        
-        .close_exp {
-          display: block;
-          width: 20px;
-          height: 20px;
-          background: rgba(255, 255, 255, 0.8) url("img/close_button.png") no-repeat center/20px 20px;
-          border-radius: 50%;
+      .l_e_w_text {
+        width: 100%;
+        height: 85%;
+        padding: 10px 20px;
+        overflow-y: auto;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+      }
+      .list_exp h5 {
+        font-size: 20px;
+        padding-bottom: 15px;
+        padding-left: 30px;
+      }
+      .list_exp ul {
+        list-style: circle;
+        padding-left: 40px;
+        padding-top: 40px;
+      }
+      .list_exp li {
+        padding: 10px 0px;
+      }
+      
+      .close_exp {
+        display: block;
+        width: 20px;
+        height: 20px;
+        background: rgba(255, 255, 255, 0.8) url("img/close_button.png") no-repeat center/20px 20px;
+        border-radius: 50%;
 
-          position: absolute;
-          top: 20px;
-          right: 20px;
-        }
-        .btnBox {
-          display: flex;
-          gap: 30px;
-          justify-content: center;
-          align-items: center;
-          padding-top: 15px;
-        }
-        .gotoreser {
-          display: block;
-          width: 100px;
-          height: 30px;
-          text-align: center;
-          border: 3px solid gray;
-          color: gray;
-        }
-        .gotoexp {
-          display: block;
-          width: 100px;
-          height: 30px;
-          text-align: center;
-          border: 3px solid gray;
-          color: gray;
-        }
+        position: absolute;
+        top: 20px;
+        right: 20px;
+      }
+      .btnBox {
+        display: flex;
+        gap: 30px;
+        justify-content: center;
+        align-items: center;
+        padding-top: 15px;
+      }
+      .gotoreser {
+        display: block;
+        width: 100px;
+        height: 30px;
+        text-align: center;
+        border: 3px solid gray;
+        color: gray;
+      }
+      .gotoexp {
+        display: block;
+        width: 100px;
+        height: 30px;
+        text-align: center;
+        border: 3px solid gray;
+        color: gray;
+      }
       /* .gotoexp {
         display: block;
         border: 2px solid #bbb;
@@ -232,6 +275,9 @@
         position: relative;
         margin: auto;
         width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
       .t_list {
         margin-bottom: 70px;
@@ -291,18 +337,19 @@
     <main>
       <div class="mainWrap">
         <div class="tickets">
+          <div class="titlebnr" hidden></div>
           <div class="title t_title">
             <div class="title_bg">
               <h3>이용권 구매하기 & 방문예약</h3>
             </div>
           </div>
+
           <div class="list t_list">
-            
             <h4>이용권 구매하기</h4>
             <div class="list_ul_wrap">
               <ul class="list_ul t_list_ul">
                 <li class="list_u_li_dated">
-                  <a href="#none">일일이용권</a>
+                  <a href="#none" class="dated_tc">일일이용권</a>
                   <div class="list_exp">
                     <div class="list_exp_wrap">
                       <div class="l_e_w_text">
@@ -322,7 +369,7 @@
                   </div>
                 </li>
                 <li class="list_u_li_dated">
-                  <a href="#none">오후이용권</a>
+                  <a href="#none" class="daytime_tc">오후이용권</a>
                   <div class="list_exp">
                     <div class="list_exp_wrap">
                       <div class="l_e_w_text">
@@ -523,7 +570,7 @@
                   </div>
                 </li>
                 <li class="list_u_li_dated">
-                  <a href="#none">VIP EXPERIENCES</a>
+                  <a href="#none" class="vip_tc">VIP EXPERIENCES</a>
                   <div class="list_exp">
                     <div class="list_exp_wrap">
                       <h5>LEGOLAND® KOREA VIP Experiences</h5>
@@ -542,7 +589,6 @@
                             <li>✔️ VIP Gold 또는 Platinum Experience에 대한 스케줄은 일주일 전 메일로 공지됩니다. </li>
                             <li>✔️ VIP Platinum Experience는 만 6세 이상 손님부터 구매 가능합니다.</li>
                           </ul>
-                      
                       </div>
                       <a href="#none" class="close_exp"></a>
                       <div class="btnBox">
@@ -555,7 +601,7 @@
               </ul>
               <ul class="list_ul list_ul_period">
                 <li class="list_u_li_period">
-                  <a href="#none">연간이용권</a>
+                  <a href="#none" class="annual_tc">연간이용권</a>
                   <div class="list_exp">
                     <div class="list_exp_wrap">
                       <div class="l_e_w_text">
@@ -700,7 +746,7 @@
                   </div>
                 </li>
                 <li class="list_u_li_period">
-                  <a href="#none">시즌이용권</a>
+                  <a href="#none" class="season_tc">시즌이용권</a>
                   <div class="list_exp">
                     <div class="list_exp_wrap">
                       <div class="l_e_w_text">
@@ -726,13 +772,13 @@
             <h4>방문예약하기</h4>
             <ul class="list_ul t_r_list_ul">
               <li class="list_u_li">
-                <a href="t_use_reser01_0.html" data-page="6" data-char="require">날짜예약</a>
+                <a href="t_use_reser01_0.html" class="require_tc" data-page="6" data-char="require">파크 방문 예약</a>
               </li>
               <li class="list_u_li">
                 <a href="#none">예약조회</a>
               </li>
               <li class="list_u_li">
-                <a href="t_hotel_reser01_slideside.html" data-char="hotel">호텔예약페이지</a>
+                <a href="t_hotel_reser01_slideside.html" class="hotel_tc" data-char="hotel">호텔예약</a>
               </li>
             </ul>
           </div>
@@ -815,20 +861,15 @@
           })
         })
         // 리스트 정리===============================
-        if ($(".list_u_li_dated").length%3 !=0){
-          const len = $(".list_u_li_dated").length % 3;
-          for(let i=1; i<= 3-len; i++) {
-            const $li = $("<li class='list_u_li_empty'></li>");
-            $li.appendTo(".t_list_ul")
+        $(".list_ul").each(function(i){
+          if( $(this).children("li").length%3 != 0) {
+            const len = $(this).children("li").length % 3;
+            for(let i=1; i<= 3-len; i++) {
+              const $li = $("<li class='list_u_li_empty'></li>");
+              $li.appendTo($(this))
+            }
           }
-        }
-        if ($(".list_u_li_period").length%3 !=0){
-          const len = $(".list_u_li_period").length % 3;
-          for(let i=1; i<= 3-len; i++) {
-            const $li = $("<li class='list_u_li_empty'></li>");
-            $li.appendTo(".list_ul_period")
-          }
-        }
+        })
         //구매 페이지로 이동==========================
         $(".gotoreser").each(function(){
           $(this).on("click",function(){

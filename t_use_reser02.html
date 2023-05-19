@@ -4,21 +4,76 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>장바구니 결제</title>
+    <title>장바구니 등록</title>
     <link rel="stylesheet" href="./css/ticket_common.css">
     <script src="./jquery.js"></script>
+    <style>
+        .mainWrap {
+            max-width: var(--whole-max-width);
+            min-width: var(--whole-min-width);
+            height: 100vh;
+            margin: auto;
+            background-color: var(--main-bg-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .complete_exp {
+            width: 50%;
+            margin: 0px auto;
+            background-color: rgba(255,255,255,0.3);
+            box-shadow: 3px 4px 6px rgba(0,0,0,0.5) ;
+            display: flex;
+            align-items: center;
+        }
+        .complete_exp strong {
+            font-size: 200%;
+        }
+        .complete_exp p {
+            font-size: 100%;
+        }
+        /* =============================================== */
+        .complete_btn {
+            width: 50%;
+            margin: 60px auto 0px;
+
+            display: flex;
+            justify-content: center;
+            gap: 30%;
+        }
+        .complete_btn a {
+            display: flex;
+            align-items: center;
+            height: 2em;
+            font-size: 130%;
+            font-weight: 600;
+            color: #333;
+        }
+        .cb_back{
+            width: 270px;
+            justify-content: end;
+            background: url("img/arrow_back_3.png") no-repeat left center/ 50px 40px;
+        }
+        .cb_pay {
+            width: 350px;
+            background: url("img/arrow_forward_3.png") no-repeat right center/ 50px 40px;
+        }
+    </style>
 </head>
 <body>
     <main>
         <div class="mainWrap">
-            <div class="goback">
-                <a href="#none">예약페이지로 이동</a>
+            <div class="complete_exp">
+                <img src="./img/boy-jumping.webp" alt="">
+                <div>
+                    <strong>장바구니에 등록되었습니다.</strong>
+                    <p>더 다양한 LEGOLAND® 를 만나보세요!</p>
+                </div>
             </div>
-            <div class="paymentList">
-                <form action="" class="pl_form01">
-                    <legend>제휴카드 전용 결제</legend>
-                    <input type="hidden" name="">
-                </form>
+            <div class="complete_btn">
+                <a href="#none" class="cb_back">계속 쇼핑하기</a>
+                <a href="#none" class="cb_pay">결제페이지로 이동</a>
             </div>
         </div>
     </main>

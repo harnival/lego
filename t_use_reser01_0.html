@@ -80,23 +80,27 @@
     </main>
 
     <script>
-      let uuuu;
-      const t = async function(){
-        let obj = JSON.parse(localStorage.getItem("load"));
-        let num = obj["page"], char = obj["char"], name = obj["name"];
-        console.log(num,char,name)
-        const p = new Promise(function(res,rej){
-          $(".formBox").load(`./t_use_reser01_${num}.html`)
-          res();
-        })
-        const r = await $(document).ready(function(){
-          $(".tapBox a").not(`:eq(${num-1})`).removeClass("active_tap");
-          $(".tapBox a").eq(num-1).addClass("active_tap");
-
-        })
-        const y = await tyty(r);
+      if(!JSON.parse(localStorage.getItem("load"))) {
+        $(function(){tyty()});
+      } else {
+        const t = async function(){
+          let obj = JSON.parse(localStorage.getItem("load"));
+          let num = obj["page"], char = obj["char"], name = obj["name"];
+          console.log(num,char,name)
+          const p = new Promise(function(res,rej){
+            $(".formBox").load(`./t_use_reser01_${num}.html`)
+            res();
+          })
+          const r = await $(document).ready(function(){
+            $(".tapBox a").not(`:eq(${num-1})`).removeClass("active_tap");
+            $(".tapBox a").eq(num-1).addClass("active_tap");
+  
+          })
+          const y = await tyty(r);
+        }
+        t();
+       
       }
-      t();
       function tyty() {
         //=========================== load =================================
         //localStorage setting

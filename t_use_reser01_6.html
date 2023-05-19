@@ -106,9 +106,14 @@
       color: white;
       margin-right: 10px;
     }
+    .vif03_c_unit_origin {
+      display: none;
+    }
     .vif03_c_unit {
       width: 100%;
-      border: 1px dashed palegreen;
+      border: 2px solid tomato;
+      background-color: white;
+      box-sizing: border-box;
     }
     .vif03_c_u_title {
       position: relative;
@@ -824,8 +829,8 @@
         })
       // -------------------------------------- 04. 정보 입력
       //핸드폰 번호 인증 창 열기
-      $(".vif04_i_phone_cert").on("click",function(){
-        window.open("./t_use_reser01_6_1.html","번호 인증","width=400, height=500, top=200,left=500")
+      $(".vif04_i_phone").on("click",".vif04_i_phone_cert",function(){
+        window.open("./t_use_reser01_6_1.html","번호 인증","width=500, height=400, top=200,left=500")
       })
       function cert(){
         if ( localStorage.getItem("phone_cert") ){

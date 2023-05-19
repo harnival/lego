@@ -2,6 +2,7 @@
 :root {
     /* length */
     --whole-max-width: 1350px;
+    --whole-min-width: 750px;
     --calender-table-size: 400px;
     --calender-month-button: 1em;
     /* color */
@@ -15,7 +16,7 @@
 body {margin: 0px;padding: 0px; font-size: 15px; font-family: "Noto Sans KR", "Sans serif";}
 ul {list-style: none;padding: 0px;margin: 0px;}
 a {text-decoration: none; color: initial;}
-
+h3,h4,h5,h6 {margin: 0px;}
 /* number input 버튼 숨기기 */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
