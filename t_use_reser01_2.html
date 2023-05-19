@@ -557,14 +557,24 @@
               const i = monthStart.getDay() + monthEnd.getDate();
 
               for (let j = 1; j <= i; j++) {
-              
                 const n = j - monthStart.getDay();
+                const cur = new Date(years,months,n);
                 if (n > 0) {
                   if ( new Date(years, months, n) < today ) {
                     const disabled_cell = $("<div class='disabled_cell dataCell'></div>");
                     disabled_cell.text(n);
                     $(this).find(".cdt_date").append(disabled_cell);
-                  } else {
+                  }
+                  else if ( cur >= new Date(2023,10,20) && new Date(2024,0,1) > cur && ([1,2,3]).some(e => e == cur.getDay()) ){
+                    //휴장일
+                    const disabled_cell = $("<div class='disabled_cell dataCell'></div>");
+                    const exp = $("<span class='notOpen'>휴관</span>")
+                    disabled_cell
+                      .text(n)
+                      .append(exp);
+                    $(this).find(".cdt_date").append(disabled_cell);
+                  }
+                  else {
                     const able_cell = $("<a href='#none' class='able_cell dataCell'></a>");
                     able_cell.text(n);
                     able_cell.data(

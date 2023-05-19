@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>예약자 번호 인증</title>
+    <style>
+        body {padding: 0px; margin: 0px; font-size: 16px;}
+        .cert {
+            height: 100vh;
+            padding: 10px 20px;
+            box-sizing: border-box;
+        }
+        .c_inputs {
+            background-color: #eee;
+            padding: 8px 7%;
+            box-sizing: border-box;
+        }
+        .c_i_phone {
+            border: 1px dashed tomato;
+            display: flex;
+            gap: 10px;
+            padding-top: 20px;
+        }
+        .c_i_phone > div {
+            position: relative;
+        }
+        .c_i_phone label{
+            position: absolute;
+            top: -20px;
+            font-size: 80%;
+            opacity: 0.6;
+        }
+        #c_i_company_select{
+            padding: 5px;
+        }
+        #c_i_phone_input{
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="cert">
+        <div class="c_title">
+            <h2>핸드폰 번호 인증</h2>
+            <span>정보를 정확히 기입하고 <br/> [확인] 버튼을 누르십시오.</span>
+        </div>
+        <div class="c_inputs">
+            <div class="c_i_phone">
+                <div class="c_i_select_wrap">
+                    <label for="c_i_company_select">통신사 선택</label>
+                    <select name="c_i_company" id="c_i_company_select">
+                        <option value="KT">KT</option>
+                        <option value="SKT">SKT</option>
+                        <option value="LG U+">LG U+</option>
+                        <option value="알뜰">알뜰요금제</option>
+                    </select>
+                </div>
+                <div class="c_i_number_wrap">
+                    <label for="c_i_phone_input">핸드폰 번호</label>
+                    <input type="tel" name="c_i_phone" id="c_i_phone_input">
+                </div>
+            </div>
+        </div>
+        <div class="c_btn">
+            <a href="#none" class="c_btn_go">확인</a>
+            <a href="#none" class="c_btn_close">닫기</a>
+        </div>
+    </div>
+    
+    <script>
+        const go = document.querySelector(".c_btn_go");
+        function accept() {
+            const w = document.querySelector(".cert");
+            w.innerHTML = `
+            <div class='eeee'>
+                <span>확인완료</span>
+                <a href='#none' class='c_btn_close'>닫기</a>
+            </div>`;
+            const set = setTimeout(function(){
+                window.close()
+            },2000)
+        }
+        go.addEventListener("click",function(){
+            localStorage.setItem("phone_cert","true");
+            accept()
+            
+        })
+        
+    </script>
+</body>
+</html>
