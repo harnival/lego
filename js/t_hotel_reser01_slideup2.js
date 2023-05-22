@@ -112,11 +112,24 @@ $("#sr_c_input").change(function(){
         }
     })
 })
-$(".sr_c_disabled").click(function(){
+$(".sr_c_disabled").on("click",function(){
     $(this).toggleClass("sr_c_disabled_active");
 });
 
-
+const h = $(".shortReservation").css("height");
+$(".openBtn").on("click",function(){
+    $(this).toggleClass("act");
+    // $(".shortReservation").toggleClass("uup");
+    if($(this).hasClass("act")) {
+        $(".shortReservation").animate({
+            height: "80px"
+        },1000);
+    } else {
+        $(".shortReservation").animate({
+            height: h
+        },1000);
+    }
+})
 // 검색정보 입력 후, 해당 객실 로드 ----------------------------------------
 $(".shortReservation_wrap_up").on("submit",function(e){ 
     $(".ri_e_t_choice").show();
