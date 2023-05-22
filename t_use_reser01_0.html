@@ -106,9 +106,8 @@
         //localStorage setting
         localStorage.setItem("payment_list","[]");
         if ( !localStorage.getItem("basket_list") ) {
-          const itemList = new Object();
-          localStorage.setItem("basket_list", "{}");
-          console.log("done");
+          localStorage.setItem("basket_list", "[]");
+          console.log("new basket on");
         }
         // page load
         $(".tapBox_btn").each(function (i) {

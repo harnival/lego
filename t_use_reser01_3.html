@@ -479,8 +479,8 @@
                 <div class="af01_tc_number">
                   <div class="numberCheck">
                     <input
-                      type="text"
-                      name="annual_standard_number"
+                      type="number"
+                      name="standard_pass"
                       id="annual_standard_number"
                       value="0"
                       readonly
@@ -501,8 +501,8 @@
                 <div class="af01_tc_number">
                   <div class="numberCheck">
                     <input
-                      type="text"
-                      name="annual_gold_number"
+                      type="number"
+                      name="gold_pass"
                       id="annual_gold_number"
                       value="0"
                       readonly
@@ -523,8 +523,8 @@
                 <div class="af01_tc_number">
                   <div class="numberCheck">
                     <input
-                      type="text"
-                      name="annual_platinum_number"
+                      type="number"
+                      name="platinum_pass"
                       id="annual_platinum_number"
                       value="0"
                       readonly
@@ -681,6 +681,7 @@
                     <div class="af02_i_i_t_name"></div>
                     <div class="af02_i_i_t_ticket"></div>
                     <div class="af02_i_i_t_age"></div>
+                    <input type="hidden" name="user_pass" id="">
                     <a href="#none">취소</a>
                   </div>
                   <div class="af02_i_i_inputpage_wrap">
@@ -769,7 +770,7 @@
                     </div>
 
                     <a href="#none" class="af06_d_l_select" id="af06_d_l_KBcard">적용하기</a>
-                    <input type="checkbox" name="af06_d_l_select_02" id="af06_d_l_select_02">
+                    <input type="checkbox" name="discount_kbcard" id="af06_d_l_select_02">
                   </div>
                   <div class="af06_d_l_detail">
                     <dl>
@@ -871,7 +872,7 @@
               <div class="af06_p_total">
                 <label for="annual_total_price">합계</label>
                 <span class="af06_p_t_text"></span>
-                <input type="text" name="annual_total_price" id="annual_total_price" readonly class="total_price">
+                <input type="text" name="total_price" id="annual_total_price" readonly class="total_price">
               </div>
               <div class="annual_ticket_submit ticket_submit">
                 <button type="submit" class="submit_btn">장바구니에 담기</button>
@@ -1000,10 +1001,21 @@
           function makeInfo(classes) {
               if( $(`.af02_i_info_${classes}`).length < $(`#annual_${classes}_number`).val()) {
                 const $makeInfo = $(`.af02_i_info_origin`).clone(true);
+                const len = $(".af02_i_info").length;
+
                 $makeInfo.addClass([`af02_i_info_${classes}`, "af02_i_info"]);
                 $makeInfo.removeClass("af02_i_info_origin");
                 $makeInfo.find(".af02_i_i_t_ticket").text(`${classes.toUpperCase()} PASS`);
+                $makeInfo.find(".af02_i_i_tab input").val((i,v) => classes);
+                $makeInfo.find("input").each(function(){
+                  $(this).removeAttr("disabled");
+                  if ($(this).prop("name")){
+                    const name = $(this).prop("name");
+                    $(this).prop("name", name + `_${len+1}`);
+                  }
+                })
                 $(".af02_inputBox").append($makeInfo);
+                $(".af02_i_info_origin input").attr("disabled",true);
 
                 //제거버튼
                 $makeInfo.find(".af02_i_i_tab a").click(function(){
@@ -1192,8 +1204,12 @@
             const bbb = new FormData(e.target);
             const ccc = Object.fromEntries(bbb.entries());
             const submitTime = Date.now();
+            ccc.type = "annual";
             ccc.submitTime = submitTime;
-            localStorage.setItem(`annual_ticket_${submitTime}`,JSON.stringify(ccc));
+            const getList = JSON.parse(localStorage.getItem("basket_list"));
+            getList.push(ccc);
+            localStorage.setItem("basket_list",JSON.stringify(getList));
+
             addBasket(submitTime);
           }
           $("#annual_ticket_form").submit(function(e){

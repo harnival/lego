@@ -1,0 +1,22 @@
+
+// t_use_reser01_1.html -- 1일이용권구매 "dated_ticket_${submitTime}"
+#dated_data_value
+    name: date
+#dated_numbers_grown
+    name: grown
+#dated_numbers_little
+    name: little
+#dated_digital_photo_number
+    name: digital_photo
+#dated_mini_figure_number
+    name: mini_figure
+.df04_ft .nc_wrap input .each()-- 패스트트랙
+    name: fasttrack_virtual , fasttrack_express , fasttrack_ultimate
+#dated_master_builder --마스터빌더 선택
+    name: master_builder
+.df05_wrap .nc_wrap input 
+    name: master_builder
+.df06_d_l_select .each()
+    name: discount_kangwon , discount_kbcard , discount_lg , discount_nation
+#dated_total_price 
+    name: total_price

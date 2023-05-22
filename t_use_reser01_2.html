@@ -237,7 +237,7 @@
             <legend>날짜 지정</legend>
             <div class="date_inputs">
               <label for="daytime_date_value"></label>
-              <input type="date" name="daytime_date_value" id="daytime_date_value">
+              <input type="date" name="date" id="daytime_date_value">
             </div>
             <div class="calender">
               <div class="calender_wrap_prev">
@@ -299,7 +299,7 @@
               </span>
               <div class="nc_wrap">
                 <div class="numberCheck">
-                  <input type="text" name="daytime_numbers_grown" id="daytime_numbers_grown" class="numbers_grown"  value="0" readonly/>
+                  <input type="text" name="grown" id="daytime_numbers_grown" class="numbers_grown"  value="0" readonly/>
                   <a href="#none" class="decrease_btn">인원 제외<img src="./img/minus.png" alt=""></a>
                   <a href="#none" class="increase_btn">인원 추가<img src="./img/plus.png" alt=""></a>
                 </div>
@@ -315,7 +315,7 @@
               </span>
               <div class="nc_wrap">
                 <div class="numberCheck">
-                  <input type="text" name="daytime_numbers_little" id="daytime_numbers_little" class="numbers_little" value="0" readonly />
+                  <input type="text" name="little" id="daytime_numbers_little" class="numbers_little" value="0" readonly />
                   <a href="#none" class="decrease_btn">인원 제외<img src="./img/minus.png" alt=""></a>
                   <a href="#none" class="increase_btn">인원 추가<img src="./img/plus.png" alt=""></a>
                 </div>
@@ -329,7 +329,7 @@
               <div>
                 <input
                   type="radio"
-                  name="daytime_pre_reserve"
+                  name=""
                   value="daytime_digital_photo"
                   id="daytime_digital_photo"
                   class="digital_photo"
@@ -350,7 +350,7 @@
                     <div class="dpnWrap">
                       <input
                         type="text"
-                        name="daytime_digital_photo_number"
+                        name="digital_photo"
                         id="daytime_digital_photo_number"
                         class="digital_photo_number"
                         value="0"
@@ -393,7 +393,7 @@
               <div>
                 <input
                   type="radio"
-                  name="daytime_pre_reserve"
+                  name=""
                   value="daytime_mini_figure"
                   id="daytime_mini_figure"
                   readonly
@@ -417,7 +417,7 @@
                     <input
                       type="text"
                       name="daytime_mini_figure_number"
-                      id="daytime_mini_figure_number"
+                      id="mini_figure"
                       class="mini_figure_number"
                       value="0"
                       readonly
@@ -495,7 +495,7 @@
               <div class="dtf06_p_total">
                 <label for="daytime_total_price">합계</label>
                 <span class="dtf06_p_t_text"></span>
-                <input type="text" name="daytime_total_price" id="daytime_total_price" readonly class="total_price">
+                <input type="text" name="total_price" id="daytime_total_price" readonly class="total_price">
               </div>
               <div class="daytime_ticket_submit ticket_submit">
                 <button type="submit" class="submit_btn">장바구니에 담기</button>
@@ -806,10 +806,11 @@
             const bbb = new FormData(e.target);
             const ccc = Object.fromEntries(bbb.entries());
             const submitTime = Date.now();
+            ccc.type = "daytime";
             ccc.submitTime = submitTime;
 
             const getList = JSON.parse(localStorage.getItem("basket_list"));
-            getList[`dated_ticket_${submitTime}`] = ccc;
+            getList.push(ccc);
             localStorage.setItem("basket_list",JSON.stringify(getList));
             // localStorage.setItem(`dated_ticket_${submitTime}`,JSON.stringify(ccc));
             addBasket(submitTime);

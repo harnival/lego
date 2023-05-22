@@ -364,7 +364,7 @@
             <legend>날짜 지정</legend>
             <div class="date_inputs">
               <label for="dated_date_value"></label>
-              <input type="date" name="dated_date_value" id="dated_date_value">
+              <input type="date" name="date" id="dated_date_value">
             </div>
             <div class="calender">
               <div class="calender_wrap_prev">
@@ -426,7 +426,7 @@
               </span>
               <div class="nc_wrap">
                 <div class="numberCheck">
-                  <input type="text" name="dated_numbers_grown" id="dated_numbers_grown" class="numbers_grown"  value="0" readonly/>
+                  <input type="text" name="grown" id="dated_numbers_grown" class="numbers_grown"  value="0" readonly/>
                   <a href="#none" class="decrease_btn">인원 제외<img src="./img/minus.png" alt=""></a>
                   <a href="#none" class="increase_btn">인원 추가<img src="./img/plus.png" alt=""></a>
                 </div>
@@ -442,7 +442,7 @@
               </span>
               <div class="nc_wrap">
                 <div class="numberCheck">
-                  <input type="text" name="dated_numbers_little" id="dated_numbers_little" class="numbers_little" value="0" readonly />
+                  <input type="text" name="little" id="dated_numbers_little" class="numbers_little" value="0" readonly />
                   <a href="#none" class="decrease_btn">인원 제외<img src="./img/minus.png" alt=""></a>
                   <a href="#none" class="increase_btn">인원 추가<img src="./img/plus.png" alt=""></a>
                 </div>
@@ -456,7 +456,7 @@
               <div>
                 <input
                   type="radio"
-                  name="dated_pre_reserve"
+                  name=""
                   value="dated_digital_photo"
                   id="dated_digital_photo"
                   class="digital_photo"
@@ -477,7 +477,7 @@
                     <div class="dpnWrap">
                       <input
                         type="text"
-                        name="dated_digital_photo_number"
+                        name="digital_photo"
                         id="dated_digital_photo_number"
                         class="digital_photo_number"
                         value="0"
@@ -520,7 +520,7 @@
               <div>
                 <input
                   type="radio"
-                  name="dated_pre_reserve"
+                  name=""
                   value="dated_mini_figure"
                   id="dated_mini_figure"
                   readonly
@@ -543,7 +543,7 @@
                   <div class="numberCheck">
                     <input
                       type="text"
-                      name="dated_mini_figure_number"
+                      name="mini_figure"
                       id="dated_mini_figure_number"
                       class="mini_figure_number"
                       value="0"
@@ -606,8 +606,8 @@
                     
                     <div class="numberCheck">
                       <input
-                        type="text"
-                        name="dated_ft_virtual_number"
+                        type="number"
+                        name="fasttrack_virtual"
                         id="dated_ft_virtual_number"
                         value="0"
                         readonly
@@ -627,8 +627,8 @@
                 <div class="nc_wrap">
                   <div class="numberCheck">
                     <input
-                      type="text"
-                      name="dated_ft_express_number"
+                      type="number"
+                      name="fasttrack_express"
                       id="dated_ft_express_number"
                       value="0"
                       readonly
@@ -647,8 +647,8 @@
                 <div class="nc_wrap">
                   <div class="numberCheck">
                     <input
-                      type="text"
-                      name="dated_ft_ultimate_number"
+                      type="number"
+                      name="fasttrack_ultimate"
                       id="dated_ft_ultimate_number"
                       value="0"
                       readonly
@@ -663,7 +663,7 @@
           <fieldset class="dated_fieldset05">
               <legend>LEGOLAND® Master Builder Program 신청</legend>
               <div class="df05_wrap">
-                <input type="checkbox" name="dated_master_builder" id="dated_master_builder" class="master_builder">
+                <input type="checkbox" name="" id="dated_master_builder" class="master_builder">
                 <label for="dated_master_builder">LEGOLAND® Master Builder Program 신청하기</label>
                 <div class="df05_price">
                   <span>온라인 구매가격</span>
@@ -675,8 +675,8 @@
                   <label for="dated_master_builder_number"></label>
                   <div class="numberCheck">
                     <input
-                      type="text"
-                      name="dated_master_builder_number"
+                      type="number"
+                      name="master_builder"
                       id="dated_master_builder_number"
                       value="0"
                       readonly
@@ -725,7 +725,7 @@
                       강원도 거주자 일일이용권 평일 30% 할인, 주말 및 공휴일 10% 할인 혜택
                     </div>
                     <a href="#none" class="df06_d_l_select" id="df06_d_l_kangwon">적용하기</a>
-                    <input type="checkbox" name="df06_d_l_select_01" id="df06_d_l_select_01">
+                    <input type="checkbox" name="discount_kangwon" id="df06_d_l_select_01">
                   </div>
                   <div class="df06_d_l_detail">
                     <dl>
@@ -757,7 +757,7 @@
                     </div>
 
                     <a href="#none" class="df06_d_l_select" id="df06_d_l_d_kb">적용하기</a>
-                    <input type="checkbox" name="df06_d_l_select_02" id="df06_d_l_select_02">
+                    <input type="checkbox" name="discount_kbcard" id="df06_d_l_select_02">
                   </div>
                   <div class="df06_d_l_detail">
                       <dl>
@@ -822,7 +822,7 @@
                     </div>
 
                     <a href="#none" class="df06_d_l_select" id="df06_d_l_lg">적용하기</a>
-                    <input type="checkbox" name="df06_d_l_select_03" id="df06_d_l_select_03">
+                    <input type="checkbox" name="discount_lg" id="df06_d_l_select_03">
                   </div>
                   <div class="df06_d_l_detail">
                         <dl>
@@ -854,7 +854,7 @@
                     </div>
 
                     <a href="#none" class="df06_d_l_select" id="df06_d_l_nation">적용하기</a>
-                    <input type="checkbox" name="df06_d_l_select_04" id="df06_d_l_select_04">
+                    <input type="checkbox" name="discount_nation" id="df06_d_l_select_04">
                   </div>
                   <div class="df06_d_l_detail">
                         <dl>
@@ -925,7 +925,7 @@
               <div class="df06_p_total">
                 <label for="dated_total_price">합계</label>
                 <span class="df06_p_t_text"></span>
-                <input type="text" name="dated_total_price" id="dated_total_price" readonly class="total_price">
+                <input type="number" name="total_price" id="dated_total_price" readonly class="total_price">
               </div>
               <div class="dated_ticket_submit ticket_submit">
                 <button type="submit" class="submit_btn">장바구니에 담기</button>
@@ -962,6 +962,7 @@
           }
           //---------------------------- 01. 달력 생성 & 날짜 입력
           $.fn.extend({
+            // 달력 요일 생성
             week : function() {
               for (let i = 0; i < 7; i++) {
                 const newDay = $("<div></div>");
@@ -970,6 +971,7 @@
                 newDay.text(weekArr[i]);
               }
             },
+            // 달력 일자 생성
             calender: function(years,months){
               if ( months < 0) {
                 years -= 1;
@@ -996,7 +998,7 @@
                     $(this).find(".cdt_date").append(disabled_cell);
                   }
                   else if ( cur >= new Date(2023,10,20) && new Date(2024,0,1) > cur && ([1,2,3]).some(e => e == cur.getDay()) ){
-                    //휴장일
+                    //휴장일 
                     const disabled_cell = $("<div class='disabled_cell dataCell'></div>");
                     const exp = $("<span class='notOpen'>휴관</span>")
                     disabled_cell
@@ -1026,14 +1028,14 @@
               }
             }
           });
-          
+          //첫 달력 로딩
           $(".calender_wrap_prev").week();
           $(".calender_wrap").week();
           $(".calender_wrap_next").week();
           $(".calender_wrap_prev").calender($selYear,$selMonth-2);
           $(".calender_wrap").calender($selYear,$selMonth-1);
           $(".calender_wrap_next").calender($selYear,$selMonth);
-
+          //달력 뒤로가기
             $(".calender_month .gotoback").click(function(){
               if (!($selYear == today.getFullYear() && $selMonth-1 == today.getMonth())) {
                 if ( $selMonth == 1 ) {
@@ -1047,6 +1049,7 @@
               $(".calender_wrap").calender($selYear,$selMonth-1);
               $(".calender_wrap_next").calender($selYear,$selMonth);
             });
+            // 달력 다음으로
             $(".calender_month .gotonext").click(function(){
               if ( $selMonth == 12 ) {
                 $selMonth = 1;
@@ -1058,12 +1061,12 @@
               $(".calender_wrap").calender($selYear,$selMonth-1);
               $(".calender_wrap_next").calender($selYear,$selMonth);
             });
-
+            //달력 선택
           $(".dated_fieldset01").on("click",".able_cell",function(){
             $(this).addClass("active_cell");
             $(".able_cell").not($(this)).removeClass("active_cell");
             $("#dated_date_value")
-              .val((i,v) => $(this).prop("id"))
+              .val((i,v) => $(this).prop("id")) //--------------> form data
               .data("value",$(this).data("value"));
             const q = new Date($(this).prop("id"));
             $(".date_inputs label").text(`${q.getFullYear()} 년 ${q.getMonth()+1} 월 ${q.getDate()} 일 (${weekArr[q.getDay()]})`);
@@ -1080,7 +1083,7 @@
             $(this).siblings("input").val((i,v) => +v+1);
             $(this).siblings("input").trigger("change");
           });
-
+          // 인원 입력
           $("#dated_numbers_grown").change(function(){
             $(".df06_p_s_person").children("span:first-child").text(`대인 ${$(this).val()} 명`);
             total()
@@ -1095,11 +1098,12 @@
             $(".df03_wrap .nc_wrap input").eq(i).change(function(){
               $(".df03_wrap input:radio").eq(i).trigger("click");
             })
-
+            // 사전구매 선택
             $(this).click(function(){
               $(".df03_wrap .nc_wrap input").not(":eq("+i+")").prop("disabled",true);
               $(".df03_wrap .nc_wrap input").eq(i).prop("disabled",false);
 
+              //사전구매 인원선택
               if ($(".df03_wrap .nc_wrap input").eq(i).val() == 0) {
                 $(".df06_p_s_extra >div").eq(0).hide()
               } else {
@@ -1318,10 +1322,11 @@
             const bbb = new FormData(e.target);
             const ccc = Object.fromEntries(bbb.entries());
             const submitTime = Date.now();
+            ccc.type = "dated";
             ccc.submitTime = submitTime;
 
             const getList = JSON.parse(localStorage.getItem("basket_list"));
-            getList[`dated_ticket_${submitTime}`] = ccc;
+            getList.push(ccc);
             localStorage.setItem("basket_list",JSON.stringify(getList));
             
           }

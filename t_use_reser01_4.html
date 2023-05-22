@@ -520,8 +520,8 @@
                 <div class="sf01_tc_number">
                   <div class="numberCheck">
                     <input
-                      type="text"
-                      name="season_summer_number"
+                      type="number"
+                      name="summer_pass"
                       id="season_summer_number"
                       value="0"
                       readonly
@@ -542,8 +542,8 @@
                 <div class="sf01_tc_number">
                   <div class="numberCheck">
                     <input
-                      type="text"
-                      name="season_spring_number"
+                      type="number"
+                      name="spring_pass"
                       id="season_spring_number"
                       value="0"
                       readonly
@@ -585,6 +585,7 @@
                     <div class="sf02_i_i_t_name"></div>
                     <div class="sf02_i_i_t_ticket"></div>
                     <div class="sf02_i_i_t_age"></div>
+                    <input type="hidden" name="user_type">
                     <a href="#none">취소</a>
                   </div>
                   <div class="sf02_i_i_inputpage_wrap">
@@ -706,7 +707,7 @@
               <div class="sf06_p_total">
                 <label for="season_total_price">합계</label>
                 <span class="sf06_p_t_text"></span>
-                <input type="text" name="season_total_price" id="season_total_price" readonly class="total_price">
+                <input type="text" name="total_price" id="season_total_price" readonly class="total_price">
               </div>
               <div class="season_ticket_submit ticket_submit">
                 <button type="submit" class="submit_btn">장바구니에 담기</button>
@@ -735,16 +736,6 @@
             $(this).siblings("input").trigger("change");
           });
           //---------------------------- 01. 이용권 선택 
-            $(".sf01_e_list dt a").each(function(i){
-              $(this).click(function(){
-                $(".sf01_e_l_detail").eq(i).slideToggle();
-                $(".sf01_e_l_detail").not(`:eq(${i})`).slideUp();
-              })
-            });
-            $(".sf01_exp > a").click(function(){
-              $(".sf01_e_listWrap").slideToggle();
-            });
-
             $(".sf01_tc_number input").each(function(i){
               const $newDiv = $("<div><p class='sf06_p_s_n_title'></p><p class='sf06_p_s_n_number'></p><p class='sf06_p_s_n_price'></p></div>");
               $(".sf06_p_s_numbers").append($newDiv);
@@ -755,22 +746,15 @@
                 } else {
                   $newDiv.show()
                   if ( i == 0 ) {
-                    const price = 119000;
-                    $(".sf06_p_s_n_title").eq(i).text("STANDARD PASS");
+                    const price = 89000;
+                    $(".sf06_p_s_n_title").eq(i).text("SUMMER PASS");
                     $(".sf06_p_s_n_number").eq(i).text($(this).val());
                     $(".sf06_p_s_n_price").eq(i).text("￦" + $(this).val() * price);
                     sf01_price[i] = $(this).val() * price;
                   }
                   if ( i == 1 ) {
-                    const price = 169000;
-                    $(".sf06_p_s_n_title").eq(i).text("GOLD PASS");
-                    $(".sf06_p_s_n_number").eq(i).text($(this).val());
-                    $(".sf06_p_s_n_price").eq(i).text("￦" + $(this).val() * price);
-                    sf01_price[i] = $(this).val() * price;
-                  }
-                  if ( i == 2 ) {
-                    const price = 249000;
-                    $(".sf06_p_s_n_title").eq(i).text("PLATINUM PASS");
+                    const price = 89000;
+                    $(".sf06_p_s_n_title").eq(i).text("SPRING PASS");
                     $(".sf06_p_s_n_number").eq(i).text($(this).val());
                     $(".sf06_p_s_n_price").eq(i).text("￦" + $(this).val() * price);
                     sf01_price[i] = $(this).val() * price;
@@ -836,10 +820,19 @@
           function makeInfo(classes) {
               if( $(`.sf02_i_info_${classes}`).length < $(`#season_${classes}_number`).val()) {
                 const $makeInfo = $(`.sf02_i_info_origin`).clone(true);
+                const len = $(".sf02_i_info").length;
                 $makeInfo.addClass([`sf02_i_info_${classes}`, "sf02_i_info"]);
                 $makeInfo.removeClass("sf02_i_info_origin");
                 $makeInfo.find(".sf02_i_i_t_ticket").text(`${classes.toUpperCase()} PASS`);
+                $makeInfo.find(".sf02_i_i_tab input").val((i,v) => classes);
                 $(".sf02_inputBox").append($makeInfo);
+                $makeInfo.find("input").each(function(){
+                  $(this).removeAttr("disabled");
+                  if ($(this).prop("name")){
+                    const name = $(this).prop("name");
+                    $(this).prop("name", name + `_${len+1}`);
+                  }
+                })
 
                 //제거버튼
                 $makeInfo.find(".sf02_i_i_tab a").click(function(){
@@ -913,10 +906,10 @@
                 $(`.sf02_i_info_${classes}`).last().remove();
               }
           }
-          $("#season_standard_number").on("change",function(){
-            const price = 119000;
+          $("#season_summer_number").on("change",function(){
+            const price = 89000;
             let n = $(this).val();
-            makeInfo("standard");
+            makeInfo("summer");
             $(".sf06_p_s_n_number").eq(0).text(n);
             $(".sf06_p_s_n_price").eq(0).text(n*price);
             if(n==0) {
@@ -926,9 +919,9 @@
             }
 
           })
-          $("#season_gold_number").on("change",function(){
-            const price = 169000;
-            makeInfo("gold");
+          $("#season_spring_number").on("change",function(){
+            const price = 89000;
+            makeInfo("spring");
             let n = $(this).val();
             $(".sf06_p_s_n_number").eq(1).text(n);
             $(".sf06_p_s_n_price").eq(1).text(n*price);
@@ -938,20 +931,6 @@
               $(".sf06_p_s_n_gold").show();
             }
           })
-          $("#season_platinum_number").on("change",function(){
-            const price = 249000;
-            makeInfo("platinum")
-            let n = $(this).val();
-            $(".sf06_p_s_n_number").eq(2).text(n);
-            $(".sf06_p_s_n_price").eq(2).text(n*price);
-            if(n==0) {
-              $(".sf06_p_s_n_platinum").hide();
-            } else {
-              $(".sf06_p_s_n_platinum").show();
-            }
-          })
-
-
           // ------------------------------------- 06-1. 할인적용
           $(".sf06_d_list li").each(function(i){
             $(this).find(".sf06_d_l_listopen").click(function(){
