@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        .numberCheck {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            width: fit-content;
+            padding: 5px 40px;
+            background-color: yellowgreen;
+        }
+        .nc_wrap label {
+            display: none;
+        }
+            .numberCheck input {
+                width: 40px;
+                height: 30px;
+                text-align: center;
+
+                padding: 0px;
+                margin: 0px;
+                box-sizing: border-box;
+                font-size: 20px;
+                border: none;
+                background-color: transparent;
+            }
+        .decrease_btn {
+            font-size: 0px;
+            display: block;
+            background-color: rgb(240, 240, 89);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+
+            position: absolute;
+            top: 5px;
+            left: 5px;
+        }
+            .decrease_btn img {
+                width: 30px;
+                opacity: 0.7;
+            }
+        .increase_btn {
+            font-size: 0px;
+            display: block;
+            background-color: rgb(240, 240, 89);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
+            .increase_btn img {
+                width: 30px;
+                opacity: 0.7;
+            }
+
+    </style>
+</head>
+<body>
+    <div class="numberCheck">
+        <input type="text" name="" id="" value="0" readonly/>
+        <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
+        <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
+    </div>
+
+    <script>
+        $(function(){
+
+            $(".decrease_btn").click(function(e){
+            if( $(this).siblings("input").val() > 0) {
+              $(this).siblings("input").val((i,v) => +v-1);
+              $(this).siblings("input").trigger("change");           
+            }
+          })
+          $(".increase_btn").click(function(e){
+            $(this).siblings("input").val((i,v) => +v+1);
+            $(this).siblings("input").trigger("change");
+          });
+        });
+    </script>
+</body>
+</html>
