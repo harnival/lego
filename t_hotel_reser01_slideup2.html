@@ -37,7 +37,7 @@
                                   <input type="date" name="checkin" id="checkin_input" />
                                   <span>날짜 입력</span>
                                 </div>
-                                <img src="./img/arrow_right_alt.svg" alt="">
+                                <img src="/image/arrow_right_alt.svg" alt="">
                                 <div class="checkout">
                                   <label for="checkout_input">체크아웃</label>
                                   <input type="date" name="checkout" id="checkout_input" />
@@ -69,50 +69,24 @@
                                 <div class="tfoot">
                                     <div class="th">
                                         <strong>객실</strong>
-                                        <div></div>
+                                        <div>0</div>
                                     </div>
-                                    <div class="td sr_n_l_head">
+                                    <div class="td">
                                         <strong>성인</strong>
-                                        <div></div>
+                                        <div>0</div>
                                     </div>
-                                    <div class="td sr_n_l_head">
+                                    <div class="td">
                                         <strong>어린이</strong>
-                                        <div></div>
+                                        <div>0</div>
                                     </div>
-                                    <div class="td sr_n_l_head">
+                                    <div class="td">
                                         <strong>유아</strong>
-                                        <div></div>
+                                        <div>0</div>
                                     </div>
     
                                 </div>
                                 <div class="tbody">
-                                    <div class="sr_n_list">
-                                        <div class="th">
-                                            <a href="#none" class="sr_deleteRoom">취소</a>
-                                            <strong class="sr_n_tdBtn">객실 1</strong>
-                                        </div>
-                                        <div class="td">
-                                            <div class="numberCheck">
-                                                <input type="number" name="sr_n_adult" class="sr_n_adult" id="sr_n_adult" value="0" max="3" readonly/>
-                                                <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
-                                                <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
-                                            </div>
-                                        </div>
-                                        <div class="td">
-                                            <div class="numberCheck">
-                                                <input type="number" name="sr_n_child" class="sr_n_child" id="sr_n_child" value="0" max="3" readonly/>
-                                                <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
-                                                <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
-                                            </div>
-                                        </div>
-                                        <div class="td">
-                                            <div class="numberCheck">
-                                                <input type="text" name="sr_n_toddler" class="sr_n_toddler" id="sr_n_toddler" value="0" max="2" readonly/>
-                                                <a href="#none" class="decrease_btn">수량 제외<img src="./img/minus.png" alt=""></a>
-                                                <a href="#none" class="increase_btn">수량 추가<img src="./img/plus.png" alt=""></a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                                 <div class="tbody_add">
                                     <div class="th">
@@ -124,7 +98,7 @@
                         <div class="sr_code">
                             <div class="sr_c_title">
                                 <h4>할인코드</h4>
-                                <input type="text" name="dc_code" id="sr_c_input" placeholder="할인코드 직접 입력">
+                                <input type="text" name="dc_code" id="sr_c_input" placeholder="직접 입력">
                             </div>
                             <ul class="sr_c_list">
                                 <li><a href="#none" class="sr_c_early" data-code="early">#얼리버드 패키지</a></li>
@@ -135,13 +109,37 @@
                             </ul>
                         </div>
                         <div class="sr_searchBtn">
-                            <button type="submit">검색</button>
-                            <a href="#none" class="openBtn">열기</a>
+                            <div class="sr_sb_box">
+                                <button type="submit">검색</button>
+                            </div>
                         </div>
                     </form>
+                    <div class="sr_slideBtn">
+                        <a href="#none" class="slideBtn">
+                            슬라이드 열기/닫기
+                        </a>
+                    </div>
                 </div>
                 <div class="hotelBasket">
-
+                    <div class="hotelBasket_wrap">
+                        <div class="hb_date">
+                            <strong class="hb_date_in"></strong>
+                            <img src="/image/arrow_right_alt.png" width="30" height="20">
+                            <strong class="hb_date_out"></strong>
+                        </div>
+                        <div class="hb_rooms">
+                        </div>
+                        <div class="hb_total">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="hb_slideBtn">
+                        <a href="#none" class="slideBtn">
+                            슬라이드 열기/닫기
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="roomInfo">

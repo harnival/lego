@@ -7,6 +7,7 @@
     --inputBox-span-min-width: 200px;
     --inputBox-span-border-color: rgba(4, 116, 0, 0.2);
     --inputBox-height: 80px;
+    --inputBox-open-height: 400px;
     --sr-title-top: -15px;
     --sr-title-left: 3%;
     --sr-title-font-size:16px;
@@ -42,45 +43,95 @@ input[type='number'] {
 }
 /* ==================================== shortReservation ============ */
 .shortReservation {
-    width: 100%;
+    width: 70%;
     min-width: 400px;
-    position: fixed;
+    z-index: 1000;
+    border: 2px solid black;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: absolute;
     top: 0px;
     left: 0px;
-    z-index: 1000;
-    overflow: hidden;
-}
-.shortReservation.uup {
+    display: flex;
     height: var(--inputBox-height);
 }
 .shortReservation_wrap_up {
-    width: 100%;
+    width: calc(100% - 50px);
     display: flex;
+    justify-content: space-between;
     background-color: white;
     position: relative;
-    height: fit-content;
-    overflow: hidden;
 }
 .sr_date h4,
 .sr_numbers h4 {
     display: none;
 }
-/* ---------------------------------------------- 1. date */
-.sr_date {
+.topSlide {
     width: 100%;
-    min-width: 360px;
-    max-width: 380px;
-    position: relative;
+    display: flex;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 1000;
 }
-.sr_date::after {
-    content: "";
-    display: block;
-    width: 1px;
-    height: 100%;
-    background: linear-gradient(to top,transparent 10%,rgba(0, 0, 0, 0.6),transparent 90%);
+/* ========= 장바구니 ============== */
+.hotelBasket {
+    width: 30%;
+    border: 2px solid black;
+    box-sizing: border-box;
+    background-color: white;
     position: absolute;
     top: 0px;
     right: 0px;
+
+    display: flex;
+    overflow: hidden;
+}
+.hotelBasket_wrap {
+    width: calc(100% - 50px);
+    background-color: aqua;
+}
+.hb_unit {
+    border: 1px dashed tomato;
+    padding: 1rem 5%;
+}
+.hb_u_number {
+    float: right;
+}
+.hb_date {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: palegreen;
+}
+.hb_total span {
+    display: block;
+
+    position: relative;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+.hb_total span:nth-of-type(1)::before {
+    content: "소계";
+    display: inline-block;
+    width: 50px;
+    height: 30px;
+}
+.hb_u_detail {
+    height: 50px;
+    background-color: magenta;
+}
+.select_hb_unit {
+    border: 2px solid yellow;
+}
+/* ---------------------------------------------- 1. date */
+.sr_date {
+    width: 60%;
+    min-width: 360px;
+    /* max-width: 380px; */
+    position: relative;
 }
 .sr_date_calender {
     width: 80%;
@@ -143,17 +194,47 @@ input[type='number'] {
 }
 /* ----------------------------------------------- 2. numbers */
 .sr_numbers {
-    width: 40%;
+    width: 70%;
     min-width: 400px;
-    max-width: 500px;
+    /* max-width: 500px; */
     position: relative;
     box-sizing: border-box;
+}
+.sr_numbers::before {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(to top,transparent 10%,rgba(0, 0, 0, 0.6),transparent 90%);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+.sr_numbers.uup::before {
+    content: "";
+    display: block;
+    width: 1px;
+    height: var(--inputBox-height);
+    background: linear-gradient(to top,transparent 10%,rgba(0, 0, 0, 0.6),transparent 90%);
+    position: absolute;
+    top: 0px;
+    left: 0px;
 }
 .sr_numbers::after {
     content: "";
     display: block;
     width: 1px;
     height: 100%;
+    background: linear-gradient(to top,transparent 10%,rgba(0, 0, 0, 0.6),transparent 90%);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+.sr_numbers.uup::after {
+    content: "";
+    display: block;
+    width: 1px;
+    height: var(--inputBox-height);
     background: linear-gradient(to top,transparent 10%,rgba(0, 0, 0, 0.6),transparent 90%);
     position: absolute;
     top: 0px;
@@ -169,31 +250,40 @@ input[type='number'] {
     box-sizing: border-box;
     padding: 0px 5%;
 }
-.tfoot_wrap {
-    display: block;
+.tfoot {
+    background-color: var(--inputBox-bg);
+    padding: 1rem 5%;
+    height: var(--inputBox-height);
     width: 100%;
+    display: flex;
+    gap: 0.5rem;
+    box-sizing: border-box;
 }
-
+.thead {
+    background-color: var(--inputBox-bg);
+    padding: 1rem 5%;
+    height: var(--inputBox-height);
+    width: 100%;
+    display: none;
+    gap: 0.5rem;
+    box-sizing: border-box;
+}
 .tbody_add {
     overflow: hidden;
     transition: .5s ease;
 }
 .sr_n_list {
     padding: 10px 0px;
-}
-.thead,
-.tfoot,
-.sr_n_list,
-.tbody_add {
     width: 100%;
     display: flex;
     gap: 0.5rem;
     box-sizing: border-box;
 }
-.thead, .tfoot {
-    background-color: var(--inputBox-bg);
-    padding: 1rem 5%;
-    height: var(--inputBox-height);
+.tbody_add {
+    width: 100%;
+    display: flex;
+    gap: 0.5rem;
+    box-sizing: border-box;
 }
 .td {
     width: 30%;
@@ -237,7 +327,7 @@ input[type='number'] {
     width: 1rem;
     aspect-ratio: 1/1;
     font-size: 0px;
-    background: url("../img/close_button.png") no-repeat center/ 1rem;
+    background: url("../image/close_button.png") no-repeat center/ 1rem;
     box-sizing: border-box;
     position: absolute;
     left: -0.7rem;
@@ -247,22 +337,11 @@ input[type='number'] {
     width: 30px;
     height: 30px;
     font-size: 0px;
-    background: rgb(143, 171, 255) url("../img/plus.png") no-repeat center/20px;
+    background: rgb(143, 171, 255) url("../image/plus.png") no-repeat center/20px;
     border-radius: 50%;
     box-sizing: border-box;
 }
-.sr_searchBtn button {
-    border: 2px solid black;
-    width: 100px;
-    height: 50px;
-    padding-left: 10px;
-    background: url("../img/search.svg") no-repeat left 10px center/ 30px;
-    font-weight: bold;
-    cursor: pointer;
-}
-.sr_searchBtn button:active {
-    background-color: tomato;
-}
+
 /* number check ---------------------- */
 .numberCheck {
     position: relative;
@@ -282,12 +361,13 @@ input[type='number'] {
     width: 60%;
     height: 100%;
     text-align: center;
+    color: black;
     
     padding: 0px;
     margin: 0px;
     box-sizing: border-box;
     background-color: yellowgreen;
-    font-size: 120%;
+    font-size: 150%;
     border: none;
 }
 .decrease_btn,
@@ -316,16 +396,15 @@ input[type='number'] {
 /* -------------------------------------------------- 3. code */
 .sr_code {
     position: relative;
-    width: 40%;
-    max-width: 300px;
+    width: 50%;
+    /* max-width: 300px; */
 }
 .sr_c_list {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 5px;
-    width: 100%;
-    margin: auto;
-    background-color: aqua;
+    width: 70%;
+    margin: 1rem auto;
 }
 .sr_c_title {
     display: flex;
@@ -342,7 +421,7 @@ input[type='number'] {
 }
 #sr_c_input {
     display: block;
-    width: 10rem;
+    width: 8rem;
     font-size: 90%;
     border: none;
     border-left: 1px solid black;
@@ -358,7 +437,7 @@ input[type='number'] {
     align-items: center;
     border: 2px solid var(--main-yellow-color);
     border-radius: 30px;
-    padding: 0px 0.3rem;
+    padding: 5px 0px;
     box-sizing: border-box;
     transition: .5s ease;
     font-size: 90%;
@@ -372,6 +451,49 @@ input[type='number'] {
     border: none;
 }
 /* ----------------------------------------------- 4. button */
+.sr_searchBtn {
+    width: 20%;
+    height: var(--inputBox-open-height);
+    position: relative;
+}
+.sr_sb_box {
+    height: var(--inputBox-height);
+    padding: 1rem 5%;
+    background-color: var(--inputBox-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+.sr_searchBtn button {
+    border: 2px solid black;
+    width: 5rem;
+    height: 50px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.sr_searchBtn button:active {
+    background-color: tomato;
+}
+.sr_slideBtn {
+    width: 50px;
+    height: 100%;
+    background-color: var(--inputBox-bg);
+    position: relative;
+}
+.slideBtn {
+    font-size: 0px;
+    width: 50px;
+    height: 100%;
+    display: block;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    background: url("/image/arrow_drop_down.png") no-repeat bottom center/50px;
+}
+.act, .act2 {
+    background: url("/image/arrow_drop_up.png") no-repeat bottom center/50px;
+}
 /* ================================================================ */
 .roomInfo {
     width: 100%;
@@ -440,11 +562,11 @@ input[type='number'] {
 }
 .slideback {
     left: 0px;
-    background: url("../img/arrow_back.png") no-repeat center/50%;
+    background: url("../image/arrow_back.png") no-repeat center/50%;
 }
 .slidenext {
     right: 0px;
-    background: url("../img/arrow_forward.png") no-repeat center/50%;
+    background: url("../image/arrow_forward.png") no-repeat center/50%;
 }
 .ri_e_t_slide ul {
     display: flex;
@@ -488,7 +610,7 @@ input[type='number'] {
     width: 20px;
     aspect-ratio: 1/1;
 
-    background: url("../img/info.png") left center/ 20px no-repeat;
+    background: url("../image/info.png") left center/ 20px no-repeat;
     filter: contrast(10%);
     padding-right: 5px;
 }

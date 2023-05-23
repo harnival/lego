@@ -8,14 +8,12 @@
   <!-- material icons -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <!-- /material icons -->
-  
   <!-- gsap -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js" integrity="sha512-cOH8ndwGgPo+K7pTvMrqYbmI8u8k6Sho3js0gOqVWTmQMlLIi6TbqGWRTpf1ga8ci9H3iPsvDLr4X7xwhC/+DQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <!-- /gsap -->
-
   <!-- main CSS & JS -->
-  <link rel="stylesheet" href="./CSS/main.css">
-  <script defer src="./JS/main.js"></script>
+  <link rel="stylesheet" href="/header/css/header.css">
+  <script src="/header/js/header.js"></script>
   <!-- /main CSS & JS -->
 </head>
 <body>
@@ -23,7 +21,7 @@
     <div class="top">
       <div class="menu_icon material-symbols-outlined">menu</div>
       <a href="#" class="logo">
-        <img src="./image/1.legoland-korea-logo.webp" alt="legoland logo">
+        <img src="/header/image/1.legoland-korea-logo.webp" alt="legoland logo">
       </a>
     </div>
   </header>
@@ -301,8 +299,13 @@
       </div>
     </div>
   </nav>
+  <main>
 
+  </main>
 
-
+  <script>
+    const m = document.querySelector("main");
+    fetch("/t_use_char01.html").then(res => res.text()).then(res => m.innerHTML = res);
+  </script>
 </body>
 </html>
