@@ -139,19 +139,19 @@
         display: flex;
         position: relative;
       }
-      .dtf06_discount {
+      .discount {
         width: 50%;
       }
-      .dtf06_d_list {
+      .d_list {
         list-style: none;
         padding: 0px;
         border: 1px solid rgba(0,0,0,0.4);
         border-bottom: none;
       }
-        .dtf06_d_list li {
+        .d_list li {
           border-bottom: 1px solid rgba(0,0,0,0.4);
         }
-        .dtf06_d_list .empty_li {
+        .d_list .empty_li {
           height: 70px;
           background-color: #eeeeeea4;
           display: flex;
@@ -160,13 +160,13 @@
 
           color: #bbb;
         }
-        .dtf06_d_l_wrap {
+        .d_l_wrap {
           position: relative;
           display: flex;
           align-items:flex-start;
           flex-direction: column;
         }
-        .dtf06_d_l_listopen {
+        .d_l_listopen {
           display: block;
           width: 50%;
           background: url("img/arrow_drop_down.png") no-repeat center left/30px;
@@ -175,15 +175,15 @@
           text-decoration: none;
           color: black;
         }
-        .dtf06_d_l_select {
+        .d_l_select {
           position: absolute;
           top: 0px;
           right: 0px;
         }
-        .dtf06_d_l_detail {
+        .d_l_detail {
           display: none;
         }
-        .dtf06_d_l_w_exp {
+        .d_l_w_exp {
           color: var(--exp-color);
           padding-left: 20px;
           font-size: 15px;
@@ -191,27 +191,27 @@
         .active_discount {
           background-color: rgb(247, 206, 199);
         }
-        .not_discount .dtf06_d_l_wrap {
+        .not_discount .d_l_wrap {
           opacity: 0.5;
         }
-        .dtf06_d_list li input[type="checkbox"] {
+        .d_list li input[type="checkbox"] {
           display: block;
         }
 
-        .dtf06_price {
+        .price {
           width: 50%;
         }
         /* ------------------ */
-        .dtf06_p_s_extra > div {
+        .p_s_extra > div {
           border: 1px solid tomato;
           box-sizing: border-box;
           display: none;
         }
 
-        .dtf06_discount_select {
+        .discount_select {
           display: none;
         }
-        .dtf06_p_s_discount >div {
+        .p_s_discount >div {
           border: 1px solid tomato;
         }
         #daytime_total_price {
@@ -447,54 +447,54 @@
 
           <fieldset class="daytime_fieldset06 total_price_wrap">
             <legend>가격 합계</legend>
-            <div class="dtf06_discount">
+            <div class="discount">
               <span>할인 적용</span>
-              <ul class="dtf06_d_list">
+              <ul class="d_list">
                 <li class="empty_li">
                   관련 혜택 없음
                 </li>
               </ul>
             </div>
 
-            <div class="dtf06_price">
-              <div class="dtf06_p_selectlist">
+            <div class="price">
+              <div class="p_selectlist">
                 <ul>
-                  <li>
-                    <span><strong>예약 일자</strong></span>
-                    <div class="dtf06_p_s_date"></div>
+                  <li class="p_s_box">
+                    <strong>예약 일자</strong>
+                    <div class="p_s_date"></div>
                   </li>
-                  <li>
-                    <span><strong>예약 인원</strong></span>
-                    <div class="dtf06_p_s_person">
+                  <li class="p_s_box">
+                    <strong>예약 인원</strong>
+                    <div class="p_s_person">
                       <span>대인 0 명</span>
                       <span>소인 0 명</span>
                     </div>
                   </li>
-                  <li>
-                    <span><strong>부가 선택</strong></span>
-                    <div class="dtf06_p_s_extra">
+                  <li class="p_s_box">
+                    <strong>부가 선택</strong>
+                    <div class="p_s_extra">
                       <div>
-                        <p class="dtf06_p_s_e_title03"></p>
-                        <p class="dtf06_p_s_e_number03"></p>
-                        <p class="dtf06_p_s_e_price03"></p>
+                        <div class="p_s_e_title03"></div>
+                        <div class="p_s_e_number03"></div>
+                        <div class="p_s_e_price03"></div>
                       </div>
                     </div>
                   </li>
-                  <li>
-                    <span><strong>할인 내역</strong></span>
-                    <div class="dtf06_p_s_discount">
+                  <li class="p_s_box">
+                    <strong>할인 내역</strong>
+                    <div class="p_s_discount">
                       <div>
-                        <p class="dtf06_p_s_e_title06"></p>
-                        <p class="dtf06_p_s_e_number06"></p>
-                        <p class="dtf06_p_s_e_price06"></p>
+                        <div class="p_s_e_title06"></div>
+                        <div class="p_s_e_number06"></div>
+                        <div class="p_s_e_price06"></div>
                       </div>
                     </div>
                   </li>
                 </ul>
               </div>
-              <div class="dtf06_p_total">
+              <div class="p_total">
                 <label for="daytime_total_price">합계</label>
-                <span class="dtf06_p_t_text"></span>
+                <span class="p_t_text">￦ 0</span>
                 <input type="text" name="total_price" id="daytime_total_price" readonly class="total_price">
               </div>
               <div class="daytime_ticket_submit ticket_submit">
@@ -528,7 +528,7 @@
           
           if ( !$(".calender_table_cell").eq($selDay + $selDate-1).hasClass("disabled_cell") ) {
             $(".calender_table_cell").eq($selDay + $selDate-1).children().addClass("active_cell");
-            $(".df06_p_s_date").text(`${$selYear}년 ${$selMonth}월 ${$selDate}일`);
+            $(".p_s_date").text(`${$selYear}년 ${$selMonth}월 ${$selDate}일 (${weekArr[$selDay]})`);
           }
           //---------------------------- 01. 달력 생성 & 날짜 입력
           $.fn.extend({
@@ -637,7 +637,7 @@
               .data("value",$(this).data("value"));
             const q = new Date($(this).prop("id"));
             $(".date_inputs label").text(`${q.getFullYear()} 년 ${q.getMonth()+1} 월 ${q.getDate()} 일 (${weekArr[q.getDay()]})`);
-            $(".dtf06_p_s_date").text(`${q.getFullYear()} 년 ${q.getMonth()+1} 월 ${q.getDate()} 일 (${weekArr[q.getDay()]})`);
+            $(".p_s_date").text(`${q.getFullYear()} 년 ${q.getMonth()+1} 월 ${q.getDate()} 일 (${weekArr[q.getDay()]})`);
           })    
           // -------------------------------------- 02. 인원 선택
           $(".decrease_btn").click(function(e){
@@ -652,11 +652,11 @@
           });
 
           $("#daytime_numbers_grown").change(function(){
-            $(".dtf06_p_s_person").children("span:first-child").text(`대인 ${$(this).val()} 명`);
+            $(".p_s_person").children("span:first-child").text(`대인 ${$(this).val()} 명`);
             total()
           })
           $("#daytime_numbers_little").change(function(){
-            $(".dtf06_p_s_person").children("span:last-child").text(`소인 ${$(this).val()} 명`);
+            $(".p_s_person").children("span:last-child").text(`소인 ${$(this).val()} 명`);
             total()
           })
           
@@ -671,25 +671,25 @@
               $(".dtf03_wrap .nc_wrap input").eq(i).prop("disabled",false);
 
               if ($(".dtf03_wrap .nc_wrap input").eq(i).val() == 0) {
-                $(".dtf06_p_s_extra >div").eq(0).hide()
+                $(".p_s_extra >div").eq(0).hide()
               } else {
-                $(".dtf06_p_s_extra >div").eq(0).show()
+                $(".p_s_extra >div").eq(0).show()
               }
               if ( i == 0 ) {
                 const digitalPhotoPrice = 25000;
                 dtf03_number = $("#daytime_digital_photo_number").val();
                 dtf03_price = digitalPhotoPrice;
-                $(".dtf06_p_s_e_title03").eq(0).text("디지털 기념 사진 사전구매");
-                $(".dtf06_p_s_e_number03").eq(0).text($("#daytime_digital_photo_number").val());
-                $(".dtf06_p_s_e_price03").eq(0).text("￦" + $("#daytime_digital_photo_number").val()*digitalPhotoPrice);
+                $(".p_s_e_title03").eq(0).text("디지털 기념 사진 사전구매");
+                $(".p_s_e_number03").eq(0).text($("#daytime_digital_photo_number").val());
+                $(".p_s_e_price03").eq(0).text("￦" + $("#daytime_digital_photo_number").val()*digitalPhotoPrice);
               }
               if ( i == 1 ) {
                 const miniFigurePrice = 15000;
                 dtf03_number = $("#daytime_mini_figure_number").val();
                 dtf03_price = miniFigurePrice;
-                $(".dtf06_p_s_e_title03").eq(0).text("미니 피겨 사전구매");
-                $(".dtf06_p_s_e_number03").eq(0).text($("#daytime_mini_figure_number").val());
-                $(".dtf06_p_s_e_price03").eq(0).text("￦" + $("#daytime_mini_figure_number").val()*miniFigurePrice);
+                $(".p_s_e_title03").eq(0).text("미니 피겨 사전구매");
+                $(".p_s_e_number03").eq(0).text($("#daytime_mini_figure_number").val());
+                $(".p_s_e_price03").eq(0).text("￦" + $("#daytime_mini_figure_number").val()*miniFigurePrice);
               }
               
               total()
@@ -700,15 +700,15 @@
           // ------------------------------------- 05. VIP EXPERIENCES
 
           // ------------------------------------- 06-1. 할인적용
-          if ($(".dtf06_d_list").has(".empty_li")) {
-            $(".dtf06_p_s_discount").parent().remove();
+          if ($(".d_list").has(".empty_li")) {
+            $(".p_s_discount").parent().remove();
           }
-          $(".dtf06_d_list li").each(function(i){
-            $(this).find(".dtf06_d_l_listopen").click(function(){
-              $(".dtf06_d_l_detail").eq(i).slideToggle();
-              $(".dtf06_d_l_detail").not(":eq("+i+")").slideUp()
-              $(".dtf06_d_l_w_exp").eq(i).slideToggle();
-              $(".dtf06_d_l_w_exp").not(":eq("+i+")").slideDown();
+          $(".d_list li").each(function(i){
+            $(this).find(".d_l_listopen").click(function(){
+              $(".d_l_detail").eq(i).slideToggle();
+              $(".d_l_detail").not(":eq("+i+")").slideUp()
+              $(".d_l_w_exp").eq(i).slideToggle();
+              $(".d_l_w_exp").not(":eq("+i+")").slideDown();
             })
           });
 
@@ -723,27 +723,27 @@
             { month: 12, date: 25} // 성탄절
           ]                        // 기타 음력 공휴일/ 대체휴일은 직접 입력 (설날, 추석, 석가탄신일)
 
-          $(".dtf06_d_l_select").each(function(i){
+          $(".d_l_select").each(function(i){
             $(this).click(function(){
-              $(".dtf06_d_list li").eq(i).toggleClass("active_discount");
-              $(".dtf06_d_list li").not(`:eq(${i})`).removeClass("active_discount");
-              // $(".dtf06_d_list li").eq(i).removeClass("not_discount");
-              // $(".dtf06_d_list li").not(`:eq(${i})`).addClass("not_discount");
-              $(".dtf06_d_list li input:checkbox").eq(i).prop("checked",function(){
-                $(".dtf06_d_list li input:checkbox").not($(this)).prop("checked",false);
+              $(".d_list li").eq(i).toggleClass("active_discount");
+              $(".d_list li").not(`:eq(${i})`).removeClass("active_discount");
+              // $(".d_list li").eq(i).removeClass("not_discount");
+              // $(".d_list li").not(`:eq(${i})`).addClass("not_discount");
+              $(".d_list li input:checkbox").eq(i).prop("checked",function(){
+                $(".d_list li input:checkbox").not($(this)).prop("checked",false);
                 return !$(this).prop("checked");
               });
 
-              if ( $(".dtf06_d_list li input:checkbox").eq(i).is(":checked")) {
-                $(".dtf06_p_s_discount > div").show();
+              if ( $(".d_list li input:checkbox").eq(i).is(":checked")) {
+                $(".p_s_discount > div").show();
                 const selectDate = new Date($selYear, $selMonth-1, $selDate);
                 const selectDay = selectDate.getDay();
                 const holidayCheck = holiday.some(function(v){
                   return v.month == $selMonth && v.date == $selDate;
                 });
 
-              } else if (!$(".dtf06_d_list li input:checkbox").is(":checked")) {
-                $(".dtf06_p_s_discount > div").hide();
+              } else if (!$(".d_list li input:checkbox").is(":checked")) {
+                $(".p_s_discount > div").hide();
               }
               
               total();
@@ -770,7 +770,7 @@
             $("#daytime_total_price").val(function(i,v) {
               return t_1 * discountRate + t_2;
             })
-            $(".dtf06_p_t_text").text("￦"+comma(t_1 * discountRate + t_2));
+            $(".p_t_text").text("￦"+comma(t_1 * discountRate + t_2));
             
           }
           

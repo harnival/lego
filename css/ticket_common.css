@@ -7,7 +7,7 @@
     --calender-table-size: 400px;
     --calender-month-button: 1em;
     /* color */
-    --exp-color: #666;
+    --exp-color: #585757c9;
     --calender-select-color: rgb(2, 172, 2);
     --inputbox-bg-color: white;
     --main-bg-color: #ffcf00;
@@ -35,7 +35,7 @@ input[type='number'] {
     width: 10%;
     aspect-ratio: 1/1;
     border-radius: 50%;
-    background: var(--main-yellow-color) url("../image/arrow_back.png") no-repeat left 40% center/25px;
+    background: var(--main-yellow-color) url("/image/arrow_back.png") no-repeat left 40% center/25px;
     position:absolute;
     left: 40px;
 }
@@ -45,7 +45,7 @@ input[type='number'] {
     width: 10%;
     aspect-ratio: 1/1;
     border-radius: 50%;
-    background: var(--main-yellow-color) url("../image/arrow_forward.png") no-repeat right 40% center/25px;
+    background: var(--main-yellow-color) url("/image/arrow_forward.png") no-repeat right 40% center/25px;
     position: absolute;
     right: 40px;
 }
@@ -234,7 +234,7 @@ left: 10%;
   opacity: 0.7;
 }
 
-/* common main */
+/* common main =========================================================== */
 .ticket_formWrap {
   max-width: var(--whole-max-width);
   width: 100%;
@@ -252,7 +252,7 @@ fieldset::after {
   display: block;
   height: 2px;
   width: 100%;
-  background: linear-gradient(to right, transparent 10%, black, transparent 90%);
+  background: linear-gradient(to right, transparent 10%, rgba(117, 117, 117, 0.363), transparent 90%);
   position:absolute;
   bottom: -2px;
   left: 0px;
@@ -265,3 +265,190 @@ fieldset legend {
   left: 7%;
   font-size: 200%;
 }
+  /* 각 페이지의 제목박스 */
+.form_title {
+  padding: 1rem 5% 0px;
+  border: 2px solid rgba(100,100,100,0.5);
+  margin: 1rem;
+  box-sizing: border-box;
+}
+.form_title > div {
+  padding-bottom: 1rem;
+}
+.form_title h4 {
+  font-size: 200%;
+  padding-bottom: 1rem;
+}
+.form_title:not(.season_form_title) li {
+  padding: 5px 50px;
+}
+.form_title:not(.season_form_title) li::before {
+  content: "";
+  display: inline-block;
+  margin-right: 0.5em;
+  width: 1em;
+  height: 1em;
+  background: url("/image/sunny.png") no-repeat center / 1em;
+}
+  /* 6.합계 디자인 */
+  .total_price_wrap {
+    display: flex;
+    gap: 40px;
+    position: relative;
+    padding: 20px 15%;
+  }
+  .total_price_wrap legend {
+    display: none;
+  }
+  .discount {
+    width: 60%;
+  }
+  .discount >strong {
+    display: flex;
+    align-items: center;
+    height: 50px;
+  }
+  .d_list {
+    width: 100%;
+    list-style: none;
+    padding: 0px;
+    border: 1px solid rgba(0,0,0,0.4);
+    border-bottom: none;
+  }
+  .d_list .empty_li {
+    height: 70px;
+    background-color: #eeeeee4b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #666;
+  }
+  .d_list li {
+    border-bottom: 1px solid rgba(0,0,0,0.4);
+    position: relative;
+    padding: 20px 15px;
+  }
+  .d_l_wrap {
+    position: relative;
+    display: flex;
+    align-items:flex-start;
+    flex-direction: column;
+  }
+  .d_l_listopen {
+    display: block;
+    width: 50%;
+    background: url("img/arrow_drop_down.png") no-repeat center left/30px;
+    padding-left: 30px;
+    line-height: 2;
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+  }
+  .d_l_select {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+  }
+  .d_l_detail {
+    display: none;
+    width: 100%;
+    height: 500px;
+    overflow-y: auto;
+
+    position: absolute;
+    top: 100%;
+    left: 0px;
+
+    background-color: var(--main-bg-color);
+    box-shadow: 1px 2px 5px 0px #55555580;
+    z-index: 100;
+    padding: 5px;
+    box-sizing: border-box;
+  }
+  .d_l_detail dd {
+    margin: 0px;
+    padding: 2px 10px;
+  }
+  .d_l_w_exp {
+    color: var(--exp-color);
+    padding-left: 20px;
+    font-size: 15px;
+  }
+  .active_discount {
+    background-color: rgb(247, 206, 199);
+  }
+  .not_discount .d_l_wrap {
+    opacity: 0.5;
+  }
+  .d_list li input[type="checkbox"] {
+    display: none;
+  }
+  .price {
+    width: 40%;
+    background-color: rgba(255,255,255,0.2);
+    padding: 50px 30px;
+    position: relative;
+  }
+  .p_s_box {
+    position: relative;
+    border: 2px solid rgba(100,100,100,0.5);
+    margin-top: 1rem;
+    padding: 15px 20px 15px 30px;
+  }
+  .p_s_box >strong {
+    display: inline-block;
+    background-color: rgb(255,217,51);
+    position: absolute;
+    top: -12px;
+    left: 15px;
+    padding: 0px 5px;
+    color: rgba(100,100,100,0.8);
+  }
+  .p_s_extra > div {
+    box-sizing: border-box;
+  }
+  .p_s_e_title04,
+  .p_s_e_title03, 
+  .p_s_e_title05,
+  .p_s_n_title { 
+    font-weight: bold;
+    float: left;
+  }
+  .p_s_e_number04,
+  .p_s_e_number03, 
+  .p_s_e_number05,
+  .p_s_n_number {
+    text-align: end;
+  }
+  .p_s_e_price04,
+  .p_s_e_price03, 
+  .p_s_e_price05,
+  .p_s_n_price {
+    text-align: end;
+  }
+  .discount_select {
+    display: none;
+  }
+  .p_s_e_title06 {
+    float: left;
+    padding-right: 20px;
+  }
+  .p_total {
+    margin: 20px 0px 20px 50%;
+    padding: 20px 10px;
+    text-align: center;
+    font-size: 120%;
+    background-color: rgba(255,255,255,0.3);
+    border-radius: 20px;
+  }
+  .p_t_text {
+    display: inline-block;
+    width: 100px;
+  }
+  .total_price {
+    display: none;
+  }
+  .p_s_e_4 {
+    display: flex;
+  }  
