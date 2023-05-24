@@ -13,13 +13,14 @@
     --sr-title-font-size:16px;
     --price-btn-width: 200px;
     /* color */
-    --inputBox-bg: beige;
     --main-bg-color: rgba(0, 128, 0, 0.671);
     --main-yellow-color: #ffcf00;
     --button-yellow: rgb(240, 240, 89);
+    --slideBtn-bg-color: rgba(0,0,0,0.05);
+    --reservation-bg-color:#fff0abd0;
 }
 body {padding: 0px;margin: 0px; font-family: 'Noto Sans KR', sans-serif; font-size: 16px;}
-a {text-decoration: none;}
+a {text-decoration: none; color: initial;}
 ul,li {list-style: none; padding: 0px; margin: 0px;}
 h1,h2,h3,h4,h5,h6 {margin: 0px; padding: 0px;}
 /* number input 버튼 숨기기 */
@@ -38,32 +39,37 @@ input[type='number'] {
     flex-direction: column;
     max-width: var(--main-max-width);
     min-width: var(--main-min-width);
-    margin: auto;
+    margin: 0px auto;
+    padding-top: 80px;
     background-color: var(--main-bg-color);
 }
 /* ==================================== shortReservation ============ */
 .shortReservation {
     width: 70%;
     min-width: 400px;
+    height: var(--inputBox-height);
     z-index: 1000;
-    border: 2px solid black;
     box-sizing: border-box;
     overflow: hidden;
     position: absolute;
     top: 0px;
     left: 0px;
     display: flex;
-    height: var(--inputBox-height);
+    background-color: var(--reservation-bg-color);
+    backdrop-filter: blur(5px);
 }
 .shortReservation_wrap_up {
     width: calc(100% - 50px);
     display: flex;
     justify-content: space-between;
-    background-color: white;
     position: relative;
 }
+.shortReservation_wrap_up >div:hover {
+    background-color: rgba(0,0,0,0.1);
+}
 .sr_date h4,
-.sr_numbers h4 {
+.sr_numbers h4,
+.roomInfo_wrap h3 {
     display: none;
 }
 .topSlide {
@@ -77,19 +83,26 @@ input[type='number'] {
 /* ========= 장바구니 ============== */
 .hotelBasket {
     width: 30%;
-    border: 2px solid black;
     box-sizing: border-box;
-    background-color: white;
     position: absolute;
     top: 0px;
     right: 0px;
 
     display: flex;
     overflow: hidden;
+    height: var(--inputBox-height);
+    background-color: var(--reservation-bg-color);
+    backdrop-filter: blur(5px);
 }
 .hotelBasket_wrap {
     width: calc(100% - 50px);
-    background-color: aqua;
+}
+.hb_date_in,
+.hb_date_out {
+    width: 30%;
+    height: 50%;
+    border-bottom: 2px solid black;
+    background-color: gray;
 }
 .hb_unit {
     border: 1px dashed tomato;
@@ -100,24 +113,17 @@ input[type='number'] {
 }
 .hb_date {
     display: flex;
+    justify-content: center;
     align-items: center;
-    padding: 0.5rem;
     width: 100%;
-    box-sizing: border-box;
-    background-color: palegreen;
-}
-.hb_total span {
-    display: block;
-
-    position: relative;
-    border: 1px solid black;
+    height: var(--inputBox-height);
+    padding: 0.5rem;
     box-sizing: border-box;
 }
-.hb_total span:nth-of-type(1)::before {
-    content: "소계";
-    display: inline-block;
-    width: 50px;
-    height: 30px;
+.hb_total {
+    width: 50%;
+    margin: 1rem;
+    background-color: aqua;
 }
 .hb_u_detail {
     height: 50px;
@@ -146,7 +152,6 @@ input[type='number'] {
     display: flex;
     align-items: center;
     box-sizing: border-box;
-    background-color: var(--inputBox-bg);
 }
 .inputBox .checkin,
 .inputBox .checkout {
@@ -205,7 +210,7 @@ input[type='number'] {
     display: block;
     width: 1px;
     height: 100%;
-    background: linear-gradient(to top,transparent 10%,rgba(0, 0, 0, 0.6),transparent 90%);
+    background: linear-gradient(to top,transparent 5%,rgba(200,200,200,0.8),transparent 95%);
     position: absolute;
     top: 0px;
     left: 0px;
@@ -215,7 +220,7 @@ input[type='number'] {
     display: block;
     width: 1px;
     height: var(--inputBox-height);
-    background: linear-gradient(to top,transparent 10%,rgba(0, 0, 0, 0.6),transparent 90%);
+    background: linear-gradient(to top,transparent 2%,rgba(200,200,200,0.8),transparent 98%);
     position: absolute;
     top: 0px;
     left: 0px;
@@ -225,7 +230,7 @@ input[type='number'] {
     display: block;
     width: 1px;
     height: 100%;
-    background: linear-gradient(to top,transparent 10%,rgba(0, 0, 0, 0.6),transparent 90%);
+    background: linear-gradient(to top,transparent 2%,rgba(200,200,200,0.8),transparent 98%);
     position: absolute;
     top: 0px;
     right: 0px;
@@ -235,7 +240,7 @@ input[type='number'] {
     display: block;
     width: 1px;
     height: var(--inputBox-height);
-    background: linear-gradient(to top,transparent 10%,rgba(0, 0, 0, 0.6),transparent 90%);
+    background: linear-gradient(to top,transparent 2%,rgba(200,200,200,0.8),transparent 98%);
     position: absolute;
     top: 0px;
     right: 0px;
@@ -251,7 +256,6 @@ input[type='number'] {
     padding: 0px 5%;
 }
 .tfoot {
-    background-color: var(--inputBox-bg);
     padding: 1rem 5%;
     height: var(--inputBox-height);
     width: 100%;
@@ -259,12 +263,20 @@ input[type='number'] {
     gap: 0.5rem;
     box-sizing: border-box;
 }
+.tfoot strong {
+    display: block;
+    width: 50%;
+}
+.tfoot .th >div,
+.tfoot .td >div {
+    color: #555;
+    font-size: 100%;
+}
 .thead {
-    background-color: var(--inputBox-bg);
+    display: none;
     padding: 1rem 5%;
     height: var(--inputBox-height);
     width: 100%;
-    display: none;
     gap: 0.5rem;
     box-sizing: border-box;
 }
@@ -312,9 +324,7 @@ input[type='number'] {
     align-items: center;
     gap: 0.5rem;
 }
-.thead .td >div,
-.tfoot .td >div,
-.tfoot .th >div {
+.thead .td >div  {
     font-size: 80%;
     color: #777;
 }
@@ -327,7 +337,7 @@ input[type='number'] {
     width: 1rem;
     aspect-ratio: 1/1;
     font-size: 0px;
-    background: url("../image/close_button.png") no-repeat center/ 1rem;
+    background: url("/image/close_button.png") no-repeat center/ 1rem;
     box-sizing: border-box;
     position: absolute;
     left: -0.7rem;
@@ -337,7 +347,7 @@ input[type='number'] {
     width: 30px;
     height: 30px;
     font-size: 0px;
-    background: rgb(143, 171, 255) url("../image/plus.png") no-repeat center/20px;
+    background: rgb(143, 171, 255) url("/image/plus.png") no-repeat center/20px;
     border-radius: 50%;
     box-sizing: border-box;
 }
@@ -411,7 +421,6 @@ input[type='number'] {
     align-items: center;
     gap: 1rem;
     height: var(--inputBox-height);
-    background-color: var(--inputBox-bg);
     padding: 1rem 5%;
     word-break: keep-all;
     box-sizing: border-box;
@@ -456,19 +465,22 @@ input[type='number'] {
     height: var(--inputBox-open-height);
     position: relative;
 }
-.sr_sb_box {
-    height: var(--inputBox-height);
-    padding: 1rem 5%;
-    background-color: var(--inputBox-bg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
+.sr_searchBtn::before {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(to top,transparent 5%,rgba(200,200,200,0.8),transparent 95%);
+    position: absolute;
+    top: 0px;
+    left: 0px;
 }
 .sr_searchBtn button {
-    border: 2px solid black;
-    width: 5rem;
-    height: 50px;
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: url("/image/search.svg") no-repeat left 15% center/ 1.5rem;
+    font-size: 100%;
     font-weight: bold;
     cursor: pointer;
 }
@@ -478,7 +490,6 @@ input[type='number'] {
 .sr_slideBtn {
     width: 50px;
     height: 100%;
-    background-color: var(--inputBox-bg);
     position: relative;
 }
 .slideBtn {
@@ -489,10 +500,10 @@ input[type='number'] {
     position: absolute;
     bottom: 0px;
     right: 0px;
-    background: url("/image/arrow_drop_down.png") no-repeat bottom center/50px;
+    background: var(--slideBtn-bg-color) url("/image/arrow_drop_down.png") no-repeat bottom center/50px;
 }
 .act, .act2 {
-    background: url("/image/arrow_drop_up.png") no-repeat bottom center/50px;
+    background: var(--slideBtn-bg-color) url("/image/arrow_drop_up.png") no-repeat bottom center/50px;
 }
 /* ================================================================ */
 .roomInfo {
@@ -635,8 +646,7 @@ input[type='number'] {
     display: none;
     justify-content: center;
     align-items: start;
-    background-color: rgba(255,255,255,0.9);
-    backdrop-filter: blur(20px);
+    background-color: rgba(255,255,255,0.95);
     box-shadow: 2px 2px 5px #666;
     border-radius: 10px;
     box-sizing: border-box;
@@ -649,7 +659,7 @@ input[type='number'] {
     width: 30px;
     height: 30px;
     font-size: 0px;
-    background: rgb(248, 175, 162) url("img/close_button.png") no-repeat center/20px;
+    background: rgb(248, 175, 162) url("/image/close_button.png") no-repeat center/20px;
     border-radius: 50%;
 }
 .ri_e_t_e_char dl{
@@ -773,7 +783,7 @@ input[type='number'] {
     width: 15px;
     height: 15px;
     margin-left: 10px;
-    background: url("img/info.png") no-repeat scroll center/ 15px 15px;
+    background: url("/image/info.png") no-repeat scroll center/ 15px 15px;
 }
 .ri_e_t_c_price {
     display: flex;

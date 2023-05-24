@@ -188,6 +188,7 @@
         })
         //최종 닫기 화면--------------------------------------------
         function accept() {
+            localStorage.setItem("phone_cert","true");
             const w = document.querySelector(".cert");
             let times = 5;
             w.innerHTML = `
@@ -196,6 +197,10 @@
                 <div class='timeset'></div>
                 <a href='#none' class='c_btn_close'>닫기</a>
             </div>`;
+            const cls = document.querySelector(".eeee .c_btn_close");
+            cls.addEventListener("click",function(){
+                window.close();
+            })
             const r = document.querySelector(".timeset");
             r.innerText = `${times}초 후에 자동으로 종료됩니다.`;
             times--;
@@ -208,7 +213,6 @@
             },5000)
         }
         go.addEventListener("click",function(){
-            localStorage.setItem("phone_cert","true");
             if (document.querySelector("#cni_i_certText").value){
                 accept()
             }
