@@ -462,114 +462,13 @@
       text-align: center;
       padding-left: 0px;
     }
-   
-
     /* ================================================= 06. 합계 */
-    .vip_fieldset06 {
-      display: flex;
-      position: relative;
-      padding: 80px 15% 30px;
-      gap: 30px;
-
-    }
-    .vf06_discount {
-      width: 50%;
-    }
-    .vf06_d_list {
-      list-style: none;
-      padding: 0px;
-      border: 1px solid rgba(0,0,0,0.4);
-      border-bottom: none;
-    }
-    .vf06_d_list li {
-      border-bottom: 1px solid rgba(0,0,0,0.4);
-    }
-    .vf06_d_list .empty_li {
-      height: 70px;
-      background-color: #eeeeeea4;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      color: #bbb;
-    }
-    .vf06_d_l_wrap {
-      position: relative;
-      display: flex;
-      align-items:flex-start;
-      flex-direction: column;
-    }
-    .vf06_d_l_listopen {
-      display: block;
-      width: 50%;
-      background: url("img/arrow_drop_down.png") no-repeat center left/30px;
-      padding-left: 30px;
-      line-height: 2;
-      text-decoration: none;
-      color: black;
-    }
-    .vf06_d_l_select {
-      position: absolute;
-      top: 0px;
-      right: 0px;
-    }
-    .vf06_d_l_detail {
-      display: none;
-    }
-      .vf06_d_l_detail table {
-        border: 1px solid rgb(121, 121, 121);
-        box-sizing: border-box;
-      }
-      .vf06_d_l_detail th {
-        background-color: rgb(187, 255, 255);
-      }
-      .vf06_d_l_detail tr {
-        background-color: rgb(207, 255, 255);
-      }
-
-    .vf06_d_l_w_exp {
-      color: var(--exp-color);
-      padding-left: 20px;
-      font-size: 15px;
-    }
-    .active_discount {
-      background-color: rgb(247, 206, 199);
-    }
-    .not_discount .vf06_d_l_wrap {
-      opacity: 0.5;
-    }
-    .vf06_d_list li input[type="checkbox"] {
-      display: block;
-    }
-
-    .vf06_price {
-      width: 50%;
-    }
-    /* ------------------ */
-    .vf06_p_s_extra > div {
-      border: 1px solid tomato;
-      box-sizing: border-box;
-      display: none;
-    }
-
-    .vf06_discount_select {
-      display: none;
-    }
-    .vf06_p_s_discount >div {
-      border: 1px solid tomato;
-    }
-    .vf06_p_s_numbers > div {
-      border: 1px solid tomato;
-      display: none;
-    }
-    .vf06_p_s_numbers >div >dl {
-      display: none;
-    }
-    .vf06_p_s_numbers span {
-      display: block;
-    }
-
-    #vip_total_price {
+    .p_s_n_s dl,
+    .p_s_n_g dl,
+    .p_s_n_p dl,
+    .p_s_n_s,
+    .p_s_n_g,
+    .p_s_n_p {
       display: none;
     }
   </style>
@@ -1048,59 +947,60 @@
 
       <fieldset class="vip_fieldset06 total_price_wrap">
         <legend>가격 합계</legend>
-        <div class="vf06_discount">
+        <div class="discount">
           <span>할인 적용</span>
-          <ul class="vf06_d_list">
+          <ul class="d_list">
             <li class="empty_li">해당 혜택 없음</li>
           </ul>
         </div>
 
-        <div class="vf06_price">
-          <div class="vf06_p_selectlist">
+        <div class="price">
+          <div class="p_selectlist">
             <ul>
               <li>
                 <span><strong>예약 일자</strong></span>
-                <div class="vf06_p_s_date"></div>
+                <div class="p_s_date"></div>
               </li>
               <li>
                 <span><strong>구매 수량</strong></span>
-                <div class="vf06_p_s_numbers">
-                  <div class="vf06_p_s_n_s">
+                <div class="p_s_numbers">
+                  <div class="p_s_n_s">
                     <span>VIP SILVER EXPERIENCES</span>
                     <dl>
                       <dt>대인 (만 13세 이상)</dt>
-                      <dd class="vf06_p_s_n_number"></dd>
-                      <dd class="vf06_p_s_n_price"></dd>
+                      <dd class="p_s_n_number"></dd>
+                      <dd class="p_s_n_price"></dd>
                     </dl>
                     <dl>
                       <dt>소인 (만 2세 이상~ 만 13세 미만)</dt>
-                      <dd class="vf06_p_s_n_number"></dd>
-                      <dd class="vf06_p_s_n_price"></dd>
+                      <dd class="p_s_n_number"></dd>
+                      <dd class="p_s_n_price"></dd>
                     </dl>
                   </div>
-                  <div class="vf06_p_s_n_g">
+                  <div class="p_s_n_g">
                     <span>VIP GOLD EXPERIENCES</span>
                     <dl>
                       <dt>대인 (만 13세 이상)</dt>
-                      <dd class="vf06_p_s_n_number"></dd>
-                      <dd class="vf06_p_s_n_price"></dd>
+                      <dd class="p_s_n_number"></dd>
+                      <dd class="p_s_n_price"></dd>
                     </dl>
                     <dl>
                       <dt>소인 (만 2세 이상~ 만 13세 미만)</dt>
-                      <dd class="vf06_p_s_n_number"></dd>
-                      <dd class="vf06_p_s_n_price"></dd>
+                      <dd class="p_s_n_number"></dd>
+                      <dd class="p_s_n_price"></dd>
                     </dl>
-                  </div><div class="vf06_p_s_n_p">
+                  </div>
+                  <div class="p_s_n_p">
                     <span>VIP PLATINUM EXPERIENCES</span>
                     <dl>
                       <dt>대인 (만 13세 이상)</dt>
-                      <dd class="vf06_p_s_n_number"></dd>
-                      <dd class="vf06_p_s_n_price"></dd>
+                      <dd class="p_s_n_number"></dd>
+                      <dd class="p_s_n_price"></dd>
                     </dl>
                     <dl>
                       <dt>소인 (만 2세 이상~ 만 13세 미만)</dt>
-                      <dd class="vf06_p_s_n_number"></dd>
-                      <dd class="vf06_p_s_n_price"></dd>
+                      <dd class="p_s_n_number"></dd>
+                      <dd class="p_s_n_price"></dd>
                     </dl>
                   </div>
                 </div>
@@ -1108,19 +1008,19 @@
               
               <li>
                 <span><strong>할인 내역</strong></span>
-                <div class="vf06_p_s_discount">
+                <div class="p_s_discount">
                   <div>
-                    <div class="vf06_p_s_e_title06"></div>
-                    <div class="vf06_p_s_e_number06"></div>
-                    <div class="vf06_p_s_e_price06"></div>
+                    <div class="p_s_e_title06"></div>
+                    <div class="p_s_e_number06"></div>
+                    <div class="p_s_e_price06"></div>
                   </div>
                 </div>
               </li>
             </ul>
           </div>
-          <div class="vf06_p_total">
+          <div class="p_total">
             <label for="vip_total_price">합계</label>
-            <span class="vf06_p_t_text"></span>
+            <span class="p_t_text">￦ 0</span>
             <input type="text" name="vip_total_price" id="vip_total_price" readonly class="total_price">
           </div>
           <div class="vip_ticket_submit ticket_submit">
@@ -1148,6 +1048,9 @@
           $(this).siblings("input").val((i,v) => +v+1);
           $(this).siblings("input").trigger("change");
         });
+        function comma(x) {
+          return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
         //------------Load-------------
         const today = new Date();
         const oneday = 86400000;
@@ -1233,7 +1136,6 @@
               }
             }
           });
-          
           $(".calender_wrap_prev").week();
           $(".calender_wrap").week();
           $(".calender_wrap_next").week();
@@ -1282,8 +1184,6 @@
             }
           })
 
-        
-        
         //--- 02. 이용권 선택 ------------------------------------------------------------------- 
           // 2-1. 혜택 보기 슬라이드
           
@@ -1338,29 +1238,29 @@
               if(i==0) {
                 makeInfo("silver", "grown","대인 (만 13세 이상)");
                 n = $(this).val();
-                $(".vf06_p_s_n_s .vf06_p_s_n_number").eq(i).text(n);
-                $(".vf06_p_s_n_s .vf06_p_s_n_price").eq(i).text(n * price);
+                $(".p_s_n_s .p_s_n_number").eq(i).text(`수량 : ${n}`);
+                $(".p_s_n_s .p_s_n_price").eq(i).text(`￦ ${comma(n*price)}`);
                 if ( n == 0 ) {
-                  $(".vf06_p_s_n_s dl").eq(i).hide();
+                  $(".p_s_n_s dl").eq(i).hide();
                 } else {
-                  $(".vf06_p_s_n_s dl").eq(i).show();
+                  $(".p_s_n_s dl").eq(i).show();
                 }
               }
               if (i==1) {
                 makeInfo("silver","little","소인 (만 13세 미만)");
                 m = $(this).val();
-                $(".vf06_p_s_n_s .vf06_p_s_n_number").eq(i).text(m);
-                $(".vf06_p_s_n_s .vf06_p_s_n_price").eq(i).text(m * price);
+                $(".p_s_n_s .p_s_n_number").eq(i).text(`수량 : ${m}`);
+                $(".p_s_n_s .p_s_n_price").eq(i).text(`￦ ${comma(m*price)}`);
                 if ( m == 0 ) {
-                  $(".vf06_p_s_n_s dl").eq(i).hide();
+                  $(".p_s_n_s dl").eq(i).hide();
                 } else {
-                  $(".vf06_p_s_n_s dl").eq(i).show();
+                  $(".p_s_n_s dl").eq(i).show();
                 }
               }
               if ( n+m == 0 ) {
-                $(".vf06_p_s_n_s").hide();
+                $(".p_s_n_s").hide();
               } else {
-                $(".vf06_p_s_n_s").show();
+                $(".p_s_n_s").show();
                 
               }
             });
@@ -1372,31 +1272,31 @@
               if(i==0) {
                 makeInfo("gold", "grown","대인 (만 13세 이상)");
                 n = $(this).val();
-                $(".vf06_p_s_n_g .vf06_p_s_n_number").eq(i).text(n);
-                $(".vf06_p_s_n_g .vf06_p_s_n_price").eq(i).text(n * price);
+                $(".p_s_n_g .p_s_n_number").eq(i).text(`수량 : ${n}`);
+                $(".p_s_n_g .p_s_n_price").eq(i).text(`￦ ${comma(n*price)}`);
                 if ( n == 0 ) {
-                  $(".vf06_p_s_n_g dl").eq(i).hide();
+                  $(".p_s_n_g dl").eq(i).hide();
                 } else {
-                  $(".vf06_p_s_n_g dl").eq(i).show();
+                  $(".p_s_n_g dl").eq(i).show();
 
                 }
               }
               if (i==1) {
                 makeInfo("gold","little","소인 (만 13세 미만)");
                 m = $(this).val();
-                $(".vf06_p_s_n_g .vf06_p_s_n_number").eq(i).text(m);
-                $(".vf06_p_s_n_g .vf06_p_s_n_price").eq(i).text(m * price);
+                $(".p_s_n_g .p_s_n_number").eq(i).text(`수량 : ${m}`);
+                $(".p_s_n_g .p_s_n_price").eq(i).text(`￦ ${comma(m*price)}`);
                 if ( m == 0 ) {
-                  $(".vf06_p_s_n_g dl").eq(i).hide();
+                  $(".p_s_n_g dl").eq(i).hide();
                 } else {
-                  $(".vf06_p_s_n_g dl").eq(i).show();
+                  $(".p_s_n_g dl").eq(i).show();
 
                 }
               }
               if ( n+m == 0 ) {
-                $(".vf06_p_s_n_g").hide();
+                $(".p_s_n_g").hide();
               } else {
-                $(".vf06_p_s_n_g").show();
+                $(".p_s_n_g").show();
 
               }
             });
@@ -1408,29 +1308,29 @@
               if(i==0) {
                 makeInfo("platinum", "grown","대인 (만 13세 이상)");
                 n = $(this).val();
-                $(".vf06_p_s_n_p .vf06_p_s_n_number").eq(i).text(n);
-                $(".vf06_p_s_n_p .vf06_p_s_n_price").eq(i).text(n * price);
+                $(".p_s_n_p .p_s_n_number").eq(i).text(`수량 : ${n}`);
+                $(".p_s_n_p .p_s_n_price").eq(i).text(`￦ ${comma(n*price)}`);
                 if ( n == 0 ) {
-                  $(".vf06_p_s_n_p dl").eq(i).hide();
+                  $(".p_s_n_p dl").eq(i).hide();
                 } else {
-                  $(".vf06_p_s_n_p dl").eq(i).show();
+                  $(".p_s_n_p dl").eq(i).show();
                 }
               }
               if (i==1) {
                 makeInfo("platinum","little","소인 (만 13세 미만)");
                 m = $(this).val();
-                $(".vf06_p_s_n_p .vf06_p_s_n_number").eq(i).text(m);
-                $(".vf06_p_s_n_p .vf06_p_s_n_price").eq(i).text(m * price);
+                $(".p_s_n_p .p_s_n_number").eq(i).text(`수량 : ${m}`);
+                $(".p_s_n_p .p_s_n_price").eq(i).text(`￦ ${comma(m*price)}`);
                 if ( m == 0 ) {
-                  $(".vf06_p_s_n_p dl").eq(i).hide();
+                  $(".p_s_n_p dl").eq(i).hide();
                 } else {
-                  $(".vf06_p_s_n_p dl").eq(i).show();
+                  $(".p_s_n_p dl").eq(i).show();
                 }
               }
               if ( n+m == 0 ) {
-                $(".vf06_p_s_n_p").hide();
+                $(".p_s_n_p").hide();
               } else {
-                $(".vf06_p_s_n_p").show();
+                $(".p_s_n_p").show();
               }
             });
           })
@@ -1481,33 +1381,33 @@
           });
 
         // ---- 06-1. 할인적용 ------------------------------------------------------------
-        $(".vf06_d_list li").each(function(i){
-          $(this).find(".vf06_d_l_listopen").click(function(){
-            $(".vf06_d_l_detail").eq(i).slideToggle();
-            $(".vf06_d_l_detail").not(":eq("+i+")").slideUp()
-            $(".vf06_d_l_w_exp").eq(i).slideToggle();
-            $(".vf06_d_l_w_exp").not(":eq("+i+")").slideDown();
+        $(".d_list li").each(function(i){
+          $(this).find(".d_l_listopen").click(function(){
+            $(".d_l_detail").eq(i).slideToggle();
+            $(".d_l_detail").not(":eq("+i+")").slideUp()
+            $(".d_l_w_exp").eq(i).slideToggle();
+            $(".d_l_w_exp").not(":eq("+i+")").slideDown();
           })
         });
-        if ($(".vf06_d_list").has(".empty_li")) {
-          $(".vf06_p_s_discount").parent().remove();
+        if ($(".d_list").has(".empty_li")) {
+          $(".p_s_discount").parent().remove();
         }
         
-        $(".vf06_d_l_select").each(function(i){
+        $(".d_l_select").each(function(i){
           $(this).click(function(){
-            $(".vf06_d_list li").eq(i).toggleClass("active_discount");
-            $(".vf06_d_list li").not(`:eq(${i})`).removeClass("active_discount");
-            $(".vf06_d_list li input:checkbox").eq(i).prop("checked",function(){
-              $(".vf06_d_list li input:checkbox").not($(this)).prop("checked",false);
+            $(".d_list li").eq(i).toggleClass("active_discount");
+            $(".d_list li").not(`:eq(${i})`).removeClass("active_discount");
+            $(".d_list li input:checkbox").eq(i).prop("checked",function(){
+              $(".d_list li input:checkbox").not($(this)).prop("checked",false);
               return !$(this).prop("checked");
             });
             
-            if ( $(".vf06_d_list li input:checkbox").eq(i).is(":checked")) {
+            if ( $(".d_list li input:checkbox").eq(i).is(":checked")) {
 
-              $(".vf06_p_s_discount > div").show();
+              $(".p_s_discount > div").show();
               
-            } else if (!$(".vf06_d_list li input:checkbox").is(":checked")) {
-              $(".vf06_p_s_discount > div").hide();
+            } else if (!$(".d_list li input:checkbox").is(":checked")) {
+              $(".p_s_discount > div").hide();
             }
             total();
           });
@@ -1517,18 +1417,10 @@
         // ------------------------------------- 06-2. 가격 합산
         
       const total = function() {
-
-        function comma(x) {
-          return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        }
-
         $("#vip_total_price").val(function(i,v) {
+          
         })
-        
       }
-      
-
-        
       function addBasket(m) {
         const $newBasket = $(`<div id='nb_${m}'></div>`);
         $newBasket.text(localStorage.getItem(`vip_ticket_${m}`));

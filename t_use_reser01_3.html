@@ -112,11 +112,11 @@
         display: none;
       }
       .af01_e_list dt {
-        width: 100%;
+        width: calc(100% - 4px);
         box-sizing: border-box;
         height: 40px;
         padding-left: 10%;
-        margin: 2px 0px;
+        margin: auto;
         display: flex;
         align-items: center;
 
@@ -140,6 +140,16 @@
         height: 25px;
         opacity: 0.7;
       }
+      .af01_e_list dt a.slidedowned::before {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        left: -25px;
+        background: url("/image/arrow_drop_up.png") no-repeat center/25px;
+        width: 25px;
+        height: 25px;
+        opacity: 0.7;
+      }
       .af01_e_list dt span {
         color: #666;
         font-size: 14px;
@@ -153,7 +163,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: palegreen;
+        background-color: white;
 
         font-weight: 600;
         color: #333;
@@ -165,10 +175,21 @@
         display: none;
       }
       .af01_e_l_detail {
-        width: 100%;
+        width: calc(100% - 4px);
+        margin: 0px auto;
         box-sizing: border-box;
         text-align: start;
         display: none;
+        background-color: white;
+      }
+      .af01_e_l_detail ul {
+        padding: 5px 0px;
+      }
+      .af01_e_l_detail li {
+        list-style: inside;
+        margin: 2px 0px;
+        padding-left: 20px;
+        font-size: 80%;
       }
     /* ----------------------------------------- */
     .annual_fieldset02 {
@@ -194,7 +215,7 @@
     }
     .af02_i_i_tab {
       height: 80px;
-      background-color: white;
+      background-color: green;
       position: relative;
       padding-left: 70px;
       display: flex;
@@ -212,9 +233,11 @@
     }
     .af02_i_i_inputpage_wrap {
       height: var(--af02-inputbox-height);
-      border: 2px solid white;
+      background-color: white;
+      border: 2px solid green;
     }
     .af02_i_i_inputpage {
+      position: relative;
       box-sizing: border-box;
       height: var(--af02-inputbox-height);
       padding: 20px 10px;
@@ -226,7 +249,6 @@
       transition: .5s ease;
     }
     .af02_i_i_inputpage > div:not(.user_photo) {
-      border: 1px dashed tomato;
       position: relative;
       height: calc(100% / 4);
       width: calc(100% / 3);
@@ -318,17 +340,28 @@
       padding-left: 0px;
     }
     .user_photo {
-      border: 1px dashed tomato;
+      background-color: #aaaaaa4d;
       position: relative;
-      height: inherit;
+      height: 100%;
       width: calc(100% / 3);
       box-sizing: border-box;
+      position: absolute;
+      top: 0px;
+      right: 0px;
+    }
+    .user_photo > span {
+      display: block;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 80%;
+      color: #666;
+
     }
     .user_photo_img_wrap {
       width: 100%;
       aspect-ratio: 1 / 1;
-      margin: 10px auto;
-      border: 1px dashed royalblue;
+      margin: 5px auto;
       box-sizing: border-box;
       position: relative;
       display: flex;
@@ -336,25 +369,24 @@
       align-items: center;
     }
     .user_photo_canvas {
-      border: 1px dashed royalblue;
       box-sizing: border-box;
-      background-color: aqua;
     }
     .user_photo_cut {
       display: none;
 
-      border: 2px solid red;
+      border: 2px dashed red;
+      background-color: rgba(255,255,255,0.3);
       box-sizing: border-box;
       aspect-ratio: 1 / 1;
       width: 50px;
       min-width: 40px;
       min-height: 40px;
       position: absolute;
-      top: 0;
-      left: 0;
+      top: center;
+      left: center;
     }
     .user_photo_cut_size {
-      width: 15px;
+      width: 13px;
       aspect-ratio: 1/1;
       margin: 2px;
       background-color: red;
@@ -367,90 +399,26 @@
       opacity: 1;
       cursor:nwse-resize;
     }
-    /* ----------------------------------------- */
-    .annual_fieldset06 {
+    .user_photo_input {
       display: flex;
-      position: relative;
-      padding: 80px 15% 30px;
+      justify-content: center;
       gap: 30px;
     }
-    .af06_discount {
-      width: 50%;
+    .user_photo_notice{
+      font-size: 80%;
+      color: #666;
+      padding: 5px 10px;
+      box-sizing: border-box;
     }
-    .af06_d_list {
-      list-style: none;
-      padding: 0px;
-      border: 1px solid rgba(0,0,0,0.4);
-      border-bottom: none;
+    .user_photo_input a {
+      padding: 3px 10px;
+      background-color: #ccc;
+      border-radius: 10px;
     }
-      .af06_d_list li {
-        border-bottom: 1px solid rgba(0,0,0,0.4);
-      }
-      .af06_d_l_wrap {
-        position: relative;
-        display: flex;
-        align-items:flex-start;
-        flex-direction: column;
-      }
-      .af06_d_l_listopen {
-        display: block;
-        width: 50%;
-        background: url("img/arrow_drop_down.png") no-repeat center left/30px;
-        padding-left: 30px;
-        line-height: 2;
-        text-decoration: none;
-        color: black;
-      }
-      .af06_d_l_select {
-        position: absolute;
-        top: 0px;
-        right: 0px;
-      }
-      .af06_d_l_detail {
-        display: none;
-      }
-        .af06_d_l_detail table {
-          border: 1px solid rgb(121, 121, 121);
-          box-sizing: border-box;
-        }
-        .af06_d_l_detail th {
-          background-color: rgb(187, 255, 255);
-        }
-        .af06_d_l_detail tr {
-          background-color: rgb(207, 255, 255);
-        }
-
-      .af06_d_l_w_exp {
-        color: var(--exp-color);
-        padding-left: 20px;
-        font-size: 15px;
-      }
-      .active_discount {
-        background-color: rgb(247, 206, 199);
-      }
-      .not_discount .af06_d_l_wrap {
-        opacity: 0.5;
-      }
-      .af06_d_list li input[type="checkbox"] {
-        display: block;
-      }
-
-      .af06_price {
-        width: 50%;
-      }
-      /* ------------------ */
-      .af06_p_s_numbers > div {
-        display: none;
-      }
-      .af06_discount_select {
-        display: none;
-      }
-      .af06_p_s_discount >div {
-        border: 1px solid tomato;
-      }
-      #annual_total_price {
-        display: none;
-      }
+    /* ----------------------------------------- */
+    .p_s_numbers > div {
+      display: none;
+    }
     </style>
 </head>
 <body>
@@ -735,6 +703,7 @@
                         <input type="text" name="user_city" id="">
                       </div>
                       <div class="user_photo">
+                        <span>패스 사진 등록</span>
                         <input type="hidden" name="user_photo" class="user_photo_submitOnly">
                         <div class="user_photo_img_wrap">
                           <canvas class="user_photo_canvas" width="0" height="0"></canvas>
@@ -742,10 +711,11 @@
                             <div class="user_photo_cut_size"></div>
                           </div>
                         </div>
+                        <div class="user_photo_notice">* '사진 업로드' 버튼을 눌러 사진을 등록하십시오. 연간회원권 등록을 완료하려면 사진이 필요합니다</div>
                         <div class="user_photo_input">
                           <input type="file" name="" class="af02_user_photo" accept="image/png, image/jpeg, image/webp" style="display:none">
-                          <a href="#none">파일 열기</a>
-                          <a href="#none">잘라내기</a>
+                          <a href="#none" class="user_photo_upload">사진 업로드</a>
+                          <a href="#none" class="user_photo_sliceBtn">잘라내기</a>
                         </div>
                       </div>
                     </div>
@@ -757,22 +727,22 @@
 
           <fieldset class="annual_fieldset06 total_price_wrap">
             <legend>가격 합계</legend>
-            <div class="af06_discount">
+            <div class="discount">
               <span>할인 적용</span>
-              <ul class="af06_d_list">
+              <ul class="d_list">
                 <li>
-                  <div class="af06_d_l_wrap">
-                    <a href="#none" class="af06_d_l_listopen">
+                  <div class="d_l_wrap">
+                    <a href="#none" class="d_l_listopen">
                       KB국민카드 제휴 할인
                     </a>
-                    <div class="af06_d_l_w_exp">
+                    <div class="d_l_w_exp">
                       연간이용권 (Gold Pass) 4장 이상 구매 시 10% 할인
                     </div>
 
-                    <a href="#none" class="af06_d_l_select" id="af06_d_l_KBcard">적용하기</a>
-                    <input type="checkbox" name="discount_kbcard" id="af06_d_l_select_02">
+                    <a href="#none" class="d_l_select" id="d_l_KBcard">적용하기</a>
+                    <input type="checkbox" name="discount_kbcard" id="d_l_select_02">
                   </div>
-                  <div class="af06_d_l_detail">
+                  <div class="d_l_detail">
                     <dl>
                       <dt>✔ 기간:</dt>
                         <dd>2022년 5월 5일(목) ~ 2027년 5월 4일(화)</dd>
@@ -833,45 +803,30 @@
               </ul>
             </div>
 
-            <div class="af06_price">
-              <div class="af06_p_selectlist">
+            <div class="price">
+              <div class="p_selectlist">
                 <ul>
-                  
-                  <li>
-                    <span><strong>구매 수량</strong></span>
-                    <div class="af06_p_s_numbers">
-                      <div class="af06_p_s_n_standard">
-                        <span class="af06_p_s_n_title">STANDARD PASS</span>
-                        <span class="af06_p_s_n_number"></span>
-                        <span class="af06_p_s_n_price"></span>
-                      </div>
-                      <div class="af06_p_s_n_gold">
-                        <span class="af06_p_s_n_title">GOLD PASS</span>
-                        <span class="af06_p_s_n_number"></span>
-                        <span class="af06_p_s_n_price"></span>
-                      </div>
-                      <div class="af06_p_s_n_platinum">
-                        <span class="af06_p_s_n_title">PLATINUM PASS</span>
-                        <span class="af06_p_s_n_number"></span>
-                        <span class="af06_p_s_n_price"></span>
-                      </div>
+                  <li class="p_s_box">
+                    <strong>구매 수량</strong>
+                    <div class="p_s_numbers">
+                      
                     </div>
                   </li>
-                  <li>
-                    <span><strong>할인 내역</strong></span>
-                    <div class="af06_p_s_discount">
+                  <li class="p_s_box">
+                    <strong>할인 내역</strong>
+                    <div class="p_s_discount">
                       <div>
-                        <p class="af06_p_s_e_title06"></p>
-                        <p class="af06_p_s_e_number06"></p>
-                        <p class="af06_p_s_e_price06"></p>
+                        <p class="p_s_e_title06"></p>
+                        <p class="p_s_e_number06"></p>
+                        <p class="p_s_e_price06"></p>
                       </div>
                     </div>
                   </li>
                 </ul>
               </div>
-              <div class="af06_p_total">
-                <label for="annual_total_price">합계</label>
-                <span class="af06_p_t_text"></span>
+              <div class="p_total">
+                <label for="total_price">합계</label>
+                <span class="p_t_text">￦ 0</span>
                 <input type="text" name="total_price" id="annual_total_price" readonly class="total_price">
               </div>
               <div class="annual_ticket_submit ticket_submit">
@@ -889,6 +844,9 @@
             var discountRate = 1;
             var af01_price = [0,0,0];
             var af04_price = [0,0,0];
+            function comma(x) {
+              return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
           //------------Load-------------
           $(".decrease_btn").click(function(e){
             if( $(this).siblings("input").val() > 0) {
@@ -903,6 +861,8 @@
           //---------------------------- 01. 이용권 선택 
             $(".af01_e_list dt a").each(function(i){
               $(this).click(function(){
+                $(this).toggleClass("slidedowned");
+                $(".af01_e_list dt a").not($(this)).removeClass("slidedowned");
                 $(".af01_e_l_detail").eq(i).slideToggle();
                 $(".af01_e_l_detail").not(`:eq(${i})`).slideUp();
               })
@@ -912,8 +872,8 @@
             });
 
             $(".af01_tc_number input").each(function(i){
-              const $newDiv = $("<div><p class='af06_p_s_n_title'></p><p class='af06_p_s_n_number'></p><p class='af06_p_s_n_price'></p></div>");
-              $(".af06_p_s_numbers").append($newDiv);
+              const $newDiv = $("<div><p class='p_s_n_title'></p><p class='p_s_n_number'></p><p class='p_s_n_price'></p></div>");
+              $(".p_s_numbers").append($newDiv);
 
               $(this).change(function(){
                 if ( $(this).val() == 0 ) {
@@ -922,23 +882,23 @@
                   $newDiv.show()
                   if ( i == 0 ) {
                     const price = 119000;
-                    $(".af06_p_s_n_title").eq(i).text("STANDARD PASS");
-                    $(".af06_p_s_n_number").eq(i).text($(this).val());
-                    $(".af06_p_s_n_price").eq(i).text("￦" + $(this).val() * price);
+                    $(".p_s_n_title").eq(i).text("STANDARD PASS");
+                    $(".p_s_n_number").eq(i).text($(this).val());
+                    $(".p_s_n_price").eq(i).text("￦" + $(this).val() * price);
                     af01_price[i] = $(this).val() * price;
                   }
                   if ( i == 1 ) {
                     const price = 169000;
-                    $(".af06_p_s_n_title").eq(i).text("GOLD PASS");
-                    $(".af06_p_s_n_number").eq(i).text($(this).val());
-                    $(".af06_p_s_n_price").eq(i).text("￦" + $(this).val() * price);
+                    $(".p_s_n_title").eq(i).text("GOLD PASS");
+                    $(".p_s_n_number").eq(i).text($(this).val());
+                    $(".p_s_n_price").eq(i).text("￦" + $(this).val() * price);
                     af01_price[i] = $(this).val() * price;
                   }
                   if ( i == 2 ) {
                     const price = 249000;
-                    $(".af06_p_s_n_title").eq(i).text("PLATINUM PASS");
-                    $(".af06_p_s_n_number").eq(i).text($(this).val());
-                    $(".af06_p_s_n_price").eq(i).text("￦" + $(this).val() * price);
+                    $(".p_s_n_title").eq(i).text("PLATINUM PASS");
+                    $(".p_s_n_number").eq(i).text($(this).val());
+                    $(".p_s_n_price").eq(i).text("￦" + $(this).val() * price);
                     af01_price[i] = $(this).val() * price;
                   }
                 }
@@ -1093,12 +1053,12 @@
             const price = 119000;
             let n = $(this).val();
             makeInfo("standard");
-            $(".af06_p_s_n_number").eq(0).text(n);
-            $(".af06_p_s_n_price").eq(0).text(n*price);
+            $(".p_s_n_number").eq(0).text(`수량 : ${n}`);
+            $(".p_s_n_price").eq(0).text(`￦ ${comma(n*price)}`);
             if(n==0) {
-              $(".af06_p_s_n_standard").hide();
+              $(".p_s_n_standard").hide();
             } else {
-              $(".af06_p_s_n_standard").show();
+              $(".p_s_n_standard").show();
             }
 
           })
@@ -1106,65 +1066,65 @@
             const price = 169000;
             makeInfo("gold");
             let n = $(this).val();
-            $(".af06_p_s_n_number").eq(1).text(n);
-            $(".af06_p_s_n_price").eq(1).text(n*price);
+            $(".p_s_n_number").eq(1).text(`수량 : ${n}`);
+            $(".p_s_n_price").eq(1).text(`￦ ${comma(n*price)}`);
             if(n==0) {
-              $(".af06_p_s_n_gold").hide();
+              $(".p_s_n_gold").hide();
             } else {
-              $(".af06_p_s_n_gold").show();
+              $(".p_s_n_gold").show();
             }
           })
           $("#annual_platinum_number").on("change",function(){
             const price = 249000;
             makeInfo("platinum")
             let n = $(this).val();
-            $(".af06_p_s_n_number").eq(2).text(n);
-            $(".af06_p_s_n_price").eq(2).text(n*price);
+            $(".p_s_n_number").eq(2).text(`수량 : ${n}`);
+            $(".p_s_n_price").eq(2).text(`￦ ${comma(n*price)}`);
             if(n==0) {
-              $(".af06_p_s_n_platinum").hide();
+              $(".p_s_n_platinum").hide();
             } else {
-              $(".af06_p_s_n_platinum").show();
+              $(".p_s_n_platinum").show();
             }
           })
 
 
           // ------------------------------------- 06-1. 할인적용
-          $(".af06_d_list li").each(function(i){
-            $(this).find(".af06_d_l_listopen").click(function(){
-              $(".af06_d_l_detail").eq(i).slideToggle();
-              $(".af06_d_l_detail").not(":eq("+i+")").slideUp()
-              $(".af06_d_l_w_exp").eq(i).slideToggle();
-              $(".af06_d_l_w_exp").not(":eq("+i+")").slideDown();
+          $(".d_list li").each(function(i){
+            $(this).find(".d_l_listopen").click(function(){
+              $(".d_l_detail").eq(i).slideToggle();
+              $(".d_l_detail").not(":eq("+i+")").slideUp()
+              $(".d_l_w_exp").eq(i).slideToggle();
+              $(".d_l_w_exp").not(":eq("+i+")").slideDown();
             })
           });
 
           
-          $(".af06_d_l_select").each(function(i){
+          $(".d_l_select").each(function(i){
             $(this).click(function(){
-              $(".af06_d_list li").eq(i).toggleClass("active_discount");
-              $(".af06_d_list li").not(`:eq(${i})`).removeClass("active_discount");
-              $(".af06_d_list li input:checkbox").eq(i).prop("checked",function(){
-                $(".af06_d_list li input:checkbox").not($(this)).prop("checked",false);
+              $(".d_list li").eq(i).toggleClass("active_discount");
+              $(".d_list li").not(`:eq(${i})`).removeClass("active_discount");
+              $(".d_list li input:checkbox").eq(i).prop("checked",function(){
+                $(".d_list li input:checkbox").not($(this)).prop("checked",false);
                 return !$(this).prop("checked");
               });
 
-              if ( $(".af06_d_list li input:checkbox").eq(i).is(":checked")) {
+              if ( $(".d_list li input:checkbox").eq(i).is(":checked")) {
 
-                $(".af06_p_s_discount > div").show();
+                $(".p_s_discount > div").show();
                 if ( i==0 ) {
                   if ($(".af01_tc_number input").eq(1).val() >= 4 ) {
-                    $(".af06_p_s_e_title06").text("KB국민카드 제휴 할인");
-                    $(".af06_p_s_e_number06").text("GOLD PASS 4장 이상 구매 시 10% 할인")
+                    $(".p_s_e_title06").text("KB국민카드 제휴 할인");
+                    $(".p_s_e_number06").text("GOLD PASS 4장 이상 구매 시 10% 할인")
                     discountRate = 1 - 0.1;
                   } else {
                     alert("GOLD PASS 4장 이상 구매 시 적용 가능합니다.");
-                    $(".af06_d_list li").eq(i).removeClass("active_discount");
-                    $(".af06_d_list li input:checkbox").eq(i).prop("checked",false);
+                    $(".d_list li").eq(i).removeClass("active_discount");
+                    $(".d_list li input:checkbox").eq(i).prop("checked",false);
                     discountRate = 1;
                   }
                 }    
-              } else if (!$(".af06_d_list li input:checkbox").is(":checked")) {
-                $(".af06_p_s_discount > div").hide();
+              } else if (!$(".d_list li input:checkbox").is(":checked")) {
+                $(".p_s_discount > div").hide();
               }
               
               total();
@@ -1176,9 +1136,7 @@
           
           const total = function() {
 
-            function comma(x) {
-              return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            }
+            
 
             $("#annual_total_price").val(function(i,v) {
               if ($(".af01_tc_number input").eq(1).val() >= 4) {
@@ -1186,7 +1144,7 @@
               }
               const t_1 = af01_price.reduce((a,b) => a+b);
               const t_2 = af04_price.reduce((a,b) => a+b);
-              $(".af06_p_t_text").text("￦"+comma(t_1+t_2));
+              $(".p_t_text").text("￦"+comma(t_1+t_2));
               
               return t_1 + t_2
             })

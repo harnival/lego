@@ -195,7 +195,9 @@
                 <div>확인완료</div>
                 <div class='timeset'></div>
                 <a href='#none' class='c_btn_close'>닫기</a>
-            </div>`;
+            </div>
+            `;
+            localStorage.setItem("phone_cert","true");
             const r = document.querySelector(".timeset");
             r.innerText = `${times}초 후에 자동으로 종료됩니다.`;
             times--;
@@ -208,7 +210,6 @@
             },5000)
         }
         go.addEventListener("click",function(){
-            localStorage.setItem("phone_cert","true");
             if (document.querySelector("#cni_i_certText").value){
                 accept()
             }

@@ -34,7 +34,7 @@ a:hover {
 /* HEADER */
 header {
   width: 100%;
-  height: 10%;
+  height: 10vh;
   position: fixed;
   top: 0;
   z-index: 2;
@@ -95,7 +95,6 @@ header .top .logo img {
   background-color: #fefbf2;
   z-index: 3;
 }
-.bottom .inner {}
 .bottom .inner .category {
   display: flex;
 }
@@ -156,7 +155,6 @@ header .top .logo img {
   font-weight: 900;
   margin: 30px 0 30px 0;
 }
-.bottom .inner .menu .park_menu li .park_2 .park_3 {}
 .bottom .inner .menu .park_menu li .park_2 .park_3 li {
   margin: 10px 0;
 }
@@ -191,7 +189,6 @@ header .top .logo img {
   font-weight: 900;
   margin: 30px 0 30px 0;
 }
-.bottom .inner .menu .hotel_menu li .hotel_2 .hotel_3 {}
 .bottom .inner .menu .hotel_menu li .hotel_2 .hotel_3 li {
   margin: 10px 0;
 }
