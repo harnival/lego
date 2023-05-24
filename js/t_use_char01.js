@@ -1,6 +1,6 @@
 $(function() {
-    $(".ftr").load("./footer/footer.html");
-    $(".headerWrap").load("./header/header.html");
+    $("footer").load("./footer/footer.html");
+    $("header").load("./header/header.html");
     //load==================================
 localStorage.removeItem("load");
 //설명창 열기/닫기============================
@@ -34,11 +34,11 @@ $(".list_ul").each(function(i){
     }
 })
 //구매 페이지로 이동==========================
-$(".gotoreser").each(function(){
+$(".gotoreser, .require_tc").each(function(){
     $(this).on("click",function(){
-    const p = $(this).data("page") ,c = $(this).data("char") ,n = $(this).data("name");
-    const obj = { page : p, char: c, name: n };
-    localStorage.setItem("load", JSON.stringify(obj));
+        const p = $(this).data("page") ,c = $(this).data("char") ,n = $(this).data("name");
+        const obj = { page : p, char: c, name: n };
+        localStorage.setItem("load", JSON.stringify(obj));
     })
 })
 });

@@ -68,12 +68,12 @@
       <div class="mainWrap">
         <div class="tapBox">
           <ul>
-            <li><a href="#none" class="tapBox_btn" >일일이용권</a></li>
-            <li><a href="#none" class="tapBox_btn">오후이용권</a></li>
-            <li><a href="#none" class="tapBox_btn">연간이용권</a></li>
-            <li><a href="#none" class="tapBox_btn">시즌이용권</a></li>
-            <li><a href="#none" class="tapBox_btn">VIP EXPERIENCES</a></li>
-            <li><a href="#none" class="tapBox_btn">이용권 방문 예약</a></li>
+            <li><a href="#reser1" class="tapBox_btn" >일일이용권</a></li>
+            <li><a href="#reser2" class="tapBox_btn">오후이용권</a></li>
+            <li><a href="#reser3" class="tapBox_btn">연간이용권</a></li>
+            <li><a href="#reser4" class="tapBox_btn">시즌이용권</a></li>
+            <li><a href="#reser5" class="tapBox_btn">VIP EXPERIENCES</a></li>
+            <li><a href="#reser6" class="tapBox_btn">이용권 방문 예약</a></li>
           </ul>
         </div>
         <div class="formBox"></div>
@@ -89,13 +89,12 @@
           let num = obj["page"], char = obj["char"], name = obj["name"];
           console.log(num,char,name)
           const p = new Promise(function(res,rej){
-            $(".formBox").load(`./t_use_reser01_${num}.html`)
+            $(".formBox").load(`./t_use_reser01_${num}.html`);
             res();
           })
           const r = await $(document).ready(function(){
             $(".tapBox a").not(`:eq(${num-1})`).removeClass("active_tap");
             $(".tapBox a").eq(num-1).addClass("active_tap");
-  
           })
           const y = await tyty(r);
         }

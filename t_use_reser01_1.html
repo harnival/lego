@@ -1187,15 +1187,7 @@
           })
 
           // ------------------------------------- 06-1. 할인적용
-          $(".d_list li").each(function(i){
-            $(this).find(".d_l_listopen").click(function(){
-              $(".d_l_detail").eq(i).slideToggle();
-              $(".d_l_detail").not(":eq("+i+")").slideUp()
-              $(".d_l_w_exp").eq(i).slideToggle();
-              $(".d_l_w_exp").not(":eq("+i+")").slideDown();
-            })
-          });
-
+          // preload //
           const holiday = [
             { month: 1, date: 1}, // 신정
             { month: 3, date: 1}, // 삼일절
@@ -1206,6 +1198,20 @@
             { month: 10, date: 9}, // 한글날
             { month: 12, date: 25} // 성탄절
           ]                        // 기타 음력 공휴일/ 대체휴일은 직접 입력 (설날, 추석, 석가탄신일)
+
+          let obj = JSON.parse(localStorage.getItem("load"));
+          let num = obj["page"], char = obj["char"], name = obj["name"];
+          selectDc(char);
+
+          $(".d_list li").each(function(i){
+            $(this).find(".d_l_listopen").click(function(){
+              $(".d_l_detail").eq(i).slideToggle();
+              $(".d_l_detail").not(":eq("+i+")").slideUp()
+              $(".d_l_w_exp").eq(i).slideToggle();
+              $(".d_l_w_exp").not(":eq("+i+")").slideDown();
+            })
+          });
+
           $(".d_l_select").each(function(i){
             $(this).click(function(){
               selectDc(i);
@@ -1284,7 +1290,7 @@
           // ------------------------------------- 06-2. 가격 합산
           
           
-          const total = function() {
+          function total() {
             const grownDatedPrice = 
               new Date($selYear,$selMonth-1,$selDate) == today ? 60000 : 54000;
             const littleDatedPrice = 

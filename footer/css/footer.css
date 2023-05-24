@@ -1,21 +1,5 @@
-/* COMMON */
-a {
-  color: #000;
-  text-decoration: none;
-}
-a:hover {
-  color: #777;
-  text-decoration: dashed;
-}
-.inner {
-  width: 1440px;
-  height: 100%;
-  margin: 0 auto;
-}
-/* COMMON */
-
-/* footer */
-footer {
+/* .footer */
+.footer {
   width: 100%;
   height: 10%;
   padding: 20px 0;
@@ -25,7 +9,7 @@ footer {
   background-color: #f9f9f9;
   box-sizing: border-box;
 }
-footer .foot_section {
+.footer .foot_section {
   width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
@@ -33,47 +17,47 @@ footer .foot_section {
   justify-content: center;
   align-items: center;
 }
-footer .foot_section .foot {
+.footer .foot_section .foot {
   display: flex;
   color:#555;
   box-sizing: border-box;
 }
-footer .foot_section .foot li {
+.footer .foot_section .foot li {
   margin-right: 25px;
   display: flex;
   align-items: center;
 }
-footer .foot_section .foot li:last-child {
+.footer .foot_section .foot li:last-child {
   margin-right: 0;
 }
-footer .foot_section .foot li span, 
-footer .foot_section .foot li a {
+.footer .foot_section .foot li span, 
+.footer .foot_section .foot li a {
   color:#555;
 }
-footer .foot_section .foot li span:hover,
-footer .foot_section .foot li a:hover {
+.footer .foot_section .foot li span:hover,
+.footer .foot_section .foot li a:hover {
   cursor: pointer;
   text-decoration: underline;
 }
 
-footer .foot_section .foot_1 {
+.footer .foot_section .foot_1 {
   width: 40%;
   justify-content: flex-start;
   margin-left: 35px;
 }
-footer .foot_section .foot_2 {
+.footer .foot_section .foot_2 {
   width: 20%;
   justify-content: center;
 }
-footer .foot_section .foot_2 li {
+.footer .foot_section .foot_2 li {
   width: 40px;
   height: 40px;
 }
-footer .foot_section .foot_2 li a {
+.footer .foot_section .foot_2 li a {
   width: 40px;
   height: 40px;
 }
-footer .foot_section .foot_2 li #popup_open_btn_3 { 
+.footer .foot_section .foot_2 li #popup_open_btn_3 { 
   width: 40px;
   height: 40px;
   background-color: #ea4335;
@@ -82,25 +66,25 @@ footer .foot_section .foot_2 li #popup_open_btn_3 {
   justify-content: center;
   align-items: center;
 }
-footer .foot_section .foot_2 li #popup_open_btn_3 svg {
+.footer .foot_section .foot_2 li #popup_open_btn_3 svg {
   color: #fff;
 }
-footer .foot_section .foot_2 li .app_store,
-footer .foot_section .foot_2 li .play_store {
+.footer .foot_section .foot_2 li .app_store,
+.footer .foot_section .foot_2 li .play_store {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-footer .foot_section .foot_2 li span img {
+.footer .foot_section .foot_2 li span img {
   color: #fff;
 }
 
-footer .foot_section .foot_3 {
+.footer .foot_section .foot_3 {
   width: 40%;
   justify-content: flex-end;
   margin-right: 35px;
 }
-/* footer */
+/* .footer */
 
 
 /* Modal Pop-up */
