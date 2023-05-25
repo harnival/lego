@@ -13,6 +13,7 @@ $(".ri_load_friends").load("./t_hotel_reser01_f.html");
 $(".ri_load_ninja").load("./t_hotel_reser01_n.html");
     // 달력 로드 //
 $(".sr_date_calender").load("./unit/multi_calender_hotel_side.html");
+    // 저장소 생성 //
 if ( !localStorage.getItem("hotelBasket")) {
     localStorage.setItem("hotelBasket", JSON.stringify([]));
 }
@@ -174,19 +175,22 @@ function changes() {
     $(".tfoot .td div").eq(2).text(v2);
 }
 const slideHeight = 430;
+const slideUpHeight = "10vh";
 $(".checkin span, .checkout span, #sr_c_input").on("click",function(){
     $(".sr_slideBtn .slideBtn").addClass("act");
     changes();
     $(".thead").css("display","flex");
     $(".tfoot").css("display","none");
     $(".shortReservation").stop().animate({height: slideHeight},300)
+    $(".sr_searchBtn").stop().animate({height: slideHeight},300);
 })
 $(".sr_searchBtn button").on("click",function(){
     $(".sr_slideBtn .slideBtn").removeClass("act");
     changes()
     $(".thead").css("display","none");
     $(".tfoot").css("display","flex");
-    $(".shortReservation").stop().animate({height: "80px"},300);
+    $(".shortReservation").stop().animate({height: slideUpHeight},300);
+    $(".sr_searchBtn").stop().animate({height: slideUpHeight},300);
 })
 $(".sr_slideBtn .slideBtn").on("click",function(){
     if ( $(this).hasClass("act")){
@@ -194,8 +198,8 @@ $(".sr_slideBtn .slideBtn").on("click",function(){
         changes()
         $(".thead").css("display","none");
         $(".tfoot").css("display","flex");
-        $(".shortReservation").stop().animate({height: "80px"},300);
-        $(".sr_searchBtn").stop().animate({height: "80px"},300);
+        $(".shortReservation").stop().animate({height: slideUpHeight},300);
+        $(".sr_searchBtn").stop().animate({height: slideUpHeight},300);
     } else {
         $(".sr_slideBtn .slideBtn").toggleClass("act");
         changes();
@@ -209,10 +213,13 @@ $(".sr_slideBtn .slideBtn").on("click",function(){
 $(".hb_slideBtn .slideBtn").on("click",function(){
     if ( $(this).hasClass("act2")){
         $(".hb_slideBtn .slideBtn").toggleClass("act2");
-        $(".hotelBasket").stop().animate({height: "80px"},300);
+        $(".hotelBasket").stop().animate({height: slideUpHeight},300);
     } else {
+        const h1 = $(".hb_date").outerHeight(true);
+        const h2 = $(".hb_rooms").outerHeight(true);
+        const h3 = $(".hb_total").outerHeight(true);
         $(".hb_slideBtn .slideBtn").toggleClass("act2");
-        $(".hotelBasket").stop().animate({height: slideHeight},300)
+        $(".hotelBasket").stop().animate({height: h1+h2+h3},300)
     }
 })
     // 해당 객실 로드 //
@@ -223,9 +230,8 @@ function loadRoom(index,obj){
     const adultNumber = obj.adult[index];
     const childNumber = obj.little[index];
     const toddlerNumber = obj.toddler[index];
-    const checkinDate = new Date(obj["checkin"]);
-    const checkoutDate = new Date(obj["checkout"]);
-
+    const checkinDate = +new Date(obj["checkin"]);
+    const checkoutDate = +new Date(obj["checkout"]);
     // 1. 기본 객실 로드 //
     $(".ri_e_t_choice_default").each(function(){
         if ( $(".sr_c_active").length == 0) {
@@ -490,13 +496,11 @@ function loadRoom(index,obj){
         } else {
             $(".birthday_li, .birthdayAnnual_li").remove();
         }
-        // 8. 닌자고 //
-        if(  $(".sr_c_active").length == 0 || $(".sr_c_ninja").hasClass("sr_c_active") ) {
-            
-        }
+       
     })
     // 상세설명 입력 //
     $(".ri_e_t_choice li").each(function(){
+        $(this).find(".cs_e_title, .cs_e_pre, .cs_e_notice").children().remove();
         const q = $(this).attr("class");
         const w = priceExp[q];
         w[0].forEach((v,i) => {
@@ -543,17 +547,25 @@ function makeUnit(data) {
                 <span class="hb_u_title"></span>
                 <span class="hb_u_price"></span>
             </div>
+            <div class="hb_u_input">
+                <input type="hidden" name="room_theme${i+1}" class="room_theme" />
+                <input type="hidden" name="room_title${i+1}" class="room_title" />
+                <input type="hidden" name="room_price${i+1}" class="room_price" />
+            </div>
         </div>
         `);
         $(".hb_rooms").append(units);
     }
 }
     // 구매목록 생성 //
+let c;
 $(".shortReservation_wrap_up").on("submit",function(event){
     event.preventDefault();
     // formdata 전달 //
+    $(".hb_rooms").children().remove();
     const q = new FormData(event.target);
-    const c = Object.fromEntries(q.entries());
+    c = Object.fromEntries(q.entries());
+    console.log(c);
     const adt=[],ltl=[],tdl=[];
     $(".sr_n_list").each(function(i){
         const w = $(this).find("input");
@@ -565,20 +577,23 @@ $(".shortReservation_wrap_up").on("submit",function(event){
     c["little"] = ltl;
     c["toddler"] = tdl;
     c["roomlength"] = $(".sr_n_list").length;
+    $(".hb_d_rn_number").text(c["roomlength"]);
     
     // 장바구니 입력 //
-    $(".hb_date_in").text($(".checkin span").text());
-    $(".hb_date_out").text($(".checkout span").text());
+    $(".hb_date_in").text($(".checkin span").text())
+        .data("dt",c.checkin);
+    $(".hb_date_out").text($(".checkout span").text())
+        .data("dt",c.checkout);
     makeUnit(c);
     // 객실별 선택 //
-    $(".hb_rooms").on("click",".hb_unit",function(){
-        $(this).toggleClass("select_hb_unit");
-        $(".hb_unit").not($(this)).removeClass("select_hb_unit");
-        
-        const idx = $(".hb_unit").index($(this));
-        loadRoom(idx,c);
-    });
     $(".hb_unit").eq(0).trigger("click");
+});
+$(".hb_rooms").on("click",".hb_unit",function(){
+    $(this).toggleClass("select_hb_unit");
+    $(".hb_unit").not($(this)).removeClass("select_hb_unit");
+    
+    const idx = $(".hb_unit").index($(this));
+    loadRoom(idx,c);
 });
     // 상품 선택 //
 $(".roomInfo_wrap").on("click",".ri_e_t_c_price",function(){
@@ -588,23 +603,51 @@ $(".roomInfo_wrap").on("click",".ri_e_t_c_price",function(){
     $(".select_hb_unit .hb_u_price")
         .text(p)
         .data("price", $(this).data("price"));
+    $(".select_hb_unit .room_price").val((i,v) => $(this).data("price"))
     $(".select_hb_unit .hb_u_title")
         .text(w);
+    $(".select_hb_unit .room_title").val((i,v) => w)
     $(".select_hb_unit .hb_u_theme")
         .text(t);
+    $(".select_hb_unit .room_theme").val((i,v) => t)
 
     let r = 0;
     $(".hb_u_price").each(function(){
+        console.log($(this).data("price"));
         if( $(this).data("price") ){
-            r += $(this).data("price");
+            r += Math.round($(this).data("price"));
         }
     });
     $(".hb_total_real span")
         .text("￦ "+ comma(r))
     $(".hb_total_tax span").text("￦ "+ comma(r*0.1)); 
     $(".hb_total_total span")
-        .text("￦ "+ comma(r*1.1))
-        .data("totalPrice",r*1.1);
+        .text("￦ "+ comma(r + r*0.1))
+        .data("totalPrice",r+r*0.1);
+});
+$("#hb_rooms_form").on("submit",function(event){
+    const q = new FormData(event.target);
+    const w = Object.fromEntries(q.entries());
+    const titleArr = [], themeArr = [], priceArr = [], newW = {};
+    for ( key in w ) {
+        if ( key.match(/title/g) ) {
+            titleArr.push(w[key]);
+        } else if ( key.match(/theme/g) ) {
+            themeArr.push(w[key])
+        } else if ( key.match(/price/g) ) {
+            priceArr.push(+w[key])
+        }
+    }
+    newW.title = titleArr;
+    newW.theme = themeArr;
+    newW.price = priceArr;
+    newW.checkin = $(".hb_date_in").data("dt");
+    newW.checkout = $(".hb_date_out").data("dt");
+    newW.submitTime = Date.now();
+    const bsk = JSON.parse(localStorage.getItem("hotelBasket"));
+    bsk.push(newW);
+    localStorage.setItem("hotelBasket",JSON.stringify(bsk));
+
 })
 
 });

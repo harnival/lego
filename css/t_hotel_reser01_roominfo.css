@@ -1,0 +1,316 @@
+.roomInfo {
+    width: 100%;
+    min-width: 600px;
+}
+.roomInfo_wrap {
+    width: 100%;
+    margin: auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.ri_elem_info_wrap {
+    box-sizing: border-box;
+    background: linear-gradient(120deg, white, transparent);
+    padding: 30px;
+    height: fit-content;
+}
+.ri_elem_info h4 {
+    font-size: 200%;
+    margin: 0px;
+}
+.ri_elem_info_wrap div {
+    width: 100%;
+    padding: 3% 0% 10% 10%;
+}
+.ri_elem_tag_page {
+    position: relative;
+}
+.ri_e_t_box {
+    width: 100%;
+    padding: 20px 0px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+}
+.ri_elem_tag_page > div::before {
+    content: "";
+    display: block;
+    width: 90%;
+    height: 2px;
+    background: linear-gradient(to right,transparent,#666,transparent);
+    position: absolute;
+    left: 5%;
+    bottom: 0px;
+}
+/* ======================================== slide =========== */
+.ri_e_t_slide {
+    width: var(--roomInfo-slide-unit);
+    max-width: 400px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: end;
+}
+.ri_e_t_slide a {
+    display: block;
+    position: absolute;
+    z-index: 100;
+    font-size: 0px;
+
+    width: 20%;
+    aspect-ratio: 1/1;
+    background-color: rgba(255,255,255,0.4);
+}
+.slideback {
+    left: 0px;
+    background: url("../image/arrow_back.png") no-repeat center/50%;
+}
+.slidenext {
+    right: 0px;
+    background: url("../image/arrow_forward.png") no-repeat center/50%;
+}
+.ri_e_t_slide ul {
+    display: flex;
+    position: relative;
+    top: 0px;
+    left: 0px;
+
+    transition: .5s ease;
+}
+.ri_e_t_slide li img {
+    display: block;
+    width: var(--roomInfo-slide-unit);
+    max-width: 400px;
+}
+/* ======================================= theme info ====== */
+.ri_e_t_exp {
+    box-sizing: border-box;
+    padding-left: 30px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+.ri_e_t_exp_title {
+    font-size: 150%;
+    font-weight: 600;
+    display: block;
+    padding-bottom: 20px;
+}
+.ri_e_t_exp_open {
+    display: flex;
+    background-color: rgba(255,255,255,0.7);
+    border: 2px solid #6666667a;
+    color: #666;
+    padding: 2px 10px;
+    border-radius: 20px;
+}
+.ri_e_t_exp_open::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    aspect-ratio: 1/1;
+
+    background: url("../image/info.png") left center/ 20px no-repeat;
+    filter: contrast(10%);
+    padding-right: 5px;
+}
+/* ====================================== room info ====== */
+.ri_e_t_e_charWrap {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: brightness(0.8) blur(1px);
+    z-index: 9999;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+.ri_e_t_e_char {
+    position: relative;
+
+    padding: 30px 50px;
+    display: none;
+    justify-content: center;
+    align-items: start;
+    background-color: rgba(255,255,255,0.95);
+    box-shadow: 2px 2px 5px #666;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+.ri_e_t_e_char > a {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: block;
+    width: 30px;
+    height: 30px;
+    font-size: 0px;
+    background: rgb(248, 175, 162) url("/image/close_button.png") no-repeat center/20px;
+    border-radius: 50%;
+}
+.ri_e_t_e_char dl{
+    width: fit-content;
+    max-width: 30%;
+    padding-right: 30px;
+}
+.ri_e_t_e_char dt {
+    margin: 10px;
+    padding: 5px;
+    width: 70%;
+    border-bottom: 2px solid rgba(153, 205, 50, 0.7);
+    font-size: 105%;
+    color: rgb(113, 150, 38);
+}
+.ri_e_t_e_char dd {
+    padding-bottom: 5px;
+    position: relative;
+    font-size: 95%;
+    word-break: keep-all;
+}
+.ri_e_t_e_char dd::before {
+    content: "•";
+    display: inline-block;
+    position: absolute;
+    top: 0px;
+    left: -15px;
+    color: yellowgreen;
+    opacity: 0.7;
+}
+.ri_e_t_e_room {
+    padding-right: 20px;
+}
+.ri_e_t_e_room span{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 23px 0px;
+    padding: 10px;
+    border: 2px solid tomato;
+    border-radius: 20px;
+    box-sizing: border-box;
+}
+.ri_e_t_e_room span:nth-of-type(1)::before {
+   content: "수용 인원";
+   display: block;
+   position: absolute;
+   top: -20px;
+   left: 10px;
+   font-size: 13px;
+   color: #666;
+}
+.ri_e_t_e_room span:nth-of-type(2)::before {
+   content: "메인 객실";
+   display: block;
+   position: absolute;
+   top: -20px;
+   left: 10px;
+   font-size: 13px;
+   color: #666;
+}
+.ri_e_t_e_room span:nth-of-type(3)::before {
+   content: "어린이 객실";
+   display: block;
+   position: absolute;
+   top: -20px;
+   left: 10px;
+   font-size: 13px;
+   color: #666;
+}
+.ri_e_t_e_room span:nth-of-type(4)::before {
+   content: "욕실";
+   display: block;
+   position: absolute;
+   top: -20px;
+   left: 10px;
+   font-size: 13px;
+   color: #666;
+}
+.ri_e_t_e_room span:nth-of-type(5)::before {
+   content: "객실 면적";
+   display: block;
+   position: absolute;
+   top: -20px;
+   left: 10px;
+   font-size: 13px;
+   color: #666;
+}
+.ri_e_t_e_room span:nth-of-type(6):not(.notroom)::before {
+   content: "뷰";
+   display: block;
+   position: absolute;
+   top: -20px;
+   left: 10px;
+   font-size: 13px;
+   color: #666;
+}
+/* ========================================= package info =========== */
+.ri_e_t_choice {
+    width: 100%;
+}
+.ri_e_t_choice li {
+    margin: 10px 0px;
+}
+.ri_e_t_choice_body {
+    height: 4rem;
+    position: relative;
+}
+.ri_e_t_choice_body a:first-child {
+    font-size: 100%;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    height: 100%;
+    padding: 0px 5%;
+}
+.ri_e_t_choice_body a:first-child::after {
+    content: "";
+    display: block;
+    width: 15px;
+    height: 15px;
+    margin-left: 10px;
+    background: url("/image/info.png") no-repeat scroll center/ 1rem;
+}
+.ri_e_t_c_price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 100%;
+    background-color: orange;
+
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+
+    font-size: 100%;
+    font-weight: 600;
+}
+/* ===================================================== */
+.ri_e_t_choice_slide {
+    background-color: rgba(0, 255, 0, 0.4);
+    display: flex;
+}
+.cs_exp {
+    width: 50%;
+    padding-left: 1rem;
+    font-size: 90%;
+    border: 1px dashed tomato;
+}
+.cs_exp span {
+    display: block;
+    padding: 3px 1rem;
+}
+.cs_price {
+    width: var(--price-btn-width);
+    height: 100%;
+    background-color: orange;
+}
+/* ===================================================== */
