@@ -3,31 +3,15 @@
     /* length */
     --whole-max-width: 1350px;
     --whole-min-width: 750px;
-    --title-height: 220px;
+    --title-height: 33vh;
     --calender-table-size: 400px;
     --calender-month-button: 1em;
     /* color */
-    --exp-color: #585757c9;
     --calender-select-color: rgb(2, 172, 2);
     --inputbox-bg-color: white;
     --main-bg-color: #ffcf00;
     --main-yellow-color: #ffcf00;
 }
-
-body {margin: 0px;padding: 0px; font-size: 15px; font-family: "Noto Sans KR", "Sans serif";}
-ul {list-style: none;padding: 0px;margin: 0px;}
-a {text-decoration: none; color: initial;}
-h3,h4,h5,h6 {margin: 0px;}
-/* number input 버튼 숨기기 */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-input[type='number'] {
-  appearance: textfield;
-}
-
 /* 달력 이동 버튼 */
 .calender .gotoback {
     font-size: 0px;
@@ -268,9 +252,11 @@ fieldset legend {
   /* 각 페이지의 제목박스 */
 .form_title {
   padding: 1rem 5% 0px;
+  height: var(--title-height);
   border: 2px solid rgba(100,100,100,0.5);
   margin: 1rem;
   box-sizing: border-box;
+  background: url("/image/background4.webp") no-repeat center/ cover;
 }
 .form_title > div {
   padding-bottom: 1rem;
@@ -387,8 +373,16 @@ fieldset legend {
   .price {
     width: 40%;
     background-color: rgba(255,255,255,0.2);
-    padding: 50px 30px;
+    padding: 30px 20px;
+    box-sizing: border-box;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 2rem;
+  }
+  .p_selectlist {
+    width: 100%;
   }
   .p_s_box {
     position: relative;
@@ -435,7 +429,7 @@ fieldset legend {
     padding-right: 20px;
   }
   .p_total {
-    margin: 20px 0px 20px 50%;
+
     padding: 20px 10px;
     text-align: center;
     font-size: 120%;
@@ -444,11 +438,29 @@ fieldset legend {
   }
   .p_t_text {
     display: inline-block;
-    width: 100px;
   }
   .total_price {
     display: none;
   }
   .p_s_e_4 {
     display: flex;
-  }  
+  }
+  /* 제출 버튼 */
+  .ticket_submit {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+  }
+  .submit_btn, .reset_btn {
+    display: inline-block;
+    padding: 8px 20px;
+    border: none;
+    font-size: 100%;
+    background-color: white;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  .ticket_submit button:hover {
+    background-color: rgba(155,155,0,0.9);
+  }

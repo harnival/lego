@@ -232,7 +232,7 @@
               </ul>
             </div>
         </div>
-        <form action="" id="daytime_ticket_form" class="ticket_form">
+        <form action="" id="daytime_ticket_form" class="ticket_form" data-type="오후이용권 구매">
           <fieldset class="daytime_fieldset01"> 
             <legend>날짜 지정</legend>
             <div class="date_inputs">
@@ -773,35 +773,6 @@
             $(".p_t_text").text("￦"+comma(t_1 * discountRate + t_2));
             
           }
-          
-
-          
-          function addBasket(m) {
-            const $newBasket = $(`
-              <div class='nb_${m}'>
-                <ul>
-                  <li class='nb_${m}_sort'>일일이용권</li>
-                  <li class='nb_${m}_date'></li>
-                  <li class='nb_${m}_number'></li>
-                  <li class='nb_${m}_price'></li>
-                </ul>
-              </div>
-              `);
-            const $closeBtn = $("<a href='#none' class='rb_remove'></a>");
-              $closeBtn.click(function(){
-                $(this).parent().remove();
-                localStorage.removeItem(`dated_ticket_${m}`);
-              });
-            const ticketData = JSON.parse(localStorage.getItem("basket_list"))[`dated_ticket_${m}`];
-              const dateData = `${new Date(ticketData.dated_date_value).getFullYear()}년${new Date(ticketData.dated_date_value).getMonth()}월${new Date(ticketData.dated_date_value).getDate()}일`;
-              $newBasket.find(`.nb_${m}_date`).text(dateData);
-              const numberData = `대인 : ${ticketData.dated_numbers_grown}명, 소인 : ${ticketData.dated_numbers_little}명`
-              $newBasket.find(`.nb_${m}_number`).text(numberData);
-              const priceData = `￦ ${ticketData.dated_total_price}`
-              $newBasket.find(`.nb_${m}_price`).text(priceData);
-            $newBasket.append($closeBtn);
-            $(".rb_list > div").append($newBasket);
-          }
           function aaa(e) {
             const bbb = new FormData(e.target);
             const ccc = Object.fromEntries(bbb.entries());
@@ -812,7 +783,6 @@
             const getList = JSON.parse(localStorage.getItem("basket_list"));
             getList.push(ccc);
             localStorage.setItem("basket_list",JSON.stringify(getList));
-            // localStorage.setItem(`dated_ticket_${submitTime}`,JSON.stringify(ccc));
             addBasket(submitTime);
           }
           $("#daytime_ticket_form").submit(function(e){

@@ -336,7 +336,7 @@
     .user_photo_img_wrap {
       width: 100%;
       aspect-ratio: 1 / 1;
-      margin: 5px auto;
+      margin: 5px auto 0px;
       box-sizing: border-box;
       position: relative;
       display: flex;
@@ -382,7 +382,7 @@
     .user_photo_notice{
       font-size: 80%;
       color: #666;
-      padding: 5px 10px;
+      padding: 3px 10px;
       box-sizing: border-box;
     }
     .user_photo_input a {
@@ -398,6 +398,11 @@
     <div class="ticket_formWrap season_ticket_formWrap">
         <div class="season_form_title form_title">
             <h4>시즌이용권 구매하기</h4>
+        </div>
+        <form action="" id="season_ticket_form" class="ticket_form" data-type="시즌이용권 구매">
+          <fieldset class="season_fieldset01">
+            <legend>이용권 선택</legend>
+            
             <div class="sf01_labelexp">
               <ul>
                 <li>
@@ -449,12 +454,6 @@
                 </li>
               </ul>
             </div>
-        </div>
-        <form action="" id="season_ticket_form" class="ticket_form">
-
-          <fieldset class="season_fieldset01">
-            <legend>이용권 선택</legend>
-            
             <div class="sf01_tcWrap">
               <div class="sf01_ticketcard summer">
                 <a href="#none" class="sf01_tc_select">
@@ -586,6 +585,7 @@
                         <input type="text" name="user_city" id="">
                       </div>
                       <div class="user_photo">
+                        <span>패스 사진 등록</span>
                         <input type="hidden" name="user_photo" class="user_photo_submitOnly">
                         <div class="user_photo_img_wrap">
                           <canvas class="user_photo_canvas" width="0" height="0"></canvas>

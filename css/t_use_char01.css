@@ -1,113 +1,127 @@
 header {
     z-index: 5000;
 }
-/* ----------------------------------------------------------------- */
+/* main ----------------------------------------------------------------- */
 main {
-background-color: #ffcf00;
-padding-top: 10vh;
+    background-color: var(--main-bg-color);
+    padding-top: 10vh;
 }
 .mainWrap {
-width: var(--whole-max-width);
-min-width: var(--whole-min-width);
-background-color: var(--main-bg-color);
-margin: auto;
-position: relative;
+    width: 100%;
 }
 /* title ------------------------------------------------------------ */
-.titlebnr {
-width: 100vw;
-height: 220px;
-background-color: white;
-position: absolute;
-top: 0px;
-}
-.title {
-width: 100%;
-margin: 0px auto 60px;
-height: 220px;
-box-sizing: border-box;
-}
-.title h3 {
-font-size: 35px;
-color: black;
-position: relative;
-max-width: var(--list-max-width);
-padding: 0px 50px;
-margin: auto;
-text-shadow: 1px 1px 5px rgba(255,255,255,0.7);
+.t_title {
+    width: 100%;
+    height: 33vh;
+    margin-bottom: 60px;
+    box-sizing: border-box;
+    background: url("/image/background01_sizeup.png") scroll no-repeat center/cover;
 }
 .title_bg {
-width: 100%;
-height: 100%;
-padding: 80px 40px 0px;
-box-sizing: border-box;
-/* background: linear-gradient(to right,white, white 5%, transparent 40% 90%,white 96%,white); */
-background: linear-gradient(to right,white, white 5%, transparent 60%);
+    max-width: var(--whole-max-width);
+    min-width: var(--whole-min-width);
+    height: 100%;
+    margin: auto;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    padding-left: 5%;
 }
-/* 구매하기 버튼들 --------------------------------------------------------- */
-.list {
-width: 100%;
-padding: 0px 15%;
-box-sizing: border-box;
+.t_title h3 {
+    padding: 20px 200px 20px 20px;
+    box-sizing: border-box;
+    background-color: var(--title-text-bg-color);
+    font-size: 200%;
+    color: black;
+    position: relative;
 }
-.list h4 {
-padding-bottom: 50px;
-font-size: 150%;
-position: relative;
+.t_title h3::after {
+    content: "LEGOLAND®와 함께 하는 시간";
+    display: block;
+    padding-top: 10px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #666;
 }
-.list h4::after {
-content: "";
-display: block;
-width: 60%;
-height: 2px;
-background: linear-gradient(to right, rgba(0,0,0, 0.3), transparent);
-position: absolute;
-bottom: 35px;
-left: 0px;
 
+
+/* 구매하기 버튼들 --------------------------------------------------------- */
+.tickets {
+    width: var(--whole-max-width);
+    min-width: var(--whole-min-width);
+    background-color: var(--main-bg-color);
+    margin: auto;
+    padding-bottom: 60px;
+    position: relative;
+    display: flex;
+    gap: 20px;
+}
+.t_list {
+    position: relative;
+    width: calc(100% * 3/4);
+    box-sizing: border-box;
+}
+.t_r_list {
+    position: relative;
+    width: calc(100% / 4);
+    box-sizing: border-box;    
+}
+.t_list h4,
+.t_r_list h4 {
+    padding-bottom: 50px;
+    font-size: 150%;
+    position: relative;
+}
+.t_list h4::after,
+.t_r_list h4::after {
+    content: "";
+    display: block;
+    width: calc(100% - 8px);
+    height: 2px;
+    background: linear-gradient(to right, rgba(0,0,0, 0.3), transparent);
+    position: absolute;
+    bottom: 35px;
+    left: 4px;
 }
 .list_ul_wrap{
-background: url("/image/entrance_korea_0729.jpg") no-repeat center/ cover;
+    background: url("/image/entrance_korea_0729.jpg") no-repeat top left/ cover;
+    display: flex;
+    height: fit-content;
 }
 .t_r_list_ul {
-background: url("/image/background4.webp") no-repeat center/ cover;
-}
-.e_list_ul{
-background: url("/image/background02.webp") no-repeat bottom center/ cover;
-}
-.c_list_ul {
-background: url("/image/background03.webp") no-repeat top left/ cover;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    border-collapse: collapse;
+    background: url("/image/entrance_korea_0729.jpg") no-repeat top right/ cover;
 }
 .list_ul {
-width: 100%;
-display: flex;
-flex-wrap: wrap;
-border-collapse: collapse;
+    width: calc(100% / 3);
+    display: flex;
+    flex-direction: column;
+    border-collapse: collapse;
 }
-.list_u_li_dated,
-.list_u_li_period,
 .list_u_li {
-width: calc(100% / 3);
-aspect-ratio: 1 / 0.6;          
+width: 100%;
+aspect-ratio: 1 / 0.4;          
 position: relative;
 border: 4px solid var(--main-bg-color);
 box-sizing: border-box;
-}
-.list_u_li {
 transition: .3s ease;
 }
 .list_u_li_empty {
-width: calc(100% / 3);
-aspect-ratio: 1 / 0.6;          
+width: 100%;
+aspect-ratio: 1 / 0.4;          
 position: relative;
 background-color: var(--main-bg-color);
 }
-.list_ul>li>a:hover {
+.list_u_li > a:hover {
 background-color: rgba(0, 128, 0, 0.3);
 color: #eee;
 }
 
-.list_ul >li>a {
+.list_u_li >a {
 display: flex;
 width: 100%;
 height: 100%;
@@ -121,19 +135,19 @@ word-break: keep-all;
 transition: .3s ease;
 background-color: white;
 }
-.list_ul >li>.dated_tc {
+.list_u_li >.dated_tc {
 background-color: red;
 }
-.list_ul >li>.daytime_tc {
+.list_u_li >.daytime_tc {
 background-color: green;
 }
-.list_ul >li>.vip_tc {
+.list_u_li >.vip_tc {
 background-color: blue;
 }
-.list_ul >li>.annual_tc {
+.list_u_li >.annual_tc {
 background-color: orange;
 }
-.list_ul >li>.season_tc {
+.list_u_li >.season_tc {
 background-color: pink;
 }
 /* 클릭 시 팝업창 ---------------------------------------------------- */
@@ -172,7 +186,8 @@ box-sizing: border-box;
     background-color: #ddd;
     padding: 0px 50px;
 }
-.l_e_w_text tr td:nth-child(2) {
+.l_e_w_text tr td:nth-child(2),
+.l_e_w_text tr td:nth-child(3) {
     height: 3rem;
     text-align: center;
     font-weight: bold;
@@ -229,78 +244,4 @@ transition: .3s ease;
 }
 .gotoexp:hover {
     text-decoration: underline;
-}
-
-
-/* .gotoexp {
-display: block;
-border: 2px solid #bbb;
-background: #bbbbbbc4 url("mage/toright_arrow.png") no-repeat right
-    10px center/20px;
-width: 160px;
-height: 30px;
-border-radius: 30px;
-padding: 0px 25px;
-box-sizing: border-box;
-font-size: 14px;
-color: #555;
-line-height: 1.8;
-} */
-/* ----------------------------------------- */
-.tickets {
-position: relative;
-margin: auto;
-width: 100%;
-display: flex;
-flex-direction: column;
-align-items: center;
-}
-.t_list {
-margin-bottom: 70px;
-position: relative;
-}
-
-.t_title {
-background: url("/image/background01.webp") no-repeat center/cover;
-}
-.t_title h3::after {
-    content: "LEGOLAND®와 함께 하는 시간";
-    display: block;
-    font-size: 20px;
-    font-weight: 500;
-}
-
-/* ----------------------------------------------------- */
-.extra {
-position: relative;
-width: 100%;
-margin: 150px auto 0px;
-}
-.e_list {
-margin-bottom: 70px;
-position: relative;
-}
-.e_title {
-background: url("/image/background02.webp") no-repeat center/cover;
-
-
-}
-.e_title h3::after {
-    content: "LEGOLAND®와 함께하는 더 특별한 경험";
-    display: block;
-    font-size: 20px;
-    font-weight: 500;
-}
-/* ------------------------------------------------------ */
-.collab {
-position: relative;
-width: 100%;
-margin: 150px auto 0px;
-}
-.c_list {
-margin-bottom: 70px;
-position: relative;
-}
-.c_title {
-background: url("/image/background03.webp") no-repeat center/cover;
 }

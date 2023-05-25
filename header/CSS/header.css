@@ -2,6 +2,7 @@
   width: 1440px;
   height: 100%;
   margin: 0 auto;
+  z-index: 2000;
 }
 /* COMMON */
 
@@ -28,7 +29,7 @@
   height: 10vh;
   position: fixed;
   top: 0;
-  z-index: 2;
+  z-index: 2000;
 }
 .header.open {
   animation: dropDown .6s;
@@ -84,7 +85,7 @@
   display: block;
   animation: dropDown .6s;
   background-color: #fefbf2;
-  z-index: 3;
+  z-index: 3000;
 }
 .bottom .inner .category {
   display: flex;

@@ -71,7 +71,7 @@
     .vf02_tc_title {
       display: block;
       text-align: start;
-      font-size: 150%;
+      font-size: 130%;
       font-weight: 600;
       padding: 10px;
       }
@@ -88,6 +88,47 @@
       box-sizing: border-box;
       padding: 20px;
     }
+    .vf02_tc_exp {
+      width: 100%;
+      font-size: 80%;
+      text-indent: 5px;
+    }
+    .vf02_tc_number {
+      width: 80%;
+      margin: auto;
+      padding: 5px 0px;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .vf02_tc_number label {
+      width: fit-content;
+      word-break: keep-all;
+    }
+    .vf02_tc_number .numberCheck {
+      display: block;
+    }
+    .vf02_tc_disabled {
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255,255,255,0.8);
+      backdrop-filter: blur(3px);
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      display: flex;
+      justify-content: center;
+      padding-top: 50%;
+      box-sizing: border-box;
+    }
+    .vf02_cover {
+      display: none;
+    }
+    .vf02_tc_disabled strong {
+      font-size: 100%;
+    }
+    /* ---------------------------------------- */
     .vf02_exp {
       width: 100%;
       box-sizing: border-box;
@@ -100,12 +141,12 @@
       position: relative;
       width: 100%;
       height: 40px;
-      background-color: #ddd;
+      background-color: #dddddd75;
       border-radius: 10px;
       box-sizing: border-box;
 
       color: #666;
-      font-size: 15px;
+      font-size: 100%;
       font-weight: 600;
     }
     .vf02_exp > a::before {
@@ -127,15 +168,16 @@
       display: none;
     }
     .vf02_e_list dt {
-      width: 100%;
+      width: calc(100% - 4px);
       box-sizing: border-box;
       height: 40px;
       padding-left: 10%;
       margin: 2px 0px;
+      margin: auto;
       display: flex;
       align-items: center;
 
-      border-radius: 10px;
+      background: linear-gradient(to left,rgb(39, 206, 39),rgb(72, 212, 72), rgb(39, 206, 39));
     }
     .vf02_e_list dt a {
       position: relative;
@@ -155,8 +197,18 @@
       height: 25px;
       opacity: 0.7;
     }
+    .vf02_e_list dt a.slidedowned::before {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        left: -25px;
+        background: url("/image/arrow_drop_up.png") no-repeat center/25px;
+        width: 25px;
+        height: 25px;
+        opacity: 0.7;
+      }
     .vf02_e_list dt span {
-      color: #888;
+      color: #666;
       font-size: 14px;
       padding-left: 10px;
     }
@@ -168,6 +220,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      background-color: white;
 
       font-weight: 600;
       color: #333;
@@ -179,138 +232,23 @@
       display: none;
     }
     .vf02_e_l_detail {
-      width: 100%;
+      width: calc(100% -4px);
+      margin: 0px auto;
       box-sizing: border-box;
       text-align: start;
       display: none;
+      background-color: white;
     }
-    .vf02_tc_number {
-      width: 100%;
-      height: 50px;
-
-      box-sizing: border-box;
-    }
-    .vf02_tc_number .numberCheck {
-      float: right;
-    }
-    .vf02_tc_disabled {
-      width: 100%;
-      height: 100%;
-      background-color: rgba(255,255,255,0.8);
-      backdrop-filter: blur(3px);
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      display: flex;
-      justify-content: center;
-      padding-top: 50%;
-      box-sizing: border-box;
-    }
-    .vf02_cover {
-      display: none;
-    }
-    .vf02_tc_disabled strong {
-      font-size: 100%;
-
-    }
-    .vf02_exp {
-        width: 100%;
-        box-sizing: border-box;
-        padding: 2px;
+    .vf02_e_l_detail ul {
+        padding: 5px 0px;
       }
-      .vf02_exp > a {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        width: 100%;
-        height: 40px;
-        background-color: #dddddd75;
-        border-radius: 10px;
-        box-sizing: border-box;
-
-        color: #666;
-        font-size: 15px;
-        font-weight: 600;
-      }
-      .vf02_exp > a::before {
-        content: "";
-          display: inline-block;
-          background: url("./image/arrow_drop_down.png") no-repeat center/30px;
-          width: 30px;
-          height: 30px;
-          opacity: 0.7;
-      }
-      .vf02_e_list {
-        display: flex;
-        flex-wrap:wrap;
-        box-sizing: border-box;
-        margin: 5px 0px 0px 0px;
-        padding: 0px;
-      }
-      .vf02_e_listWrap {
-        display: none;
-      }
-      .vf02_e_list dt {
-        width: 100%;
-        box-sizing: border-box;
-        height: 40px;
-        padding-left: 10%;
+      .vf02_e_l_detail li {
+        list-style: inside;
         margin: 2px 0px;
-        display: flex;
-        align-items: center;
-
-        background: linear-gradient(to left,rgb(39, 206, 39),rgb(72, 212, 72), rgb(39, 206, 39));
+        padding-left: 20px;
+        font-size: 80%;
       }
-      .vf02_e_list dt a {
-        position: relative;
-        display: block;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-      }
-      .vf02_e_list dt a::before {
-        content: "";
-        display: inline-block;
-        position: absolute;
-        left: -25px;
-        background: url("./image/arrow_drop_down.png") no-repeat center/25px;
-        width: 25px;
-        height: 25px;
-        opacity: 0.7;
-      }
-      .vf02_e_list dt span {
-        color: #666;
-        font-size: 14px;
-        padding-left: 10px;
-      }
-      .vf02_e_list dd:not(.vf02_e_l_detail) {
-        width: calc(100% / 3 - 4px);
-        box-sizing: border-box;
-        height: 40px;
-        margin: 0px 2px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: palegreen;
-
-        font-weight: 600;
-        color: #333;
-      }
-      .vf02_e_list dd:not(.vf02_e_l_detail) svg {
-        filter: brightness(100%);
-      }
-      .vf02_e_l_name {
-        display: none;
-      }
-      .vf02_e_l_detail {
-        width: 100%;
-        box-sizing: border-box;
-        text-align: start;
-        display: none;
-      }
-
+ 
     /* ================================================= 03. 정보 입력 */
     .vip_fieldset03 {
       position: relative;
@@ -334,11 +272,11 @@
       display: none;
     }
     .vf03_i_info {
-      background-color:  var(--inputbox-bg-color);
+      background-color: var(--inputbox-bg-color);
     }
     .vf03_i_i_tab {
       height: 80px;
-      background-color: white;
+      background-color: green;
       position: relative;
       padding-left: 70px;
       display: flex;
@@ -356,9 +294,11 @@
     }
     .vf03_i_i_inputpage_wrap {
       height: var(--vf03-inputbox-height);
-      border: 2px solid white;
+      background-color: white;
+      border: 2px solid green;
     }
     .vf03_i_i_inputpage {
+      position: relative;
       box-sizing: border-box;
       height: var(--vf03-inputbox-height);
       padding: 20px 10px;
@@ -369,9 +309,7 @@
       align-content:space-evenly;
       transition: .5s ease;
     }
-    
     .vf03_i_i_inputpage > div{
-      border: 1px dashed tomato;
       position: relative;
       height: calc(100% / 4);
       width: calc(100% / 3);
@@ -417,11 +355,11 @@
       margin: 0px;
       width: 200px;
       background-color: white;
-      border: 2px solid #bbb;
+      border: 2px solid #ffffff41;
       border-radius: 15px;
       box-sizing: border-box;
       position: absolute;
-      top: 50px;
+      top: 45px;
       left: 0px;
       z-index: 9000;
     }
@@ -471,6 +409,19 @@
     .p_s_n_p {
       display: none;
     }
+    .p_s_numbers dl {
+      padding: 5px;
+      margin: 5px 0px;
+      background-color: rgba(255,255,255,0.2);
+    }
+    .p_s_numbers dt {
+      padding: 0px;
+      margin: 0px;
+    }
+    .p_s_numbers span {
+      font-size: 100%;
+      font-weight: 600;
+    }
   </style>
 </head>
 <body>
@@ -484,7 +435,7 @@
           </ul>
         </div>
     </div>
-    <form action="" id="vip_ticket_form" class="ticket_form">
+    <form action="" id="vip_ticket_form" class="ticket_form" data-type="VIP EXPERIENCE 구매">
 
       <fieldset class="vip_fieldset01"> 
         <legend>날짜 지정</legend>
@@ -553,6 +504,7 @@
             <span class="vf02_tc_title">VIP SILVER EXPERIENCE</span>
             <div class="vf02_tc_number">
               <label for="vip_silver_grown_number">대인</label>
+              <div class="vf02_tc_exp">￦ 320,000</div>
               <div class="numberCheck">
                 <input
                   type="text"
@@ -568,6 +520,7 @@
             </div>
             <div class="vf02_tc_number">
               <label for="vip_silver_little_number">소인</label>
+              <div class="vf02_tc_exp">￦ 320,000</div>
               <div class="numberCheck">
                 <input
                   type="text"
@@ -581,9 +534,7 @@
                 <a href="#none" class="increase_btn">수량 추가<img src="./image/plus.png" alt=""></a>
               </div>
             </div>
-            <div class="vf02_tc_exp">
-              ￦ 320,000
-            </div>
+            
           </div>
           <div class="vf02_ticketcard vf02_ticketcard_gold">
             <a href="#none" class="vf02_tc_select">
@@ -592,6 +543,7 @@
             <span class="vf02_tc_title">VIP GOLD EXPERIENCE</span>
             <div class="vf02_tc_number">
               <label for="vip_silver_grown_number">대인</label>
+              <div class="vf02_tc_exp">￦ 440,000</div>
               <div class="numberCheck">
                 <input
                   type="text"
@@ -607,6 +559,7 @@
             </div>
             <div class="vf02_tc_number">
               <label for="vip_silver_little_number">소인</label>
+              <div class="vf02_tc_exp">￦ 440,000</div>
               <div class="numberCheck">
                 <input
                   type="text"
@@ -620,9 +573,6 @@
                 <a href="#none" class="increase_btn">수량 추가<img src="./image/plus.png" alt=""></a>
               </div>
             </div>
-            <div class="vf02_tc_exp">
-              ￦ 440,000
-            </div>
             <div class="vf02_tc_disabled">
               <strong>최소 방문 2주 전에 예약해야합니다.</strong>
             </div>
@@ -634,6 +584,7 @@
             <span class="vf02_tc_title">VIP PLATINUM EXPERIENCE</span>
             <div class="vf02_tc_number">
               <label for="vip_silver_grown_number">대인</label>
+              <div class="vf02_tc_exp">￦ 620,000</div>
               <div class="numberCheck">
                 <input
                   type="text"
@@ -649,6 +600,7 @@
             </div>
             <div class="vf02_tc_number">
               <label for="vip_silver_little_number">소인</label>
+              <div class="vf02_tc_exp">￦ 620,000</div>
               <div class="numberCheck">
                 <input
                   type="text"
@@ -661,9 +613,6 @@
                 <a href="#none" class="decrease_btn">수량 제외<img src="./image/minus.png" alt=""></a>
                 <a href="#none" class="increase_btn">수량 추가<img src="./image/plus.png" alt=""></a>
               </div>
-            </div>
-            <div class="vf02_tc_exp">
-              ￦ 620,000
             </div>
             <div class="vf02_tc_disabled">
               <strong>최소 방문 2주 전에 예약해야합니다.</strong>
@@ -957,12 +906,12 @@
         <div class="price">
           <div class="p_selectlist">
             <ul>
-              <li>
-                <span><strong>예약 일자</strong></span>
+              <li class="p_s_box">
+                <strong>예약 일자</strong>
                 <div class="p_s_date"></div>
               </li>
-              <li>
-                <span><strong>구매 수량</strong></span>
+              <li class="p_s_box">
+                <strong>구매 수량</strong>
                 <div class="p_s_numbers">
                   <div class="p_s_n_s">
                     <span>VIP SILVER EXPERIENCES</span>
@@ -1006,8 +955,8 @@
                 </div>
               </li>
               
-              <li>
-                <span><strong>할인 내역</strong></span>
+              <li class="p_s_box">
+                <strong>할인 내역</strong>
                 <div class="p_s_discount">
                   <div>
                     <div class="p_s_e_title06"></div>
@@ -1176,7 +1125,7 @@
               .data("value",$(this).data("value"));
             const q = new Date($(this).prop("id"));
             $(".date_inputs label").text(`${q.getFullYear()} 년 ${q.getMonth()+1} 월 ${q.getDate()} 일 (${weekArr[q.getDay()]})`);
-            $(".df06_p_s_date").text(`${q.getFullYear()} 년 ${q.getMonth()+1} 월 ${q.getDate()} 일 (${weekArr[q.getDay()]})`);
+            $(".p_s_date").text(`${q.getFullYear()} 년 ${q.getMonth()+1} 월 ${q.getDate()} 일 (${weekArr[q.getDay()]})`);
             if( +q < +new Date() + 14*oneday ) {
               $(".vf02_tc_disabled").removeClass("vf02_cover");
             } else {
@@ -1403,9 +1352,7 @@
             });
             
             if ( $(".d_list li input:checkbox").eq(i).is(":checked")) {
-
               $(".p_s_discount > div").show();
-              
             } else if (!$(".d_list li input:checkbox").is(":checked")) {
               $(".p_s_discount > div").hide();
             }
@@ -1415,38 +1362,25 @@
         
 
         // ------------------------------------- 06-2. 가격 합산
-        
-      const total = function() {
+        $(".vip_fieldset02").on("change","input",function(){ total(); });
+      function total() {
+        const cost = [320000,320000,440000,440000,620000,620000];
+        const cost2 = cost.map((v,i) => {
+          const t = $(".vip_fieldset02 input").eq(i).val();
+          return v*t
+        });
         $("#vip_total_price").val(function(i,v) {
-          
+          const to = cost2.reduce((a,b) => a+b);
+          $(".p_t_text").text(`￦ ${comma(to)}`);
+          return to
         })
       }
-      function addBasket(m) {
-        const $newBasket = $(`<div id='nb_${m}'></div>`);
-        $newBasket.text(localStorage.getItem(`vip_ticket_${m}`));
-        $newBasket.appendTo($(".rb_list"));
-      }
-      function aaa(e) {
-        const bbb = new FormData(e.target);
-        const ccc = Object.fromEntries(bbb.entries());
-        const submitTime = Date.now();
-        ccc.submitTime = submitTime;
-        localStorage.setItem(`vip_ticket_${submitTime}`,JSON.stringify(ccc));
-        addBasket(submitTime);
-      }
-      $("#vip_ticket_form").submit(function(e){
-        e.preventDefault();
-        total();
-        aaa(e);
-      });
-
-        
         //페이지 리셋
       $(".reset_btn").click(function(){
         $(".formBox").load("./t_use_reser01_1.html");
       })
     });
   </script>
-   
+   <script src="/js/ticket_common.js"></script>
 </body>
 </html>

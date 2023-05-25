@@ -28,20 +28,28 @@
     .vif01_tcWrap {
       display: flex;
       flex-wrap: wrap;
-
+      margin-top: 30px;
     }
     .vif01_ticketcard {
       width: 50%;
       min-width: 350px;
-      height: 200px;
-      border: 1px dashed tomato;
+      height: 150px;
+      padding: 1rem 0px ;
+      border: 1px solid #eeeeee6c;
       box-sizing: border-box;
       position: relative;
-
       display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    .vif01_ticketcard:hover {
+      background-color: rgba(255,255,255,0.3);
+    }
+    .vif01_tc_title strong {
+      font-size: 100%;
     }
     .vif01_tc_img {
-      height: 70%;
+      height: 100%;
       aspect-ratio: 1/1;
       background-color: aqua;
       overflow: hidden;
@@ -52,6 +60,13 @@
       height: 110%;
       position: absolute;
       left: -10px;
+    }
+    .vif01_tc_content {
+      width: 50%;
+    }
+    .vif01_tc_number {
+      float: right;
+      padding-top: 10px;
     }
     .vif01_tc_disabled {
       width: 100%;
@@ -454,7 +469,7 @@
             </div>
             <div class="vif01_tc_content">
               <div class="vif01_tc_title">
-                <strong>레이니 데이 개런티(RAINY DAY GUARANTEE) 방문예약</strong>
+                <strong>레이니 데이 개런티 방문예약 <br/>(RAINY DAY GUARANTEE)</strong>
                 <span></span>
               </div>
               <div class="vif01_tc_number">

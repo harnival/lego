@@ -20,3 +20,5 @@
     name: discount_kangwon , discount_kbcard , discount_lg , discount_nation
 #dated_total_price 
     name: total_price
+
+    주문번호, 주문일, 주문종류, 매수, 금액, 주문상태

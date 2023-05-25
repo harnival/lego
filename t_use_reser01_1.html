@@ -316,29 +316,7 @@
       }
       .p_s_e_4 {
         display: flex;
-      } */
-      /* ------------------- */
-      .ticket_submit {
-        width: 100%;
-        position: absolute;
-        left: 0px;
-        bottom: 5%;
-        display: flex;
-        justify-content: center;
-        gap: 30px;
-      }
-      .ticket_submit button {
-        display: inline-block;
-        padding: 8px 20px;
-        border: none;
-        font-size: 100%;
-        background-color: white;
-        border-radius: 20px;
-        cursor: pointer;
-      }
-      .ticket_submit button:hover {
-        background-color: rgba(155,155,0,0.9);
-      }
+      }     
     </style>
 </head>
 <body>
@@ -354,7 +332,7 @@
               </ul>
             </div>
         </div>
-        <form action="" id="dated_ticket_form" class="ticket_form">
+        <form action="" id="dated_ticket_form" class="ticket_form"  data-type="1일 이용권 구매">
 
           <fieldset class="dated_fieldset01"> 
             <legend>날짜 지정</legend>
@@ -1187,7 +1165,6 @@
           })
 
           // ------------------------------------- 06-1. 할인적용
-          // preload //
           const holiday = [
             { month: 1, date: 1}, // 신정
             { month: 3, date: 1}, // 삼일절
@@ -1199,9 +1176,13 @@
             { month: 12, date: 25} // 성탄절
           ]                        // 기타 음력 공휴일/ 대체휴일은 직접 입력 (설날, 추석, 석가탄신일)
 
-          let obj = JSON.parse(localStorage.getItem("load"));
-          let num = obj["page"], char = obj["char"], name = obj["name"];
-          selectDc(char);
+          if (localStorage.getItem("load")){
+            let obj = JSON.parse(localStorage.getItem("load"));
+            let num = obj["page"], char = obj["char"], name = obj["name"];
+            if (char) {
+              selectDc(char);
+            }
+          }
 
           $(".d_list li").each(function(i){
             $(this).find(".d_l_listopen").click(function(){
@@ -1283,13 +1264,10 @@
             } else if (!$(".d_list li input:checkbox").is(":checked")) {
               $(".p_s_discount > div").hide();
             }
-            
             total();
           }
 
           // ------------------------------------- 06-2. 가격 합산
-          
-          
           function total() {
             const grownDatedPrice = 
               new Date($selYear,$selMonth-1,$selDate) == today ? 60000 : 54000;
@@ -1307,49 +1285,12 @@
             $(".p_t_text").text("￦"+comma(t_1 * discountRate + t_2 + t_3 + t_4));
             
           }
-          
-
-          
-          function addBasket(m) {
-            const $newBasket = $(`
-              <div class='nb_${m}'>
-                <ul>
-                  <li class='nb_${m}_sort'>일일이용권</li>
-                  <li class='nb_${m}_date'></li>
-                  <li class='nb_${m}_number'></li>
-                  <li class='nb_${m}_price'></li>
-                </ul>
-              </div>
-              `);
-              $newBasket.append($closeBtn);
-            
-            $(".rb_list > div").append($newBasket);
-          }
-          function aaa(e) {
-            const bbb = new FormData(e.target);
-            const ccc = Object.fromEntries(bbb.entries());
-            const submitTime = Date.now();
-            ccc.type = "dated";
-            ccc.submitTime = submitTime;
-
-            const getList = JSON.parse(localStorage.getItem("basket_list"));
-            getList.push(ccc);
-            localStorage.setItem("basket_list",JSON.stringify(getList));
-            
-          }
-          $("#dated_ticket_form").submit(function(e){
-            e.preventDefault();
-            total();
-            aaa(e);
-          });
-
-          
           //페이지 리셋
         $(".reset_btn").click(function(){
           $(".formBox").load("./t_use_reser01_1.html");
         })
         });
     </script>
-   
+    <script src="/js/ticket_common.js"></script>
 </body>
 </html>

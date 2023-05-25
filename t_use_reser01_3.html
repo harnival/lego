@@ -73,6 +73,14 @@
 
         padding: 10px 20px;
       }
+      .af01_tc_number {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 80%;
+        margin: auto;
+      }
+      /* --------------------------------- */
       .af01_exp {
         width: 100%;
         box-sizing: border-box;
@@ -90,7 +98,7 @@
         box-sizing: border-box;
 
         color: #666;
-        font-size: 15px;
+        font-size: 100%;
         font-weight: 600;
       }
       .af01_exp > a::before {
@@ -191,7 +199,7 @@
         padding-left: 20px;
         font-size: 80%;
       }
-    /* ----------------------------------------- */
+    /* ----------------------------------------- 02. 정보 입력 */
     .annual_fieldset02 {
       position: relative;
       padding: 80px 15% 30px;
@@ -356,12 +364,11 @@
       left: 10px;
       font-size: 80%;
       color: #666;
-
     }
     .user_photo_img_wrap {
       width: 100%;
       aspect-ratio: 1 / 1;
-      margin: 5px auto;
+      margin: 5px auto 0px;
       box-sizing: border-box;
       position: relative;
       display: flex;
@@ -407,7 +414,7 @@
     .user_photo_notice{
       font-size: 80%;
       color: #666;
-      padding: 5px 10px;
+      padding: 3px 10px;
       box-sizing: border-box;
     }
     .user_photo_input a {
@@ -431,7 +438,7 @@
               </ul>
             </div>
         </div>
-        <form action="" id="annual_ticket_form" class="ticket_form">
+        <form action="" id="annual_ticket_form" class="ticket_form" data-type="연간이용권 구매">
 
           <fieldset class="annual_fieldset01">
             <legend>이용권 선택</legend>
@@ -445,6 +452,9 @@
                 </a>
                 <span class="af01_tc_title">STANDARD PASS</span>
                 <div class="af01_tc_number">
+                  <div class="af01_tc_exp">
+                    ￦ 119,000
+                  </div>
                   <div class="numberCheck">
                     <input
                       type="number"
@@ -457,9 +467,6 @@
                     <a href="#none" class="increase_btn">수량 추가<img src="./image/plus.png" alt=""></a>
                   </div>
                 </div>
-                <div class="af01_tc_exp">
-                  ￦ 119,000
-                </div>
               </div>
               <div class="af01_ticketcard gold">
                 <a href="#none" class="af01_tc_select">
@@ -467,6 +474,7 @@
                 </a>
                 <span class="af01_tc_title">GOLD PASS</span>
                 <div class="af01_tc_number">
+                  <div class="af01_tc_exp">￦ 169,000</div>
                   <div class="numberCheck">
                     <input
                       type="number"
@@ -479,9 +487,6 @@
                     <a href="#none" class="increase_btn">수량 추가<img src="./image/plus.png" alt=""></a>
                   </div>
                 </div>
-                <div class="af01_tc_exp">
-                  ￦ 169,000
-                </div>
               </div>
               <div class="af01_ticketcard platinum">
                 <a href="#none" class="af01_tc_select">
@@ -489,6 +494,7 @@
                 </a>
                 <span class="af01_tc_title">PLATINUM PASS</span>
                 <div class="af01_tc_number">
+                  <div class="af01_tc_exp">￦ 249,000</div>
                   <div class="numberCheck">
                     <input
                       type="number"
@@ -501,9 +507,7 @@
                     <a href="#none" class="increase_btn">수량 추가<img src="./image/plus.png" alt=""></a>
                   </div>
                 </div>
-                <div class="af01_tc_exp">
-                  ￦ 249,000
-                </div>
+                
               </div>
             </div>
             <div class="af01_exp">
@@ -1005,6 +1009,7 @@
                   })
                   .on("change",".af02_user_photo",function(event){
                     $makeInfo.find(".user_photo_cut").show();
+                    $makeInfo.find(".user_photo_sliceBtn").show();
                     const loader = event.target.files[0];
                     const reader = new FileReader();
                     reader.readAsDataURL(loader);
@@ -1039,8 +1044,10 @@
                       const da = can.get(0).toDataURL("image/png");
                       can.data("replaceUrl",da);
                       $makeInfo.find(".user_photo_submitOnly").val((i,v) => da);
+
+                      $makeInfo.find(".user_photo_cut").hide();
+                      $makeInfo.find(".user_photo_sliceBtn").hide();
                     }
-                    
                   })
                   
               }
@@ -1150,39 +1157,13 @@
             })
             
           }
-          
-
-          
-          function addBasket(m) {
-            const $newBasket = $(`<div id='nb_${m}'></div>`);
-            $newBasket.text(localStorage.getItem(`annual_ticket_${m}`));
-            $newBasket.appendTo($(".rb_list"));
-          }
-          function aaa(e) {
-            const bbb = new FormData(e.target);
-            const ccc = Object.fromEntries(bbb.entries());
-            const submitTime = Date.now();
-            ccc.type = "annual";
-            ccc.submitTime = submitTime;
-            const getList = JSON.parse(localStorage.getItem("basket_list"));
-            getList.push(ccc);
-            localStorage.setItem("basket_list",JSON.stringify(getList));
-
-            addBasket(submitTime);
-          }
-          $("#annual_ticket_form").submit(function(e){
-            e.preventDefault();
-            total();
-            aaa(e);
-          });
-
-          
           //페이지 리셋
         $(".reset_btn").click(function(){
           $(".formBox").load("./t_use_reser01_1.html");
         })
         });
     </script>
+    <script src="/js/ticket_common.js"></script>
    
 </body>
 </html>

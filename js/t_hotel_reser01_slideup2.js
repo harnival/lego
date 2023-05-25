@@ -1,5 +1,8 @@
 $(function(){
 
+    $("header").load("/header/header.html");
+    $("footer").load("/footer/footer.html");
+
 const oneday = 86400000;
 const todayDate = new Date();
 // ============================ 페이지 로드 =============================
@@ -45,6 +48,7 @@ $(".sr_numbers")
     .on('click',".sr_deleteRoom",function(e){
         // 객실 취소 버튼 //
         const trLength = $(".sr_n_list").length;
+        const idx = $(".sr_deleteRoom").index($(this));
         if (trLength > 1) {
             $(this).parents(".sr_n_list").remove();
             $(".sr_n_list").each(function(i){
@@ -55,6 +59,11 @@ $(".sr_numbers")
                     .prop("name", `room${i+1}_${$(this).data("age")}`)
                 })
             });
+            $(".hb_unit").eq(idx).remove();
+            $(".hb_u_room").each(function(i){
+                $(this).text(`객실 ${i+1}`);
+            })
+            
         }
     })
     // 객실 추가 //
@@ -164,12 +173,13 @@ function changes() {
     $(".tfoot .td div").eq(1).text(v1);
     $(".tfoot .td div").eq(2).text(v2);
 }
+const slideHeight = 430;
 $(".checkin span, .checkout span, #sr_c_input").on("click",function(){
     $(".sr_slideBtn .slideBtn").addClass("act");
     changes();
     $(".thead").css("display","flex");
     $(".tfoot").css("display","none");
-    $(".shortReservation").stop().animate({height: "400px"},300)
+    $(".shortReservation").stop().animate({height: slideHeight},300)
 })
 $(".sr_searchBtn button").on("click",function(){
     $(".sr_slideBtn .slideBtn").removeClass("act");
@@ -191,8 +201,8 @@ $(".sr_slideBtn .slideBtn").on("click",function(){
         changes();
         $(".thead").css("display","flex");
         $(".tfoot").css("display","none");
-        $(".shortReservation").stop().animate({height: "400px"},300)
-        $(".sr_searchBtn").stop().animate({height: "400px"},300);
+        $(".shortReservation").stop().animate({height: slideHeight},300)
+        $(".sr_searchBtn").stop().animate({height: slideHeight},300);
     }
 })
     // 장바구니 슬라이드 //
@@ -202,7 +212,7 @@ $(".hb_slideBtn .slideBtn").on("click",function(){
         $(".hotelBasket").stop().animate({height: "80px"},300);
     } else {
         $(".hb_slideBtn .slideBtn").toggleClass("act2");
-        $(".hotelBasket").stop().animate({height: "400px"},300)
+        $(".hotelBasket").stop().animate({height: slideHeight},300)
     }
 })
     // 해당 객실 로드 //

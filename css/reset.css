@@ -6,14 +6,22 @@
     --wrap-radial-px: 60px;
     --wrap-width-percent: 90%;
     /* color */
+    --exp-color: #585757c9;
     --main-bg-color: #ffcf00;
+    --title-text-bg-color: rgba(49, 161, 224, 0.8);
     --list-bg-color01 : rgba(228, 54, 41, 0.6);
     --list-bg-color02 : rgba(43, 43, 180, 0.6);
     --list-bg-color03 : rgba(22, 165, 22, 0.6);
     --list-bg-color04 : rgba(255, 255, 59, 0.6);
     }
 /* common elements=============================================================== */
-body { margin: 0px; padding: 0px; font-size: 16px; font-family: 'Noto Sans KR','Sans serif';}
-ul { list-style: none; padding: 0px; margin: 0px; }
-h3,h4,h5 { margin: 0px; }
-a { text-decoration: none; color: initial}
+
+body {margin: 0px;padding: 0px; font-size: 16px; font-family: "Noto Sans KR", "Sans serif";}
+ul {list-style: none;padding: 0px;margin: 0px;}
+a {text-decoration: none; color: initial;}
+h1,h2,h3,h4,h5,h6 {margin: 0px;}
+
+/* number input 버튼 숨기기 */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+input[type='number'] { appearance: textfield; }

@@ -7,17 +7,17 @@
     --inputBox-span-min-width: 200px;
     --inputBox-span-border-color: rgba(4, 116, 0, 0.2);
     --inputBox-height: 80px;
-    --inputBox-open-height: 400px;
+    --inputBox-open-height: 430px;
     --sr-title-top: -15px;
     --sr-title-left: 3%;
     --sr-title-font-size:16px;
     --price-btn-width: 200px;
     /* color */
-    --main-bg-color: rgba(0, 128, 0, 0.671);
+    --main-bg-color: rgba(0, 128, 0);
     --main-yellow-color: #ffcf00;
     --button-yellow: rgb(240, 240, 89);
     --slideBtn-bg-color: rgba(0,0,0,0.05);
-    --reservation-bg-color:#fff0abd0;
+    --reservation-bg-color:rgba(255,255,255,0.8);
 }
 body {padding: 0px;margin: 0px; font-family: 'Noto Sans KR', sans-serif; font-size: 16px;}
 a {text-decoration: none; color: initial;}
@@ -33,6 +33,13 @@ input[type='number'] {
     appearance: textfield;
 }
 /* ===================================== 0. main ================== */
+header {
+    z-index: 4000;
+}
+main {
+    padding-top: calc(10vh + 90px);
+    background-color: var(--main-bg-color);
+}
 .mainWrap {
     position: relative;
     display: flex;
@@ -40,7 +47,6 @@ input[type='number'] {
     max-width: var(--main-max-width);
     min-width: var(--main-min-width);
     margin: 0px auto;
-    padding-top: 80px;
     background-color: var(--main-bg-color);
 }
 /* ==================================== shortReservation ============ */
@@ -48,7 +54,6 @@ input[type='number'] {
     width: 70%;
     min-width: 400px;
     height: var(--inputBox-height);
-    z-index: 1000;
     box-sizing: border-box;
     overflow: hidden;
     position: absolute;
@@ -76,9 +81,9 @@ input[type='number'] {
     width: 100%;
     display: flex;
     position: fixed;
-    top: 0px;
+    top: calc(10vh + 10px);
     left: 0px;
-    z-index: 1000;
+    z-index: 500;
 }
 /* ========= 장바구니 ============== */
 .hotelBasket {
@@ -96,41 +101,89 @@ input[type='number'] {
 }
 .hotelBasket_wrap {
     width: calc(100% - 50px);
+    position: relative;
 }
 .hb_date_in,
 .hb_date_out {
+    text-align: center;
     width: 30%;
     height: 50%;
-    border-bottom: 2px solid black;
-    background-color: gray;
+    font-size: 100%;
 }
 .hb_unit {
-    border: 1px dashed tomato;
     padding: 1rem 5%;
+    background: linear-gradient(to top, transparent,white 10% 90%,transparent);
+}
+.hb_unit:hover {
+    background: linear-gradient(to top, transparent,yellow 10% 90%,transparent);
 }
 .hb_u_number {
     float: right;
 }
 .hb_date {
     display: flex;
+}
+.hb_date_roomnum {
+    width: 20%;
+    height: var(--inputBox-height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+.hb_date_roomnum strong {
+    font-size: 100%;
+}
+.hb_d_rn_number {
+    display: block;
+    width: 1.5rem;
+    aspect-ratio: 1/1;
+    background-color: tomato;
+    border-radius: 50%;
+}
+.hb_date_wrap {
+    display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 70%;
     height: var(--inputBox-height);
-    padding: 0.5rem;
     box-sizing: border-box;
+}
+.hb_date_wrap::after {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 80%;
+    background: linear-gradient(to top, transparent 5%, rgba(200,200,200,0.8), transparent 95%);
+    margin-left: 10%;
 }
 .hb_total {
     width: 50%;
     margin: 1rem;
-    background-color: aqua;
+    padding: 1rem;
+    border-radius: 20px;
+    background-color: rgba(255,255,255,0.3);
 }
 .hb_u_detail {
     height: 50px;
     background-color: magenta;
 }
 .select_hb_unit {
-    border: 2px solid yellow;
+    box-sizing: border-box;
+    border: 3px solid yellow;
+}
+.hb_submit {
+    padding: 10px;
+}
+.hb_submit button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 90%;
+    margin-right: 10px;
+    background-color: var(--main-yellow-color);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
 }
 /* ---------------------------------------------- 1. date */
 .sr_date {
@@ -139,9 +192,15 @@ input[type='number'] {
     /* max-width: 380px; */
     position: relative;
 }
+.sr_calender_wrap {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, white 0% 95%, transparent);
+}
 .sr_date_calender {
     width: 80%;
-    margin: 0px auto 10px;
+    height: 100%;
+    margin: 0px auto;
     box-sizing: border-box;
 }
 /* inputbox ----------------- */
