@@ -146,17 +146,15 @@
                         <li class="basket_l_unit_origin basket_l_unit">
                             <div class="basket_l_title">
                                 <div class="basket_l_u_t_name">
-                                    <a href="">
-                                        <strong>sample</strong>
-                                    </a>
+                                    <a href="#none"><strong>sample</strong></a>
+                                    <div class="basket_l_u_t_date"></div>
+                                    <div class="basket_l_u_t_number"></div>
                                 </div>
                                 <div class="basket_l_u_t_price">
                                     <span>￦ sample</span>
                                 </div>
                             </div>
-                            <div class="basket_l_u_detail">
-                                
-                            </div>
+                            <div class="basket_l_u_detail"></div>
                         </li>
                     </ul>
                     <div class="basket_total">
@@ -209,7 +207,43 @@
                     $(".terms_list_frame").children().remove();
                     $(".terms_list_frame").load(`t_use_reser03_terms_${i+1}.html`);
                 })
-            })
+            });
+
+            // 목록 로딩 //
+            const bsk = JSON.parse(localStorage.getItem("basket_list"));
+            const bskLen = bsk.length;
+            for ( let i = 0; i < bskLen; i++ ) {
+                const $li = $(`
+                    <li class="basket_l_unit">
+                        <div class="basket_l_title">
+                            <div class="basket_l_u_t_name">
+                                <a href="#none"><strong>${bsk[i].typetext}</strong></a>
+                            </div>
+                            <div class="basket_l_u_t_price">
+                                    <span>￦ ${bsk[i]["total_price"]}</span>
+                            </div>
+                        </div>
+                        <div class="basket_l_u_detail"></div>
+                    </li>
+                `);
+                if ( Object.hasOwn(bsk[i],"date") ) {
+                    const $m = $(`<div class="basket_l_u_t_date">${bsk[i].date}</div>`);
+                    $li.find(".basket_l_u_name").append($m)
+                }
+                if ( bsk[i].type == 1 || bsk[i].type == 2 ) {
+                    const $li = $(`<div class="basket_l_u_t_number">어른 : ${bsk[i].grown}명, 소인 : ${bsk[i].little}명</div>`)
+                    $li.find(".basket_l_u_name").append($m)
+                }
+                if ( bsk[i].type == 3 ) {
+                    const $li = $(`<div class="basket_l_u_t_passes">STANDARD PASS : ${bsk[i]["standard_pass"]}, GOLD PASS : ${bsk[i]["gold_pass"]}, PLATINUM PASS : ${bsk[i]["platinum_pass"]}</div>`)
+                    $li.find(".basket_l_u_name").append($m)
+                }
+                if ( bsk[i].type == 4 ) {
+                    const $li = $(`<div class="basket_l_u_t_passes">STANDARD PASS : ${bsk[i]["standard_pass"]}, GOLD PASS : ${bsk[i]["gold_pass"]}, PLATINUM PASS : ${bsk[i]["platinum_pass"]}</div>`)
+                    $li.find(".basket_l_u_name").append($m)
+                }
+                
+            }
         })
     </script>
 </body>

@@ -4,15 +4,16 @@
     --main-min-width: 780px;
     --roomInfo-slide-unit: 15vw;
     --inputBox-span-min-width: 200px;
-    --inputBox-span-border-color: rgba(4, 116, 0, 0.2);
     --inputBox-height: 10vh;
     --inputBox-open-height: 430px;
     --sr-title-top: -15px;
     --sr-title-left: 3%;
     --sr-title-font-size:16px;
     --price-btn-width: 200px;
+    --common-title-height: 20vh;
     /* color */
-    --main-bg-color: rgba(0, 128, 0);
+    --inputBox-span-border-color: rgba(4, 116, 0, 0.2);
+    --main-bg-color: #00a138;
     --main-yellow-color: #ffcf00;
     --button-yellow: rgb(240, 240, 89);
     --slideBtn-bg-color: rgba(0,0,0,0.05);

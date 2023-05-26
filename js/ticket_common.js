@@ -5,14 +5,25 @@ $(function(){
             const bbb = new FormData(e.target);
             const ccc = Object.fromEntries(bbb.entries());
             const ddd = $(this).data("type");
+            const eee = $(this).data("typetext");
             const submitTime = Date.now();
             ccc.type = ddd;
+            ccc.typetext = eee;
             ccc.submitTime = submitTime;
-            console.log(submitTime)
+            
+            if(ddd==4) {
+                let n=0;
+                const fff = $(this).data("pass");
+                for ( key in fff) {
+                    n += fff[key];
+                }
+                ccc.pass = fff;
+                ccc.length = n;
+            }
 
-            const getList = JSON.parse(localStorage.getItem("basket_list"));
+            const getList = JSON.parse(localStorage.getItem("ticketBasket"));
             getList.push(ccc);
-            localStorage.setItem("basket_list",JSON.stringify(getList));
+            localStorage.setItem("ticketBasket",JSON.stringify(getList));
 
             location.href = "/t_use_reser02.html";
         })

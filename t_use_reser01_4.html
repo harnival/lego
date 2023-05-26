@@ -399,7 +399,7 @@
         <div class="season_form_title form_title">
             <h4>시즌이용권 구매하기</h4>
         </div>
-        <form action="" id="season_ticket_form" class="ticket_form" data-type="시즌이용권 구매">
+        <form action="" id="season_ticket_form" class="ticket_form" data-typetext="시즌이용권 구매" data-type="4">
           <fieldset class="season_fieldset01">
             <legend>이용권 선택</legend>
             
@@ -772,7 +772,7 @@
                   $(this).removeAttr("disabled");
                   if ($(this).prop("name")){
                     const name = $(this).prop("name");
-                    $(this).prop("name", name + `_${len+1}`);
+                    $(this).prop("name",`seasonArray[${len}][${name}]`);
                   }
                 })
 
@@ -851,7 +851,13 @@
           $("#season_summer_number").on("change",function(){
             const price = 89000;
             let n = $(this).val();
+              //생성
             makeInfo("summer");
+              //각 pass 갯수 입력
+            const q = $("form").data("pass");
+            q.summer = n;
+            $("form").data("pass",q);
+              // 가격 수정
             $(".p_s_n_number").eq(0).text(`￦ ${n}`);
             $(".p_s_n_price").eq(0).text(`￦ ${comma(n*price)}`);
             if(n==0) {
@@ -864,6 +870,10 @@
           $("#season_spring_number").on("change",function(){
             const price = 89000;
             makeInfo("spring");
+              //각 pass 갯수 입력
+            const q = $("form").data("pass");
+            q.spring = n;
+            $("form").data("pass",q);
             let n = $(this).val();
             $(".p_s_n_number").eq(1).text(`￦ ${n}`);
             $(".p_s_n_price").eq(1).text(`￦ ${comma(n*price)}`);
@@ -919,36 +929,13 @@
               return t_1 + t_2
             })
             
-          }
-          
-
-          
-          function addBasket(m) {
-            const $newBasket = $(`<div id='nb_${m}'></div>`);
-            $newBasket.text(localStorage.getItem(`season_ticket_${m}`));
-            $newBasket.appendTo($(".rb_list"));
-          }
-          function aaa(e) {
-            const bbb = new FormData(e.target);
-            const ccc = Object.fromEntries(bbb.entries());
-            const submitTime = Date.now();
-            ccc.submitTime = submitTime;
-            localStorage.setItem(`season_ticket_${submitTime}`,JSON.stringify(ccc));
-            addBasket(submitTime);
-          }
-          $("#season_ticket_form").submit(function(e){
-            e.preventDefault();
-            total();
-            aaa(e);
-          });
-
-          
+          } 
           //페이지 리셋
         $(".reset_btn").click(function(){
           $(".formBox").load("./t_use_reser01_1.html");
         })
         });
     </script>
-   
+   <script src="/js/ticket_common.js"></script>
 </body>
 </html>

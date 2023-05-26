@@ -438,7 +438,7 @@
               </ul>
             </div>
         </div>
-        <form action="" id="annual_ticket_form" class="ticket_form" data-type="연간이용권 구매">
+        <form action="" id="annual_ticket_form" class="ticket_form" data-typetext="연간이용권 구매" data-type="3">
 
           <fieldset class="annual_fieldset01">
             <legend>이용권 선택</legend>
@@ -461,6 +461,7 @@
                       name="standard_pass"
                       id="annual_standard_number"
                       value="0"
+                      data-passtype="1"
                       readonly
                     />
                     <a href="#none" class="decrease_btn">수량 제외<img src="./image/minus.png" alt=""></a>
@@ -481,6 +482,7 @@
                       name="gold_pass"
                       id="annual_gold_number"
                       value="0"
+                      data-passtype="2"
                       readonly
                     />
                     <a href="#none" class="decrease_btn">수량 제외<img src="./image/minus.png" alt=""></a>
@@ -501,6 +503,7 @@
                       name="platinum_pass"
                       id="annual_platinum_number"
                       value="0"
+                      data-passtype="3"
                       readonly
                     />
                     <a href="#none" class="decrease_btn">수량 제외<img src="./image/minus.png" alt=""></a>
@@ -653,7 +656,7 @@
                     <div class="af02_i_i_t_name"></div>
                     <div class="af02_i_i_t_ticket"></div>
                     <div class="af02_i_i_t_age"></div>
-                    <input type="hidden" name="user_pass" id="">
+                    <input type="hidden" name="user_pass" id="" data-passtype="">
                     <a href="#none">취소</a>
                   </div>
                   <div class="af02_i_i_inputpage_wrap">
@@ -962,7 +965,7 @@
             });
           })
           // 입력창 생성
-          function makeInfo(classes) {
+          function makeInfo(classes,typeNum) {
               if( $(`.af02_i_info_${classes}`).length < $(`#annual_${classes}_number`).val()) {
                 const $makeInfo = $(`.af02_i_info_origin`).clone(true);
                 const len = $(".af02_i_info").length;
@@ -970,12 +973,14 @@
                 $makeInfo.addClass([`af02_i_info_${classes}`, "af02_i_info"]);
                 $makeInfo.removeClass("af02_i_info_origin");
                 $makeInfo.find(".af02_i_i_t_ticket").text(`${classes.toUpperCase()} PASS`);
-                $makeInfo.find(".af02_i_i_tab input").val((i,v) => classes);
+                $makeInfo.find(".af02_i_i_tab input")
+                  .val((i,v) => classes)
+                  .data("passtype",typeNum);
                 $makeInfo.find("input").each(function(){
                   $(this).removeAttr("disabled");
                   if ($(this).prop("name")){
                     const name = $(this).prop("name");
-                    $(this).prop("name", name + `_${len+1}`);
+                    $(this).prop("name", `annualArray[${len}][${name}]`);
                   }
                 })
                 $(".af02_inputBox").append($makeInfo);
@@ -1059,7 +1064,7 @@
           $("#annual_standard_number").on("change",function(){
             const price = 119000;
             let n = $(this).val();
-            makeInfo("standard");
+            makeInfo("standard",1);
             $(".p_s_n_number").eq(0).text(`수량 : ${n}`);
             $(".p_s_n_price").eq(0).text(`￦ ${comma(n*price)}`);
             if(n==0) {
@@ -1071,7 +1076,7 @@
           })
           $("#annual_gold_number").on("change",function(){
             const price = 169000;
-            makeInfo("gold");
+            makeInfo("gold",2);
             let n = $(this).val();
             $(".p_s_n_number").eq(1).text(`수량 : ${n}`);
             $(".p_s_n_price").eq(1).text(`￦ ${comma(n*price)}`);
@@ -1083,7 +1088,7 @@
           })
           $("#annual_platinum_number").on("change",function(){
             const price = 249000;
-            makeInfo("platinum")
+            makeInfo("platinum",3)
             let n = $(this).val();
             $(".p_s_n_number").eq(2).text(`수량 : ${n}`);
             $(".p_s_n_price").eq(2).text(`￦ ${comma(n*price)}`);
@@ -1142,9 +1147,6 @@
           // ------------------------------------- 06-2. 가격 합산
           
           const total = function() {
-
-            
-
             $("#annual_total_price").val(function(i,v) {
               if ($(".af01_tc_number input").eq(1).val() >= 4) {
                 af01_price[1] *= discountRate;

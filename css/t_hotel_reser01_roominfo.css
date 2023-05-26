@@ -47,7 +47,8 @@
 /* ======================================== slide =========== */
 .ri_e_t_slide {
     width: var(--roomInfo-slide-unit);
-    max-width: 400px;
+    aspect-ratio: 1/0.6;
+    /* max-width: 400px; */
     position: relative;
     overflow: hidden;
     display: flex;
@@ -73,7 +74,7 @@
 }
 .ri_e_t_slide ul {
     display: flex;
-    position: relative;
+    position: absolute;
     top: 0px;
     left: 0px;
 
@@ -82,7 +83,8 @@
 .ri_e_t_slide li img {
     display: block;
     width: var(--roomInfo-slide-unit);
-    max-width: 400px;
+    aspect-ratio: 1/0.6;
+    /* max-width: 400px; */
 }
 /* ======================================= theme info ====== */
 .ri_e_t_exp {
@@ -254,6 +256,12 @@
 /* ========================================= package info =========== */
 .ri_e_t_choice {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+.ri_e_t_choice ul {
+    width: 75%;
 }
 .ri_e_t_choice li {
     margin: 10px 0px;
@@ -282,7 +290,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 300px;
+    width: var(--price-btn-width);
     height: 100%;
     background-color: orange;
 
@@ -295,20 +303,24 @@
 }
 /* ===================================================== */
 .ri_e_t_choice_slide {
+    position: relative;
     background-color: rgba(0, 255, 0, 0.4);
-    display: flex;
+    display: none;
+    overflow: hidden;
 }
 .cs_exp {
     width: 50%;
     padding-left: 1rem;
     font-size: 90%;
-    border: 1px dashed tomato;
 }
 .cs_exp span {
     display: block;
     padding: 3px 1rem;
 }
 .cs_price {
+    position: absolute;
+    top: 0px;
+    right: 0px;
     width: var(--price-btn-width);
     height: 100%;
     background-color: orange;

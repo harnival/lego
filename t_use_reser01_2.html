@@ -232,7 +232,7 @@
               </ul>
             </div>
         </div>
-        <form action="" id="daytime_ticket_form" class="ticket_form" data-type="오후이용권 구매">
+        <form action="" id="daytime_ticket_form" class="ticket_form" data-typetext="오후이용권 구매" data-type="2">
           <fieldset class="daytime_fieldset01"> 
             <legend>날짜 지정</legend>
             <div class="date_inputs">
@@ -773,31 +773,12 @@
             $(".p_t_text").text("￦"+comma(t_1 * discountRate + t_2));
             
           }
-          function aaa(e) {
-            const bbb = new FormData(e.target);
-            const ccc = Object.fromEntries(bbb.entries());
-            const submitTime = Date.now();
-            ccc.type = "daytime";
-            ccc.submitTime = submitTime;
-
-            const getList = JSON.parse(localStorage.getItem("basket_list"));
-            getList.push(ccc);
-            localStorage.setItem("basket_list",JSON.stringify(getList));
-            addBasket(submitTime);
-          }
-          $("#daytime_ticket_form").submit(function(e){
-            e.preventDefault();
-            total();
-            aaa(e);
-          });
-
-          
           //페이지 리셋
         $(".reset_btn").click(function(){
           $(".formBox").load("./t_use_reser01_1.html");
         })
         });
     </script>
-   
+    <script src="/js/ticket_common.js"></script>
 </body>
 </html>

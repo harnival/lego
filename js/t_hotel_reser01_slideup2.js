@@ -5,6 +5,7 @@ $(function(){
 
 const oneday = 86400000;
 const todayDate = new Date();
+const week = ['일','월','화','수','목','금','토'];
 // ============================ 페이지 로드 =============================
     // 테마 페이지 로드 //
 $(".ri_load_pirate").load("./t_hotel_reser01_p.html");
@@ -226,33 +227,55 @@ $(".hb_slideBtn .slideBtn").on("click",function(){
 function loadRoom(index,obj){ 
     $(".ri_e_t_choice").show();
     $(".ri_e_t_choice_extra").children().remove();
+    $(".cs_price").children().remove();
 
     const adultNumber = obj.adult[index];
     const childNumber = obj.little[index];
     const toddlerNumber = obj.toddler[index];
-    const checkinDate = +new Date(obj["checkin"]);
-    const checkoutDate = +new Date(obj["checkout"]);
+    const checkinDate = new Date(obj["checkin"]);
+    const checkoutDate = new Date(obj["checkout"]);
+    // 일별 가격 고지 //
+    let m = {}, datam = [], roomm = {};
+    for ( let dd = 1; dd <= 6; dd++) {
+        const pricem = [];
+        for ( let j = +checkinDate; j < +checkoutDate; j += oneday) {
+            const q0 = new Date(j);
+            const q1 = q0.getFullYear(), q2 = q0.getMonth(), q3 = q0.getDate(), q4 = q0.getDay();
+            const dateText =`${q1.toString().slice(2,5)}년 ${q2 + 1}월 ${q3}일 (${week[q4]})`
+            datam.push(dateText);
+            pricem.push(A1[dd][q4]);
+        }
+        m[dd] = pricem.reduce((a,b) => a+b);
+        roomm[dd] = pricem;
+    }
     // 1. 기본 객실 로드 //
     $(".ri_e_t_choice_default").each(function(){
         if ( $(".sr_c_active").length == 0) {
             const $par = $(this).parents(".ri_e_t_box");
             const t = $par.data("theme");
             const r = $par.data("room");
-            let m = 0;
-            for ( let j = checkinDate; j < checkoutDate; j += oneday) {
-                const d = new Date(j).getDay();
-                m += A1[r][d];
-            }
+            roomm[r].forEach((v,idx) => {
+                const val = v;
+                const $span = $(`<div><span>${datam[idx]}</span><span>￦ ${comma(val)}</span></div>`);
+                $(this).find(".default_li .cs_price").append($span);
+                $(this).find(".friends_li .cs_price").append($span);
+
+                const val2 = v*0.9;
+                const $span2 = $(`<div><span>${datam[idx]}</span><span>￦ ${comma(val2)}</span></div>`);
+                $(this).find(".defaultAnnual_li .cs_price").append($span2);
+                $(this).find(".friendsAnnual_li .cs_price").append($span2);
+            });
             $(this).children(".default_li")
                 .show()
                 .find(".ri_e_t_c_price")
-                    .data("price",m)
-                    .text("￦" + comma(m));
+                .data("price",m[r])
+                .text("￦" + comma(+m[r]));
             $(this).children(".defaultAnnual_li")
                 .show()
                 .find(".ri_e_t_c_price")
-                    .data("price",m*0.9)
-                    .text("￦" + comma(m*0.9));
+                    .data("price",m[r]*0.9)
+                    .text("￦" + comma(+m[r]*0.9));
+        
         } else {
             $(".default_li, .defaultAnnual_li").hide();
         }
@@ -278,10 +301,18 @@ function loadRoom(index,obj){
                     const w = checkoutDate.getDay();
                     const ticket = adultNumber * 60000 + childNumber * 50000;
                     
-                    const par = $(this).parents(".ri_e_t_box").data("room");
+                    const r = $(this).parents(".ri_e_t_box").data("room");
+                    roomm[r].forEach((v,idx) => {
+                        console.log(idx)
+                        const val = v + ticket;
+                        const $span = $(`<div><span>${datam[idx]}</span><span>￦ ${comma(val)}</span></div>`);
+                        $(this).find(".cs_price").append($span);
+                        $(this).find(".cs_price").append($span);
+                    });
                     $(this).find(".ri_e_t_c_price")
-                        .data("price", A1[par][q] + ticket )
-                        .text( "￦" + comma(A1[par][q] + ticket) );
+                        .data("price", A1[r][q] + ticket )
+                        .text( "￦" + comma(A1[r][q] + ticket) );
+            
             } else {
                 $(this).hide();
             }
@@ -293,7 +324,7 @@ function loadRoom(index,obj){
     const originLi = $(`
         <li>
             <div class="ri_e_t_choice_body">
-                <a href="#none"><strong></strong></a>
+                <a href="#none" class='ri_e_t_c_title'><strong></strong></a>
                 <a href="#none" class="ri_e_t_c_price"></a>
             </div>
             <div class="ri_e_t_choice_slide">
@@ -316,11 +347,7 @@ function loadRoom(index,obj){
             if ( checkinDate - todayDate > oneday*21 && 0<checkinDate.getDay() && checkinDate.getDay()<4 && 0<checkoutDate.getDay() && checkoutDate.getDay()<4) {
                 if ( todayDate < new Date(2023,5,28) && checkoutDate < new Date(2023,6,19)) {
                     if ( (r == 1 || r == 3) &&  t != 3) {
-                        let m = 0;
-                        for ( let j = checkinDate; j < checkoutDate; j += oneday) {
-                            const d = new Date(j).getDay();
-                            m += A1[r][d];
-                        }
+                        
                         const $earlyLi = originLi.clone(true);
                         $earlyLi
                             .data("code","early")
@@ -328,9 +355,13 @@ function loadRoom(index,obj){
                             .appendTo($(this))
                         $earlyLi.find("a strong").text("얼리버드 조식 패키지")
                         $earlyLi.find(".ri_e_t_c_price")
-                            .data("price", m*0.8)
-                            .text("￦" + comma(m*0.8));
-
+                            .data("price", m[r]*0.8)
+                            .text("￦" + comma(+m[r]*0.8));
+                        roomm[r].forEach((v,idx) => {
+                            const val = v*0.8;
+                            const $span = $(`<div><span>${datam[idx]}</span><span>￦ ${comma(val)}</span></div>`);
+                            $(this).find(".early_li .cs_price").append($span);
+                        });
                         
                         const $earlyAnnualLi = originLi.clone(true);
                         $earlyAnnualLi
@@ -340,9 +371,13 @@ function loadRoom(index,obj){
                             .appendTo($(this))
                         $earlyAnnualLi.find("a strong").text("[연간회원권 할인]얼리버드 조식 패키지");
                         $earlyAnnualLi.find(".ri_e_t_c_price")
-                            .data("price", m*0.8*0.9)
-                            .text("￦" + comma(m*0.8*0.9));
-
+                            .data("price", m[r]*0.8*0.9)
+                            .text("￦" + comma(+m[r]*0.8*0.9));
+                        roomm[r].forEach((v,idx) => {
+                            const val = v*0.8*0.9;
+                            const $span = $(`<div><span>${datam[idx]}</span><span>￦ ${comma(val)}</span></div>`);
+                            $(this).find(".earlyAnnual_li .cs_price").append($span);
+                        });
                         if (  checkoutDate - checkinDate == oneday ) {
                             const ticket = adultNumber * 60000 + childNumber * 50000;
                             const $earlyTwoLi = originLi.clone(true);
@@ -352,10 +387,14 @@ function loadRoom(index,obj){
                                 .appendTo($(this));
                             $earlyTwoLi.find("a strong").text("얼리버드 파크 2일 이용권 패키지");
                             $earlyTwoLi.find(".ri_e_t_c_price")
-                                .data("price", m*0.8 + ticket)
-                                .text("￦" + comma(m * 0.8 + ticket));
-                        }
-                        
+                                .data("price", m[r]*0.8 + ticket)
+                                .text("￦" + comma(+m[r] * 0.8 + ticket));
+                            roomm[r].forEach((v,idx) => {
+                                const val = v + ticket;
+                                const $span = $(`<div><span>${datam[idx]}</span><span>￦ ${comma(val)}</span></div>`);
+                                $(this).find(".earlyTwo_li .cs_price").append($span);
+                            });
+                        } 
                     }  
                 }
             }
@@ -368,11 +407,7 @@ function loadRoom(index,obj){
             if ( checkoutDate - checkinDate >= oneday*2) {
                 if (checkoutDate < new Date(2023,11,31)) {
                     if ( t != 3 ) {
-                        let m = 0;
-                        for ( let j = checkinDate; j < checkoutDate; j += oneday) {
-                            const d = new Date(j).getDay();
-                            m += A1[r][d];
-                        }
+                        
                         if( r == 1 ) {
                         const $awesomeLi = originLi.clone(true);
                         $awesomeLi
@@ -381,8 +416,13 @@ function loadRoom(index,obj){
                                 .appendTo($(this));
                             $awesomeLi.find("a strong").text("어썸 초이스");
                             $awesomeLi.find(".ri_e_t_c_price")
-                                .data("price",m*0.95)
-                                .text("￦" + comma(m*0.95));
+                                .data("price",m[r]*0.95)
+                                .text("￦" + comma(+m[r]*0.95));
+                            roomm[r].forEach((v,idx) => {
+                                const val = v*0.95;
+                                const $span = $(`<div><span>${datam[idx]}</span><span>￦ ${comma(val)}</span></div>`);
+                                $(this).find(".awesome_li .cs_price").append($span);
+                            });
                         
                         const $awesomeAnnualLi = originLi.clone(true);
                         $awesomeAnnualLi
@@ -392,8 +432,14 @@ function loadRoom(index,obj){
                                 .appendTo($(this));
                             $awesomeAnnualLi.find("a strong").text("[연간회원권 할인]어썸 초이스");
                             $awesomeAnnualLi.find(".ri_e_t_c_price")
-                                .data("price", m*0.85)
-                                .text("￦" + comma(m*0.85));
+                                .data("price", m[r]*0.85)
+                                .text("￦" + comma(+m[r]*0.85));
+                            roomm[r].forEach((v,idx) => {
+                                const val = v*0.85;
+                                const $span = $(`<div><span>${datam[idx]}</span><span>￦ ${comma(val)}</span></div>`);
+                                $(this).find(".awesomeAnnual_li .cs_price").append($span);
+                            });
+    
                         }
                         if ( r == 3 ) {
                             const $awesomeAnnualLi = originLi.clone(true);
@@ -404,8 +450,14 @@ function loadRoom(index,obj){
                                 .appendTo($(this));
                             $awesomeAnnualLi.find("a strong").text("[연간회원권 할인]어썸 초이스");
                             $awesomeAnnualLi.find(".ri_e_t_c_price")
-                                .data("price", m * 0.85)
-                                .text("￦" + comma(m*0.85));
+                                .data("price", m[r] * 0.85)
+                                .text("￦" + comma(+m[r]*0.85));
+                            roomm[r].forEach((v,idx) => {
+                                const val = v*0.85;
+                                const $span = $(`<div><span>${datam[idx]}</span><span>￦ ${comma(val)}</span></div>`);
+                                $(this).find(".awesomeAnnual_li .cs_price").append($span);
+                            });
+    
                         }
                         
                     }
@@ -445,17 +497,13 @@ function loadRoom(index,obj){
                     const $par = $(this).parents(".ri_e_t_box");
                     const t = $par.data("theme");
                     const r = $par.data("room");
-                    let m = 0;
-                    for ( let j = checkinDate; j < checkoutDate; j += oneday) {
-                        const d = new Date(j).getDay();
-                        m += A1[r][d];
-                    }
+                    
                     $(this).children(".friends_li").find(".ri_e_t_c_price")
-                        .data("price",m)
-                        .text("￦" + comma(m));
+                        .data("price",m[r])
+                        .text("￦" + comma(+m[r]));
                     $(this).children(".friendsAnnual_li").find(".ri_e_t_c_price")
-                        .data("price",m*0.9)
-                        .text("￦" + comma(m*0.9));
+                        .data("price",m[r]*0.9)
+                        .text("￦" + comma(+m[r]*0.9));
                 } else {
                     $(".friends_li, .friendsAnnual_li, .friendsTwo_li").remove();
                     $(this).siblings("ul").show();
@@ -468,11 +516,7 @@ function loadRoom(index,obj){
         }
         // 7. 브릭스타틱 생일 이벤트 //
         if ( $(".sr_c_active").length == 0 || $(".sr_c_birthday").hasClass("sr_c_active")) {
-            let m = 0;
-            for ( let j = checkinDate; j < checkoutDate; j += oneday) {
-                const d = new Date(j).getDay();
-                m += A1[r][d];
-            }
+            
             if ( (r == 1 || r == 3) && (t != 3)) {
                 if ( checkoutDate - checkinDate == oneday) {                        
                     const $birthdayLi = originLi.clone(true);
@@ -481,7 +525,7 @@ function loadRoom(index,obj){
                         .addClass("birthday_li")
                         .appendTo($(this));
                     $birthdayLi.find("a strong").text("레고랜드® 브릭타스틱 생일 패키지");
-                    $birthdayLi.find(".ri_e_t_c_price").text("￦" + comma(m+100000));
+                    $birthdayLi.find(".ri_e_t_c_price").text("￦" + comma(+m[r]+100000));
                 
                     const $birthdayAnnualLi = originLi.clone(true);
                     $birthdayAnnualLi
@@ -490,7 +534,16 @@ function loadRoom(index,obj){
                         .addClass("birthdayAnnual_li")
                         .appendTo($(this));
                     $birthdayAnnualLi.find("a strong").text("[연간회원권 할인]레고랜드® 브릭타스틱 생일 패키지");
-                    $birthdayAnnualLi.find(".ri_e_t_c_price").text("￦" + comma(m+90000));
+                    $birthdayAnnualLi.find(".ri_e_t_c_price").text("￦" + comma(+m[r]+90000));
+                    roomm[r].forEach((v,idx) => {
+                        const val = v+100000;
+                        const val2 = v+90000;
+                        const $span = $(`<div><span>${datam[idx]}</span><span>￦ ${comma(val)}</span></div>`);
+                        const $span2 = $(`<div><span>${datam[idx]}</span><span>￦ ${comma(val2)}</span></div>`);
+                        $(this).find(".birthday_li .cs_price").append($span);
+                        $(this).find(".birthdayAnnual_li .cs_price").append($span2);
+                    });
+
                 }
             }
         } else {
@@ -557,6 +610,11 @@ function makeUnit(data) {
         $(".hb_rooms").append(units);
     }
 }
+$(document).on("click",".ri_e_t_c_title",function(){
+    const $s = $(this).parent().siblings(".ri_e_t_choice_slide");
+    $s.slideToggle();
+    $(".ri_e_t_choice_slide").not($s).slideUp();
+})
     // 구매목록 생성 //
 let c;
 $(".shortReservation_wrap_up").on("submit",function(event){
@@ -642,7 +700,9 @@ $("#hb_rooms_form").on("submit",function(event){
     newW.theme = themeArr;
     newW.price = priceArr;
     newW.checkin = $(".hb_date_in").data("dt");
+    newW.checkinText = $(".hb_date_in").text();
     newW.checkout = $(".hb_date_out").data("dt");
+    newW.checkoutText = $(".hb_date_out").text();
     newW.submitTime = Date.now();
     const bsk = JSON.parse(localStorage.getItem("hotelBasket"));
     bsk.push(newW);

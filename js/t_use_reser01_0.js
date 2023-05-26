@@ -13,9 +13,8 @@ $(function(){
     $("footer").load("/footer/footer.html");
       //localStorage setting
       localStorage.setItem("payment_list","[]");
-      if ( !localStorage.getItem("basket_list") ) {
-        localStorage.setItem("basket_list", "[]");
-        console.log("new basket on");
+      if ( !localStorage.getItem("ticketBasket") ) {
+        localStorage.setItem("ticketBasket", "[]");
       }
       // page load
       $(".tapBox_btn").each(function (i) {
@@ -27,21 +26,19 @@ $(function(){
         });
       });
       // basket setting
-      const basketList = JSON.parse(localStorage.getItem("basket_list"));
+      const basketList = JSON.parse(localStorage.getItem("ticketBasket"));
       for( const key in basketList ) {
         const $listSetting = $("<li class='rb_l_list'></li>");
         const $closeBtn = $("<a href='#none' class='rb_remove'></a>");
         $closeBtn.click(function(){
           $(this).parent().remove();
     
-          const getList = JSON.parse(localStorage.getItem("basket_list"));
-          delete getList[`dated_ticket_${m}`];
-          localStorage.setItem("basket_list",JSON.stringify(getList));
+          const getList = JSON.parse(localStorage.getItem("ticketBasket"));
+          // delete getList[`dated_ticket_${m}`];
+          localStorage.setItem("ticketBasket",JSON.stringify(getList));
         });
         
         //불러오기
-        const bl_list_date = basketList[key]["dated_date_value"];
-        const bl_list_number = 0;
       }
 })
 
@@ -69,8 +66,8 @@ $(function(){
 //   $("header").load("/header/header.html");
 //   //localStorage setting
 //   localStorage.setItem("payment_list","[]");
-//   if ( !localStorage.getItem("basket_list") ) {
-//     localStorage.setItem("basket_list", "[]");
+//   if ( !localStorage.getItem("ticketBasket") ) {
+//     localStorage.setItem("ticketBasket", "[]");
 //     console.log("new basket on");
 //   }
 //   // page load
@@ -84,16 +81,16 @@ $(function(){
 //     });
 //   });
 //   // basket setting
-//   const basketList = JSON.parse(localStorage.getItem("basket_list"));
+//   const basketList = JSON.parse(localStorage.getItem("ticketBasket"));
 //   for( const key in basketList ) {
 //     const $listSetting = $("<li class='rb_l_list'></li>");
 //     const $closeBtn = $("<a href='#none' class='rb_remove'></a>");
 //     $closeBtn.click(function(){
 //       $(this).parent().remove();
 
-//       const getList = JSON.parse(localStorage.getItem("basket_list"));
+//       const getList = JSON.parse(localStorage.getItem("ticketBasket"));
 //       delete getList[`dated_ticket_${m}`];
-//       localStorage.setItem("basket_list",JSON.stringify(getList));
+//       localStorage.setItem("ticketBasket",JSON.stringify(getList));
 //     });
     
 //     //불러오기

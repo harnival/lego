@@ -16,7 +16,7 @@
     }
 /* common elements=============================================================== */
 
-body {margin: 0px;padding: 0px; font-size: 16px; font-family: "Noto Sans KR", "Sans serif";}
+body {margin: 0px;padding: 0px; font-size: 0.8vw; font-family: "Noto Sans KR", "Sans serif";}
 ul {list-style: none;padding: 0px;margin: 0px;}
 a {text-decoration: none; color: initial;}
 h1,h2,h3,h4,h5,h6 {margin: 0px;}
