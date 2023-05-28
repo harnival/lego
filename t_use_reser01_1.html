@@ -49,35 +49,6 @@
           color: white;
           margin-right: 10px;
         }
-        .df02_wrap {
-          width: 100%;
-          display: flex;
-          flex-direction: column;
-          position: relative;
-          padding-left: 55px;
-        }
-          .df02_wrap > label {
-            font-size: 20px;
-            font-weight: 600;
-          }
-          .df02_wrap > span:first-of-type {
-            font-size: 15px;
-            color: var(--exp-color);
-          }
-          .df02_wrap > span:last-of-type {
-            padding-top: 10px;
-          }
-          .df02_wrap > span:last-of-type span {
-            color: var(--exp-color);
-            font-weight: 600;
-            font-size: 15px;
-          }
-          .df02_wrap .nc_wrap {
-            position: absolute;
-            top: 0px;
-            right: 20%;
-          }
-              
       /* ============================================ 03. 사전 구매 */
       .dated_fieldset03 legend::before {
         content: "03";
@@ -154,38 +125,33 @@
       }
       .df04_labelexp {
         position: relative;
+        height: 1.5rem;
       }
       .df04_labelexp >span {
         color: var(--exp-color);
       }
       .df04_labelexp a {
         float: right;
-        display: flex;
+        text-align: end;
+        padding-right: 1rem;
         text-decoration: none;
-        color: #444;
-        gap: 5px;
-        border: 2px solid #ddd;
-        width: fit-content;
-        padding: 2px 5px;
-        border-radius: 20px;
-        font-size: 14px;
+        width: 25%;
+        height: 100%;
+        background: rgba(255,255,255) url("/image/info.png") no-repeat left 5% center/ 1rem;
+        box-sizing: border-box;        
+        font-size: 100%;
+        opacity: 0.5;
       }
-      .df04_labelexp a::before {
-        content: url("img/info.png");
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 20px;
-        height: 20px;
-        transform: scale(0.4,0.4);
-        opacity: 0.7;
-      }       
       .df04_l_ride {
-        background-color: bisque;
+        width: 25%;
+        background-color: white;
         position: absolute;
-        padding: 20px;
-        list-style: square;
-
+        top: 100%;
+        right: 0px;
+        z-index: 500;
+        padding: 0.5rem 0px 0.5rem 1rem;
+        font-size: 90%;
+        box-sizing: border-box;
         display: none;
       }
       .df04_ft {
@@ -198,10 +164,15 @@
         top: 0px;
         right: 0px;
       }
+      .df04_ft label {
+        font-size: 110%;
+        padding-right: 2rem;
+      }
       .df04_ft_exp {
         color: var(--exp-color);
+        padding-top: 1rem;
         text-indent: 10px;
-        font-size: 15px;
+        font-size: 100%;
       }
       /* =========================================== 05. master builder */
       .dated_fieldset05 {
@@ -257,66 +228,10 @@
         padding: 50px 30px;
         position: relative;
       }
-      .p_s_box {
-        position: relative;
-        border: 2px solid rgba(100,100,100,0.5);
-        margin-top: 1rem;
-        padding: 15px 20px 15px 30px;
-      }
-      .p_s_box >strong {
-        display: inline-block;
-        background-color: rgb(255,217,51);
-        position: absolute;
-        top: -12px;
-        left: 15px;
-        padding: 0px 5px;
-        color: rgba(100,100,100,0.8);
-      }
-      .p_s_extra > div {
-        box-sizing: border-box;
-      }
-      .p_s_e_title04,
-      .p_s_e_title03, 
-      .p_s_e_title05 {
-        font-weight: bold;
-        float: left;
-      }
-      .p_s_e_number04,
-      .p_s_e_number03, 
-      .p_s_e_number05 {
-        text-align: end;
-      }
-      .p_s_e_price04,
-      .p_s_e_price03, 
-      .p_s_e_price05 {
-        text-align: end;
-      }
       
-      .discount_select {
-        display: none;
-      }
-      .p_s_e_title06 {
-        float: left;
-        padding-right: 20px;
-      }
-      .p_total {
-        margin: 20px 0px 20px 50%;
-        padding: 20px 10px;
-        text-align: center;
-        font-size: 120%;
-        background-color: rgba(255,255,255,0.3);
-        border-radius: 20px;
-      }
-      .p_t_text {
-        display: inline-block;
-        width: 100px;
-      }
       #dated_total_price {
         display: none;
       }
-      .p_s_e_4 {
-        display: flex;
-      }     
     </style>
 </head>
 <body>
@@ -338,7 +253,7 @@
             <legend>날짜 지정</legend>
             <div class="date_inputs">
               <label for="dated_date_value"></label>
-              <input type="date" name="date" id="dated_date_value">
+              <input type="date" name="date.방문날짜" id="dated_date_value">
             </div>
             <div class="calender">
               <div class="calender_wrap_prev">
@@ -400,7 +315,7 @@
               </span>
               <div class="nc_wrap">
                 <div class="numberCheck">
-                  <input type="text" name="grown" id="dated_numbers_grown" class="numbers_grown"  value="0" readonly/>
+                  <input type="text" name="number.대인" id="dated_numbers_grown" class="numbers_grown"  value="0" readonly/>
                   <a href="#none" class="decrease_btn">인원 제외<img src="/image/minus.png" alt=""></a>
                   <a href="#none" class="increase_btn">인원 추가<img src="/image/plus.png" alt=""></a>
                 </div>
@@ -416,7 +331,7 @@
               </span>
               <div class="nc_wrap">
                 <div class="numberCheck">
-                  <input type="text" name="little" id="dated_numbers_little" class="numbers_little" value="0" readonly />
+                  <input type="text" name="number.소인" id="dated_numbers_little" class="numbers_little" value="0" readonly />
                   <a href="#none" class="decrease_btn">인원 제외<img src="/image/minus.png" alt=""></a>
                   <a href="#none" class="increase_btn">인원 추가<img src="/image/plus.png" alt=""></a>
                 </div>
@@ -451,7 +366,7 @@
                     <div class="dpnWrap">
                       <input
                         type="text"
-                        name="digital_photo"
+                        name="extra.디지털 기념 사진 사전구매"
                         id="dated_digital_photo_number"
                         class="digital_photo_number"
                         value="0"
@@ -517,7 +432,7 @@
                   <div class="numberCheck">
                     <input
                       type="text"
-                      name="mini_figure"
+                      name="extra.미니 피규어 세트 사전구매"
                       id="dated_mini_figure_number"
                       class="mini_figure_number"
                       value="0"
@@ -553,24 +468,34 @@
                   기다리는 시간을 단축하여 더 많은 어트렉션을 즐길 수 있는 방법!
                 </span>
                 <a href="#none">이용 가능한 라이드 목록</a>                  
-                <div>
-                  <ul class="df04_l_ride">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
+                <div class="df04_l_ride">
+                  <ul>
+                    <li>- 멀린의 마법열차</li>
+                    <li>- 멍키 클라임</li>
+                    <li>- 브릭파티</li>
+                    <li>- 스플래쉬 배틀</li>
+                    <li>- 앵커스 어웨이</li>
+                    <li>- 왕실 호위대</li>
+                    <li>- 웨이브 레이서</li>
+                    <li>- 주니어 드라이빙 스쿨</li>
+                    <li>- 파이어 아카데미</li>
+                    <li>- 해상 경비 아카데미</li>
+                    <li>- DUPLO® 익스프레스</li>
+                    <li>- LEGOLAND® 익스프레스</li>
+                    <li>- LEGOLAND® 전망대</li>
+                    <li>- LEGO® NINJAGO® 라이드</li>
+                    <li>- LEGO® 시티 라이드</li>
+                    <li>- LEGO® 팩토리 어드벤처</li>
+                    <li>- 드라이빙 스쿨</li>
+                    <li>- 드래곤 코스터</li>
+                    <li>- 디스코 스핀</li>
+                    <li>- 멀린의 플라잉 머신</li>
                   </ul>
                 </div>
               </div>
               <div class="df04_ft">
                 <label for="ft_virtual_number">
-                  패스트트랙 버츄얼
+                  <strong>패스트트랙 버츄얼</strong>
                 </label>
                   <span>￦40,000</span>
                   <div class="df04_ft_exp">
@@ -581,7 +506,7 @@
                     <div class="numberCheck">
                       <input
                         type="number"
-                        name="fasttrack_virtual"
+                        name="extra.패스트트랙 버츄얼"
                         id="dated_ft_virtual_number"
                         value="0"
                         readonly
@@ -593,7 +518,7 @@
               </div>
               <div class="df04_ft">
                 
-                <label for="ft_express_number">패스트트랙 익스프레스</label>
+                <label for="ft_express_number"><strong>패스트트랙 익스프레스</strong></label>
                 <span>￦70,000</span>
                 <div class="df04_ft_exp">
                   어트렉션 대기 시간을 절반으로 단축하여 더 많은 어트렉션을 즐길 수 있어요!
@@ -602,7 +527,7 @@
                   <div class="numberCheck">
                     <input
                       type="number"
-                      name="fasttrack_express"
+                      name="extra.패스트트랙 익스프레스"
                       id="dated_ft_express_number"
                       value="0"
                       readonly
@@ -613,7 +538,7 @@
                 </div>
               </div>
               <div class="df04_ft">
-                <label for="ft_ultimate_number">패스트트랙 얼티밋</label>
+                <label for="ft_ultimate_number"><strong>패스트트랙 얼티밋</strong></label>
                 <span>￦130,000</span>
                 <div class="df04_ft_exp">
                   대기시간을 95% 줄여주는 슈퍼 아이템! 가장 적은 대기시간으로 많은 어트렉션 체험이 가능해요!
@@ -622,7 +547,7 @@
                   <div class="numberCheck">
                     <input
                       type="number"
-                      name="fasttrack_ultimate"
+                      name="extra.패스트트랙 얼티밋"
                       id="dated_ft_ultimate_number"
                       value="0"
                       readonly
@@ -650,7 +575,7 @@
                   <div class="numberCheck">
                     <input
                       type="number"
-                      name="master_builder"
+                      name="extra.LEGOLAND® Master Builder"
                       id="dated_master_builder_number"
                       value="0"
                       readonly
@@ -699,7 +624,7 @@
                       강원도 거주자 일일이용권 평일 30% 할인, 주말 및 공휴일 10% 할인 혜택
                     </div>
                     <a href="#none" class="d_l_select" id="d_l_kangwon">적용하기</a>
-                    <input type="checkbox" name="discount_kangwon" id="d_l_select_01">
+                    <input type="checkbox" name="extra.discount" id="d_l_select_01" value="강원도민 할인혜택 적용">
                   </div>
                   <div class="d_l_detail">
                     <dl>
@@ -731,7 +656,7 @@
                     </div>
 
                     <a href="#none" class="d_l_select" id="d_l_d_kb">적용하기</a>
-                    <input type="checkbox" name="discount_kbcard" id="d_l_select_02">
+                    <input type="checkbox" name="extra.discount" id="d_l_select_02" value="KB국민카드 제휴할인 적용">
                   </div>
                   <div class="d_l_detail">
                       <dl>
@@ -796,7 +721,7 @@
                     </div>
 
                     <a href="#none" class="d_l_select" id="d_l_lg">적용하기</a>
-                    <input type="checkbox" name="discount_lg" id="d_l_select_03">
+                    <input type="checkbox" name="extra.discount" id="d_l_select_03" value="LG U+ 통신사 고객 제휴할인 적용">
                   </div>
                   <div class="d_l_detail">
                         <dl>
@@ -828,7 +753,7 @@
                     </div>
 
                     <a href="#none" class="d_l_select" id="d_l_nation">적용하기</a>
-                    <input type="checkbox" name="discount_nation" id="d_l_select_04">
+                    <input type="checkbox" name="extra.discount" id="d_l_select_04" value="나라사랑 할인혜택">
                   </div>
                   <div class="d_l_detail">
                         <dl>
@@ -869,7 +794,8 @@
                 <div class="p_s_box">
                   <strong>예약 인원</strong></span>
                   <div class="p_s_person">
-                    <span>대인 0 명 ,</span>
+                    <span>대인 0 명</span>
+                    <span>,</span>
                     <span>소인 0 명</span>
                   </div>
                 </div>
@@ -896,7 +822,7 @@
               <div class="p_total">
                 <label for="dated_total_price">합계</label>
                 <span class="p_t_text">￦ 0</span>
-                <input type="number" name="total_price" id="dated_total_price" readonly class="total_price">
+                <input type="number" name="total_price.합계" id="dated_total_price" readonly class="total_price">
               </div>
               <div class="dated_ticket_submit ticket_submit">
                 <button type="submit" class="submit_btn">장바구니에 담기</button>
@@ -1105,9 +1031,10 @@
             });
           });
           // ------------------------------------- 04. 패스트트랙
-          
+          $(".df04_labelexp >a").on("click",function(){
+            $(".df04_l_ride").slideToggle("fast");
+          })
           $(".df04_ft .nc_wrap input").each(function(i) {
-            
             const $newbox04 = $('<div class="p_s_e_4"><div class="p_s_e_title04"></div><div class="p_s_e_number04"></div><div class="p_s_e_price04"></div></div>');
             $(".p_s_extra").append($newbox04);
 
@@ -1143,7 +1070,7 @@
               } else {
                 $newbox05.show();
                 const vipPrice = 165000;
-                $(".p_s_e_title05").text("LEGOLAND® Master Builder Program");
+                $(".p_s_e_title05").text("LEGOLAND® Master Builder");
                 $(".p_s_e_number05").text(`수량 : ${$(this).val()}`);
                 $(".p_s_e_price05").text("￦ " + comma($(this).val()*vipPrice));
                 
@@ -1175,7 +1102,7 @@
             { month: 10, date: 9}, // 한글날
             { month: 12, date: 25} // 성탄절
           ]                        // 기타 음력 공휴일/ 대체휴일은 직접 입력 (설날, 추석, 석가탄신일)
-
+          // 로딩 시 할인 적용 //
           if (localStorage.getItem("load")){
             let obj = JSON.parse(localStorage.getItem("load"));
             let num = obj["page"], char = obj["char"], name = obj["name"];
@@ -1183,7 +1110,7 @@
               selectDc(char);
             }
           }
-
+          // 할인 설명 슬라이드 //
           $(".d_list li").each(function(i){
             $(this).find(".d_l_listopen").click(function(){
               $(".d_l_detail").eq(i).slideToggle();
@@ -1192,7 +1119,7 @@
               $(".d_l_w_exp").not(":eq("+i+")").slideDown();
             })
           });
-
+          // 할인 내용 입력 //
           $(".d_l_select").each(function(i){
             $(this).click(function(){
               selectDc(i);
@@ -1210,7 +1137,6 @@
               $(".d_list li input:checkbox").not($(this)).prop("checked",false);
               return !$(this).prop("checked");
             });
-
             if ( $(".d_list li input:checkbox").eq(i).is(":checked")) {
               $(".p_s_discount > div").show();
               const selectDate = new Date($selYear, $selMonth-1, $selDate);
@@ -1218,46 +1144,43 @@
               const holidayCheck = holiday.some(function(v){
                 return v.month == $selMonth && v.date == $selDate;
               });
-
-
-                
               if ( i==0 ) {
                 $(".p_s_e_title06").text("강원도민 할인 혜택");
                 if (selectDay==0 || selectDay==6 || holidayCheck ) {
-                  $(".p_s_e_number06").text("10%");
+                  $(".p_s_e_number06").text("10% 할인");
                   discountRate = 1 - 0.1;
                 } else {
-                  $(".p_s_e_number06").text("30%") ;
+                  $(".p_s_e_number06").text("30% 할인") ;
                   discountRate = 1 - 0.3
                 }
               }
               if ( i==1 ) {
                 $(".p_s_e_title06").text("국민카드 할인");
                 if (selectDay==0 || selectDay==6 || holidayCheck ) {
-                  $(".p_s_e_number06").text("10%");
+                  $(".p_s_e_number06").text("10% 할인");
                   discountRate = 1 - 0.1;
                 } else {
-                  $(".p_s_e_number06").text("20%") ;
+                  $(".p_s_e_number06").text("20% 할인") ;
                   discountRate = 1 - 0.2;
                 }
               }
               if ( i==2 ) {
                 $(".p_s_e_title06").text("LG U+ 할인");
                 if (selectDay==0 || selectDay==6 || holidayCheck ) {
-                  $(".p_s_e_number06").text("10%");
+                  $(".p_s_e_number06").text("10% 할인");
                   discountRate = 1 - 0.1;
                 } else {
-                  $(".p_s_e_number06").text("20%") ;
+                  $(".p_s_e_number06").text("20% 할인") ;
                   discountRate = 1 - 0.2;
                 }
               }
               if ( i==3 ) {
                 $(".p_s_e_title06").text("나라사랑 할인");
                 if (selectDay==0 || selectDay==6 || holidayCheck ) {
-                  $(".p_s_e_number06").text("20%");
+                  $(".p_s_e_number06").text("20% 할인");
                   discountRate = 1 - 0.2;
                 } else {
-                  $(".p_s_e_number06").text("35%") ;
+                  $(".p_s_e_number06").text("35% 할인") ;
                   discountRate = 1 - 0.35;
                 }
               }
@@ -1283,8 +1206,9 @@
               return t_1 * discountRate + t_2 + t_3 + t_4;
             })
             $(".p_t_text").text("￦"+comma(t_1 * discountRate + t_2 + t_3 + t_4));
-            
           }
+
+        
           //페이지 리셋
         $(".reset_btn").click(function(){
           $(".formBox").load("./t_use_reser01_1.html");

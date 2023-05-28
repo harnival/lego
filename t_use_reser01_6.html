@@ -29,18 +29,23 @@
       display: flex;
       flex-wrap: wrap;
       margin-top: 30px;
+      border-top: 1px solid #eeeeee;
     }
     .vif01_ticketcard {
       width: 50%;
       min-width: 350px;
       height: 150px;
       padding: 1rem 0px ;
-      border: 1px solid #eeeeee6c;
       box-sizing: border-box;
       position: relative;
       display: flex;
       justify-content: center;
       gap: 20px;
+      border-bottom: 1px solid #eee;
+      border-right: 1px solid #eee;
+    }
+    .vif01_ticketcard:nth-child(odd) {
+      border-left: 1px solid #eee;
     }
     .vif01_ticketcard:hover {
       background-color: rgba(255,255,255,0.3);
@@ -299,14 +304,14 @@
               </div>
               <div class="vif01_tc_number">
                 <div class="numberCheck">
-                  <input type="text" name="vif01_number_first" class="vif01_number" value="0" readonly data-classes="first"/>
+                  <input type="text" name="number_first" class="vif01_number" value="0" readonly data-classes="first"/>
                   <a href="#none" class="decrease_btn">수량 제외<img src="./image/minus.png" alt=""></a>
                   <a href="#none" class="increase_btn">수량 추가<img src="./image/plus.png" alt=""></a>
                 </div>
               </div>
             </div>
             <div class="vif01_tc_check">
-              <input type="checkbox" name="vif01_check" id="">
+              <input type="checkbox" name="" id="">
             </div>
             <div class="vif01_tc_disabled">
               <span></span>
@@ -324,14 +329,14 @@
               </div>
               <div class="vif01_tc_number">
                 <div class="numberCheck">
-                  <input type="text" name="vif01_number_dated" class="vif01_number" value="0" readonly data-classes="dated"/>
+                  <input type="text" name="number_dated" class="vif01_number" value="0" readonly data-classes="dated"/>
                   <a href="#none" class="decrease_btn">수량 제외<img src="./image/minus.png" alt=""></a>
                   <a href="#none" class="increase_btn">수량 추가<img src="./image/plus.png" alt=""></a>
                 </div>
               </div>
             </div>
             <div class="vif01_tc_check">
-              <input type="checkbox" name="vif01_check" id="">
+              <input type="checkbox" name="" id="">
             </div>
             <div class="vif01_tc_disabled">
               <span></span>
@@ -349,14 +354,14 @@
               </div>
               <div class="vif01_tc_number">
                 <div class="numberCheck">
-                  <input type="text" name="vif01_number_standard" class="vif01_number" value="0" readonly data-classes="standard"/>
+                  <input type="text" name="number_standard" class="vif01_number" value="0" readonly data-classes="standard"/>
                   <a href="#none" class="decrease_btn">수량 제외<img src="./image/minus.png" alt=""></a>
                   <a href="#none" class="increase_btn">수량 추가<img src="./image/plus.png" alt=""></a>
                 </div>
               </div>
             </div>
             <div class="vif01_tc_check">
-              <input type="checkbox" name="vif01_check" id="">
+              <input type="checkbox" name="" id="">
             </div>
             <div class="vif01_tc_disabled">
               <span></span>
@@ -374,14 +379,14 @@
               </div>
               <div class="vif01_tc_number">
                 <div class="numberCheck">
-                  <input type="text" name="vif01_number_gold" class="vif01_number" value="0" readonly data-classes="gold"/>
+                  <input type="text" name="number_gold" class="vif01_number" value="0" readonly data-classes="gold"/>
                   <a href="#none" class="decrease_btn">수량 제외<img src="./image/minus.png" alt=""></a>
                   <a href="#none" class="increase_btn">수량 추가<img src="./image/plus.png" alt=""></a>
                 </div>
               </div>
             </div>
             <div class="vif01_tc_check">
-              <input type="checkbox" name="vif01_check" id="">
+              <input type="checkbox" name="" id="">
             </div>
             <div class="vif01_tc_disabled">
               <span></span>
@@ -399,14 +404,14 @@
               </div>
               <div class="vif01_tc_number">
                 <div class="numberCheck">
-                  <input type="text" name="vif01_number_platinum" class="vif01_number" value="0" readonly data-classes="platinum"/>
+                  <input type="text" name="number_platinum" class="vif01_number" value="0" readonly data-classes="platinum"/>
                   <a href="#none" class="decrease_btn">수량 제외<img src="./image/minus.png" alt=""></a>
                   <a href="#none" class="increase_btn">수량 추가<img src="./image/plus.png" alt=""></a>
                 </div>
               </div>
             </div>
             <div class="vif01_tc_check">
-              <input type="checkbox" name="vif01_check" id="">
+              <input type="checkbox" name="" id="">
             </div>
             <div class="vif01_tc_disabled">
               <span></span>
@@ -424,14 +429,14 @@
               </div>
               <div class="vif01_tc_number">
                 <div class="numberCheck">
-                  <input type="text" name="vif01_number_spring" class="vif01_number" value="0" readonly data-classes="spring"/>
+                  <input type="text" name="number_spring" class="vif01_number" value="0" readonly data-classes="spring"/>
                   <a href="#none" class="decrease_btn">수량 제외<img src="./image/minus.png" alt=""></a>
                   <a href="#none" class="increase_btn">수량 추가<img src="./image/plus.png" alt=""></a>
                 </div>
               </div>
             </div>
             <div class="vif01_tc_check">
-              <input type="checkbox" name="vif01_check" id="">
+              <input type="checkbox" name="" id="">
             </div>
             <div class="vif01_tc_disabled">
               <span></span>
@@ -449,14 +454,14 @@
               </div>
               <div class="vif01_tc_number">
                 <div class="numberCheck">
-                  <input type="text" name="vif01_number_summer" class="vif01_number" value="0" readonly data-classes="summer"/>
+                  <input type="text" name="number_summer" class="vif01_number" value="0" readonly data-classes="summer"/>
                   <a href="#none" class="decrease_btn">수량 제외<img src="./image/minus.png" alt=""></a>
                   <a href="#none" class="increase_btn">수량 추가<img src="./image/plus.png" alt=""></a>
                 </div>
               </div>
             </div>
             <div class="vif01_tc_check">
-              <input type="checkbox" name="vif01_check" id="">
+              <input type="checkbox" name="" id="">
             </div>
             <div class="vif01_tc_disabled">
               <span></span>
@@ -474,14 +479,14 @@
               </div>
               <div class="vif01_tc_number">
                 <div class="numberCheck">
-                  <input type="text" name="vif01_number_rainy" class="vif01_number" value="0" readonly data-classes="rainy"/>
+                  <input type="text" name="number_rainy" class="vif01_number" value="0" readonly data-classes="rainy"/>
                   <a href="#none" class="decrease_btn">수량 제외<img src="./image/minus.png" alt=""></a>
                   <a href="#none" class="increase_btn">수량 추가<img src="./image/plus.png" alt=""></a>
                 </div>
               </div>
             </div>
             <div class="vif01_tc_check">
-              <input type="checkbox" name="vif01_check" id="">
+              <input type="checkbox" name="" id="">
             </div>
             <div class="vif01_tc_disabled">
               <span></span>
@@ -499,14 +504,14 @@
               </div>
               <div class="vif01_tc_number">
                 <div class="numberCheck">
-                  <input type="text" name="vif01_number_carer" class="vif01_number" value="0" readonly data-classes="carer"/>
+                  <input type="text" name="number_carer" class="vif01_number" value="0" readonly data-classes="carer"/>
                   <a href="#none" class="decrease_btn">수량 제외<img src="./image/minus.png" alt=""></a>
                   <a href="#none" class="increase_btn">수량 추가<img src="./image/plus.png" alt=""></a>
                 </div>
               </div>
             </div>
             <div class="vif01_tc_check">
-              <input type="checkbox" name="vif01_check" id="">
+              <input type="checkbox" name="" id="">
             </div>
             <div class="vif01_tc_disabled">
               <span></span>
@@ -684,7 +689,7 @@
                 $(this).find(".cdt_date").append(disabled_cell);
               }
               else if ( cur >= new Date(2023,10,20) && new Date(2024,0,1) > cur && ([1,2,3]).some(e => e == cur.getDay()) ){
-                //휴장일
+                // 휴장일 //
                 const disabled_cell = $("<div class='disabled_cell dataCell'></div>");
                 const exp = $("<span class='notOpen'>휴관</span>")
                 disabled_cell
@@ -692,8 +697,8 @@
                   .append(exp);
                 $(this).find(".cdt_date").append(disabled_cell);
               }
-              else if ( $(this).hasClass("standard") && cur.getDay() == 6 ) {
-                //standard 예약제한
+              else if ($(".vif01_number[data-classes='standard']").val() != 0 && cur.getDay()==6) {
+                // standard pass 제한일 //
                 const disabled_cell = $("<div class='disabled_cell dataCell'></div>");
                 disabled_cell
                   .text(n)
@@ -765,7 +770,11 @@
         $(".date_inputs label").text(`${q.getFullYear()} 년 ${q.getMonth()+1} 월 ${q.getDate()} 일 (${weekArr[q.getDay()]})`);
         $(".vif06_p_s_date").text(`${q.getFullYear()} 년 ${q.getMonth()+1} 월 ${q.getDate()} 일 (${weekArr[q.getDay()]})`);
       })
-      
+      $(".vif01_number[data-classes='standard']").on("change",function(){
+        $(".calender_wrap_prev").calender($selYear,$selMonth-2);
+        $(".calender_wrap").calender($selYear,$selMonth-1);
+        $(".calender_wrap_next").calender($selYear,$selMonth);
+      })
 
       //--------------------------------- 03. 바코드 입력
       const certObject = {};

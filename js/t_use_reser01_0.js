@@ -17,12 +17,17 @@ $(function(){
         localStorage.setItem("ticketBasket", "[]");
       }
       // page load
+      $(document).on("DOMcontentLoaded",function(){
+        const v = visualViewport.pageTop;
+        console.log(v)
+        $(window).scrollTop(v);
+      })
       $(".tapBox_btn").each(function (i) {
         $(this).click(function () {
           $(".formBox").children().remove();
           $(".formBox").load(`/t_use_reser01_${i + 1}.html`);
           $(".tapBox a").not($(this)).removeClass("active_tap");
-          $(this).addClass("active_tap");              
+          $(this).addClass("active_tap");
         });
       });
       // basket setting

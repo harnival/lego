@@ -7,9 +7,6 @@
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
-      :root {
-        --af02-inputbox-height: 400px;
-      }
       .annual_fieldset01 {
         position: relative;
         padding: 80px 15% 30px;
@@ -199,229 +196,7 @@
         padding-left: 20px;
         font-size: 80%;
       }
-    /* ----------------------------------------- 02. 정보 입력 */
-    .annual_fieldset02 {
-      position: relative;
-      padding: 80px 15% 30px;
-    }
-    .annual_fieldset02 legend::before {
-      content: "02";
-      display: inline-block;
-      text-align: center;
-      vertical-align: middle;
-      line-height: 1.5;
-      width: 30px;
-      height: 30px;
-      background-color: royalblue;
-      border-radius: 50%;
-      font-size: 18px;
-      color: white;
-      margin-right: 10px;
-    }
-    .af02_i_info_origin {
-      display: none;
-    }
-    .af02_i_i_tab {
-      height: 80px;
-      background-color: green;
-      position: relative;
-      padding-left: 70px;
-      display: flex;
-      align-items: center;
-    }
-    .af02_i_i_tab > a {
-      display: block;
-      font-size: 0px;
-      width: 15px;
-      height: 15px;
-      background: #eee url("./image/close_button.png") no-repeat center/90%;
-      border: 2px solid #666;
-      position: absolute;
-      left: 20px;
-    }
-    .af02_i_i_inputpage_wrap {
-      height: var(--af02-inputbox-height);
-      background-color: white;
-      border: 2px solid green;
-    }
-    .af02_i_i_inputpage {
-      position: relative;
-      box-sizing: border-box;
-      height: var(--af02-inputbox-height);
-      padding: 20px 10px;
-      margin:auto;
-      display: flex;
-      flex-wrap: wrap;
-      flex-direction: column;
-      align-content: start;
-      transition: .5s ease;
-    }
-    .af02_i_i_inputpage > div:not(.user_photo) {
-      position: relative;
-      height: calc(100% / 4);
-      width: calc(100% / 3);
-      box-sizing: border-box;
-    }
-    .af02_i_i_inputpage input {
-      background-color: transparent;
-      border: none;
-      border: 1px solid #666;
-      border-radius: 15px;
-      padding: 17px 0px 9px 20px ;
-      box-sizing: border-box;
-      width: 250px;
-      font-size: 15px;
-      outline-color:rgb(2, 172, 2);
-      transition: .5s ease;
-    }
-    .af02_i_i_inputpage input::placeholder {
-      opacity: 0.7;
-    }
-    .af02_i_i_inputpage input:focus {
-      border-color: yellow;
-    }
-    .af02_i_i_inputpage label:not(.user_birthday label),
-    .user_birthday span {
-      display: inline-block;
-      position: absolute;
-      top: -10px;
-      left: 0px;
-      font-size: 12px;
-      color: #666;
-      background-color: var(--inputbox-bg-color);
-      padding: 0px 3px;
-    }
-    .user_nationality_select {
-      position: relative;
-    }
-    .user_nationality_select ul {
-      display: none;
-
-      list-style: none;
-      padding: 0px;
-      margin: 0px;
-      width: 200px;
-      background-color: white;
-      border: 2px solid #ffffff41;
-      border-radius: 15px;
-      box-sizing: border-box;
-      position: absolute;
-      top: 45px;
-      left: 0px;
-      z-index: 9000;
-    }
-    .user_nationality_select li {
-      padding: 3px 0px 3px 15px;
-      
-    }
-    .user_nationality_select li a {
-      display: block;
-      width: 100%;
-    }
-    .user_nationality_select li:first-child {
-      border-top-left-radius: 15px;
-      border-top-right-radius: 15px;
-    }
-    .user_nationality_select li:last-child {
-      border-bottom-left-radius: 15px;
-      border-bottom-right-radius: 15px;
-      padding-bottom: 5px;
-    }
-    .user_nationality_select li:hover {
-      background-color: #ddd;
-    }
-    .user_nationality_select input {
-      
-      background: url("img/arrow_drop_down.png") no-repeat center right 8px / 20px 30px;
-      width: 200px;
-      
-    }
-    .user_birthday input:nth-of-type(1) {
-      width: 70px;
-      text-align: center;
-      padding-left: 0px;
-    }
-    .user_birthday input:nth-of-type(2),
-    .user_birthday input:nth-of-type(3) {
-      width: 50px;
-      text-align: center;
-      padding-left: 0px;
-    }
-    .user_photo {
-      background-color: #aaaaaa4d;
-      position: relative;
-      height: 100%;
-      width: calc(100% / 3);
-      box-sizing: border-box;
-      position: absolute;
-      top: 0px;
-      right: 0px;
-    }
-    .user_photo > span {
-      display: block;
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      font-size: 80%;
-      color: #666;
-    }
-    .user_photo_img_wrap {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      margin: 5px auto 0px;
-      box-sizing: border-box;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .user_photo_canvas {
-      box-sizing: border-box;
-    }
-    .user_photo_cut {
-      display: none;
-
-      border: 2px dashed red;
-      background-color: rgba(255,255,255,0.3);
-      box-sizing: border-box;
-      aspect-ratio: 1 / 1;
-      width: 50px;
-      min-width: 40px;
-      min-height: 40px;
-      position: absolute;
-      top: center;
-      left: center;
-    }
-    .user_photo_cut_size {
-      width: 13px;
-      aspect-ratio: 1/1;
-      margin: 2px;
-      background-color: red;
-      position: absolute;
-      bottom: -10px;
-      right: -10px;
-      opacity: 0;
-    }
-    .user_photo_cut_size:hover {
-      opacity: 1;
-      cursor:nwse-resize;
-    }
-    .user_photo_input {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-    }
-    .user_photo_notice{
-      font-size: 80%;
-      color: #666;
-      padding: 3px 10px;
-      box-sizing: border-box;
-    }
-    .user_photo_input a {
-      padding: 3px 10px;
-      background-color: #ccc;
-      border-radius: 10px;
-    }
+   
     /* ----------------------------------------- */
     .p_s_numbers > div {
       display: none;
@@ -458,7 +233,7 @@
                   <div class="numberCheck">
                     <input
                       type="number"
-                      name="standard_pass"
+                      name="number.STANDARD PASS"
                       id="annual_standard_number"
                       value="0"
                       data-passtype="1"
@@ -479,7 +254,7 @@
                   <div class="numberCheck">
                     <input
                       type="number"
-                      name="gold_pass"
+                      name="number.GOLD PASS"
                       id="annual_gold_number"
                       value="0"
                       data-passtype="2"
@@ -500,7 +275,7 @@
                   <div class="numberCheck">
                     <input
                       type="number"
-                      name="platinum_pass"
+                      name="number.PLATINUM PASS"
                       id="annual_platinum_number"
                       value="0"
                       data-passtype="3"
@@ -647,44 +422,44 @@
             </div>
           </fieldset>
 
-          <fieldset class="annual_fieldset02">
+          <fieldset class="annual_fieldset02 fieldset02">
             <legend>정보 입력</legend>
             <div class="af02_wrap">
               <div class="af02_inputBox">
-                <div class="af02_i_info_origin">
-                  <div class="af02_i_i_tab">
-                    <div class="af02_i_i_t_name"></div>
-                    <div class="af02_i_i_t_ticket"></div>
-                    <div class="af02_i_i_t_age"></div>
-                    <input type="hidden" name="user_pass" id="" data-passtype="">
+                <div class="i_info_origin">
+                  <div class="i_i_tab">
+                    <div class="i_i_t_name"></div>
+                    <div class="i_i_t_ticket"></div>
+                    <div class="i_i_t_age"></div>
+                    <input type="hidden" name="pass" id="" data-passtype="">
                     <a href="#none">취소</a>
                   </div>
-                  <div class="af02_i_i_inputpage_wrap">
-                    <div class="af02_i_i_inputpage">
+                  <div class="i_i_inputpage_wrap">
+                    <div class="i_i_inputpage">
                       <div class="user_name">
                         <label for="">이름</label>
-                        <input type="text" name="user_name" id="" >
+                        <input type="text" name="name" id="" >
                       </div>
                       <div class="user_birthday">
                         <span>생년월일</span>
-                        <input type="number" name="user_birthYear" maxlength="4" placeholder="0000" id="">
+                        <input type="number" name="birthYear" maxlength="4" placeholder="0000" id="">
                         <label for="">년</label>
-                        <input type="number" name="user_birthMonth" maxlength="2" min="1" max="12" placeholder="00" id="">
+                        <input type="number" name="birthMonth" maxlength="2" min="1" max="12" placeholder="00" id="">
                         <label for="">월</label>
-                        <input type="number" name="user_birthDate" maxlength="2" min="1" max="31" placeholder="00" id="">
+                        <input type="number" name="birthDate" maxlength="2" min="1" max="31" placeholder="00" id="">
                         <label for="">일</label>
                       </div>
                       <div class="user_phone">
                         <label for="">전화번호</label>
-                        <input type="tel" name="user_phone" maxlength="20" placeholder="' - ' 빼고 입력하세요." id="">
+                        <input type="tel" name="phone" maxlength="20" placeholder="' - ' 빼고 입력하세요." id="">
                       </div>
                       <div class="user_email">
                         <label for="">이메일</label>
-                        <input type="email" name="user_email" placeholder="ex. example@example.com" id="">
+                        <input type="email" name="email" placeholder="ex. example@example.com" id="">
                       </div>
                       <div class="user_nationality_select">
                         <label for="">국가</label>
-                        <input type="text" name="user_nationality" id="" placeholder="국가 선택" readonly>
+                        <input type="text" name="nationality" id="" placeholder="국가 선택" readonly>
                         <ul>
                           <li><a href="#none">대한민국</a></li>
                           <li><a href="#none">미국</a></li>
@@ -703,15 +478,15 @@
                       </div>
                       <div class="user_states">
                         <label for="">도/특별시/시</label>
-                        <input type="text" name="user_states" id="">
+                        <input type="text" name="states" id="">
                       </div>
                       <div class="user_city">
                         <label for="">시/군/구</label>
-                        <input type="text" name="user_city" id="">
+                        <input type="text" name="city" id="">
                       </div>
                       <div class="user_photo">
                         <span>패스 사진 등록</span>
-                        <input type="hidden" name="user_photo" class="user_photo_submitOnly">
+                        <input type="hidden" name="photo" class="user_photo_submitOnly">
                         <div class="user_photo_img_wrap">
                           <canvas class="user_photo_canvas" width="0" height="0"></canvas>
                           <div class="user_photo_cut">
@@ -720,7 +495,7 @@
                         </div>
                         <div class="user_photo_notice">* '사진 업로드' 버튼을 눌러 사진을 등록하십시오. 연간회원권 등록을 완료하려면 사진이 필요합니다</div>
                         <div class="user_photo_input">
-                          <input type="file" name="" class="af02_user_photo" accept="image/png, image/jpeg, image/webp" style="display:none">
+                          <input type="file" name="" class="user_photo" accept="image/png, image/jpeg, image/webp" style="display:none">
                           <a href="#none" class="user_photo_upload">사진 업로드</a>
                           <a href="#none" class="user_photo_sliceBtn">잘라내기</a>
                         </div>
@@ -747,7 +522,7 @@
                     </div>
 
                     <a href="#none" class="d_l_select" id="d_l_KBcard">적용하기</a>
-                    <input type="checkbox" name="discount_kbcard" id="d_l_select_02">
+                    <input type="checkbox" name="extra.discount" id="d_l_select_01" value="KB국민카드 제휴혜택 적용">
                   </div>
                   <div class="d_l_detail">
                     <dl>
@@ -834,7 +609,7 @@
               <div class="p_total">
                 <label for="total_price">합계</label>
                 <span class="p_t_text">￦ 0</span>
-                <input type="text" name="total_price" id="annual_total_price" readonly class="total_price">
+                <input type="text" name="total_price.합계" id="annual_total_price" readonly class="total_price">
               </div>
               <div class="annual_ticket_submit ticket_submit">
                 <button type="submit" class="submit_btn">장바구니에 담기</button>
@@ -966,28 +741,19 @@
           })
           // 입력창 생성
           function makeInfo(classes,typeNum) {
-              if( $(`.af02_i_info_${classes}`).length < $(`#annual_${classes}_number`).val()) {
-                const $makeInfo = $(`.af02_i_info_origin`).clone(true);
-                const len = $(".af02_i_info").length;
+              if( $(`.i_info_${classes}`).length < $(`#annual_${classes}_number`).val()) {
+                const $makeInfo = $(`.i_info_origin`).clone(true);
 
-                $makeInfo.addClass([`af02_i_info_${classes}`, "af02_i_info"]);
-                $makeInfo.removeClass("af02_i_info_origin");
-                $makeInfo.find(".af02_i_i_t_ticket").text(`${classes.toUpperCase()} PASS`);
-                $makeInfo.find(".af02_i_i_tab input")
+                $makeInfo.addClass([`i_info_${classes}`, "i_info"]);
+                $makeInfo.removeClass("i_info_origin");
+                $makeInfo.find(".i_i_t_ticket").text(`${classes.toUpperCase()} PASS`);
+                $makeInfo.find(".i_i_tab input")
                   .val((i,v) => classes)
                   .data("passtype",typeNum);
-                $makeInfo.find("input").each(function(){
-                  $(this).removeAttr("disabled");
-                  if ($(this).prop("name")){
-                    const name = $(this).prop("name");
-                    $(this).prop("name", `annualArray[${len}][${name}]`);
-                  }
-                })
                 $(".af02_inputBox").append($makeInfo);
-                $(".af02_i_info_origin input").attr("disabled",true);
 
                 //제거버튼
-                $makeInfo.find(".af02_i_i_tab a").click(function(){
+                $makeInfo.find(".i_i_tab a").click(function(){
                   $makeInfo.remove();
                   $(`#annual_${classes}_number`).val((i,v) => +v-1);
                 });
@@ -1001,18 +767,18 @@
                   $(this).parents(".user_nationality_select").find("ul").slideUp("fast");
                 });
                 $makeInfo.find(".user_name input").on("change",function(){
-                  $makeInfo.find(".af02_i_i_t_name").text(`사용자 이름 : ${$(this).val()}`);
+                  $makeInfo.find(".i_i_t_name").text(`사용자 이름 : ${$(this).val()}`);
                 })
                 // 슬라이드
-                $makeInfo.find(".af02_i_i_tab").on("click",function(){
-                  $makeInfo.find(".af02_i_i_inputpage_wrap").slideToggle();
+                $makeInfo.find(".i_i_tab").on("click",function(){
+                  $makeInfo.find(".i_i_inputpage_wrap").slideToggle();
                 })
                 //이미지
                 $makeInfo.find(".user_photo")
                   .on("click",".user_photo_input a:eq(0)",function(){
-                    $(this).siblings(".af02_user_photo").trigger("click");
+                    $(this).siblings(".user_photo").trigger("click");
                   })
-                  .on("change",".af02_user_photo",function(event){
+                  .on("change",".user_photo",function(event){
                     $makeInfo.find(".user_photo_cut").show();
                     $makeInfo.find(".user_photo_sliceBtn").show();
                     const loader = event.target.files[0];
@@ -1057,8 +823,8 @@
                   
               }
               // ------------------------------------------
-              else if ($(`.af02_i_info_${classes}`).length > $(`#annual_${classes}_number`).val()) {
-                $(`.af02_i_info_${classes}`).last().remove();
+              else if ($(`.i_info_${classes}`).length > $(`#annual_${classes}_number`).val()) {
+                $(`.i_info_${classes}`).last().remove();
               }
           }
           $("#annual_standard_number").on("change",function(){
@@ -1159,10 +925,11 @@
             })
             
           }
-          //페이지 리셋
-        $(".reset_btn").click(function(){
-          $(".formBox").load("./t_use_reser01_1.html");
-        })
+          
+            //페이지 리셋
+          $(".reset_btn").click(function(){
+            $(".formBox").load("./t_use_reser01_1.html");
+          })
         });
     </script>
     <script src="/js/ticket_common.js"></script>

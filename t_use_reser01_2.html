@@ -48,36 +48,7 @@
           font-size: 18px;
           color: white;
           margin-right: 10px;
-        }
-        .dtf02_wrap {
-          width: 100%;
-          display: flex;
-          flex-direction: column;
-          position: relative;
-          padding-left: 55px;
-        }
-          .dtf02_wrap > label {
-            font-size: 20px;
-            font-weight: 600;
-          }
-          .dtf02_wrap > span:first-of-type {
-            font-size: 15px;
-            color: var(--exp-color);
-          }
-          .dtf02_wrap > span:last-of-type {
-            padding-top: 10px;
-          }
-          .dtf02_wrap > span:last-of-type span {
-            color: var(--exp-color);
-            font-weight: 600;
-            font-size: 15px;
-          }
-          .dtf02_wrap .nc_wrap {
-            position: absolute;
-            top: 0px;
-            right: 20%;
-          }
-          
+        } 
       /* ---------------------- */
       .daytime_fieldset03 legend::before {
         content: "03";
@@ -139,80 +110,14 @@
         display: flex;
         position: relative;
       }
-      .discount {
-        width: 50%;
-      }
-      .d_list {
-        list-style: none;
-        padding: 0px;
-        border: 1px solid rgba(0,0,0,0.4);
-        border-bottom: none;
-      }
-        .d_list li {
-          border-bottom: 1px solid rgba(0,0,0,0.4);
-        }
-        .d_list .empty_li {
-          height: 70px;
-          background-color: #eeeeeea4;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-
-          color: #bbb;
-        }
-        .d_l_wrap {
-          position: relative;
-          display: flex;
-          align-items:flex-start;
-          flex-direction: column;
-        }
-        .d_l_listopen {
-          display: block;
-          width: 50%;
-          background: url("img/arrow_drop_down.png") no-repeat center left/30px;
-          padding-left: 30px;
-          line-height: 2;
-          text-decoration: none;
-          color: black;
-        }
-        .d_l_select {
-          position: absolute;
-          top: 0px;
-          right: 0px;
-        }
-        .d_l_detail {
-          display: none;
-        }
-        .d_l_w_exp {
-          color: var(--exp-color);
-          padding-left: 20px;
-          font-size: 15px;
-        }
-        .active_discount {
-          background-color: rgb(247, 206, 199);
-        }
-        .not_discount .d_l_wrap {
-          opacity: 0.5;
-        }
-        .d_list li input[type="checkbox"] {
-          display: block;
-        }
-
-        .price {
-          width: 50%;
-        }
         /* ------------------ */
         .p_s_extra > div {
-          border: 1px solid tomato;
           box-sizing: border-box;
           display: none;
         }
 
         .discount_select {
           display: none;
-        }
-        .p_s_discount >div {
-          border: 1px solid tomato;
         }
         #daytime_total_price {
           display: none;
@@ -237,7 +142,7 @@
             <legend>날짜 지정</legend>
             <div class="date_inputs">
               <label for="daytime_date_value"></label>
-              <input type="date" name="date" id="daytime_date_value">
+              <input type="date" name="date.방문날짜" id="daytime_date_value">
             </div>
             <div class="calender">
               <div class="calender_wrap_prev">
@@ -299,7 +204,7 @@
               </span>
               <div class="nc_wrap">
                 <div class="numberCheck">
-                  <input type="text" name="grown" id="daytime_numbers_grown" class="numbers_grown"  value="0" readonly/>
+                  <input type="text" name="number.대인" id="daytime_numbers_grown" class="numbers_grown"  value="0" readonly/>
                   <a href="#none" class="decrease_btn">인원 제외<img src="./image/minus.png" alt=""></a>
                   <a href="#none" class="increase_btn">인원 추가<img src="./image/plus.png" alt=""></a>
                 </div>
@@ -315,7 +220,7 @@
               </span>
               <div class="nc_wrap">
                 <div class="numberCheck">
-                  <input type="text" name="little" id="daytime_numbers_little" class="numbers_little" value="0" readonly />
+                  <input type="text" name="number.소인" id="daytime_numbers_little" class="numbers_little" value="0" readonly />
                   <a href="#none" class="decrease_btn">인원 제외<img src="./image/minus.png" alt=""></a>
                   <a href="#none" class="increase_btn">인원 추가<img src="./image/plus.png" alt=""></a>
                 </div>
@@ -350,7 +255,7 @@
                     <div class="dpnWrap">
                       <input
                         type="text"
-                        name="digital_photo"
+                        name="extra.디지털 기념 사진 사전구매"
                         id="daytime_digital_photo_number"
                         class="digital_photo_number"
                         value="0"
@@ -416,8 +321,8 @@
                   <div class="numberCheck">
                     <input
                       type="text"
-                      name="daytime_mini_figure_number"
-                      id="mini_figure"
+                      name="extra.미니 피규어 세트 사전구매"
+                      id="daytime_mini_figure_number"
                       class="mini_figure_number"
                       value="0"
                       readonly
@@ -495,7 +400,7 @@
               <div class="p_total">
                 <label for="daytime_total_price">합계</label>
                 <span class="p_t_text">￦ 0</span>
-                <input type="text" name="total_price" id="daytime_total_price" readonly class="total_price">
+                <input type="number" name="total_price.합계" id="daytime_total_price" readonly class="total_price">
               </div>
               <div class="daytime_ticket_submit ticket_submit">
                 <button type="submit" class="submit_btn">장바구니에 담기</button>
@@ -512,6 +417,10 @@
           var dtf03_number = 0, dtf03_price = 0;
           var df04_price = [0,0,0];
           var df05_price = 0;
+
+          function comma(x) {
+              return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+          }
           //------------Load-------------
           const today = new Date();
           const weekArr = ["일", "월", "화", "수", "목", "금", "토"];
@@ -744,39 +653,30 @@
 
               } else if (!$(".d_list li input:checkbox").is(":checked")) {
                 $(".p_s_discount > div").hide();
-              }
-              
+              } 
               total();
             });
           });
-         
-
-          // ------------------------------------- 06-2. 가격 합산
-          
+          // ------------------------------------- 06-2. 가격 합산          
           const total = function() {
             const grownDatedPrice = 
               today.getFullYear()==$selYear && today.getMonth()==$selMonth-1 && today.getDate()==$selDate ? 60000 : 54000;
             const littleDatedPrice = 
               today.getFullYear()==$selYear && today.getMonth()==$selMonth-1 && today.getDate()==$selDate ? 50000 : 45000;
-
             const t_1 = grownDatedPrice * $("#daytime_numbers_grown").val() + littleDatedPrice * $("#daytime_numbers_little").val();
             const t_2 = dtf03_number * dtf03_price;
             // const t_3 = df04_price.reduce((a,b) => a+b, 0);
             // const t_4 = df05_price;
-
-            function comma(x) {
-                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            }
             $("#daytime_total_price").val(function(i,v) {
               return t_1 * discountRate + t_2;
             })
             $(".p_t_text").text("￦"+comma(t_1 * discountRate + t_2));
-            
           }
-          //페이지 리셋
-        $(".reset_btn").click(function(){
-          $(".formBox").load("./t_use_reser01_1.html");
-        })
+      
+            //페이지 리셋
+          $(".reset_btn").click(function(){
+            $(".formBox").load("./t_use_reser01_1.html");
+          })
         });
     </script>
     <script src="/js/ticket_common.js"></script>
