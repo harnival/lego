@@ -1,9 +1,4 @@
 /* main --------------------------------------- */
-main {
-    padding-top: 10vh;
-}
-header,footer {z-index: 5000;}
-
 .mainWrap {
 width: 100%;
 display: flex;

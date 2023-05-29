@@ -9,7 +9,10 @@ $(function(){
     } else {
       $(".formBox").load("/t_use_reser01_1.html");
     }
-    $("header").load("/header/header.html");
+    $("header")
+      .hide()
+      .load("/header/header.html")
+      .ready(function(){ $("header").show() })
     $("footer").load("/footer/footer.html");
       //localStorage setting
       localStorage.setItem("payment_list","[]");

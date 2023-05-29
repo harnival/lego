@@ -26,3 +26,5 @@ input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 input[type='number'] { appearance: textfield; }
 
 /* main 조절 */
+main { padding-top: 10vh; }
+header,footer {z-index: 5000;}

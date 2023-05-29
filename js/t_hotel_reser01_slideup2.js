@@ -1,6 +1,9 @@
 $(function(){
 
-    $("header").load("/header/header.html");
+    $("header")
+        .hide()
+        .load("/header/header.html")
+        .ready(function(){$("header").show()})
     $("footer").load("/footer/footer.html");
 
 const oneday = 86400000;

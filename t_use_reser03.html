@@ -13,6 +13,7 @@
         .mainWrap {
             position: relative;
             background-color: var(--main-bg-color);
+            padding-bottom: 8rem;
         }
         .title_wrap {
             width: 100%;            
@@ -58,7 +59,7 @@
             max-width: var(--whole-max-width);
             min-width: var(--whole-min-width);
             
-            margin: auto;
+            margin:3rem auto;
             padding: 30px 0px;
             box-sizing: border-box;
         }
@@ -66,27 +67,44 @@
             display: flex;
         }
         .basket_total {
-            background-color: palevioletred;
+            padding: 2rem;
+            box-sizing: border-box;
             width: 30%;
+            border-top: 2px solid rgba(0,0,0,0.3);
+            border-bottom: 2px solid rgba(0,0,0,0.3);
+        }
+        .basket_t_detail span{
+            font-size: 150%;
+        }
+        .basket_t_detail {
+            text-align: end;
         }
         .basket_l_delete {
             display: block;
             font-size: 0px;
             position: absolute;
-            top: 0px;
-            left: -2rem;
+            top: -2rem;
+            left: 1rem;
             width: 2rem;
             height: 2rem;
-            background-color: aqua;
+            background:  url("/image/lego_close.png") no-repeat center bottom/ 100%;
+        }
+        .pay_button {
+            display: inline-block;
+            font-size: 120%;
+            font-weight: bold;
+            padding: 0.5rem 2rem;
+            background-color: orange;
+            border-radius: 15px;
         }
         .basket_l_ul {
-            background-color: palegreen;
             width: 70%;
             padding: 10px 6%;
             box-sizing: border-box;
         }
         .basket_l_unit {
             width: 100%;
+            padding: 2rem 0px;
         }
         .basket_l_u_detail {
             background-color: aqua;
@@ -103,7 +121,9 @@
             justify-content: space-between;
             padding: 20px;
             box-sizing: border-box;
-            background-color: tomato;
+            border-radius: 20px;
+            background-color: green;
+            box-shadow: 3px 2px 5px 0px rgba(102, 102, 102, 0.8);
         }
         .basket_l_u_t_number >span{
             margin-left: 1rem;
@@ -116,13 +136,13 @@
             width: 100%;
             height: 520px;
             
-            margin: 2rem auto;
+            margin: 0 auto;
             box-sizing: border-box;
         }
         .terms_list {
             display: flex;
             width: 100%;
-            margin:0 auto;
+            margin: 1rem auto;
             border-right: 1px solid rgba(0,0,0,0.3);
         }
         .terms_list_wrap {
@@ -132,7 +152,7 @@
         }
         .terms_list_frame {
             width: 100%;
-            height: 52%;
+            height: 65%;
             background-color: rgba(255,255,255,0.4);
             padding: 20px 30px;
             box-sizing: border-box;
@@ -169,6 +189,7 @@
     </style>
 </head>
 <body>
+    <header></header>
     <main>
         <div class="mainWrap">
             <div class="title_wrap">
@@ -184,7 +205,7 @@
             <div class="basket">
                 <div class="basket_title_wrap">
                     <div class="basket_title">
-                        <h3>장바구니 목록</h3>
+                        <h3>구매 목록</h3>
                     </div>
                 </div>
                 <div class="basket_list">
@@ -192,10 +213,11 @@
                         
                     </ul>
                     <div class="basket_total">
-                        <div class="basket_t_detail">
-                            <span>결제 금액</span>
+                        <span>총 결제 금액</span>
+                        <form class="basket_t_detail">
                             <span></span>
-                        </div>
+                            <input type="hidden" name="price" value="0">
+                        </form>
                         <div class="buttons">
                             <a href="#none" class="pay_button">결제하기</a>
                         </div>
@@ -229,9 +251,14 @@
         </div>
         
     </main>
-    
+    <footer></footer>
     <script>
         $(function(){
+            $("header")
+                .hide()
+                .load("/header/header.html")
+                .ready(function(){ $("header").show() });
+            $("footer").load("/footer/footer.html");
             function comma(x) {
               return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             }
@@ -258,6 +285,7 @@
                     var datetext = `${q.getFullYear()}년 ${q.getMonth()+1}월 ${q.getDate()}일 (${weekArr[q.getDay()]})`
                 }
                 total += +element['total_price.합계'];
+                $(".basket_t_detail input").val((i,v) => +v + +element['total_price.합계'])
                 const $li = $(`
                 <li class="basket_l_unit">
                     <div class="basket_l_title">
@@ -265,7 +293,7 @@
                         <div class="basket_l_u_t_name">
                             <div class="basket_l_u_t_code">코드번호 ${element['common.type']}-${element['common.submittime']}</div>
                             <a href="#none"><strong>${element["common.typetext"]}</strong></a>
-                            <div class="basket_l_u_t_date">${datetext}</div>
+                            <div class="basket_l_u_t_date">${datetext??""}</div>
                             <div class="basket_l_u_t_number"></div>
                         </div>
                         <div class="basket_l_u_t_price">
@@ -297,11 +325,17 @@
 
             })
             // 합계 입력 //
-            $(".basket_t_detail span").eq(1).text(`￦ ${comma(total)}`);
+            $(".basket_t_detail span").eq(0).text(`￦ ${comma(total)}`);
             // 결제 //
             $(".pay_button").on("click",function(){
-                if( $(".terms input[type='checkbox']").is(":checked") ) {
-                    alert(`${comma(total)}원 결제하세요~~`);
+                $(".basket_t_detail").trigger("submit");
+            });
+            $(".basket_t_detail").on("submit",function(e){                
+                const q = new FormData(e.target);
+                const w = q.get("price");
+                console.log(w)
+                if( $("#terms_c_input1").is(":checked")&&$("#terms_c_input2").is(":checked") ) {
+                    alert(`${comma(w)}원 결제하세요~~`);
                 } else {
                     alert(" 약관에 동의해주세요. ")
                 }

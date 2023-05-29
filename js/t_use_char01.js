@@ -1,10 +1,9 @@
 $(function(){
     //load==================================
-    $("body").hide();
-    $("footer").load("/footer/footer.html");
-    $("header").load("/header/header.html",function(){
-        $("body").show("slow");
-    });
+   $("header").hide()
+        .load("/header/header.html")
+        .ready(function(){ $("header").show() });
+    $("footer").load("/footer/footer.html")
     
     localStorage.removeItem("load");
     //설명창 열기/닫기============================
