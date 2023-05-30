@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>호텔 결제</title>
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- css -->
+    <link rel="stylesheet" href="/t_hotel/css/hotel_reset.css">
+    <style>
+        .mainWrap {
+            background-color: white;
+        }
+        .title_wrap {
+            height: var(--common-title-height);
+            background-color: tomato;
+        }
+        /* ---------------------- */
+        .check_wrap {
+            max-width: var(--main-max-width);
+            margin: auto;
+            background-color: var(--main-bg-color);
+
+            display: flex;
+            gap: 5rem;
+        }
+        .check_wrap h4 {
+            font-size: 150%;
+            height: 3em;
+        }
+        #hotelForm {
+            padding: 10px 10%;
+        }
+        .form_wrap {
+            width: 60%;
+            border: 1px dashed aqua;
+            box-sizing: border-box;
+            background-color: white;
+        }
+        fieldset {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            border: none;
+            padding: 0px 0px 2rem 0px;
+            margin: 0px;
+            box-sizing: border-box;
+            position: relative;
+        }
+        fieldset > div {
+            margin-bottom: 2rem;
+        }
+        
+        .name_wrap_en {
+            display: none;
+            position: relative;
+            gap: 2rem;
+        }
+        .name_wrap_en::after {
+            content: "* 영문이름 입력 시, 반드시 여권에 기재된 이름으로 작성하세요.";
+            position: absolute;
+            bottom: -1.2rem;
+            left: 0px;
+            font-size: 80%;
+            color: #666;
+        }
+        .convert_check {
+            position: absolute;
+            right: 0px;
+        }
+        .inputBox {
+            position: relative;
+        }
+        .inputBox input {
+            border: 1px solid rgb(143, 143, 143);
+            width: 15rem;
+            box-sizing: border-box;
+            padding: 10px;
+            font-size: 100%;
+        }
+        .inputBox input::placeholder {
+            color: rgb(143,143,143);
+        }
+        .inputBox label {
+            position: absolute;
+            top: -1.5em;
+            left: 0px;
+            font-size: 90%;
+            font-weight: 600;
+        }
+        .arrive_wrap label span {
+            font-size: 80%;
+            font-weight: 400;
+        }
+        #hotelForm_arrive_time {
+            background:white url("/image/t_hotel_reser02/arrow_drop_down.png") no-repeat center right / 1.5rem;
+            cursor: pointer;
+        }
+        .inputBox label strong {
+            color: red;
+            margin-left: 2px;
+        }
+        .arrive_wrap {
+            position: relative;
+        }
+        .arrive_wrap .arrive_option {
+            background-color: white;
+            width: calc(100% - 2px);
+            position: absolute;
+            left: 1px;
+            top: 100%;
+
+            display: none;
+        }
+        .arrive_option a {
+            display: block;
+            height: 100%;
+            padding: 2px 1rem;
+        }
+        .arrive_option a:hover {
+            background-color: rgba(0,0,0,0.2);
+        }
+        #hotelForm_request {
+            display: block;
+            width: 25vw;
+            aspect-ratio: 1/0.3;
+            resize: none;
+            padding: 1rem;
+            font-size: 100%;
+            box-sizing: border-box;
+        }
+        /* ----------------------------- */
+        .check {
+            width: 35%;
+            box-sizing: border-box;
+            background-color: white;
+        }
+        .check > ul {
+            width: 85%;
+            margin: auto;
+            padding-bottom: 4rem;
+        }
+        .check_li {
+            margin-bottom: 1rem;
+        }
+        .check_list {
+            background-color: white;
+            box-shadow: 2px 1px 3px 0px rgba(0,0,0,0.4);
+            border-radius: 2rem;
+            padding: 1rem 1.5rem;
+        }
+        .check_date {
+            display: flex;
+            justify-content: end;
+            font-size: 90%;
+            color: #666;
+        }
+        .check_theme {
+            font-size: 90%;
+            color: #666;
+        }
+        .check_room {
+            font-size: 100%;
+            padding-left: 1rem;
+        }
+        .check_price {
+            font-size: 100%;
+            font-weight: bold;
+            text-align: end;
+            padding-right: 1rem;
+        }
+        .check_total {
+            width: 60%;
+            margin: auto;
+            display: flex;
+            justify-content: end;
+            gap: 2rem;
+            padding: 1rem 3rem;
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+            font-size: 120%;
+        }
+        .check_button {
+            padding: 3rem;
+        }
+        .check_button button {
+            float: right;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 120%;
+            background-color: orange;
+            border-radius: 20px;
+            color: white;
+            cursor: pointer;
+            transition: .3s ease;
+        }
+        .check_button button:hover {
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="mainWrap">
+            <div class="title_wrap">
+                <div class="title">
+                    <h3>예약 확인 및 결제</h3>
+                </div>
+            </div>
+            <div class="check_wrap">
+                <div class="form_wrap">
+                    <h4>예약자 정보</h4>
+                    <form action="" id="hotelForm">
+                        <fieldset>
+                            <div class="name_wrap_kr">
+                                <div class="n_wk_name inputBox">
+                                    <label for="hotelForm_name">이름(한글)<strong>*</strong></label>
+                                    <input type="text" name="name_kr" id="hotelForm_name">
+                                </div>
+                            </div>
+                            <div class="name_wrap_en">
+                                <div class="n_we_fn inputBox">
+                                    <label for="hotelForm_family_name">성(영문)<strong>*</strong></label>
+                                    <input type="text" name="family_name_en" id="hotelform_family_name">
+                                </div>
+                                <div class="n_we_ln inputBox">
+                                    <label for="hotelform_last_name">이름(영문)<strong>*</strong></label>
+                                    <input type="text" name="last_name_en" id="hotelForm_last_name">
+                                </div>
+                            </div>
+                            <div class="convert_check">
+                                <input type="checkbox" name="name_for_eng" id="hotelForm_name_for_eng">
+                                <label for="hotelForm_name_for_eng">영문으로 입력</label>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="phone_wrap inputBox">
+                                <label for="hotelForm_phone">전화번호<strong>*</strong></label>
+                                <input type="tel" name="phone" id="hotelForm_phone" maxlength="11" placeholder="'-' 없이 입력">
+                            </div>
+                            <div class="email_wrap inputBox">
+                                <label for="hotelForm_email">이메일<strong>*</strong></label>
+                                <input type="email" name="email" id="hotelForm_email">
+                            </div>
+                        </fieldset>
+                        
+                        <fieldset>
+                            <div class="arrive_wrap inputBox">
+                                <label for="hotelForm_arrive_time">도착 예정 시간을 알려주세요.</label>
+                                <input type="text" name="arrive_time" id="hotelForm_arrive_time" placeholder="선택 시 클릭" readonly>
+                                <ul class="arrive_option">
+                                    <li><a href="#none">04:00 PM (16:00) ~ </a></li>
+                                    <li><a href="#none">05:00 PM (17:00) ~ </a></li>
+                                    <li><a href="#none">06:00 PM (18:00) ~ </a></li>
+                                    <li><a href="#none">07:00 PM (19:00) ~ </a></li>
+                                    <li><a href="#none">08:00 PM (20:00) ~ </a></li>
+                                    <li><a href="#none">09:00 PM (21:00) ~ </a></li>
+                                    <li><a href="#none">10:00 PM (22:00) ~ </a></li>
+                                    <li><a href="#none">11:00 PM (23:00) ~ </a></li>
+                                </ul>
+                            </div>
+                            <div class="arrive_wrap inputBox">
+                                <label for="hotelForm_annual_pass">연간회원권 번호 <span>( *소지 시 선택사항)</span></label>
+                                <input type="text" name="annual_pass" id="hotelForm_annual_pass">
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="request_wrap inputBox">
+                                <label for="hotelform_request">추가 요청사항</label>
+                                <textarea name="request" id="hotelForm_request" placeholder="ex. 추가 물품이 필요합니다."></textarea>
+                            </div>
+                            <input type="hidden" name="total_price" id="hotelForm_total_price">
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="check">
+                    <h4>예약 목록</h4>
+                    <ul>
+                    </ul>
+                    <div class="total_wrap">
+                        <div class="check_total">
+                            <strong>총 요금</strong>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="check_button">
+                        <button type="submit" form="hotelForm"><strong>예약하기</strong></button>
+                    </div>
+                </div>
+            </div>
+            <div class="btn">
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        $(document).ready(function(){ readyGo()});
+        function readyGo() {
+            const data = JSON.parse(localStorage.getItem("hotelBasket"));
+            const dataLen = data.length;
+       
+            // 가격 숫자 //
+            function comma(x) {
+                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }      
+            // ========================================================= //
+            $("#hotelForm_name_for_eng").on("change",function(){
+                if ($(this).is(":checked")) {
+                    $(".name_wrap_kr").hide();
+                    $(".name_wrap_en").css("display","flex");
+                } else {
+                    $(".name_wrap_kr").show();
+                    $(".name_wrap_en").css("display","none");
+                }
+            });
+
+            // 예약 목록 생성 //
+            let total=0;
+            for( let j = 0; j < dataLen; j++) {
+                const len = data[j]["price"].length;
+                for(let i = 0; i < len; i++) {
+                    total += +data[j].price[i];
+                    const $li = $(`
+                        <li class="check_li">
+                            <div class="check_list">
+                                <div class="check_date">${data[j].checkinText} → ${data[j].checkoutText}</div>
+                                <div class="check_theme">${data[j].theme[i]}</div>
+                                <div class="check_room">${data[j].title[i]}</div>
+                                <div class="check_price">￦ ${comma(data[j].price[i])}</div>
+                            </div>
+                        </li>
+                    `);
+                    $(".check ul").append($li);
+                }
+            }
+            $("#hotelForm_total_price").val((i,v) => total);
+            $(".check_total span").text(`￦ ${comma(total)}`);
+
+            $("#hotelForm").on("submit",function(event){
+                event.preventDefault();
+                const q = new FormData(event.target);
+                const w = Object.fromEntries(q.entries());
+                const time = Date.now();
+                w.submitTime = time;
+
+                const basket = JSON.parse(localStorage.getItem("hotelBasket"));
+                basket.push(w);
+                localStorage.setItem(`hotelReservation_${time}`, JSON.stringify(basket));
+                localStorage.removeItem("hotelBasket");
+
+                alert(`${comma(total)}원 결제하세요.`);
+                $.post("example.html",{ price : total, codeNumber : time});
+                location.href = '/t_use/t_use_char01.html';
+            })
+        };
+    </script>
+</body>
+</html>

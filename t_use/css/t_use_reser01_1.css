@@ -1,0 +1,225 @@
+/* ======================================= 01. 날짜 선택 */
+.dated_fieldset01 {
+  display: flex;
+  justify-content: right;
+  position: relative;
+  padding-left: 20%;
+}    
+.dated_fieldset01 legend::before {
+  content: "01";
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 1.5;
+  width: 30px;
+  height: 30px;
+  background-color: royalblue;
+  border-radius: 50%;
+  font-size: 18px;
+  color: white;
+  margin-right: 10px;
+}
+/* ======================================= 02. 인원 선택 */
+.dated_fieldset02 {
+  padding: 30px 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+  .dated_fieldset02 legend::before {
+    content: "02";
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 1.5;
+    width: 30px;
+    height: 30px;
+    background-color: royalblue;
+    border-radius: 50%;
+    font-size: 18px;
+    color: white;
+    margin-right: 10px;
+  }
+/* ============================================ 03. 사전 구매 */
+.dated_fieldset03 legend::before {
+  content: "03";
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 1.5;
+  width: 30px;
+  height: 30px;
+  background-color: royalblue;
+  border-radius: 50%;
+  font-size: 18px;
+  color: white;
+  margin-right: 10px;
+}
+.dated_fieldset03 {
+  padding: 30px 20%;
+}
+.df03_labelExp {
+  color: var(--exp-color);
+  text-indent: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-bottom: 20px;
+}
+.df03_wrap .nc_wrap {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+} 
+.df03_wrap {
+  position: relative;
+  padding-bottom: 40px;
+}
+.df03_w_exp {
+  padding: 20px;
+  border: 1px solid rgba(0,0,0,0.1);
+  width: 70%;
+  margin: auto;
+}
+.df03_w_exp span {
+  font-weight: 500;
+  font-size: 15px;
+}
+.df03_w_exp ul {
+  list-style:square;
+  padding: 10px 0px 10px 30px;
+  margin: 0px;
+  font-size: 13px;
+  color: #666;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+/* ============================================== 04. 패스트트랙 */
+.dated_fieldset04 {
+  padding: 80px 20%;
+}
+.dated_fieldset04 legend::before {
+  content: "04";
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 1.5;
+  width: 30px;
+  height: 30px;
+  background-color: royalblue;
+  border-radius: 50%;
+  font-size: 18px;
+  color: white;
+  margin-right: 10px;
+}
+.df04_labelexp {
+  position: relative;
+  height: 1.5rem;
+}
+.df04_labelexp >span {
+  color: var(--exp-color);
+}
+.df04_labelexp a {
+  float: right;
+  text-align: end;
+  padding-right: 1rem;
+  text-decoration: none;
+  width: 25%;
+  height: 100%;
+  background: rgba(255,255,255) url("/image/t_use_reser01_1/info.png") no-repeat left 5% center/ 1rem;
+  box-sizing: border-box;        
+  font-size: 100%;
+  opacity: 0.5;
+}
+.df04_l_ride {
+  width: 25%;
+  background-color: white;
+  position: absolute;
+  top: 100%;
+  right: 0px;
+  z-index: 500;
+  padding: 0.5rem 0px 0.5rem 1rem;
+  font-size: 90%;
+  box-sizing: border-box;
+  display: none;
+}
+.df04_ft {
+  margin-top: 20px;
+  padding-bottom: 40px;
+  position: relative;
+}
+.df04_ft .nc_wrap {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+.df04_ft label {
+  font-size: 110%;
+  padding-right: 2rem;
+}
+.df04_ft_exp {
+  color: var(--exp-color);
+  padding-top: 1rem;
+  text-indent: 10px;
+  font-size: 100%;
+}
+/* =========================================== 05. master builder */
+.dated_fieldset05 {
+  padding: 80px 20% 30px;
+}
+.dated_fieldset05 legend::before {
+  content: "05";
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 1.5;
+  width: 30px;
+  height: 30px;
+  background-color: royalblue;
+  border-radius: 50%;
+  font-size: 18px;
+  color: white;
+  margin-right: 10px;
+}
+.df05_wrap {
+  position: relative;
+  padding: 0px 0px 40px;
+}
+.df05_wrap .nc_wrap {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+.df05_price {
+  color: var(--exp-color);
+  text-indent: 10px;
+}
+.df05_w_exp {
+  padding: 20px;
+  border: 1px solid rgba(0,0,0,0.1);
+  width: 70%;
+  margin: auto;
+}
+.df05_w_exp ul {
+  list-style:square;
+  padding: 10px 0px 10px 30px;
+  margin: 0px;
+  font-size: 13px;
+  color: #666;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+/* ================================================  06. 합계 */
+.price {
+  width: 40%;
+  background-color: rgba(255,255,255,0.2);
+  padding: 50px 30px;
+  position: relative;
+}
+
+#dated_total_price {
+  display: none;
+}

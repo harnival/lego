@@ -1,0 +1,738 @@
+/* 공통 요소 */
+:root {
+    /* length */
+    --whole-max-width: 1350px;
+    --whole-min-width: 750px;
+    --title-height: 33vh;
+    --calender-table-size: 400px;
+    --calender-month-button: 1em;
+    --f02-inputbox-height: 25rem;
+    /* color */
+    --calender-select-color: rgb(2, 172, 2);
+    --inputbox-bg-color: white;
+    --main-bg-color: #ffcf00;
+    --main-yellow-color: #ffcf00;
+}
+/* 달력 이동 버튼 */
+.calender .gotoback {
+    font-size: 0px;
+    display: block;
+    width: 10%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    background: var(--main-yellow-color) url("/image/arrow_back.png") no-repeat left 40% center/25px;
+    position:absolute;
+    left: 40px;
+}
+.calender .gotonext {
+    font-size: 0px;
+    display: block;
+    width: 10%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    background: var(--main-yellow-color) url("/image/arrow_forward.png") no-repeat right 40% center/25px;
+    position: absolute;
+    right: 40px;
+}
+
+  /* (단일)달력 공통 디자인 =====================================================*/
+  /* 정보입력용 달력은 디자인이 다름 */
+.calender {
+    width: 80%;
+    padding: 0px 8%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    background: linear-gradient(to right, transparent ,white 15% 85%,transparent);
+    height: max-content;
+    overflow: hidden;
+
+    margin-top: 2px;
+}
+.calender_wrap {
+    padding: 10px;
+}
+.calender_wrap_prev,
+.calender_wrap_next {
+    filter: blur(2px);
+    opacity: 0.8;
+    padding: 10px;
+}
+.calender_date_table {
+display: flex;
+flex-direction: column;
+}
+.calender .cdt_date {
+width: var(--calender-table-size);
+min-height: fit-content;
+display: flex;
+flex-wrap: wrap;
+}      
+.calender .cdt_week {
+height: 30px;
+justify-content: space-around;
+align-items: center;
+display: flex;
+text-align: center;
+color: #aaa;
+}
+.calender .calender_month {
+width: 100%;
+padding: 20px 0px 30px;
+box-sizing: border-box;
+display: flex;
+align-items: center;
+position: relative;
+}
+.calender .cm_spanbox {
+width: 100%;
+height: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 10px;
+font-size: 150%; 
+}
+.cm_sb_span1 {
+    color: var(--main-yellow-color);
+}
+.cm_sb_span2 {
+    color: #666;
+}
+.date_inputs {
+box-sizing: border-box;
+position: absolute;
+top: 100px;
+left: 10%;
+}
+.date_inputs label{
+    font-size: 150%;
+    padding: 10px 20px;
+}
+.date_inputs input{
+    display: none;
+}
+/* calender cell */
+.calender .dataCell {
+    width: calc(100% / 7 - 4px);
+    margin: 2px;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  .disabled_cell {
+    color: #bbb;
+  }
+  .able_cell {
+    color: var(--calender-select-color);
+  }
+  .active_cell{
+    background-color: var(--calender-select-color);
+    color: white;
+    position: relative;
+  }
+  .active_cell::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 20%;
+    height: 10%;
+    background-color: var(--calender-select-color);
+    top: -10%;
+    left: 15%;
+  }
+  .active_cell::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 20%;
+    height: 10%;
+    background-color: var(--calender-select-color);
+    top: -10%;
+    right: 15%;
+  }
+.notOpen {
+  display: block;
+  color: #666;
+  font-size: 70%;
+  position: absolute;
+  bottom: 0px;
+}
+/* 공통 수량 입력 버튼 */
+.numberCheck {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: fit-content;
+  padding: 5px 40px;
+  border-radius: 25px;
+  background-color: yellowgreen;
+}
+.nc_wrap label {
+  display: none;
+}
+.numberCheck input {
+  width: 40px;
+  height: 30px;
+  text-align: center;
+
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  font-size: 20px;
+  border: none;
+  background-color: transparent;
+}
+.decrease_btn {
+  font-size: 0px;
+  display: block;
+  background-color: var(--main-yellow-color);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+.decrease_btn img {
+  width: 30px;
+  opacity: 0.7;
+}
+.increase_btn {
+  font-size: 0px;
+  display: block;
+  background-color: var(--main-yellow-color);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+.increase_btn img {
+  width: 30px;
+  opacity: 0.7;
+}
+
+/* common main ============================================================== */
+.ticket_formWrap {
+  max-width: var(--whole-max-width);
+  width: 100%;
+  margin: auto;
+  padding-bottom: 500px;
+}
+fieldset {
+  border: none;
+  position: relative;
+  margin: 0px;
+  padding: 0px;
+}
+fieldset::after {
+  content: "";
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(to right, transparent 10%, rgba(117, 117, 117, 0.363), transparent 90%);
+  position:absolute;
+  bottom: -2px;
+  left: 0px;
+}
+fieldset legend {
+  display: block;
+  width: fit-content;
+  position: absolute;
+  top: 20px;
+  left: 7%;
+  font-size: 200%;
+}
+  /* 각 페이지의 제목박스 */
+.form_title {
+  padding: 1rem 5% 0px;
+  height: var(--title-height);
+  border: 2px solid rgba(100,100,100,0.5);
+  margin: 1rem;
+  box-sizing: border-box;
+  background: url("/image/background4.webp") no-repeat center/ cover;
+}
+.form_title > div {
+  padding-bottom: 1rem;
+}
+.form_title h4 {
+  font-size: 200%;
+  padding-bottom: 1rem;
+}
+.form_title:not(.season_form_title) li {
+  padding: 5px 50px;
+}
+.form_title:not(.season_form_title) li::before {
+  content: "";
+  display: inline-block;
+  margin-right: 0.5em;
+  width: 1em;
+  height: 1em;
+  background: url("/image/sunny.png") no-repeat center / 1em;
+}
+/* 2. 인원 선택 디자인 */
+.df02_wrap,
+.dtf02_wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-left: 55px;
+  margin-top: 1rem;
+}
+  .df02_wrap > label,
+  .dtf02_wrap > label {
+    font-size: 150%;
+    font-weight: 600;
+  }
+  .df02_wrap > span:first-of-type,
+  .dtf02_wrap > span:first-of-type {
+    font-size: 100%;
+    color: var(--exp-color);
+  }
+  .df02_wrap > span:last-of-type,
+  .dtf02_wrap > span:last-of-type {
+    padding-top: 10px;
+  }
+  .df02_wrap > span:last-of-type span,
+  .dtf02_wrap > span:last-of-type span {
+    color: var(--exp-color);
+    font-weight: 600;
+    font-size: 100%;
+  }
+  .df02_wrap .nc_wrap,
+  .dtf02_wrap .nc_wrap {
+    position: absolute;
+    top: 0px;
+    right: 20%;
+  }
+  /* 개인정보 입력---------------------------------------------- */
+  .fieldset02 {
+    position: relative;
+    padding: 80px 15% 30px;
+  }
+  .fieldset02 legend::before {
+    content: "02";
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 1.5;
+    width: 30px;
+    height: 30px;
+    background-color: royalblue;
+    border-radius: 50%;
+    font-size: 18px;
+    color: white;
+    margin-right: 10px;
+  }
+  .i_info_origin {
+    display: none;
+  }
+  .i_i_tab {
+    height: 80px;
+    background-color: green;
+    position: relative;
+    padding-left: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+  }
+  .i_i_tab > a {
+    display: block;
+    font-size: 0px;
+    width: 15px;
+    height: 15px;
+    background: #eee url("/image/close_button.png") no-repeat center/90%;
+    border: 2px solid #666;
+    position: absolute;
+    left: 20px;
+  }
+  .i_i_inputpage_wrap {
+    height: var(--f02-inputbox-height);
+    background-color: white;
+    border: 2px solid green;
+  }
+  .i_i_inputpage {
+    position: relative;
+    box-sizing: border-box;
+    height: var(--f02-inputbox-height);
+    padding: 2rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    transition: .5s ease;
+  }
+  .fieldset02 .i_i_inputpage {
+    align-content: flex-start;
+  }
+  .vip_fieldset03 .i_i_inputpage {
+    align-content: space-evenly;
+  }
+  .i_i_inputpage > div:not(.user_photo) {
+    position: relative;
+    height: calc(100% / 4);
+    width: calc(100% / 3);
+    box-sizing: border-box;
+  }
+  .i_i_inputpage input {
+    background-color: transparent;
+    border: none;
+    border: 1px solid #666;
+    border-radius: 15px;
+    padding: 17px 0px 9px 20px ;
+    box-sizing: border-box;
+    width: 80%;
+    font-size: 15px;
+    outline-color:rgb(2, 172, 2);
+    transition: .5s ease;
+  }
+  .i_i_inputpage input::placeholder {
+    opacity: 0.7;
+  }
+  .i_i_inputpage input:focus {
+    border-color: yellow;
+  }
+  .i_i_inputpage label:not(.user_birthday label),
+  .user_birthday span {
+    display: inline-block;
+    position: absolute;
+    top: -10px;
+    left: 0px;
+    font-size: 12px;
+    color: #666;
+    background-color: var(--inputbox-bg-color);
+    padding: 0px 3px;
+  }
+  .user_nationality_select {
+    position: relative;
+  }
+  .user_nationality_select ul {
+    display: none;
+
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    width: 80%;
+    background-color: white;
+    border: 2px solid #ffffff41;
+    border-radius: 15px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 45px;
+    left: 0px;
+    z-index: 9000;
+  }
+  .user_nationality_select li {
+    padding: 3px 0px 3px 15px;
+    
+  }
+  .user_nationality_select li a {
+    display: block;
+    width: 100%;
+  }
+  .user_nationality_select li:first-child {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+  .user_nationality_select li:last-child {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    padding-bottom: 5px;
+  }
+  .user_nationality_select li:hover {
+    background-color: #ddd;
+  }
+  .user_nationality_select input {
+    
+    background: url("/image/arrow_drop_down.png") no-repeat center right 8px / 20px 30px;
+    width: 200px;
+    
+  }
+  .user_birthday input:nth-of-type(1) {
+    width: 70px;
+    text-align: center;
+    padding-left: 0px;
+  }
+  .user_birthday input:nth-of-type(2),
+  .user_birthday input:nth-of-type(3) {
+    width: 50px;
+    text-align: center;
+    padding-left: 0px;
+  }
+  .user_photo {
+    background-color: #aaaaaa4d;
+    position: relative;
+    height: 100%;
+    width: calc(100% / 3);
+    box-sizing: border-box;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+  }
+  .user_photo > span {
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 80%;
+    color: #666;
+  }
+  .user_photo_img_wrap {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    margin: 5px auto 0px;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .user_photo_canvas {
+    box-sizing: border-box;
+  }
+  .user_photo_cut {
+    display: none;
+
+    border: 2px dashed red;
+    background-color: rgba(255,255,255,0.3);
+    box-sizing: border-box;
+    aspect-ratio: 1 / 1;
+    width: 50px;
+    min-width: 40px;
+    min-height: 40px;
+    position: absolute;
+    top: center;
+    left: center;
+  }
+  .user_photo_cut_size {
+    width: 13px;
+    aspect-ratio: 1/1;
+    margin: 2px;
+    background-color: red;
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    opacity: 0;
+  }
+  .user_photo_cut_size:hover {
+    opacity: 1;
+    cursor:nwse-resize;
+  }
+  .user_photo_input {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+  }
+  .user_photo_notice{
+    font-size: 80%;
+    color: #666;
+    padding: 3px 10px;
+    box-sizing: border-box;
+  }
+  .user_photo_input a {
+    padding: 3px 10px;
+    background-color: #ccc;
+    border-radius: 10px;
+  }
+  /* 6.합계 디자인 ------------------------------------------*/
+  .total_price_wrap {
+    display: flex;
+    gap: 40px;
+    position: relative;
+    padding: 20px 15%;
+  }
+  .total_price_wrap legend {
+    display: none;
+  }
+  .discount {
+    width: 60%;
+  }
+  .discount >strong {
+    display: flex;
+    align-items: center;
+    height: 50px;
+  }
+  .d_list {
+    width: 100%;
+    list-style: none;
+    padding: 0px;
+    border: 1px solid rgba(0,0,0,0.4);
+    border-bottom: none;
+  }
+  .d_list .empty_li {
+    height: 70px;
+    background-color: #eeeeee4b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #666;
+  }
+  .d_list li {
+    border-bottom: 1px solid rgba(0,0,0,0.4);
+    position: relative;
+    padding: 20px 15px;
+  }
+  .d_l_wrap {
+    position: relative;
+    display: flex;
+    align-items:flex-start;
+    flex-direction: column;
+  }
+  .d_l_listopen {
+    display: block;
+    width: 50%;
+    background: url("img/arrow_drop_down.png") no-repeat center left/30px;
+    padding-left: 30px;
+    line-height: 2;
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+  }
+  .d_l_select {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+  }
+  .d_l_detail {
+    display: none;
+    width: 100%;
+    height: 500px;
+    overflow-y: auto;
+
+    position: absolute;
+    top: 100%;
+    left: 0px;
+
+    background-color: var(--main-bg-color);
+    box-shadow: 1px 2px 5px 0px #55555580;
+    z-index: 100;
+    padding: 5px;
+    box-sizing: border-box;
+  }
+  .d_l_detail dd {
+    margin: 0px;
+    padding: 2px 10px;
+  }
+  .d_l_w_exp {
+    color: var(--exp-color);
+    padding-left: 20px;
+    font-size: 15px;
+  }
+  .active_discount {
+    background-color: rgb(247, 206, 199);
+  }
+  .not_discount .d_l_wrap {
+    opacity: 0.5;
+  }
+  .d_list li input[type="checkbox"] {
+    display: none;
+  }
+  .price {
+    width: 40%;
+    background-color: rgba(255,255,255,0.2);
+    padding: 30px 20px;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 2rem;
+  }
+  .p_selectlist {
+    width: 100%;
+  }
+  .p_s_box {
+    position: relative;
+    border: 2px solid rgba(100,100,100,0.5);
+    margin-top: 1rem;
+    padding: 15px 20px 15px 30px;
+  }
+  .p_s_box >strong {
+    display: inline-block;
+    background-color: rgb(255,217,51);
+    position: absolute;
+    top: -12px;
+    left: 15px;
+    padding: 0px 5px;
+    color: rgba(100,100,100,0.8);
+  }
+  .p_s_extra > div {
+    box-sizing: border-box;
+  }
+  .p_s_e_title04,
+  .p_s_e_title03, 
+  .p_s_e_title05,
+  .p_s_n_title { 
+    font-weight: bold;
+    float: left;
+  }
+  .p_s_e_number04,
+  .p_s_e_number03, 
+  .p_s_e_number05,
+  .p_s_n_number {
+    text-align: end;
+  }
+  .p_s_e_price04,
+  .p_s_e_price03, 
+  .p_s_e_price05,
+  .p_s_n_price {
+    text-align: end;
+  }
+  .discount_select {
+    display: none;
+  }
+  .p_s_e_title06 {
+    float: left;
+    padding-right: 20px;
+    font-weight: bold;
+  }
+  .p_s_e_number06 {
+    text-align: end;
+  }
+  .p_total {
+    font-size: 120%;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    min-width: 10rem;
+    background-color: rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 1rem 2rem;
+    box-sizing: border-box;
+  }
+  .p_t_text {
+    display: inline-block;
+  }
+  .total_price {
+    display: none;
+  }
+  
+  /* 제출 버튼 */
+  .ticket_submit {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+  }
+  .submit_btn, .reset_btn {
+    display: inline-block;
+    padding: 8px 20px;
+    border: none;
+    font-size: 100%;
+    background-color: white;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  .ticket_submit button:hover {
+    background-color: rgba(155,155,0,0.9);
+  }

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="/t_use/css/t_use_reser01_3.css">
+</head>
+<body>
+    <div class="ticket_formWrap annual_ticket_formWrap">
+        <div class="annual_form_title form_title">
+            <h4>연간이용권 구매하기</h4>
+            <div>
+              <ul>
+                <li>Bricktastic한 Family Fun이 여러분을 기다리고 있습니다!</li>
+              </ul>
+            </div>
+        </div>
+        <form action="" id="annual_ticket_form" class="ticket_form" data-typetext="연간이용권 구매" data-type="3">
+
+          <fieldset class="annual_fieldset01">
+            <legend>이용권 선택</legend>
+            <div class="af01_labelexp">
+              <span>LEGOLAND® Korea Resort를 운영일 기준 1년 동안 즐길 수 있는 특별한 선물! 연간 이용권 3종을 꼼꼼히 비교해보고 나에게 꼭 맞는 연간 이용권을 선택해보세요.</span>
+            </div>
+            <div class="af01_tcWrap">
+              <div class="af01_ticketcard standard">
+                <a href="#none" class="af01_tc_select">
+                  <img src="/image/t_use_reser01_3/standard_pass.png" alt="">
+                </a>
+                <span class="af01_tc_title">STANDARD PASS</span>
+                <div class="af01_tc_number">
+                  <div class="af01_tc_exp">
+                    ￦ 119,000
+                  </div>
+                  <div class="numberCheck">
+                    <input
+                      type="number"
+                      name="number.STANDARD PASS"
+                      id="annual_standard_number"
+                      value="0"
+                      data-passtype="1"
+                      readonly
+                    />
+                    <a href="#none" class="decrease_btn">수량 제외<img src="/image/t_use_reser01_3/minus.png" alt=""></a>
+                    <a href="#none" class="increase_btn">수량 추가<img src="/image/t_use_reser01_3/plus.png" alt=""></a>
+                  </div>
+                </div>
+              </div>
+              <div class="af01_ticketcard gold">
+                <a href="#none" class="af01_tc_select">
+                  <img src="/image/t_use_reser01_3/gold_pass.png" alt="">
+                </a>
+                <span class="af01_tc_title">GOLD PASS</span>
+                <div class="af01_tc_number">
+                  <div class="af01_tc_exp">￦ 169,000</div>
+                  <div class="numberCheck">
+                    <input
+                      type="number"
+                      name="number.GOLD PASS"
+                      id="annual_gold_number"
+                      value="0"
+                      data-passtype="2"
+                      readonly
+                    />
+                    <a href="#none" class="decrease_btn">수량 제외<img src="/image/t_use_reser01_3/minus.png" alt=""></a>
+                    <a href="#none" class="increase_btn">수량 추가<img src="/image/t_use_reser01_3/plus.png" alt=""></a>
+                  </div>
+                </div>
+              </div>
+              <div class="af01_ticketcard platinum">
+                <a href="#none" class="af01_tc_select">
+                  <img src="/image/t_use_reser01_3/platinum_pass.png" alt="">
+                </a>
+                <span class="af01_tc_title">PLATINUM PASS</span>
+                <div class="af01_tc_number">
+                  <div class="af01_tc_exp">￦ 249,000</div>
+                  <div class="numberCheck">
+                    <input
+                      type="number"
+                      name="number.PLATINUM PASS"
+                      id="annual_platinum_number"
+                      value="0"
+                      data-passtype="3"
+                      readonly
+                    />
+                    <a href="#none" class="decrease_btn">수량 제외<img src="/image/t_use_reser01_3/minus.png" alt=""></a>
+                    <a href="#none" class="increase_btn">수량 추가<img src="/image/t_use_reser01_3/plus.png" alt=""></a>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+            <div class="af01_exp">
+              <a href="#none" class="a_toClose">
+                혜택 비교하기
+              </a>
+              <div class="af01_e_listWrap">
+                <dl class="af01_e_list">
+                  <dt>이용 제한일 없음 <span>(레고랜드® 코리아 리조트 운영일 기준)</span></dt>
+                    <dd><span class="af01_e_l_name">standard</span></dd>
+                    <dd><span class="af01_e_l_name">gold</span></dd>
+                    <dd>
+                      <span class="af01_e_l_name">platinum</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                    </dd>
+                  <dt>레고랜드® 코리아 리조트 운영일 기준 1년간 입장 가능한 연간이용권</dt>
+                    <dd>
+                      <span class="af01_e_l_name">standard</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                    </dd>
+                    <dd>
+                      <span class="af01_e_l_name">gold</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                    </dd>
+                    <dd>
+                      <span class="af01_e_l_name">platinum</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                    </dd>
+                  <dt><a href="#none">레고랜드® 코리아 리조트 내 식음료 할인</a></dt>
+                    <dd class="af01_e_l_detail">
+                      <ul>
+                        <li>식음료 및 소매 할인은 다른 혜택, 할인 또는 보상/충성 프로그램과 함께 사용할 수 없습니다.</li>
+                        <li>특별한 초대 이벤트에서는 혜택이 제외됩니다. (프리뷰 이벤트 한정 적용 가능)</li>
+                        <li>Tasty Treats를 제외한 모든 음식점에서 할인이 적용됩니다.</li>
+                        <li>소매 제품 할인은 개인 용도로만 제공되며 재판매를 엄격히 금지합니다. </li>
+                        <li>주류는 할인에서 제외됩니다.</li>
+                      </ul>
+                    </dd>
+                    <dd><span class="af01_e_l_name">standard</span></dd>
+                    <dd>
+                      <span class="af01_e_l_name">gold</span>
+                      10%
+                    </dd>
+                    <dd>
+                      <span class="af01_e_l_name">platinum</span>
+                      20%
+                    </dd>
+                  <dt><a href="#none">레고랜드® 코리아 리조트 내 리테일샵 할인 <span>(중복할인 불가)</span></a></dt>
+                    <dd class="af01_e_l_detail">
+                      <ul>
+                        <li>식음료 및 소매 할인은 다른 혜택, 할인 또는 로열티/멤버십 프로그램과 함께 사용할 수 없습니다.</li>
+                        <li>특별한 초대 이벤트에서는 혜택이 제외됩니다. (프리뷰 이벤트 한정 적용 가능)</li>
+                        <li>일부 품목은 해당 혜택에서 제외됩니다. </li>
+                        <li>소매 제품 할인은 개인 용도로만 제공되며 재판매를 엄격히 금지합니다. </li>
+                        <li>유모차 대여시 골드 패스 15%, 플래티넘 패스 30% 할인 제공됩니다.</li>
+                      </ul>
+                    </dd>
+                    <dd><span class="af01_e_l_name">standard</span></dd>
+                    <dd><span class="af01_e_l_name">gold</span>10%</dd>
+                    <dd><span class="af01_e_l_name">platinum</span>10%</dd>
+                  <dt>레고랜드® 코리아 호텔 숙박료 할인 <span>(일부 사용 제한일 및 프로모션 제외)</span></dt>
+                    <dd>
+                      <span class="af01_e_l_name">standard</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                    </dd>
+                    <dd>
+                      <span class="af01_e_l_name">gold</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                    </dd>
+                    <dd>
+                      <span class="af01_e_l_name">platinum</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                    </dd>
+                  <dt><a href="#none">브릭토피아 다이너 뷔페 성인 1명 결제 시 동반 어린이 1명 무료 이용 <span>(주말 및 공휴일 제외, 주중만 가능)</span></a></dt>
+                    <dd class="af01_e_l_detail">
+                      <ul>
+                        <li>본 혜택은 패스당 제공되며 성인 패스 소지자 1명이 정상 결제 시, 동반 어린이 1명이 무료 이용 가능 (*중복할인 불가)</li>
+                        <li>혜택 제공 다이닝: 브릭토피아 다이너</li>
+                        <li>혜택 제공 내역은 사정에 따라 임의로 변경 될 수 있으며, 변경되는 경우 홈페이지 또는 모바일 앱을 통해 공지 예정</li>
+                        <li>주말과 공휴일에는 본 혜택 미적용</li>
+                      </ul>
+                    </dd>
+                    <dd><span class="af01_e_l_name">standard</span></dd>
+                    <dd>
+                      <span class="af01_e_l_name">gold</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                    </dd>
+                    <dd>
+                      <span class="af01_e_l_name">platinum</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                    </dd>
+                  <dt><a href="#none">방문 당일 생일자 선물 무료 제공</a></dt>
+                    <dd class="af01_e_l_detail">
+                      <ul>
+                        <li>브릭스트릿에 위치한 ‘브릭스트릿 카페’에서 "커피 또는 핫 초코(음료 택 1) + 쿠키 1개”를 무료로 제공해 드립니다. </li>
+                        <li>증빙 서류 제시가 현장에서 요구되며 미제공시 혜택 이용이 제한됩니다.</li>
+                        <li>2023년 1월 - 3월 동절기 유지 보수 기간 동안 생일을 맞으시는 연간 이용권 소지자분들은 2023년 5월까지 증빙 서류를 지참하여 파크를 방문하시면 동일 혜택을 드립니다.</li>
+                      </ul>
+                    </dd>
+                    <dd>
+                      <span class="af01_e_l_name">standard</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                    </dd>
+                    <dd>
+                      <span class="af01_e_l_name">gold</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                    </dd>
+                    <dd>
+                      <span class="af01_e_l_name">platinum</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                    </dd>
+                  <dt><a href="#none">파크 전용 혜택</a></dt>
+                    <dd class="af01_e_l_detail">
+                      <ul>
+                        <li>파크 공식 개장 시간부터 30분간 Fastrack(어트렉션 우선탑승) 이용 가능
+                          ※ 사전 이용 시간 및 기구는 변동 될 수 있습니다.</li>
+                      </ul>
+                    </dd>
+                    <dd>
+                      <span class="af01_e_l_name">standard</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                    </dd>
+                    <dd>
+                      <span class="af01_e_l_name">gold</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                    </dd>
+                    <dd>
+                      <span class="af01_e_l_name">platinum</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                    </dd>
+                </dl>
+              </div>
+            
+            </div>
+          </fieldset>
+
+          <fieldset class="annual_fieldset02 fieldset02">
+            <legend>정보 입력</legend>
+            <div class="af02_wrap">
+              <div class="af02_inputBox">
+                <div class="i_info_origin">
+                  <div class="i_i_tab">
+                    <div class="i_i_t_name"></div>
+                    <div class="i_i_t_ticket"></div>
+                    <div class="i_i_t_age"></div>
+                    <input type="hidden" name="pass" id="" data-passtype="">
+                    <a href="#none">취소</a>
+                  </div>
+                  <div class="i_i_inputpage_wrap">
+                    <div class="i_i_inputpage">
+                      <div class="user_name">
+                        <label for="">이름</label>
+                        <input type="text" name="name" id="" >
+                      </div>
+                      <div class="user_birthday">
+                        <span>생년월일</span>
+                        <input type="number" name="birthYear" maxlength="4" placeholder="0000" id="">
+                        <label for="">년</label>
+                        <input type="number" name="birthMonth" maxlength="2" min="1" max="12" placeholder="00" id="">
+                        <label for="">월</label>
+                        <input type="number" name="birthDate" maxlength="2" min="1" max="31" placeholder="00" id="">
+                        <label for="">일</label>
+                      </div>
+                      <div class="user_phone">
+                        <label for="">전화번호</label>
+                        <input type="tel" name="phone" maxlength="20" placeholder="' - ' 빼고 입력하세요." id="">
+                      </div>
+                      <div class="user_email">
+                        <label for="">이메일</label>
+                        <input type="email" name="email" placeholder="ex. example@example.com" id="">
+                      </div>
+                      <div class="user_nationality_select">
+                        <label for="">국가</label>
+                        <input type="text" name="nationality" id="" placeholder="국가 선택" readonly>
+                        <ul>
+                          <li><a href="#none">대한민국</a></li>
+                          <li><a href="#none">미국</a></li>
+                          <li><a href="#none">오스트레일리아</a></li>
+                          <li><a href="#none">일본</a></li>
+                          <li><a href="#none">홍콩</a></li>
+                          <li><a href="#none">중국</a></li>
+                          <li><a href="#none">대만</a></li>
+                          <li><a href="#none">싱가포르</a></li>
+                          <li><a href="#none">오스트리아</a></li>
+                          <li><a href="#none">필리핀</a></li>
+                          <li><a href="#none">말레이시아</a></li>
+                          <li><a href="#none">영국</a></li>
+                          <li><a href="#none">태국</a></li>
+                        </ul>
+                      </div>
+                      <div class="user_states">
+                        <label for="">도/특별시/시</label>
+                        <input type="text" name="states" id="">
+                      </div>
+                      <div class="user_city">
+                        <label for="">시/군/구</label>
+                        <input type="text" name="city" id="">
+                      </div>
+                      <div class="user_photo">
+                        <span>패스 사진 등록</span>
+                        <input type="hidden" name="photo" class="user_photo_submitOnly">
+                        <div class="user_photo_img_wrap">
+                          <canvas class="user_photo_canvas" width="0" height="0"></canvas>
+                          <div class="user_photo_cut">
+                            <div class="user_photo_cut_size"></div>
+                          </div>
+                        </div>
+                        <div class="user_photo_notice">* '사진 업로드' 버튼을 눌러 사진을 등록하십시오. 연간회원권 등록을 완료하려면 사진이 필요합니다</div>
+                        <div class="user_photo_input">
+                          <input type="file" name="" class="user_photo" accept="image/png, image/jpeg, image/webp" style="display:none">
+                          <a href="#none" class="user_photo_upload">사진 업로드</a>
+                          <a href="#none" class="user_photo_sliceBtn">잘라내기</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="annual_fieldset06 total_price_wrap">
+            <legend>가격 합계</legend>
+            <div class="discount">
+              <span>할인 적용</span>
+              <ul class="d_list">
+                <li>
+                  <div class="d_l_wrap">
+                    <a href="#none" class="d_l_listopen">
+                      KB국민카드 제휴 할인
+                    </a>
+                    <div class="d_l_w_exp">
+                      연간이용권 (Gold Pass) 4장 이상 구매 시 10% 할인
+                    </div>
+
+                    <a href="#none" class="d_l_select" id="d_l_KBcard">적용하기</a>
+                    <input type="checkbox" name="extra.discount" id="d_l_select_01" value="KB국민카드 제휴혜택 적용">
+                  </div>
+                  <div class="d_l_detail">
+                    <dl>
+                      <dt>✔ 기간:</dt>
+                        <dd>2022년 5월 5일(목) ~ 2027년 5월 4일(화)</dd>
+                      <dt>✔ 대상:</dt>
+                        <dd>KB국민카드 회원 (KB국민 비씨, 기업, 선불카드 제외)</dd>
+                      <dt>✔ 내용:</dt>
+                        <dd>KB국민카드로 LEGOLAND® 연간이용권(Gold Pass)를 4장 이상 구매시 1장 당 10% 할인 혜택 제공</dd>
+                      <dt>✔ KB국민카드 회원 할인 혜택</dt>
+                        <dd>
+                          <table>
+                            <thead>
+                              <tr>
+                              <th style="width: 33.3333%; text-align: center;">구분</th>
+                              <th style="width: 33.3333%; text-align: center;">대인<br />(만 13세 이상)</th>
+                              <th style="width: 33.3333%; text-align: center;">소인<br />(만 2세 이상<br />~12세 이하)</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                              <td style="width: 33.3333%; text-align: center;">정상가</td>
+                              <td style="width: 33.3333%; text-align: center;">60,000원</td>
+                              <td style="width: 33.3333%; text-align: center;">50,000원</td>
+                              </tr>
+                              <tr>
+                              <td style="width: 33.3333%; text-align: center;">KB국민카드 할인가<br />(평일)</td>
+                              <td style="width: 33.3333%; text-align: center;">48,000원</td>
+                              <td style="width: 33.3333%; text-align: center;">40,000원</td>
+                              </tr>
+                              <tr>
+                              <td style="width: 33.3333%; text-align: center;">KB국민카드 할인가<br />(주말,공휴일)</td>
+                              <td style="width: 33.3333%; text-align: center;">54,000원</td>
+                              <td style="width: 33.3333%; text-align: center;">45,000원</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </dd>
+                        <dd>* 4장 구매시 정상가 대비 67,600원 할인</dd>
+                        <dd>* 4장 부터 구매 가능하며, 4장 미만 구매는 LEGOLAND® 공식 홈페이지를 통해 구매 가능(4장 미만 구매는 할인 제공 불가)</dd>
+                        <dd>* 연간이용권(Gold Pass) 혜택 자세히보기 (클릭)</dd>
+                      <dt>✔ 이용 전 확인해 주세요.</dt>
+                        <dd>- 다른 할인권 및 우대행사와 중복할인이 불가합니다.</dd>
+                        <dd>- 이용권 구매 및 유의사항은 레고랜드 코리아 리조트 홈페이지에서 확인 바랍니다.</dd>
+                        <dd>- 본 행사는 KB국민카드 영업정책 및 제휴업체 상황에 따라 변경 또는 중단될 수 있습니다.</dd>
+                        <dd>- 문의: KB국민카드 고객센터(1588-1688)</dd>
+                        <dd>- 계약을 체결하기 전에 상품설명서와 약관을 확인하시기 바랍니다.</dd>
+                        <dd>- 상환능력에 비해 신용카드 사용액이 과도할 경우 귀하의 개인신용평점이 하락할 수 있습니다.</dd>
+                        <dd>- 개인신용평점 하락 시 금융거래 관련된 불이익이 발생할 수 있습니다.</dd>
+                        <dd>- 일정기간 원리금을 연체할 경우, 모든 원리금을 변제할 의무가 발생할 수 있습니다.</dd>
+                        <dd>- 신용카드 발급이 부적정한 경우 (개인신용평점 낮음, 연체금 보유 등) 카드발급이 제한될 수 있습니다.</dd>
+                        <dd>- 카드 이용대금과 이에 수반되는 모든 수수료를 지정된 대금 결제일에 상환합니다.</dd>
+                        <dd>- 금융소비자는 금소법 제19조 제1항에 따라 해당 상품 또는 서비스에 대하여 설명을 받을 권리가 있으며, 그 설명을 듣고 내용을 충분히 이해한 후 거래하시기 바랍니다.</dd>
+                    </dl>
+                    
+                    
+                  </div>
+                </li>
+                
+              </ul>
+            </div>
+
+            <div class="price">
+              <div class="p_selectlist">
+                <ul>
+                  <li class="p_s_box">
+                    <strong>구매 수량</strong>
+                    <div class="p_s_numbers">
+                      
+                    </div>
+                  </li>
+                  <li class="p_s_box">
+                    <strong>할인 내역</strong>
+                    <div class="p_s_discount">
+                      <div>
+                        <p class="p_s_e_title06"></p>
+                        <p class="p_s_e_number06"></p>
+                        <p class="p_s_e_price06"></p>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="p_total">
+                <label for="total_price">합계</label>
+                <span class="p_t_text">￦ 0</span>
+                <input type="text" name="total_price.합계" id="annual_total_price" readonly class="total_price">
+              </div>
+              <div class="annual_ticket_submit ticket_submit">
+                <button type="submit" class="submit_btn">장바구니에 담기</button>
+                <button type="button" class="reset_btn">다시 입력</button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+    </div>
+    <script src="/t_use/js/t_use_reser01_3.js"></script>
+    <script src="/t_use/js/ticket_common.js"></script>
+   
+</body>
+</html>

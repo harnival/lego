@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이용권 방문 예약</title>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <link rel="stylesheet" href="/t_use/css/t_use_reser01_6.css">
+</head>
+<body>
+  <div class="ticket_formWrap visit_ticket_formWrap">
+    <div class="form_title visit_form_title">
+      <h4>이용권 방문 예약</h4>
+      <div>
+        <ul></ul>
+      </div>
+    </div>
+
+    <form class="ticket_form" id="visit_ticket_form">
+      <fieldset class="visit_fieldset01">
+        <legend>이용권 선택</legend>
+        <div class="vif01_labelexp">
+          <span class="vif01_labelexp_add">사용할 이용권을 선택해주세요.</span>
+        </div>
+        <div class="vif01_tcWrap">
+
+          <div class="vif01_ticketcard">
+            <div class="vif01_tc_img">
+              <img src="./image/1st_to_play.jpg" alt="">
+            </div>
+            <div class="vif01_tc_content">
+              <div class="vif01_tc_title">
+                <strong>1st TO PLAY 패스 방문예약</strong>
+                <span></span>
+              </div>
+              <div class="vif01_tc_number">
+                <div class="numberCheck">
+                  <input type="text" name="number.first" class="vif01_number" value="0" readonly data-classes="first"/>
+                  <a href="#none" class="decrease_btn">수량 제외<img src="./image/minus.png" alt=""></a>
+                  <a href="#none" class="increase_btn">수량 추가<img src="./image/plus.png" alt=""></a>
+                </div>
+              </div>
+            </div>
+            <div class="vif01_tc_check">
+              <input type="checkbox" name="" id="">
+            </div>
+            <div class="vif01_tc_disabled">
+              <span></span>
+            </div>
+          </div>
+
+          <div class="vif01_ticketcard">
+            <div class="vif01_tc_img">
+              <img src="./image/1day_re.webp" alt="">
+            </div>
+            <div class="vif01_tc_content">
+              <div class="vif01_tc_title">
+                <strong>날짜 미지정 일일이용권 방문예약</strong>
+                <span></span>
+              </div>
+              <div class="vif01_tc_number">
+                <div class="numberCheck">
+                  <input type="text" name="number.dated" class="vif01_number" value="0" readonly data-classes="dated"/>
+                  <a href="#none" class="decrease_btn">수량 제외<img src="./image/minus.png" alt=""></a>
+                  <a href="#none" class="increase_btn">수량 추가<img src="./image/plus.png" alt=""></a>
+                </div>
+              </div>
+            </div>
+            <div class="vif01_tc_check">
+              <input type="checkbox" name="" id="">
+            </div>
+            <div class="vif01_tc_disabled">
+              <span></span>
+            </div>
+          </div>
+
+          <div class="vif01_ticketcard">
+            <div class="vif01_tc_img">
+              <img src="./image/standard-pass.webp" alt="">
+            </div>
+            <div class="vif01_tc_content">
+              <div class="vif01_tc_title">
+                <strong>STANDARD PASS 방문예약</strong>
+                <span></span>
+              </div>
+              <div class="vif01_tc_number">
+                <div class="numberCheck">
+                  <input type="text" name="number.standard" class="vif01_number" value="0" readonly data-classes="standard"/>
+                  <a href="#none" class="decrease_btn">수량 제외<img src="./image/minus.png" alt=""></a>
+                  <a href="#none" class="increase_btn">수량 추가<img src="./image/plus.png" alt=""></a>
+                </div>
+              </div>
+            </div>
+            <div class="vif01_tc_check">
+              <input type="checkbox" name="" id="">
+            </div>
+            <div class="vif01_tc_disabled">
+              <span></span>
+            </div>
+          </div>
+
+          <div class="vif01_ticketcard">
+            <div class="vif01_tc_img">
+              <img src="./image/gold-pass.webp" alt="">
+            </div>
+            <div class="vif01_tc_content">
+              <div class="vif01_tc_title">
+                <strong>GOLD PASS 방문예약</strong>
+                <span></span>
+              </div>
+              <div class="vif01_tc_number">
+                <div class="numberCheck">
+                  <input type="text" name="number.gold" class="vif01_number" value="0" readonly data-classes="gold"/>
+                  <a href="#none" class="decrease_btn">수량 제외<img src="./image/minus.png" alt=""></a>
+                  <a href="#none" class="increase_btn">수량 추가<img src="./image/plus.png" alt=""></a>
+                </div>
+              </div>
+            </div>
+            <div class="vif01_tc_check">
+              <input type="checkbox" name="" id="">
+            </div>
+            <div class="vif01_tc_disabled">
+              <span></span>
+            </div>
+          </div>
+
+          <div class="vif01_ticketcard">
+            <div class="vif01_tc_img">
+              <img src="./image/platinum-pass.webp" alt="">
+            </div>
+            <div class="vif01_tc_content">
+              <div class="vif01_tc_title">
+                <strong>PLATINUM PASS 방문예약</strong>
+                <span></span>
+              </div>
+              <div class="vif01_tc_number">
+                <div class="numberCheck">
+                  <input type="text" name="number.platinum" class="vif01_number" value="0" readonly data-classes="platinum"/>
+                  <a href="#none" class="decrease_btn">수량 제외<img src="./image/minus.png" alt=""></a>
+                  <a href="#none" class="increase_btn">수량 추가<img src="./image/plus.png" alt=""></a>
+                </div>
+              </div>
+            </div>
+            <div class="vif01_tc_check">
+              <input type="checkbox" name="" id="">
+            </div>
+            <div class="vif01_tc_disabled">
+              <span></span>
+            </div>
+          </div>
+
+          <div class="vif01_ticketcard">
+            <div class="vif01_tc_img">
+              <img src="./image/spring_season_re.jpg" alt="">
+            </div>
+            <div class="vif01_tc_content">
+              <div class="vif01_tc_title">
+                <strong>SPRING 시즌 패스 방문예약</strong>
+                <span></span>
+              </div>
+              <div class="vif01_tc_number">
+                <div class="numberCheck">
+                  <input type="text" name="number.spring" class="vif01_number" value="0" readonly data-classes="spring"/>
+                  <a href="#none" class="decrease_btn">수량 제외<img src="./image/minus.png" alt=""></a>
+                  <a href="#none" class="increase_btn">수량 추가<img src="./image/plus.png" alt=""></a>
+                </div>
+              </div>
+            </div>
+            <div class="vif01_tc_check">
+              <input type="checkbox" name="" id="">
+            </div>
+            <div class="vif01_tc_disabled">
+              <span></span>
+            </div>
+          </div>
+
+          <div class="vif01_ticketcard">
+            <div class="vif01_tc_img">
+              <img src="./image/summer_season_re.png" alt="">
+            </div>
+            <div class="vif01_tc_content">
+              <div class="vif01_tc_title">
+                <strong>SUMMER 시즌 패스 방문예약</strong>
+                <span></span>
+              </div>
+              <div class="vif01_tc_number">
+                <div class="numberCheck">
+                  <input type="text" name="number.summer" class="vif01_number" value="0" readonly data-classes="summer"/>
+                  <a href="#none" class="decrease_btn">수량 제외<img src="./image/minus.png" alt=""></a>
+                  <a href="#none" class="increase_btn">수량 추가<img src="./image/plus.png" alt=""></a>
+                </div>
+              </div>
+            </div>
+            <div class="vif01_tc_check">
+              <input type="checkbox" name="" id="">
+            </div>
+            <div class="vif01_tc_disabled">
+              <span></span>
+            </div>
+          </div>
+          
+          <div class="vif01_ticketcard">
+            <div class="vif01_tc_img">
+              <img src="./image/legoland_starrynight.webp" alt="">
+            </div>
+            <div class="vif01_tc_content">
+              <div class="vif01_tc_title">
+                <strong>레이니 데이 개런티 방문예약 <br/>(RAINY DAY GUARANTEE)</strong>
+                <span></span>
+              </div>
+              <div class="vif01_tc_number">
+                <div class="numberCheck">
+                  <input type="text" name="number.rainy" class="vif01_number" value="0" readonly data-classes="rainy"/>
+                  <a href="#none" class="decrease_btn">수량 제외<img src="./image/minus.png" alt=""></a>
+                  <a href="#none" class="increase_btn">수량 추가<img src="./image/plus.png" alt=""></a>
+                </div>
+              </div>
+            </div>
+            <div class="vif01_tc_check">
+              <input type="checkbox" name="" id="">
+            </div>
+            <div class="vif01_tc_disabled">
+              <span></span>
+            </div>
+          </div>
+
+          <div class="vif01_ticketcard">
+            <div class="vif01_tc_img">
+              <img src="./image/legoland_starrynight.webp" alt="">
+            </div>
+            <div class="vif01_tc_content">
+              <div class="vif01_tc_title">
+                <strong>장애인 보호자 우대 방문예약</strong>
+                <span></span>
+              </div>
+              <div class="vif01_tc_number">
+                <div class="numberCheck">
+                  <input type="text" name="number.carer" class="vif01_number" value="0" readonly data-classes="carer"/>
+                  <a href="#none" class="decrease_btn">수량 제외<img src="./image/minus.png" alt=""></a>
+                  <a href="#none" class="increase_btn">수량 추가<img src="./image/plus.png" alt=""></a>
+                </div>
+              </div>
+            </div>
+            <div class="vif01_tc_check">
+              <input type="checkbox" name="" id="">
+            </div>
+            <div class="vif01_tc_disabled">
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="visit_fieldset02"> 
+        <legend>날짜 지정</legend>
+        <div class="date_inputs">
+          <label for="visit_date_value"></label>
+          <input type="date" name="visit_date_value" id="visit_date_value">
+        </div>
+        <div class="calender">
+          <div class="calender_wrap_prev">
+            <div class="calender_month dated_calender_month">
+              <div class="cm_spanbox">
+                <span class="cm_sb_span1"></span>
+                <span class="cm_sb_span2">년</span>
+                <span class="cm_sb_span1"></span>
+                <span class="cm_sb_span2">월</span>
+              </div>
+            </div>
+            <div class="calender_date_table visit_calender_date_table">
+              <div class="cdt_week"></div>
+              <div class="cdt_date"></div>
+            </div>
+          </div>
+          <div class="calender_wrap">
+            <div class="calender_month visit_calender_month">
+              <div class="cm_spanbox">
+                <span class="cm_sb_span1"></span>
+                <span class="cm_sb_span2">년</span>
+                <span class="cm_sb_span1"></span>
+                <span class="cm_sb_span2">월</span>
+              </div>
+              <a href="#none" class="gotoback">이전</a>
+              <a href="#none" class="gotonext">다음</a>
+            </div>
+            <div class="calender_date_table visit_calender_date_table">
+              <div class="cdt_week"></div>
+              <div class="cdt_date"></div>
+            </div>
+          </div>
+          <div class="calender_wrap_next">
+            <div class="calender_month visit_calender_month">
+              <div class="cm_spanbox">
+                <span class="cm_sb_span1"></span>
+                <span class="cm_sb_span2">년</span>
+                <span class="cm_sb_span1"></span>
+                <span class="cm_sb_span2">월</span>
+              </div>
+            </div>
+            <div class="calender_date_table visit_calender_date_table">
+              <div class="cdt_week"></div>
+              <div class="cdt_date"></div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="visit_fieldset03">
+        <legend>바코드 입력</legend>
+        <div class="vif03_code">
+
+          <div class="vif03_c_unit_origin">
+            <div class="vif03_c_u_title">
+              <strong>sample</strong>
+              <span>number</span>
+              <a href="#none" class="deleteBtn">입력창 삭제</a>
+            </div>
+            <div class="vif03_c_u_input">
+              <div class="vif03_c_u_input_text_wrap">
+                <input type="text" name="" class="vif03_c_u_input_text" placeholder="티켓 / 패스의 바코드 번호 입력" required>
+              </div>
+              <a href="#none" class="certification">입력정보 확인</a>
+            </div>
+          </div>
+
+        </div>
+      </fieldset>
+
+      <fieldset class="visit_fieldset04">
+        <legend>예약자 정보 입력</legend>
+        <div class="vif04_info_wrap">
+          <div class="vif04_info">
+            <div class="vif04_i_name">
+              <label for="vif04_i_name_input">이름</label>
+              <input type="text" name="vif04_i_name" id="vif04_i_name_input" required>
+            </div>
+            <div class="vif04_i_phone">
+              <label for="vif04_i_phone_input">핸드폰 번호</label>
+              <input type="tel" name="vif04_i_phone" id="vif04_i_phone_input" required>
+              <a href="#none" class="vif04_i_phone_cert cert_btn_inner">인증하기</a>
+            </div>
+            <div class="vif04_i_email">
+              <label for="vif04_i_email_input">이메일</label>
+              <input type="email" name="vif04_i_email" id="vif04_i_email_input" required>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="visit_submitBtn">
+        <a href="#none" class="v_s_submit">예약하기</a>
+        <a href="#none" class="v_s_cancel">취소</a>
+      </div>
+    </form>
+  </div>
+  <script>
+    $(function(){
+      
+      // number check
+      $(".decrease_btn").click(function(e){
+        if( $(this).siblings("input").val() > 0) {
+          $(this).siblings("input").val((i,v) => +v-1);
+          $(this).siblings("input").trigger("change");           
+        }
+      })
+      $(".increase_btn").click(function(e){
+        $(this).siblings("input").val((i,v) => +v+1);
+        $(this).siblings("input").trigger("change");
+      });
+      //------------Load-------------
+      const today = new Date();
+      const weekArr = ["일", "월", "화", "수", "목", "금", "토"];
+      let $selYear = today.getFullYear();
+      let $selMonth = today.getMonth() +1;
+        const $selMonthText = $selMonth < 10? "0"+($selMonth) : $selMonth;
+      let $selDate = today.getDate();
+        const $selDateText = $selDate < 10? "0"+$selDate : $selDate;
+      let $selDay = today.getDay();
+      $("#dated_date_value")
+        .val((i,v) => `${$selYear}-${$selMonthText}-${$selDateText}`)
+        .data("value",`${$selYear}${$selMonthText}${$selDateText}`);
+      $(".date_inputs label").text(`${$selYear}년 ${$selMonth}월 ${$selDate}일 (${weekArr[$selDay]})`);
+      
+      if ( !$(".calender_table_cell").eq($selDay + $selDate-1).hasClass("disabled_cell") ) {
+        $(".calender_table_cell").eq($selDay + $selDate-1).children().addClass("active_cell");
+        $(".df06_p_s_date").text(`${$selYear}년 ${$selMonth}월 ${$selDate}일`);
+      }
+      localStorage.setItem("code_cert",'{}');
+      const codeArr = [1234,5678]
+      localStorage.setItem("codeStorage",JSON.stringify(codeArr));
+      //---------------------------- 02. 달력 생성 & 날짜 입력
+      $.fn.extend({
+        week : function() {
+          for (let i = 0; i < 7; i++) {
+            const newDay = $("<div></div>");
+            newDay.addClass("weekCell");
+            $(this).find(".cdt_week").append(newDay);
+            newDay.text(weekArr[i]);
+          }
+        },
+        calender: function(years,months){
+          if ( months < 0) {
+            years -= 1;
+            months = 11;
+          } else if (months > 11) {
+            years += 1;
+            months = 0;
+          }
+          let monthStart = new Date(years, months, 1);
+          let monthEnd = new Date(years, months + 1, 0);
+          $(this).find(".cm_sb_span1").eq(0).text(years);
+          $(this).find(".cm_sb_span1").eq(1).text(months+1);
+
+          $(this).find(".cdt_date").children().remove();
+          const i = monthStart.getDay() + monthEnd.getDate();
+
+          for (let j = 1; j <= i; j++) {
+            const n = j - monthStart.getDay();
+            const cur = new Date(years,months,n);
+            if (n > 0) {
+              if ( new Date(years, months, n) < today ) {
+                const disabled_cell = $("<div class='disabled_cell dataCell'></div>");
+                disabled_cell.text(n);
+                $(this).find(".cdt_date").append(disabled_cell);
+              }
+              else if ( cur >= new Date(2023,10,20) && new Date(2024,0,1) > cur && ([1,2,3]).some(e => e == cur.getDay()) ){
+                // 휴장일 //
+                const disabled_cell = $("<div class='disabled_cell dataCell'></div>");
+                const exp = $("<span class='notOpen'>휴관</span>")
+                disabled_cell
+                  .text(n)
+                  .append(exp);
+                $(this).find(".cdt_date").append(disabled_cell);
+              }
+              else if ($(".vif01_number[data-classes='standard']").val() != 0 && cur.getDay()==6) {
+                // standard pass 제한일 //
+                const disabled_cell = $("<div class='disabled_cell dataCell'></div>");
+                disabled_cell
+                  .text(n)
+                $(this).find(".cdt_date").append(disabled_cell);
+              }
+              else {
+                const able_cell = $("<a href='#none' class='able_cell dataCell'></a>");
+                able_cell.text(n);
+                able_cell.data(
+                  "value",
+                  `${years}${months + 1 < 10 ?  "0" + (months + 1) : months + 1 }${n < 10 ? "0"+n : n}`
+                ).prop(
+                  "id",
+                  `${years}-${months + 1 < 10 ? "0" + (months + 1) : months + 1 }-${n < 10 ? "0"+n : n}`
+                );
+                if ( able_cell.data("value") == $("#visit_date_value").data("value") ) {
+                  able_cell.addClass("active_cell");
+                }
+                $(this).find(".cdt_date").append(able_cell);
+              }
+            } else {
+              const newDateBox = $("<div class='dataCell'></div>");
+              $(this).find(".cdt_date").append(newDateBox);
+            } 
+          }
+        }
+      });
+      
+      
+
+      $(".calender_wrap_prev").week();
+      $(".calender_wrap").week();
+      $(".calender_wrap_next").week();
+      $(".calender_wrap_prev").calender($selYear,$selMonth-2);
+      $(".calender_wrap").calender($selYear,$selMonth-1);
+      $(".calender_wrap_next").calender($selYear,$selMonth);
+
+      $(".calender_month .gotoback").click(function(){
+        if (!($selYear <= today.getFullYear() && $selMonth-1 == today.getMonth())) {
+          if ( $selMonth == 1 ) {
+            $selMonth = 12;
+            $selYear -= 1;
+          } else {
+            $selMonth -= 1;
+          }
+        }
+        $(".calender_wrap_prev").calender($selYear,$selMonth-2);
+        $(".calender_wrap").calender($selYear,$selMonth-1);
+        $(".calender_wrap_next").calender($selYear,$selMonth); 
+      });
+      $(".calender_month .gotonext").click(function(){
+        if ( $selMonth == 12 ) {
+          $selMonth = 1;
+          $selYear += 1;
+        } else {
+          $selMonth += 1;
+        }
+        $(".calender_wrap_prev").calender($selYear,$selMonth-2);
+        $(".calender_wrap").calender($selYear,$selMonth-1);
+        $(".calender_wrap_next").calender($selYear,$selMonth);
+      });
+      $(".visit_fieldset02").on("click",".able_cell",function(){
+        $(this).addClass("active_cell");
+        $(".able_cell").not($(this)).removeClass("active_cell");
+        $("#visit_date_value")
+          .val((i,v) => $(this).prop("id"))
+          .data("value",$(this).data("value"));
+        const q = new Date($(this).prop("id"));
+        $(".date_inputs label").text(`${q.getFullYear()} 년 ${q.getMonth()+1} 월 ${q.getDate()} 일 (${weekArr[q.getDay()]})`);
+        $(".vif06_p_s_date").text(`${q.getFullYear()} 년 ${q.getMonth()+1} 월 ${q.getDate()} 일 (${weekArr[q.getDay()]})`);
+      })
+      $(".vif01_number[data-classes='standard']").on("change",function(){
+        $(".calender_wrap_prev").calender($selYear,$selMonth-2);
+        $(".calender_wrap").calender($selYear,$selMonth-1);
+        $(".calender_wrap_next").calender($selYear,$selMonth);
+      })
+
+      //--------------------------------- 03. 바코드 입력
+      const certObject = {};
+      const certArray = [];
+      $(".vif01_number").each(function(i){
+        const classes = $(this).data("classes");
+        const texts = $(".vif01_tc_title").eq(i).find("strong").text();
+        $(this)
+        .addClass(`n_${classes}`)
+        .on("change",function(){
+          if( $(`.vif03_c_unit_${classes}`).length == 0) {
+            const q = JSON.parse(localStorage.getItem("code_cert"));
+            q[`${classes}_cert`] = [];
+              const m = $(".vif03_c_unit_origin").clone(true);
+              m
+              .addClass([`vif03_c_unit_${classes}`, "vif03_c_unit"])
+              .removeClass("vif03_c_unit_origin")
+              .data("classes",classes)
+              .appendTo(".vif03_code");
+              m.find(".vif03_c_u_title strong")
+              .text(classes)
+              m.find(".vif03_c_u_input_text")
+              .prop("name",`${classes}_0`)
+              q[`${classes}_cert`].push(false);
+              localStorage.setItem("code_cert", JSON.stringify(q));
+            }
+            else if($(this).val() > $(`.vif03_c_unit_${classes} .vif03_c_u_input`).length){
+              const len = $(`.vif03_c_unit_${classes} .vif03_c_u_input`).length;
+              const l = $(".vif03_c_unit_origin .vif03_c_u_input").clone(true);
+              l
+              .appendTo(`.vif03_c_unit_${classes}`);
+              l.find("input")
+              .prop("name",`${classes}_${len}`)
+              
+              const q = JSON.parse(localStorage.getItem("code_cert"));
+              q[`${classes}_cert`].push(false);
+              localStorage.setItem("code_cert", JSON.stringify(q));
+            }
+            else if ($(this).val() < $(`.vif03_c_unit_${classes} .vif03_c_u_input`).length){
+              if ($(this).val() == 0) {
+                $(`.vif03_c_unit_${classes}`).remove();
+                localStorage.removeItem(`${classes}_cert`);
+              } else {
+                $(`.vif03_c_unit_${classes} .vif03_c_u_input`).last().remove();
+                certArray.pop();                
+              }
+            }
+            const len = $(`.vif03_c_unit_${classes} .vif03_c_u_input`).length;
+            $(`.vif03_c_unit_${classes} .vif03_c_u_title span`).text(len);
+        });
+      });
+
+      $(".vif03_code")
+        .on("click",".deleteBtn",function(){
+          const q = $(this).parents(".vif03_c_unit");
+          const w = q.find(".vif03_c_u_input");
+          $(`.n_${q.data("classes")}`).val((i,v) => +v-1)
+
+          if (w.length >1 ) {
+            w.last().remove();
+            q.find(".vif03_c_u_title span").text(w.length-1)
+          } 
+          else {
+            q.remove();
+          }
+        })
+        .on("click",".certification",function(){
+          const par = $(this).parents(".vif03_c_unit");
+          const par2 = $(this).parent();
+          const classes = par.data("classes");
+          const q = $(this).siblings(".vif03_c_u_input_text_wrap");
+          const qi = q.children("input");
+          const w = JSON.parse(localStorage.getItem("codeStorage"));
+          if ( w.includes(+qi.val())) {
+            let r = JSON.parse(localStorage.getItem("code_cert"));
+            const n = par.find("input").index(qi)
+            r[`${classes}_cert`].splice(n,1,true);
+            localStorage.setItem('code_cert',JSON.stringify(r))
+            q.addClass("cert_pass");
+            qi.prop("readonly","true");
+            $(this).text("확인 완료");
+          }
+        })
+      // -------------------------------------- 04. 정보 입력
+      //핸드폰 번호 인증 창 열기
+      $(".vif04_i_phone").on("click",".vif04_i_phone_cert",function(){
+        window.open("/t_use/t_use_reser01_6_1.html","번호 인증","width=500, height=400, top=200,left=500")
+      })
+      function cert(){
+        if ( localStorage.getItem("phone_cert") ){
+          $(".vif04_i_phone_cert").remove()
+          const span = $("<span class='vif04_i_phone_complete cert_btn_inner'>인증완료</span>");
+            $(".vif04_i_phone").append(span);
+            localStorage.removeItem("phone_cert")
+          } else {
+            $(".vif04_i_phone_complete").remove();
+            const btn = $('<a href="#none" class="vif04_i_phone_cert cert_btn_inner">인증하기</a>')
+            $(".vif04_i_phone").append(btn);
+        }
+      }
+      $(window).on("storage",()=> cert())
+      $("#vif04_i_phone_input").on("change",function(){
+        cert()
+      })
+      // ------------------------------------------ 05.제출/취소
+      $(".v_s_submit").on("click",function(){
+        $("#visit_ticket_form").data("complete",true)
+        if($("#visit_ticket_form").data("complete")){
+          $("#visit_ticket_form")
+            .trigger("submit")
+          }
+        })
+        
+        $("#visit_ticket_form").on("submit",function(e){
+          e.preventDefault();
+          const q = new FormData(e.target);
+          const w = Object.fromEntries(q.entries());
+          console.log(w)
+          for ( key in w ) {
+            if( key.split(".")[0] == "number" ) {
+              return w[key] == 0? delete w[key] : null;
+            }
+          }
+          
+          // 제출 시 확인
+          //바코드 인증 확인
+          if ( $(".vif03_c_unit").length != 0 ) {
+            $(".vif03_c_unit").each(function(){
+              const classes = $(this).data("classes");
+              const r = JSON.parse(localStorage.getItem(`${classes}_cert`));
+              if (!r.some(v => !v)) {
+                w["codeCert"] = true;
+              }
+            })
+          }
+        })
+    });
+  </script>
+</body>
+</html>

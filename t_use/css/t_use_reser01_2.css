@@ -1,0 +1,115 @@
+      /* 01. 날짜 */
+      .daytime_fieldset01 {
+        display: flex;
+        justify-content: right;
+        position: relative;
+        padding-left: 20%;
+      }    
+      .daytime_fieldset01 legend::before {
+        content: "01";
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 1.5;
+        width: 30px;
+        height: 30px;
+        background-color: royalblue;
+        border-radius: 50%;
+        font-size: 18px;
+        color: white;
+        margin-right: 10px;
+      }
+      /* ----------------------------------- */
+      .daytime_fieldset02 {
+        padding: 30px 20%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+        .daytime_fieldset02 legend::before {
+          content: "02";
+          display: inline-block;
+          text-align: center;
+          vertical-align: middle;
+          line-height: 1.5;
+          width: 30px;
+          height: 30px;
+          background-color: royalblue;
+          border-radius: 50%;
+          font-size: 18px;
+          color: white;
+          margin-right: 10px;
+        } 
+      /* ---------------------- */
+      .daytime_fieldset03 legend::before {
+        content: "03";
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 1.5;
+        width: 30px;
+        height: 30px;
+        background-color: royalblue;
+        border-radius: 50%;
+        font-size: 18px;
+        color: white;
+        margin-right: 10px;
+      }
+      .daytime_fieldset03 {
+        padding: 30px 20%;
+      }
+      .dtf03_labelExp {
+        color: var(--exp-color);
+        text-indent: 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding-bottom: 20px;
+      }
+      .dtf03_wrap .nc_wrap {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+      } 
+      .dtf03_wrap {
+        position: relative;
+        padding-bottom: 40px;
+      }
+      .dtf03_w_exp {
+        padding: 20px;
+        border: 1px solid rgba(0,0,0,0.1);
+        width: 70%;
+        margin: auto;
+      }
+      .dtf03_w_exp span {
+        font-weight: 500;
+        font-size: 15px;
+      }
+      .dtf03_w_exp ul {
+        list-style:square;
+        padding: 10px 0px 10px 30px;
+        margin: 0px;
+        font-size: 13px;
+        color: #666;
+
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      /* ----------------------------------------- */
+      .daytime_fieldset06 {
+        display: flex;
+        position: relative;
+      }
+        /* ------------------ */
+        .p_s_extra > div {
+          box-sizing: border-box;
+          display: none;
+        }
+
+        .discount_select {
+          display: none;
+        }
+        #daytime_total_price {
+          display: none;
+        }

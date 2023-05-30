@@ -1,0 +1,95 @@
+/* main --------------------------------------- */
+.mainWrap {
+width: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+background-color: var(--main-bg-color);
+}
+/* tap --------------------------------------- */
+.tapBox {
+max-width: var(--whole-max-width);
+width: 100%;
+height: 10vh;
+margin: auto;
+position: relative;
+}
+.tapBox ul {
+display: flex;
+width: 100%;
+height: 100%;
+/* border-top: 2px solid #bbb;
+border-left: 2px solid #bbb; */
+background-color: white;
+box-sizing: border-box;
+}
+.tapBox li {
+width: 100%;
+height: 100%;
+box-shadow: 2px 0px 3px 0px #66666659;
+}
+.tapBox li a{
+/* border-right: 2px solid #bbb; */
+border-bottom: none;
+height: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+box-sizing: border-box;
+}
+.active_tap {
+background-color: var(--main-yellow-color);
+
+}
+
+/* titleBox------------------------------------- */
+.main_title_wrap {
+    width: 100%;
+    height: 33vh;
+    background: url("/image/t_use_reser01_0/background02_sizeup.png") no-repeat center bottom 40%/ cover;
+}
+.main_title {
+    width: 100%;
+    max-width: var(--whole-max-width);
+    height: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+.main_title h3 {
+    font-size: 200%;
+}
+/* btnBox------------------------------------- */
+.pageBtn {
+    width: 100%;
+    max-width: var(--whole-max-width);
+    margin: 2rem 0px;
+}
+.pageBtn a {
+    display: block;
+    font-size: 120%;
+    border-radius: 20px;
+}
+.pageBtn_next {
+    float: right;
+    padding: 0.5rem 4rem 0.5rem 2rem;
+    background:rgba(238, 238, 238, 0.4) url("/image/t_use_reser01_0/arrow_forward_3.png") no-repeat center right 1rem / 2em 1.5em;
+}
+.pageBtn_back {
+    float: left;
+    padding: 0.5rem 2rem 0.5rem 4rem;
+    background:rgba(238, 238, 238, 0.4) url("/image/t_use_reser01_0/arrow_back_3.png") no-repeat center left 1rem / 2em 1.5em;
+}
+.pageBtn a:hover {
+    background-color: rgba(0, 128, 0, 0.4);
+}
+/* formBox------------------------------------- */
+.formBox {
+max-width: var(--whole-max-width);
+width: 100%;
+box-sizing: border-box;
+margin: auto;
+padding-top: 50px;
+background-color: var(--main-yellow-color);
+z-index: 5;
+}

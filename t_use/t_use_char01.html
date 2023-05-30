@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/image/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/image/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/image/favicon/favicon-16x16.png">
+    <title>통합 예매 서비스</title>
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- css -->
+    <link rel="stylesheet" href="/t_use/css/reset.css">
+    <link rel="stylesheet" href="/t_use/css/t_use_char01.css">
+    
+  </head>
+
+  <body>
+    <header></header>
+    <main>
+      <div class="mainWrap">
+        <div class="t_title">
+          <div class="title_bg">
+            <h3>이용권 구매하기 & 방문예약</h3>
+          </div>
+        </div>
+
+        <div class="tickets">
+          <div class="t_list">
+            <h4>이용권 구매하기</h4>
+            <div class="list_ul_wrap">
+              <ul class="list_ul t_list_ul">
+                <!-- dated -->
+                <li class="list_u_li">
+                  <a href="#none" class="dated_tc">일일이용권</a>
+                  <div class="list_exp">
+                    <div class="list_exp_wrap">
+                      <h5>일일이용권 구매하기</h5>
+                      <div class="l_e_w_text">
+                        <ul>
+                          <li>정상가 및 오프라인 가격은 어른 60,000원 어린이 50,000원입니다.</li>
+                          <li>홈페이지 또는 모바일 앱을 통한 사전 구매 시 당일 현장 구매보다 낮은 가격이 제공될 수 있습니다.</li>
+                          <li>만 12세 이하 어린이는 입장 및 이용 시 만 16세 이상의 보호자 동반입장이 필수입니다.</li>
+                        </ul>
+                      </div>
+                      <a href="#none" class="close_exp"></a>
+                      <div class="btnBox">
+                        <a href="/t_use/t_use_reser01_0.html" class="gotoreser" data-page="1" data-name="dated">구매하기</a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <!-- 할인 -->
+                <li class="list_u_li">
+                  <a href="#none">강원도민 일일이용권 할인</a>
+                  <div class="list_exp">
+                    <div class="list_exp_wrap">
+                      <h5>강원도민 일일이용권 할인</h5>
+                      <div class="l_e_w_text">
+                        <p><strong>평일 30%, 주말 및 공휴일 10% 할인</strong></p>
+                        <hr />
+                        <dl>
+                          <dt><strong>✔ 대상:</strong></dt>
+                            <dd>강원도 거주자</dd>
+                          <dt><strong>✔ 내용:</strong></dt>
+                            <dd>* <strong>평일 30% 할인, 주말 및 공휴일 10% 할인</strong></dd>
+                          <dt>* 이용 전 확인해주세요!</dt>
+                            <dd>- 본 혜택은 방문일로부터 <strong>최소 1일 전 온라인 구매 시에만</strong> 적용되며 당일 온라인/현장 구매 시 정가 판매 됩니다.</dd>
+                            <dd>- 만 12세 이하 어린이는 입장 및 이용 시 만 16세 이상의 보호자 동반 입장 필수</dd>
+                            <dd>- 해당 이용권은 강원도민 전용으로 입장 시 반드시 강원도민임을 입증할 수 있는 서류가 필요합니다. 본인 확인이 불가한 경우 혜택 적용이 불가능하며, 당일 구매 요금과의 차액에 해당하는 추가 요금이 발생됩니다.</dd>
+                            <dd>- 강원도 거주 증빙서류 : 주민등록증, 가족관계증명서, 학생증, 공무원증, 운전면허증, 군인의 경우 공무원증 및 개인 휴가증/외박증 원본과 신분증</dd>
+                            <dd>- 기타 프로모션 및 카드할인 등의 우대혜택과 중복 적용되지 않습니다.</dd>
+                            <dd>- 환불을 원하시는 경우, 예약하신 방문일 1일 전까지 회사의 홈페이지 내 취소 요청 절차를 통해 구매 철회를 요청해야 합니다.</dd>
+                            <dd>- 입장일 기준, 만 2세 (24개월 미만) 유아는 무료 입장이 가능합니다.</dd>
+                            <dd>- 티켓번호(사전 예약 시 필요)가 포함된 영수증이 발송될 이메일 주소는 정확히 기재 부탁 드립니다.</dd>
+                            <dd>- 주차는 포함되지 않습니다.</dd>
+                        </dl>
+                      </div>
+                      <a href="#none" class="close_exp"></a>
+                      <div class="btnBox">
+                        <a href="/p_use/p_use_alli_02.html" class="gotoexp">자세히 보기</a>
+                        <a href="/t_use/t_use_reser01_0.html" class="gotoreser" data-page="1" data-char="0" data-name="kangwon">구매하기</a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="list_u_li">
+                  <a href="#none">KB국민카드 일일이용권 제휴 할인</a>
+                  <div class="list_exp">
+                    <div class="list_exp_wrap">
+                      <h5>KB국민카드니까 가능! 레고랜드 최대 20% 할인</h5>
+                      <div class="l_e_w_text">
+                        
+                          <p><strong>1일 이용권 10 ~ 20% 할인 제공</strong></p>
+                          <hr />
+                          <dl>
+                            <dt><strong>✔ 기간:</strong></dt>
+                              <dd>2022년 5월 5일(목) ~ 2027년 5월 4일(화)</dd>
+                            <dt><strong>✔ 대상:</strong></dt>
+                              <dd>KB국민카드 회원 (KB국민 비씨, 기업, 선불카드 제외)</dd>
+                            <dt><strong>✔ 내용:</strong></dt>
+                              <dd>KB국민카드로 LEGOLAND® 1일 이용권 구매 시 정상가에서 평일 20%, 주말·공휴일 10% 할인 혜택 제공(최소 1일 전 구매 시 할인 적용되며 방문일 당일 입장권 구매 시 할인 없이 정가 적용 됩니다.)</dd>
+                            <dt><strong>✔ KB국민카드 회원 할인 혜택</strong></dt>
+                            <dd>
+                              <table>
+                                <thead>
+                                  <tr>
+                                    <th style="width: 33.3333%; text-align: center;">구분</th>
+                                    <th style="width: 33.3333%; text-align: center;">대인<br />(만 13세 이상)</th>
+                                    <th style="width: 33.3333%; text-align: center;">소인<br />(만 2세 이상<br />~12세 이하)</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td style="width: 33.3333%; text-align: center;">정상가</td>
+                                    <td style="width: 33.3333%; text-align: center;">60,000원</td>
+                                    <td style="width: 33.3333%; text-align: center;">50,000원</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="width: 33.3333%; text-align: center;">KB국민카드 할인가<br />(평일)</td>
+                                    <td style="width: 33.3333%; text-align: center;">48,000원</td>
+                                    <td style="width: 33.3333%; text-align: center;">40,000원</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="width: 33.3333%; text-align: center;">KB국민카드 할인가<br />(주말,공휴일)</td>
+                                    <td style="width: 33.3333%; text-align: center;">54,000원</td>
+                                    <td style="width: 33.3333%; text-align: center;">45,000원</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </dd>
+                            <dt><strong>✔ 이용 전 확인해 주세요.</strong></dt>
+                              <dd>- 다른 할인권 및 우대행사와 중복할인이 불가합니다.</dd>
+                              <dd>- 이용권 구매 및 유의사항은 LEGOLAND® 코리아 리조트 홈페이지에서 확인 바랍니다.</dd>
+                              <dd>- 본 행사는 KB국민카드 영업정책 및 제휴업체 상황에 따라 변경 또는 중단될 수 있습니다.</dd>
+                              <dd>- 문의: KB국민카드 고객센터(1588-1688)</dd>
+                              <dd>- 계약을 체결하기 전에 상품설명서와 약관을 확인하시기 바랍니다.</dd>
+                              <dd>- 상환능력에 비해 신용카드 사용액이 과도할 경우 귀하의 개인신용평점이 하락할 수 있습니다.</dd>
+                              <dd>- 개인신용평점 하락 시 금융거래 관련된 불이익이 발생할 수 있습니다.</dd>
+                              <dd>- 일정기간 원리금을 연체할 경우, 모든 원리금을 변제할 의무가 발생할 수 있습니다.</dd>
+                              <dd>- 신용카드 발급이 부적정한 경우 (개인신용평점 낮음, 연체금 보유 등) 카드발급이 제한될 수 있습니다.</dd>
+                              <dd>- 카드 이용대금과 이에 수반되는 모든 수수료를 지정된 대금 결제일에 상환합니다.</dd>
+                              <dd>- 금융소비자는 금소법 제19조 제1항에 따라 해당 상품 또는 서비스에 대하여 설명을 받을 권리가 있으며, 그 설명을 듣고 내용을 충분히 이해한 후 거래하시기 바랍니다.</dd>
+                          </dl>
+                          <p></p>
+                          <p></p>
+                          <p></p>
+                                      
+                      </div>
+                      <a href="#none" class="close_exp"></a>
+                      <div class="btnBox">
+                        <a href="/p_use/p_use_alli_03.html" class="gotoexp">자세히 보기</a>
+                        <a href="/t_use/t_use_reser01_0.html" class="gotoreser" data-page="1" data-char="1" data-name="d_kb">구매하기</a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="list_u_li">
+                  <a href="#none">LG U+ 일일이용권 할인 혜택</a>
+                  <div class="list_exp">
+                    <div class="list_exp_wrap">
+                      <h5>LG U+ 일일이용권 제휴 할인 혜택</h5>
+                      <div class="l_e_w_text">
+                          <p><strong>통신사 단독 "최대" 20% 상시 할인</strong></p>
+                          <hr />
+                          <dl>
+                            <dt><strong>✔ 기간:<br /></strong></dt>
+                              <dd>2022년 6월 1일(수) ~ 2027년 5월 4일(화)</dd>
+                            <dt><strong><br /><br />✔ 대상: <br /></strong></dt>
+                              <dd>LG U+ 가입 고객</dd>
+                            <dt><strong>✔ 내용:<br /></strong></dt>
+                              <dd>* 주중 20%, 주말 10% 할인 적용(정상가 성인/청소년 60,000원, 어린이 50,000원)</dd>
+                              <dd>* 본인 포함 동반 4인까지 할인 적용 가능(최대 48,000원 할인 혜택)</dd>
+                            <dt><strong>✔ 이용 전 확인해 주세요.</strong></dt>
+                              <dd>- 파크 입장 시 현장에서 모바일 통신사를 확인할 수 있습니다.</dd>
+                              <dd>- 개장일과 운영시간 등 보다 자세한 정보는 LEGOLAND® 공식 홈페이지-이용가이드에서 확인하실 수 있습니다.</dd>
+                              <dd>- 본 이용권은 재판매가 불가하며, 티켓환불은 구매일로부터 1일 이내만 가능합니다.</dd>
+                              <dd>- 입장일 기준 만 2세(24개월 미만) 유아는 무료 입장이 가능합니다.</dd>
+                              <dd>- 주차 정보는 LEGOLAND® 공식 홈페이지-이용가이드에서 확인 하실 수 있습니다. </dd>
+                              <dd>- 파크 1일 이용권 티켓 가격은 성수기/비수기에 따라 일 변동될 수 있습니다.</dd>
+                          </dl>
+                      </div>
+                      <a href="#none" class="close_exp"></a>
+                      <div class="btnBox">
+                        <a href="/p_use/p_use_alli_04.html" class="gotoexp">자세히 보기</a>
+                        <a href="/t_use/t_use_reser01_0.html" class="gotoreser" data-page="1" data-char="2" data-name="lg">구매하기</a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="list_u_li">
+                  <a href="#none">나라사랑 할인 혜택</a>
+                  <div class="list_exp">
+                    <div class="list_exp_wrap">
+                      <h5>나라를 위해 힘써주셔서 감사합니다!</h5>
+                      <div class="l_e_w_text">
+                          <p><strong>군인, 경찰, 소방관 최대 35% 감사할인<br/>
+                            주중 35% 할인, 주말 및 공휴일 20%할인
+                            </strong></p>
+                          <hr />
+                          <dl>
+                            <dt><strong>✔ 내용:<br /></strong></dt>
+                              <dd>* 주중 35%, 주말 및 공휴일 20% 할인</dd>
+                            <dt><strong><br /><br />✔ 대상: <br /></strong></dt>
+                              <dd>- 국내 군인(직업군인, 현복무), 경찰, 소방관 당사자 본인+ 동반 3인(최대 4명(대/소인 별도 구분없음))</dd>
+                              <dd>- 주한 미군 근무 카투사, 군인/의경/해경/의무소방원 혜택 적용</dd>
+                              <dd>- 단, 공익, 예비군 혜택 적용 불가</dd>
+                            <dt><strong>✔ 증빙자료 안내:<br /></strong></dt>
+                              <dd>* 입장 시 군인/경찰/소방관 본인임을 확인할 수 있는 실물 증빙자료를 반드시 지참해 주시기 바랍니다. 증빙자료를 지참하지 않거나 당사자를 동반하지 않을 경우 당일 구매 요금과의 차액에 해당하는 추가 요금이 발생됩니다.</dd>
+                              <dd>* 본 혜택은 본인 한정으로 양도는 불가합니다. </dd>
+                              <br/>
+                              <dd>- 대상 증명서 종류 : 군인 휴가증/외박증, 공무원증, 재직증명서, 근무증명서(현재 재직중인 상태만 가능)</dd>
+                              <dd>- 대상 증명서 적용 제외 : 외출증, 출장증, 단체휴가/외박증, 명령서</dd>
+                              <dd>- 개인 신분증 종류 : 주민등록증, 운전면허증, 기간 만료 전의 여권, 주민등록증 발급 신청서(모바일 증명 가능)</dd>
+                              <dd>- 휴가증/외박증에는 성명,소속,군번,관인,휴가기간, 휴가/외박이 명시되어야 효력이 있음</dd>
+                            <dt><strong>✔ 이용 전 확인해 주세요.</strong></dt>
+                              <dd>- 본 혜택은 방문일로부터 최소 1일 전 온라인 구매 시에만 적용되며 방문일 당일 온라인/현장 구매 시 정가 판매 됩니다.</dd>
+                              <dd>- 해당 이용권은 군인/경찰/소방관 전용으로 입장 시 반드시 입증할 수 있는 실물 증빙자료가 필요합니다.</dd>
+                              <dd>- 본인 확인이 불가한 경우 혜택 적용이 불가능하며, 당일 구매 요금과의 차액에 해당하는 추가 요금이 발생됩니다.</dd>
+                              <dd>- 환불을 원하시는 경우, 예약하신 방문일 1일 전까지 회사의 홈페이지 내 취소 요청 절차를 통해 구매 철회를 요청해야 합니다.</dd>
+                              <dd>- 입장일 기준, 만 2세 (24개월 미만) 유아는 증빙서류 지참 시 무료 입장이 가능합니다.</dd>
+                              <dd>- 티켓번호가 포함된 영수증이 발송될 이메일 주소는 정확히 기재 부탁드립니다.</dd>
+                              <dd>- 주차는 포함되지 않습니다.</dd>
+                              <dd>- 만 12세 이하 어린이는 입장 및 이용 시 만 16세 이상의 보호자 동반 입장 필수</dd>
+                          </dl>
+                      </div>
+                      <a href="#none" class="close_exp"></a>
+                      <div class="btnBox">
+                        <a href="/p_use/p_use_alli_06.html" class="gotoexp">자세히 보기</a>
+                        <a href="/t_use/t_use_reser01_0.html" class="gotoreser" data-page="1" data-char="3" data-name="nation">구매하기</a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <!-- 연간 & 시즌 -->
+              <ul class="list_ul list_ul_annaul">
+                <li class="list_u_li">
+                  <a href="#none" class="annual_tc">연간이용권</a>
+                  <div class="list_exp">
+                    <div class="list_exp_wrap">
+                      <h5>연간이용권 구매하기</h5>
+                      <div class="l_e_w_text">
+                        <ul>
+                          <li>자유롭게 언제나! 계속되는 레고랜드® 모험!</li>
+                          <li>연간 이용권 3종을 꼼꼼히 비교해보고 나에게 꼭 맞는 연간 이용권을 선택해보세요.</li>
+                          <li>패스 종류 및 파크 운영일에 따라 입장 불가일 발생할 수 있습니다.</li>
+                          <li>만 12세 이하 어린이는 입장 및 이용 시 만 16세 이상의 보호자 동반입장이 필수입니다.</li>
+                        </ul>
+                      </div>
+                      <a href="#none" class="close_exp"></a>
+                      <div class="btnBox">
+                        <a href="/t_use/t_use_reser01_0.html" class="gotoreser" data-page="3">구매하기</a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="list_u_li">
+                  <a href="#none">STANDARD PASS</a>
+                  <div class="list_exp">
+                    <div class="list_exp_wrap">
+                      <h5>연간이용권 STANDARD PASS 혜택 안내</h5>
+                      <div class="l_e_w_text">
+                        <!-- ------------------------------------------------ -->
+                          <div>
+                            <table style="border-spacing: 5px;">
+                              <tr>
+                                <td>이용 제한일 없음 <span>(레고랜드® 코리아 리조트 운영일 기준)</span></td>
+                                <td></td>                                
+                              </tr>
+                              <tr>
+                                <td>레고랜드® 코리아 리조트 운영일 기준 1년간 입장 가능한 연간이용권</td>
+                                <td><svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg></td>                                
+                              </tr>
+                              <tr>
+                                <td><a href="#none">레고랜드® 코리아 리조트 내 식음료 할인</a></td>
+                                <td></td>
+                              </tr>
+                              <tr>
+                                <td><a href="#none">레고랜드® 코리아 리조트 내 리테일샵 할인 <span>(중복할인 불가)</span></a></td>  
+                                <td></td>
+                              </tr>
+                              <tr>
+
+                                <td>레고랜드® 코리아 호텔 숙박료 할인 <span>(일부 사용 제한일 및 프로모션 제외)</span></td>
+                                  <td>
+                                    
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td><a href="#none">브릭토피아 다이너 뷔페 성인 1명 결제 시 동반 어린이 1명 무료 이용 <span>(주말 및 공휴일 제외, 주중만 가능)</span></a></td>
+                                  
+                                  <td></td>
+                              </tr>
+                               <tr>
+                                 <td><a href="#none">방문 당일 생일자 선물 무료 제공</a></td>
+                                   
+                                   <td>
+                                     
+                                     <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                                   </td>
+                               </tr>
+                               <tr>
+                                 <td><a href="#none">파크 전용 혜택</a></td>
+                                   
+                                   <td>
+                                     
+                                     <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg>
+                                   </td>
+                               </tr>
+                                
+                              </table>
+                          </div>
+                        <!-- ----------------------------------------- -->
+                      </div>
+                      <a href="#none" class="close_exp"></a>
+                      <div class="btnBox">
+                        <a href="/p_use/p_use_ext_01.html" class="gotoexp">자세히 보기</a>
+                        <a href="/t_use/t_use_reser01_0.html" class="gotoreser" data-page="3" data-name="a_standard">구매하기</a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="list_u_li">
+                  <a href="#none">GOLD PASS</a>
+                  <div class="list_exp">
+                    <div class="list_exp_wrap">
+                        <h5>연간이용권 GOLD PASS 혜택 안내</h5>
+                        <div class="l_e_w_text">
+                          <!-- ------------------------------------------------ -->
+                            <div>
+                              <table style="border-spacing: 5px;">
+                                <tr>
+                                  <td>이용 제한일 없음 <span>(레고랜드® 코리아 리조트 운영일 기준)</span></td>
+                                  <td></td>                                
+                                </tr>
+                                <tr>
+                                  <td>레고랜드® 코리아 리조트 운영일 기준 1년간 입장 가능한 연간이용권</td>
+                                  <td><svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg></td>                                
+                                </tr>
+                                <tr>
+                                  <td><a href="#none">레고랜드® 코리아 리조트 내 식음료 할인</a></td>
+                                  <td>10%</td>
+                                </tr>
+                                <tr>
+                                  <td><a href="#none">레고랜드® 코리아 리조트 내 리테일샵 할인 <span>(중복할인 불가)</span></a></td>  
+                                  <td><svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg></td>                                
+  
+                                </tr>
+                                <tr>
+                                  <td>레고랜드® 코리아 호텔 숙박료 할인 <span>(일부 사용 제한일 및 프로모션 제외)</span></td>
+                                  <td><svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg></td>
+                                </tr>
+                                <tr>
+                                  <td><a href="#none">브릭토피아 다이너 뷔페 성인 1명 결제 시 동반 어린이 1명 무료 이용 <span>(주말 및 공휴일 제외, 주중만 가능)</span></a></td>
+                                  <td><svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg></td>                                
+  
+                                </tr>
+                                 <tr>
+                                    <td><a href="#none">방문 당일 생일자 선물 무료 제공</a></td>
+                                    <td><svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg></td>
+                                 </tr>
+                                 <tr>
+                                    <td><a href="#none">파크 전용 혜택</a></td> 
+                                    <td> <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg></td>
+                                 </tr>
+                                </table>
+                            </div>
+                          <!-- ----------------------------------------- -->
+                        </div>
+                        <a href="#none" class="close_exp"></a>
+                        <div class="btnBox">
+                          <a href="/p_use/p_use_ext_02.html" class="gotoexp">자세히 보기</a>
+                          <a href="/t_use/t_use_reser01_0.html" class="gotoreser" data-page="3" data-name="a_gold">구매하기</a>
+                        </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="list_u_li">
+                  <a href="#none">PLATINUM PASS</a>
+                  <div class="list_exp">
+                    <div class="list_exp_wrap">
+                      <h5>연간이용권 PLATINUM PASS 혜택 안내</h5>
+                      <div class="l_e_w_text">
+                        <!-- ------------------------------------------------ -->
+                          <div>
+                            <table style="border-spacing: 5px;">
+                              <tr>
+                                <td>이용 제한일 없음 <span>(레고랜드® 코리아 리조트 운영일 기준)</span></td>
+                                <td><svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg></td>                                
+                              </tr>
+                              <tr>
+                                <td>레고랜드® 코리아 리조트 운영일 기준 1년간 입장 가능한 연간이용권</td>
+                                <td><svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg></td>                                
+                              </tr>
+                              <tr>
+                                <td><a href="#none">레고랜드® 코리아 리조트 내 식음료 할인</a></td>
+                                <td>20%</td>
+                              </tr>
+                              <tr>
+                                <td><a href="#none">레고랜드® 코리아 리조트 내 리테일샵 할인 <span>(중복할인 불가)</span></a></td>  
+                                <td><svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg></td>                                
+
+                              </tr>
+                              <tr>
+                                <td>레고랜드® 코리아 호텔 숙박료 할인 <span>(일부 사용 제한일 및 프로모션 제외)</span></td>
+                                <td><svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg></td>
+                              </tr>
+                              <tr>
+                                <td><a href="#none">브릭토피아 다이너 뷔페 성인 1명 결제 시 동반 어린이 1명 무료 이용 <span>(주말 및 공휴일 제외, 주중만 가능)</span></a></td>
+                                <td><svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg></td>                                
+
+                              </tr>
+                               <tr>
+                                  <td><a href="#none">방문 당일 생일자 선물 무료 제공</a></td>
+                                  <td><svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg></td>
+                               </tr>
+                               <tr>
+                                  <td><a href="#none">파크 전용 혜택</a></td> 
+                                  <td> <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 96 960 960" width="48"><path d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"/></svg></td>
+                               </tr>
+                              </table>
+                          </div>
+                        <!-- ----------------------------------------- -->
+                      </div>
+                      <a href="#none" class="close_exp"></a>
+                      <div class="btnBox">
+                        <a href="/p_use/p_use_ext_01.html" class="gotoexp">자세히 보기</a>
+                        <a href="/t_use/t_use_reser01_0.html" class="gotoreser" data-page="3"data-name="a_platinum">구매하기</a>
+                      </div>
+                  </div>
+                  </div>
+                </li>
+                <li class="list_u_li">
+                  <a href="#none">KB국민카드 제휴 GOLD PASS 할인</a>
+                  <div class="list_exp">
+                    <div class="list_exp_wrap" >
+                      <h5>KB국민카드 제휴 GOLD PASS 할인</h5>
+                      <div class="l_e_w_text">
+                        <p>
+                          <strong>연간이용권 (Gold Pass) 4장 이상 구매 시 10% 할인</strong>
+                        </p>
+                        <hr />
+                        <dl>
+                          <dt><strong>✔ 기간:</strong></dt>
+                            <dd>2022년 5월 5일(목) ~ 2027년 5월 4일(화)</dd>
+                          <dt><strong>✔ 대상: </strong></dt>
+                            <dd>KB국민카드 회원 (KB국민 비씨, 기업, 선불카드 제외)</dd>
+                          <dt><strong>✔ 내용:</strong></dt>
+                            <dd>KB국민카드로 LEGOLAND<small>® </small>연간이용권(Gold Pass)를 4장 이상 구매시 1장 당 10% 할인 혜택 제공</dd>
+                          <dt><strong>✔ KB국민카드 회원 할인 혜택</strong></dt>
+                            <dd>
+                              <table style="border: 1px solid #ddd">
+                                <thead style="background-color: #ccc; color: #444;">
+                                  <tr>
+                                  <th style="width: 33.3333%; text-align: center;">구분</th>
+                                  <th style="width: 33.3333%; text-align: center;">정상가</th>
+                                  <th style="width: 33.3333%; text-align: center;">KB국민카드 할인 가격</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td style="width: 33.3333%; text-align: center;">Gold Pass 1장 가격</td>
+                                    <td style="width: 33.3333%; text-align: center;">169,000원</td>
+                                    <td style="width: 33.3333%; text-align: center;">152,100원</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="width: 33.3333%; text-align: center;">Gold Pass 4장 가격</td>
+                                    <td style="width: 33.3333%; text-align: center;">676,000원</td>
+                                    <td style="width: 33.3333%; text-align: center;">608,400원</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </dd>
+                            <dd><strong>* 4장 구매시 정상가 대비 67,600원 할인</strong></dd>
+                            <dd><strong>* 4장 부터 구매 가능하며, 4장 미만 구매는 LEGOLAND® 공식 홈페이지를 통해 구매 가능(4장 미만 구매는 할인 제공 불가)</strong></dd>
+                            <dd>
+                              * <a rel="noopener" href="/legoland-%ED%8C%8C%ED%81%AC-%ED%8B%B0%EC%BC%93/%EC%8B%9C%EC%A6%8C-%EC%97%B0%EA%B0%84-%EC%9D%B4%EC%9A%A9%EA%B6%8C/%EC%97%B0%EA%B0%84-%EC%9D%B4%EC%9A%A9%EA%B6%8C-%EA%B3%A8%EB%93%9C/" target="_blank" title="연간 이용권 골드">
+                                연간이용권(Gold Pass) 혜택 자세히보기 (클릭)
+                              </a>
+                            </dd>
+                          <dt><strong>✔ 이용 전 확인해 주세요.</strong></dt>
+                            <dd>- 다른 할인권 및 우대행사와 중복할인이 불가합니다.</dd>
+                            <dd>- 이용권 구매 및 유의사항은 레고랜드 코리아 리조트 홈페이지에서 확인 바랍니다.</dd>
+                            <dd>- 본 행사는 KB국민카드 영업정책 및 제휴업체 상황에 따라 변경 또는 중단될 수 있습니다.</dd>
+                            <dd>- 문의: KB국민카드 고객센터(1588-1688)</dd>
+                            <dd>- 계약을 체결하기 전에 상품설명서와 약관을 확인하시기 바랍니다.</dd>
+                            <dd>- 상환능력에 비해 신용카드 사용액이 과도할 경우 귀하의 개인신용평점이 하락할 수 있습니다.</dd>
+                            <dd>- 개인신용평점 하락 시 금융거래 관련된 불이익이 발생할 수 있습니다.</dd>
+                            <dd>- 일정기간 원리금을 연체할 경우, 모든 원리금을 변제할 의무가 발생할 수 있습니다.</dd>
+                            <dd>- 신용카드 발급이 부적정한 경우 (개인신용평점 낮음, 연체금 보유 등) 카드발급이 제한될 수 있습니다.</dd>
+                            <dd>- 카드 이용대금과 이에 수반되는 모든 수수료를 지정된 대금 결제일에 상환합니다.</dd>
+                            <dd>- 금융소비자는 금소법 제19조 제1항에 따라 해당 상품 또는 서비스에 대하여 설명을 받을 권리가 있으며, 그 설명을 듣고 내용을 충분히 이해한 후 거래하시기 바랍니다.</dd>
+                        </dl>
+                      </div>
+                      <a href="#none" class="close_exp"></a>
+                      <div class="btnBox">
+                        <a href="/p_use/p_use_alli_03.html" class="gotoexp">자세히 보기</a>
+                        <a href="/t_use/t_use_reser01_0.html" class="gotoreser" data-page="3" data-char="0" data-name="a_kb">구매하기</a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <ul class="list_ul list_up_period">
+                <!-- daytime -->
+                <li class="list_u_li">
+                  <a href="#none" class="daytime_tc">오후이용권</a>
+                  <div class="list_exp">
+                    <div class="list_exp_wrap">
+                      <h5>오후이용권 구매하기</h5>
+                      <div class="l_e_w_text">
+                        <ul>
+                          <li>본 상품은 온라인 전용 상품으로 LEGOLAND® 파크를 오후 3시부터 9시(폐장)까지 이용하실 수 있는 1일 이용권입니다. (4/28~10/29, 금토일 및 공휴일 한정)</li>
+                          <li>당일, 운영시간 및 이용 불가 시설 등 파크 이용 관련 보다 자세한 정보는 공식 홈페이지 또는 공식 App을 통해 확인하세요.</li>
+                          <li>환불을 원하시는 경우, 예약하신 방문일 1일 전까지 회사의 홈페이지 내 취소 요청 절차를 통해 구매 철회를 요청해야 합니다.</li>
+                          <li>입장일 기준, 만 2세 (24개월 미만) 유아는 무료 입장이 가능합니다.</li>
+                        </ul>
+                      </div>
+                      <a href="#none" class="close_exp"></a>
+                      <div class="btnBox">
+                        <a href="/t_use/t_use_reser01_0.html" class="gotoreser" data-page="2" data-name="daytime">구매하기</a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <!-- vip -->
+                <li class="list_u_li">
+                  <a href="#none" class="vip_tc">VIP EXPERIENCES</a>
+                  <div class="list_exp">
+                    <div class="list_exp_wrap">
+                      <h5>LEGOLAND® KOREA VIP Experiences</h5>
+                      <div class="l_e_w_text">
+                          <p><strong>LEGOLAND® 코리아 VIP팀은 여러분이 경험하게 될 LEGOLAND®에서 보내는 멋진 하루에 도움을 드립니다.</strong></p>
+                          <p><strong>다양한 종류의 VIP Experiences 프로그램을 통해 더욱 알찬 LEGOLAND® 코리아를 경험해 보세요.</strong></p>
+                          <p>LEGOLAND®의 가이드 투어부터 비하인드 스토리 접근에 이르기까지 VIP팀이 모든 것을 계획합니다.</p>
+                          <p>VIP Experiences 프로그램을 경험하려면 미리 예약하는 것이 좋습니다. 아래에서 더욱 자세한 내용을 확인해보세요!</p>
+                          <hr />
+                          <ul>
+                            <li>✔️ 모든 24개월 이상 손님은 티켓 구매 후 이용 가능합니다.</li>
+                            <li>✔️ VIP 체험은 파크 입장을 포함하며 추가 예약이 필요 없습니다.</li>
+                            <li>✔️ 어린이의 VIP 티켓 구매 시, 적어도 1명 이상의 성인 부모/보호자는 반드시 VIP 티켓을 구매하고 어린이와 함께 체험에 참여해야 합니다.</li>
+                            <li>✔️ VIP Gold 또는 Platinum Experience의 최소 예약 인원은 한팀당 2인 이상이며, 최대 예약 인원은 5명입니다.</li>
+                            <li>✔️ VIP Gold 또는 Platinum Experience는 최소 2주 전부터 예약 신청이 가능합니다.</li>
+                            <li>✔️ VIP Gold 또는 Platinum Experience에 대한 스케줄은 일주일 전 메일로 공지됩니다. </li>
+                            <li>✔️ VIP Platinum Experience는 만 6세 이상 손님부터 구매 가능합니다.</li>
+                          </ul>
+                      </div>
+                      <a href="#none" class="close_exp"></a>
+                      <div class="btnBox">
+                        <a href="/p_use/p_use_ext_02.html" class="gotoexp">자세히 보기</a>
+                        <a href="/t_use/t_use_reser01_0.html" class="gotoreser" data-page="5">구매하기</a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <!-- season -->
+                <li class="list_u_li">
+                  <a href="#none" class="season_tc">시즌이용권</a>
+                  <div class="list_exp">
+                    <div class="list_exp_wrap">
+                      <h5>시즌이용권 구매하기</h5>
+                      <div class="l_e_w_text">
+                        <div><strong>SUMMER 시즌 패스 판매!</strong></div>
+                        <br/>
+                        <div>- 이용기간 : 6월 12일(월) ~ 9월 3일(일) (총 84일)</div>
+                        <div>- 판매기간 : 5월 12일(금) ~ 6월 30일(금)</div>
+                        <br/>
+                        <span>8만 9천원으로!
+                          <br/>84일간(6/12~9/3) 내 마음대로 무제한으로 파크를 즐길 수 있는 "갓성비" Summer패스!
+                          <br/>올여름 피서는 LEGOLAND® 야간개장과 곧 오픈할 워터 어트랙션까지!
+                          <br/>오직 6월 30일까지 기간 한정 판매!</span>
+
+                        
+                      </div>
+                      <a href="#none" class="close_exp"></a>
+                      <div class="btnBox">
+                        <a href="/t_use/t_use_reser01_0.html" class="gotoreser" data-page="4" data-char="season">구매하기</a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="t_r_list">
+            <h4>예약하기</h4>
+            <ul class="t_r_list_ul">
+              <li class="list_u_li">
+                <a href="/t_use/t_use_reser01_0.html" class="require_tc" data-page="6">파크 방문 예약</a>
+              </li>
+              <li class="list_u_li">
+                <a href="/p_cus/p_cus_use_01.html">예약조회</a>
+              </li>
+              <li class="list_u_li">
+                <a href="/t_hotel/t_hotel_reser01.html" class="hotel_tc" data-char="hotel">호텔예약</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+       
+      </div>
+
+      <script src="/t_use/js/t_use_char01.js"></script>
+    </main>
+    <footer></footer>
+  </body>
+  </html>
+  

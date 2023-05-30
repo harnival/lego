@@ -1,0 +1,281 @@
+    /* ======================================= 02.이용권 선택 */
+    .vip_fieldset01 {
+      display: flex;
+      justify-content: right;
+      position: relative;
+      padding-left: 20%;
+    }
+    .vip_fieldset01 legend::before {
+      content: "01";
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+      line-height: 1.5;
+      width: 30px;
+      height: 30px;
+      background-color: royalblue;
+      border-radius: 50%;
+      font-size: 18px;
+      color: white;
+      margin-right: 10px;
+    }
+    /* ---------------------------------------- */
+    .vip_fieldset02 {
+      position: relative;
+      padding: 90px 13% 30px;
+    }
+    .vip_fieldset02 legend::before {
+      content: "02";
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+      line-height: 1.5;
+      width: 30px;
+      height: 30px;
+      background-color: royalblue;
+      border-radius: 50%;
+      font-size: 18px;
+      color: white;
+      margin-right: 10px;
+    }
+    
+    .vf02_tcWrap {
+      display: flex;
+      position: relative;
+      width: 100%;
+      box-sizing: border-box;
+      gap: 10px;
+      padding-bottom: 20px;
+    }
+    .vf02_ticketcard {
+      position: relative;
+      border-radius: 20px;
+      box-sizing: border-box;
+      width: calc(100% / 3);
+      aspect-ratio: 1 / 1.6;
+      overflow: hidden;
+      box-shadow: 3px 3px 6px rgba(136, 136, 136, 0.5);
+    }
+    .vf02_tc_title {
+      display: block;
+      text-align: start;
+      font-size: 130%;
+      font-weight: 600;
+      padding: 10px;
+      }
+    .vf02_tc_select{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+    .vf02_tc_select img {
+      width: 100%;
+      display: block;
+      box-sizing: border-box;
+      padding: 20px;
+    }
+    .vf02_tc_exp {
+      width: 100%;
+      font-size: 80%;
+      text-indent: 5px;
+    }
+    .vf02_tc_number {
+      width: 80%;
+      margin: auto;
+      padding: 5px 0px;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .vf02_tc_number label {
+      width: fit-content;
+      word-break: keep-all;
+    }
+    .vf02_tc_number .numberCheck {
+      display: block;
+    }
+    .vf02_tc_disabled {
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255,255,255,0.8);
+      backdrop-filter: blur(3px);
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      display: flex;
+      justify-content: center;
+      padding-top: 50%;
+      box-sizing: border-box;
+    }
+    .vf02_cover {
+      display: none;
+    }
+    .vf02_tc_disabled strong {
+      font-size: 100%;
+    }
+    /* ---------------------------------------- */
+    .vf02_exp {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 2px;
+    }
+    .vf02_exp > a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      width: 100%;
+      height: 40px;
+      background-color: #dddddd75;
+      border-radius: 10px;
+      box-sizing: border-box;
+
+      color: #666;
+      font-size: 100%;
+      font-weight: 600;
+    }
+    .vf02_exp > a::before {
+      content: "";
+        display: inline-block;
+        background: url("/image/t_use_reser01_5/arrow_drop_down.png") no-repeat center/30px;
+        width: 30px;
+        height: 30px;
+        opacity: 0.7;
+    }
+    .vf02_e_list {
+      display: flex;
+      flex-wrap:wrap;
+      box-sizing: border-box;
+      margin: 5px 0px 0px 0px;
+      padding: 0px;
+    }
+    .vf02_e_listWrap {
+      display: none;
+    }
+    .vf02_e_list dt {
+      width: calc(100% - 4px);
+      box-sizing: border-box;
+      height: 40px;
+      padding-left: 10%;
+      margin: 2px 0px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+
+      background: linear-gradient(to left,rgb(39, 206, 39),rgb(72, 212, 72), rgb(39, 206, 39));
+    }
+    .vf02_e_list dt a {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+    .vf02_e_list dt a::before {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      left: -25px;
+      background: url("/image/t_use_reser01_5/arrow_drop_down.png") no-repeat center/25px;
+      width: 25px;
+      height: 25px;
+      opacity: 0.7;
+    }
+    .vf02_e_list dt a.slidedowned::before {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        left: -25px;
+        background: url("/image/t_use_reser01_5/arrow_drop_up.png") no-repeat center/25px;
+        width: 25px;
+        height: 25px;
+        opacity: 0.7;
+      }
+    .vf02_e_list dt span {
+      color: #666;
+      font-size: 14px;
+      padding-left: 10px;
+    }
+    .vf02_e_list dd:not(.vf02_e_l_detail) {
+      width: calc(100% / 3 - 4px);
+      box-sizing: border-box;
+      height: 40px;
+      margin: 0px 2px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: white;
+
+      font-weight: 600;
+      color: #333;
+    }
+    .vf02_e_list dd:not(.vf02_e_l_detail) svg {
+      filter: brightness(100%);
+    }
+    .vf02_e_l_name {
+      display: none;
+    }
+    .vf02_e_l_detail {
+      width: calc(100% -4px);
+      margin: 0px auto;
+      box-sizing: border-box;
+      text-align: start;
+      display: none;
+      background-color: white;
+    }
+    .vf02_e_l_detail ul {
+        padding: 5px 0px;
+      }
+      .vf02_e_l_detail li {
+        list-style: inside;
+        margin: 2px 0px;
+        padding-left: 20px;
+        font-size: 80%;
+      }
+ 
+    /* ================================================= 03. 정보 입력 */
+    .vip_fieldset03 {
+      position: relative;
+      padding: 80px 15% 30px;
+    }
+    .vip_fieldset03 legend::before {
+      content: "02";
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+      line-height: 1.5;
+      width: 30px;
+      height: 30px;
+      background-color: royalblue;
+      border-radius: 50%;
+      font-size: 18px;
+      color: white;
+      margin-right: 10px;
+    }
+   
+    /* ================================================= 06. 합계 */
+    .p_s_n_s dl,
+    .p_s_n_g dl,
+    .p_s_n_p dl,
+    .p_s_n_s,
+    .p_s_n_g,
+    .p_s_n_p {
+      display: none;
+    }
+    .p_s_numbers dl {
+      padding: 5px;
+      margin: 5px 0px;
+      background-color: rgba(255,255,255,0.2);
+    }
+    .p_s_numbers dt {
+      padding: 0px;
+      margin: 0px;
+    }
+    .p_s_numbers span {
+      font-size: 100%;
+      font-weight: 600;
+    }

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>예약자 번호 인증</title>
+    <style>
+        body {padding: 0px; margin: 0px; font-size: 16px; min-width: 500px;}
+        a{text-decoration: none; color: inherit;}
+        /* number input 버튼 숨기기 */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        input[type='number'] { appearance: textfield; }
+        /* =============================================================== */
+        .c_title {
+            padding: 0px 0px 30px 30px;
+        }
+        .cert {
+            height: 100vh;
+            width: 500px;
+            padding: 10px 0px;
+            box-sizing: border-box;
+        }
+        .c_inputs {
+            background-color: #eee;
+            padding: 8px 7%;
+            box-sizing: border-box;
+        }
+        .c_i_phone {
+            display: flex;
+            align-items: center;
+            height: 26px;
+            gap: 10px;
+            margin: 20px 0px;
+        }
+        .c_i_phone > div {
+            position: relative;
+        }
+        .c_i_phone label{
+            position: absolute;
+            top: -20px;
+            font-size: 80%;
+            opacity: 0.6;
+        }
+        .c_i_select_wrap{
+            height: 100%;
+        }
+        #c_i_company_select{
+            height: 100%;
+            border: 1px solid #acacac;
+            border-radius: 5px;
+
+            
+        }
+        .c_i_number_wrap {
+            height: 100%;
+        }
+        #c_i_phone_input{
+            width: 200px;
+            height: 100%;
+            box-sizing: border-box;
+            border: 1px solid #acacac;
+            border-radius: 5px;
+            padding-left: 15px;
+            font-size: 100%;
+        }
+        .c_i_submit,
+        .cni_input a,
+        .c_btn a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            background-color: #eee;
+            box-shadow: inset -1px -1px 1px 1px rgba(112, 112, 112, 0.3);
+            padding: 5px;
+            border: 1px solid #acacac;
+            border-radius: 5px;
+
+            box-sizing: border-box;
+            font-size: 90%;
+        }
+        .c_i_submit{
+            min-width: 110px;
+        }
+        /* ======================================== */
+        .certNumber_input {
+            margin: 60px 0px 30px;
+            position: relative;
+        }
+        .cni_input label {
+            position: absolute;
+            top: -20px;
+            font-size: 80%;
+            opacity: 0.6;
+        }
+        .cni_input span {
+            font-size: 80%;
+            opacity: 0.8;
+        }
+        .cni_input a{
+            width: 70px;
+        }
+        .cni_input {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            height: 26px;
+        }
+        #cni_i_certText {
+            width: 200px;
+            height: 100%;
+            box-sizing: border-box;
+            border: 1px solid #acacac;
+            border-radius: 5px;
+            padding-left: 15px;
+            font-size: 100%;
+        }
+        /* =========================================== */
+        .c_btn {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            padding: 30px 7% 10px;
+        }
+        .c_btn a {
+            width: 60px;
+        }
+        /* =========================================== */
+        .eeee {
+            display: flex;
+            flex-direction: column;
+            height: 400px;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            box-sizing: border-box;
+        }
+        .eeee div:first-child {
+            font-size: 120%;
+            font-weight: 600;
+        }
+        .timeset {
+            font-size: 90%;
+            opacity: 0.8;
+        }
+        .eeee a {
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="cert">
+        <div class="c_title">
+            <h2>핸드폰 번호 인증</h2>
+            <span>정보를 정확히 기입하고 [확인] 버튼을 누르십시오.</span>
+        </div>
+        <div class="c_inputs">
+            <div class="c_i_phone">
+                <div class="c_i_select_wrap">
+                    <label for="c_i_company_select">통신사 선택</label>
+                    <select name="c_i_company" id="c_i_company_select">
+                        <option value="KT">KT</option>
+                        <option value="SKT">SKT</option>
+                        <option value="LG U+">LG U+</option>
+                        <option value="알뜰">알뜰요금제</option>
+                    </select>
+                </div>
+                <div class="c_i_number_wrap">
+                    <label for="c_i_phone_input">핸드폰 번호</label>
+                    <input type="tel" name="c_i_phone" id="c_i_phone_input">
+                </div>
+                <a href="#none" class="c_i_submit">인증문자 전송</a>
+            </div>
+            <div class="certNumber_input">
+
+            </div>
+        </div>
+        <div class="c_btn">
+            <a href="#none" class="c_btn_go">확인</a>
+            <a href="#none" class="c_btn_close">닫기</a>
+        </div>
+    </div>
+    
+    <script>
+        const go = document.querySelector(".c_btn_go");
+        const close = document.querySelector(".c_btn_close");
+        close.addEventListener("click",function(){
+            window.close();
+        })
+        //최종 닫기 화면--------------------------------------------
+        function accept() {
+            localStorage.setItem("phone_cert","true");
+            const w = document.querySelector(".cert");
+            let times = 5;
+            w.innerHTML = `
+            <div class='eeee'>
+                <div>확인완료</div>
+                <div class='timeset'></div>
+                <a href='#none' class='c_btn_close'>닫기</a>
+            </div>`;
+            const cls = document.querySelector(".eeee .c_btn_close");
+            cls.addEventListener("click",function(){
+                window.close();
+            })
+            localStorage.setItem("phone_cert","true");
+            const r = document.querySelector(".timeset");
+            r.innerText = `${times}초 후에 자동으로 종료됩니다.`;
+            times--;
+            const set = setInterval(function(){
+                r.innerText = `${times}초 후에 자동으로 종료됩니다.`;
+                times--;
+            },1000)
+            const set2 = setTimeout(function(){
+                window.close()
+            },5000)
+        }
+        go.addEventListener("click",function(){
+            if (document.querySelector("#cni_i_certText").value == "1234"){
+                accept()
+            } else {
+                alert("인증번호가 틀렸습니다. 다시 입력하세요 (인증번호 : 1234)")
+            }
+        })
+        //인증문자 섹션 띄우기
+        const q = document.querySelector(".certNumber_input");
+        const s = document.querySelector(".c_i_submit");
+        s.addEventListener("click",function(){
+            alert("인증번호가 전송되었습니다.")
+            q.innerHTML = `
+                <div class='cni_input'>
+                    <label for='cni_i_certText'>인증번호 입력</label>
+                    <input type='number' name='cni_i_certText' id='cni_i_certText' />
+                    <span></span>
+                    <a href='#none'>재전송</a>
+                </div>
+            `;
+            const r = document.querySelector(".cni_input span");
+            let t = 60;
+            r.innerText = `남은 시간 ${t}초`;
+            const set3 = setInterval(function(){
+                t--;
+                r.innerText = `남은 시간 ${t}초`;
+                if(t == 0) {
+                    alert("응답 시간이 지나 재전송합니다.");
+                    t = 60
+                }
+            },1000)
+            //재전송
+            const y = document.querySelector(".cni_input a");
+            y.addEventListener("click",function(){
+                alert("인증번호가 전송되었습니다.")
+                t = 60;
+            })
+        });
+    </script>
+</body>
+</html>

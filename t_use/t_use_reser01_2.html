@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오후이용권 예약 │ </title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="/t_use/css/t_use_reser01_2.css">
+</head>
+<body>
+    <div class="ticket_formWrap daytime_ticket_formWrap">
+        <div class="daytime_form_title form_title">
+            <h4>오후이용권 구매하기</h4>
+            <div>
+              <ul>
+                <li>본 상품은 온라인 전용 상품으로 LEGOLAND® 파크를 오후 3시부터 9시(폐장)까지 이용하실 수 있는 1일 이용권입니다. (4/28~10/29, 금토일 및 공휴일 한정)</li>
+                <li>당일, 운영시간 및 이용 불가 시설 등 파크 이용 관련 보다 자세한 정보는 공식 홈페이지 또는 공식 App을 통해 확인하세요.</li>
+                <li>환불을 원하시는 경우, 예약하신 방문일 1일 전까지 회사의 홈페이지 내 취소 요청 절차를 통해 구매 철회를 요청해야 합니다.</li>
+                <li>입장일 기준, 만 2세 (24개월 미만) 유아는 무료 입장이 가능합니다.</li>
+              </ul>
+            </div>
+        </div>
+        <form action="" id="daytime_ticket_form" class="ticket_form" data-typetext="오후이용권 구매" data-type="2">
+          <fieldset class="daytime_fieldset01"> 
+            <legend>날짜 지정</legend>
+            <div class="date_inputs">
+              <label for="daytime_date_value"></label>
+              <input type="date" name="date.방문날짜" id="daytime_date_value">
+            </div>
+            <div class="calender">
+              <div class="calender_wrap_prev">
+                <div class="calender_month dated_calender_month">
+                  <div class="cm_spanbox">
+                    <span class="cm_sb_span1"></span>
+                    <span class="cm_sb_span2">년</span>
+                    <span class="cm_sb_span1"></span>
+                    <span class="cm_sb_span2">월</span>
+                  </div>
+                </div>
+                <div class="calender_date_table daytime_calender_date_table">
+                  <div class="cdt_week"></div>
+                  <div class="cdt_date"></div>
+                </div>
+              </div>
+              <div class="calender_wrap">
+                <div class="calender_month daytime_calender_month">
+                  <div class="cm_spanbox">
+                    <span class="cm_sb_span1"></span>
+                    <span class="cm_sb_span2">년</span>
+                    <span class="cm_sb_span1"></span>
+                    <span class="cm_sb_span2">월</span>
+                  </div>
+                  <a href="#none" class="gotoback">이전</a>
+                  <a href="#none" class="gotonext">다음</a>
+                </div>
+                <div class="calender_date_table daytime_calender_date_table">
+                  <div class="cdt_week"></div>
+                  <div class="cdt_date"></div>
+                </div>
+              </div>
+              <div class="calender_wrap_next">
+                <div class="calender_month daytime_calender_month">
+                  <div class="cm_spanbox">
+                    <span class="cm_sb_span1"></span>
+                    <span class="cm_sb_span2">년</span>
+                    <span class="cm_sb_span1"></span>
+                    <span class="cm_sb_span2">월</span>
+                  </div>
+                </div>
+                <div class="calender_date_table daytime_calender_date_table">
+                  <div class="cdt_week"></div>
+                  <div class="cdt_date"></div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="daytime_fieldset02">
+            <legend>인원 지정</legend>
+            <div class="dtf02_wrap">
+              <label for="daytime_numbers_grown">대인</label>
+              <span>만 13세 이상</span>
+              <span>
+                <span>온라인 판매가격</span> 
+                <s>￦60,000</s>
+                <strong> ￦54,000</strong>
+              </span>
+              <div class="nc_wrap">
+                <div class="numberCheck">
+                  <input type="text" name="number.대인" id="daytime_numbers_grown" class="numbers_grown"  value="0" readonly/>
+                  <a href="#none" class="decrease_btn">인원 제외<img src="/image/t_use_reser01_2/minus.png" alt=""></a>
+                  <a href="#none" class="increase_btn">인원 추가<img src="/image/t_use_reser01_2/plus.png" alt=""></a>
+                </div>
+              </div>
+            </div>
+            <div class="dtf02_wrap">
+              <label for="daytime_numbers_little">소인</label>
+              <span>만 2세 ~ 12세</span>
+              <span>
+                <span>온라인 판매가격</span> 
+                <s>￦50,000</s>
+                <strong> ￦45,000</strong>
+              </span>
+              <div class="nc_wrap">
+                <div class="numberCheck">
+                  <input type="text" name="number.소인" id="daytime_numbers_little" class="numbers_little" value="0" readonly />
+                  <a href="#none" class="decrease_btn">인원 제외<img src="/image/t_use_reser01_2/minus.png" alt=""></a>
+                  <a href="#none" class="increase_btn">인원 추가<img src="/image/t_use_reser01_2/plus.png" alt=""></a>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="daytime_fieldset03">
+            <legend>사전구매</legend>
+            <div class="dtf03_wrap">
+              <div>
+                <input
+                  type="radio"
+                  name=""
+                  value="daytime_digital_photo"
+                  id="daytime_digital_photo"
+                  class="digital_photo"
+                />
+                <label for="daytime_digital_photo">디지털 기념 사진 사전 구매</label>
+                <p class="dtf03_labelExp">
+                  <span>
+                    LEGOLAND® 와 함께 한 소중한 추억을 고화질 사진으로
+                    간직하세요!
+                  </span>
+                  <span>온라인 구매가격 ￦25,000</span>
+                </p>
+                <p>
+                </p>
+                <div class="nc_wrap">
+                  <label for="daytime_digital_photo_number">수량</label>
+                  <div class="numberCheck">
+                    <div class="dpnWrap">
+                      <input
+                        type="text"
+                        name="extra.디지털 기념 사진 사전구매"
+                        id="daytime_digital_photo_number"
+                        class="digital_photo_number"
+                        value="0"
+                        readonly
+                      />
+                      <a href="#none" class="decrease_btn">수량 제외<img src="/image/t_use_reser01_2/minus.png" alt=""></a>
+                      <a href="#none" class="increase_btn">수량 추가<img src="/image/t_use_reser01_2/plus.png" alt=""></a>
+                    </div>
+                </div>
+                </div>
+              </div>
+              <div class="dtf03_w_exp">
+                <div>
+                    <span>기념 사진 사전 구매 안내</span>
+                    <ul>
+                        <li>
+                          시그니쳐 포토존 위티는 파크 운영 상황에 따라 변경될 수
+                          있음.
+                        </li>
+                        <li>
+                          어트랙션 탑승 중 촬영한 사진은 다운로드 항목에서 제외
+                        </li>
+                        <li>
+                          사진 파일 수령은 LEGOLAND® 파크 내 포토 카운터 5곳에서
+                          가능하며, 구매 후 발행된 18자리 바코드(모바일 또는 인쇄)를
+                          제시해야 수령 가능
+                        </li>
+                    </ul>
+                </div>
+                  <span>포토존 위치 안내</span>
+                  <ul>
+                      <li>파크 Entry Plaza 앞</li>
+                      <li>파크입구 공룡 조형물 앞</li>
+                      <li>브릭스트리트 광장 앞</li>
+                  </ul>
+                </dl>
+              </div>
+            </div>
+            <div class="dtf03_wrap">
+              <div>
+                <input
+                  type="radio"
+                  name=""
+                  value="daytime_mini_figure"
+                  id="daytime_mini_figure"
+                  readonly
+                  class="mini_figure"
+                />
+                <label for="daytime_mini_figure">미니 피규어 세트 사전구매</label>
+                <p class="dtf03_labelExp">
+                  <span>
+                    LEGOLAND®의 방문 필수템 귀여운 미니 피겨와 함께!
+                  </span>
+                  <span>
+                    현장구매가 <s>￦15,900</s>
+                    온라인 구매가격 <strong>￦15,000</strong>
+                  </span>
+                </p>
+                <p>
+                </p>
+                <div class="nc_wrap">
+                  <label for="daytime_mini_figure_number">수량</label>
+                  <div class="numberCheck">
+                    <input
+                      type="text"
+                      name="extra.미니 피규어 세트 사전구매"
+                      id="daytime_mini_figure_number"
+                      class="mini_figure_number"
+                      value="0"
+                      readonly
+                    />
+                    <a href="#none" class="decrease_btn">수량 제외<img src="/image/t_use_reser01_2/minus.png" alt=""></a>
+                    <a href="#none" class="increase_btn">수량 추가<img src="/image/t_use_reser01_2/plus.png" alt=""></a>
+
+                  </div>
+                </div>
+              </div>
+              <div class="dtf03_w_exp">
+                  <span>미니 피겨 세트 사전구매 안내</span>
+                  <ul>
+                      <li>파크 정문에서 가장 가까운 리테일샵 '빅샵'에서 수령</li>
+                      <li>
+                        번 세트는 미니피겨 3개입 1세트 구성으로 디자인은 시즌에
+                        따라 변경
+                      </li>
+                      <li>
+                        세트의 구성품은 판매중인 개별 제품과 임의로 교환 및 환불
+                        불가
+                      </li>
+                  </ul>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="daytime_fieldset06 total_price_wrap">
+            <legend>가격 합계</legend>
+            <div class="discount">
+              <span>할인 적용</span>
+              <ul class="d_list">
+                <li class="empty_li">
+                  관련 혜택 없음
+                </li>
+              </ul>
+            </div>
+
+            <div class="price">
+              <div class="p_selectlist">
+                <ul>
+                  <li class="p_s_box">
+                    <strong>예약 일자</strong>
+                    <div class="p_s_date"></div>
+                  </li>
+                  <li class="p_s_box">
+                    <strong>예약 인원</strong>
+                    <div class="p_s_person">
+                      <span>대인 0 명</span>
+                      <span>소인 0 명</span>
+                    </div>
+                  </li>
+                  <li class="p_s_box">
+                    <strong>부가 선택</strong>
+                    <div class="p_s_extra">
+                      <div>
+                        <div class="p_s_e_title03"></div>
+                        <div class="p_s_e_number03"></div>
+                        <div class="p_s_e_price03"></div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="p_s_box">
+                    <strong>할인 내역</strong>
+                    <div class="p_s_discount">
+                      <div>
+                        <div class="p_s_e_title06"></div>
+                        <div class="p_s_e_number06"></div>
+                        <div class="p_s_e_price06"></div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="p_total">
+                <label for="daytime_total_price">합계</label>
+                <span class="p_t_text">￦ 0</span>
+                <input type="number" name="total_price.합계" id="daytime_total_price" readonly class="total_price">
+              </div>
+              <div class="daytime_ticket_submit ticket_submit">
+                <button type="submit" class="submit_btn">장바구니에 담기</button>
+                <button type="button" class="reset_btn">다시 입력</button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+    </div>
+    <script src="/t_use/js/t_use_reser01_2.js"></script>
+    <script src="/t_use/js/ticket_common.js"></script>
+</body>
+</html>
